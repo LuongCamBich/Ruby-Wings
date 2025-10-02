@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyên Ngôn Sáng Lập - Ruby Wings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e8f5e9; /* Light green background */
+            color: #1b5e20; /* Dark green text */
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .logo-space {
+            width: 100px;
+            height: 100px;
+            margin-right: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            /* Add your logo via CSS or inline HTML */
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ff4081; /* Bright pink-red */
+            font-size: 1.8rem; /* Smaller size */
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        h1:hover {
+            transform: translateY(-2px);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            background-color: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.1), /* 3D shadow effect */
+                0 6px 6px rgba(0,0,0,0.05),
+                0 0 0 1px rgba(0,0,0,0.02);
+            margin-bottom: 40px;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .content:before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+        
+        p {
+            margin-bottom: 25px;
+            font-size: 1.15rem; /* Slightly larger */
+            font-weight: 700; /* Bold */
+            font-style: italic; /* Italic */
+            color: #2e7d32; /* Darker green */
+        }
+        
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 50px;
+            font-weight: 300;
+            color: #1b5e20;
+        }
+        
+        .home-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 12px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255, 64, 129, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(255, 64, 129, 0.4);
+            background: linear-gradient(135deg, #ff80ab, #ff4081);
+        }
+        
+        .home-button:active {
+            transform: translateY(1px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-space {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- Logo space - replace with your logo -->
+            <div class="logo-space" style="background-image: url('your-logo-url-here.png');"></div>
+            <h1>TUYÊN NGÔN SÁNG LẬP CỦA RUBY WINGS</h1>
+        </div>
+        
+        <a href="index.html" class="home-button">Trở về trang chủ</a>
+        
+        <div class="content">
+            <p>Hành trình này bắt đầu từ một trăn trở rất thật: bạn – cũng như chúng tôi – cần những không gian đủ tĩnh để phục hồi năng lượng, đủ sâu để kết nối với thiên nhiên, với văn hóa bản địa, và với chính tâm hồn mình. Chúng tôi tin rằng, giữa nhịp sống ngày càng hối hả và đầy áp lực, ai trong chúng ta rồi cũng sẽ cần một khoảng dừng để thở sâu hơn, sống chậm lại một chút, lắng nghe chính mình và chạm vào những cảm xúc tưởng chừng đã lặng quên...</p>
+            
+            <p>Như vậy, niềm tin dẫn đường là "Con người hôm nay cần những hành trình chạm vào cảm xúc và kết nối với giá trị thật". Vì vậy, Ruby Wings chọn bắt đầu một cách nhẹ nhàng nhưng chắc chắn, không phải khởi đầu bằng bảng giá hay khuyến mãi, mà bằng triết lý sống, bằng hệ điều hành, văn hóa cho tổ chức và bằng tinh thần "Chuẩn mực – Chân thành – Có chiều sâu" - kim chỉ nam điều hướng mọi hành vi, quyết định và cách tổ chức vận hành...</p>
+            
+            <p>Ruby Wings định vị mình là một hệ sinh thái du lịch xanh - nhân văn - vận hành bằng chuẩn mực, phát triển bằng cảm xúc, lan tỏa bằng sự chân thành... Chúng tôi chọn sống đúng, làm thật, dù phải đi đường vòng.</p>
+            
+            <p>Nhưng muốn bay xa mà không mất - phải giữ gốc; muốn lan tỏa lý tưởng - phải tồn tại - lý tưởng không thể đi xa nếu không có thực tế song hành. Để vững bước, Ruby Wings sẽ thực hiện cả những hành trình phổ thông với mong muốn tạo dựng nguồn lực nuôi dưỡng hành trình chắp cánh ước mơ...</p>
+            
+            <p>Ở đây mỗi chuyến đi ngoài việc tối ưu trong tổ chức (chu đáo, thân thiện, chỉn chu…), Ruby Wings luôn hướng đến trải nghiệm cảm xúc, không đưa bạn đến đâu đó rồi kết thúc, mà là mở ra cánh cửa để bạn có thể chạm nhẹ vào điều gì đó bên trong…</p>
+            
+            <p>Ruby Wings là một cách sống – một cộng đồng đang kiến tạo lại cách con người bước đi và cảm nhận thế giới xung quanh./.</p>
+            
+            <div class="signature">
+                Đội ngũ Ruby Wings
+            </div>
+        </div>
+        
+        <a href="index.html" class="home-button">Trở về trang chủ</a>
+    </div>
+</body>
+</html>

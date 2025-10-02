@@ -1,0 +1,36 @@
+[build]
+  publish = "."  # Thư mục chứa file build, trong trường hợp của bạn là thư mục hiện tại
+
+[[redirects]]
+  from = "http://rubywings.vn"
+  to = "https://www.rubywings.vn"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.rubywings.vn"
+  to = "https://www.rubywings.vn"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://rubywings.vn"
+  to = "https://www.rubywings.vn"
+  status = 301
+  force = true
+
+# Redirect mọi thứ khác về index.html cho SPA (nếu cần)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
