@@ -59,11 +59,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -183,6 +183,10 @@
                             "item": "https://rubywings.vn/"
                         }
                     ]
+                },
+                "speakable": {
+                    "@type": "SpeakableSpecification",
+                    "cssSelector": [".section-title h2", ".about-card h3", ".nature-card-header", ".tour-info h3"]
                 }
             },
             {
@@ -204,6 +208,22 @@
                             "@type": "Answer",
                             "text": "Chúng tôi cung cấp các hành trình: Du lịch di sản lịch sử, Retreat thiền và khí công, Hành trình xanh bền vững, Forest bathing và các chương trình giáo dục kỹ năng cho thanh thiếu niên."
                         }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Ruby Wings có phù hợp cho thanh thiếu niên không?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Hoàn toàn phù hợp! Chúng tôi có các chương trình giáo dục kỹ năng đặc biệt dành cho thanh thiếu niên, giúp các em phát triển toàn diện thông qua các hành trình trải nghiệm thực tế."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Thiền và khí công có lợi ích gì cho sức khỏe?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Thiền và khí công giúp cân bằng tâm trí, giảm căng thẳng, cải thiện sức khỏe thể chất và tinh thần, tăng cường năng lượng sống và khả năng tập trung."
+                        }
                     }
                 ]
             }
@@ -224,14 +244,19 @@
             --color-light: #F5F5F5;
             --color-nature: #0b8b34;
             --color-fresh-pink: #f0ecee;
-            --color-dark-blue: #3ae517;
+            --color-dark-blue: #9cf379;
             --color-search-green: #8bc34a;
+            --color-healing-green: #e8f5e9;
+            --color-nature-light: #a0d8b0;
+            --color-text-dark: #333;
+            --color-text-light: #fff;
             
             --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
             --gradient-secondary: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
             --gradient-nature: linear-gradient(135deg, #44ba46 0%, var(--color-primary) 100%);
             --gradient-header: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
             --gradient-logo: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(11, 86, 42, 0.9) 0%, rgba(43, 181, 89, 0.8) 100%);
             
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
@@ -240,9 +265,11 @@
             --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             --box-shadow-hover: 0 10px 25px rgba(0,0,0,0.15);
             --box-shadow-logo: 0 8px 25px rgba(139, 46, 82, 0.3);
+            --box-shadow-card: 0 8px 30px rgba(0,0,0,0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 12px;
+            --border-radius-lg: 20px;
         }
        
         /* === Reset & Base Styles === */
@@ -254,12 +281,13 @@
        
         body {
             font-family: var(--font-body);
-            color: #333;
+            color: var(--color-text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            background-color: #f0f0f0; /* Màu xám nhạt cho nền toàn trang */
+            background-color: #f0f0f0;
             text-align: justify;
             text-justify: inter-word;
+            font-size: 16px;
         }
        
         h1, h2, h3, h4 {
@@ -267,11 +295,13 @@
             margin-bottom: 15px;
             line-height: 1.2;
             text-align: center;
+            font-weight: 700;
         }
        
         img {
             max-width: 100%;
             height: auto;
+            display: block;
         }
        
         ul {
@@ -290,7 +320,7 @@
             padding: 0 20px;
         }
 
-        /* === Text Justification Fix === */
+        /* Text Justification */
         p, .text-justify {
             text-align: justify;
             text-justify: inter-word;
@@ -362,13 +392,14 @@
             z-index: 1000;
             box-shadow: 0 2px 30px rgba(0,0,0,0.1);
             transition: var(--transition-slow);
-            border-bottom: 1px solid rgba(63, 62, 62, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             padding: 0;
         }
        
         header.sticky {
             background: var(--gradient-header);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 5px 0;
         }
 
         header.hidden {
@@ -391,6 +422,7 @@
             gap: 15px;
             transition: var(--transition);
             position: relative;
+            z-index: 1001;
         }
 
         .logo:hover {
@@ -450,16 +482,15 @@
             align-items: flex-start;
         }
 
-        /* Nút hiệu ứng cho chữ RUBY WINGS - ĐÃ SỬA NỀN TRẮNG, XÓA HIỆU ỨNG */
         .logo-main {
             font-size: 2.2rem;
             font-weight: 800;
-            color: #ff1493; /* Màu hồng tươi */
+            color: #ff1493;
             letter-spacing: -0.5px;
             font-family: var(--font-heading);
             line-height: 1;
             margin-bottom: 4px;
-            background: white; /* Nền trắng */
+            background: white;
             padding: 5px 15px;
             border-radius: 30px;
             transition: all 0.3s ease;
@@ -539,53 +570,338 @@
             background: var(--color-secondary);
         }
 
-        /* Thanh tìm kiếm thay thế cho Hero section */
+        /* === HỆ THỐNG TÌM KIẾM CHUYÊN NGHIỆP === */
         .search-section {
-            background-color: var(--color-search-green);
-            padding: 20px 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            padding: 40px 0;
             margin-top: 140px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.05)"><path d="M500 50Q550 0 600 50T700 50T800 50T900 50T1000 50V100H0V50Q100 50 200 50T300 50T400 50T500 50Z"/></svg>');
+            background-size: cover;
+            background-position: bottom;
         }
 
         .search-container {
             max-width: 800px;
             margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .search-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
         }
 
         .search-box {
             display: flex;
             width: 100%;
-            max-width: 600px;
             background: white;
             border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            border: 3px solid transparent;
+        }
+
+        .search-box:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-color: var(--color-secondary);
         }
 
         .search-input {
             flex: 1;
             border: none;
-            padding: 15px 20px;
-            font-size: 1rem;
+            padding: 18px 25px;
+            font-size: 1.1rem;
             outline: none;
             background: transparent;
+            font-family: var(--font-body);
+        }
+
+        .search-input::placeholder {
+            color: #999;
         }
 
         .search-button {
-            background: var(--color-primary);
+            background: var(--color-secondary);
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 18px 30px;
             cursor: pointer;
             transition: var(--transition);
             font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+            justify-content: center;
         }
 
         .search-button:hover {
+            background: var(--color-secondary-light);
+            padding-right: 35px;
+        }
+
+        .search-button.loading {
+            background: var(--color-primary);
+            pointer-events: none;
+        }
+
+        .search-button.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 15px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-suggestions.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .suggestion-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .suggestion-item:hover {
+            background: var(--color-healing-green);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-icon {
+            color: var(--color-secondary);
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .suggestion-text {
+            flex: 1;
+        }
+
+        .suggestion-title {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 4px;
+        }
+
+        .suggestion-keywords {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .search-results {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+        }
+
+        .results-filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
             background: var(--color-secondary);
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .results-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow-card);
+            transition: var(--transition);
+            cursor: pointer;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+            border-left-color: var(--color-secondary);
+        }
+
+        .result-category {
+            display: inline-block;
+            background: var(--color-healing-green);
+            color: var(--color-primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            color: var(--color-dark);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .result-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .keyword-tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .result-url {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .google-fallback {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--color-dark);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .google-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .search-loading {
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
         }
 
         /* Enhanced Mobile Menu Toggle */
@@ -712,7 +1028,7 @@
         /* About Section */
         .about {
             padding: 80px 0;
-            background-color: #f0f8f0;
+            background-color: var(--color-healing-green);
         }
        
         .section-title {
@@ -750,12 +1066,15 @@
             background: white;
             padding: 25px;
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow-card);
             transition: var(--transition);
             text-align: center;
             position: relative;
             background-color: #f0f9f0;
             border: 1px solid rgba(255,255,255,0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
        
         .about-card:hover {
@@ -765,33 +1084,32 @@
        
         .about-card i {
             font-size: 2.5rem;
-            color: var(--color-secondary); /* Đổi màu hồng đỏ tươi */
+            color: var(--color-secondary);
             margin-bottom: 15px;
         }
        
         .about-card h3 {
-            color: var(--color-secondary); /* Đổi màu hồng đỏ tươi */
+            color: var(--color-secondary);
             margin-bottom: 12px;
             font-size: 1.4rem;
         }
        
         .about-card-link {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
             color: inherit;
             text-decoration: none;
-            padding-bottom: 30px;
         }
        
         .read-more {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: auto;
             color: var(--color-secondary);
             font-weight: 600;
             font-size: 0.9rem;
             opacity: 0;
             transition: var(--transition);
+            padding-top: 10px;
         }
        
         .about-card:hover .read-more {
@@ -820,7 +1138,7 @@
             background: white;
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow-card);
             transition: var(--transition);
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -878,24 +1196,12 @@
             border-left: 4px solid var(--color-accent);
         }
 
-        /* Các liên kết trong nature-highlight trên mobile */
-        @media (max-width: 768px) {
-            .nature-highlight a {
-                color: #ffeb3b !important; /* Màu vàng nhạt trên mobile */
-            }
-            
-            .nature-highlight a:hover {
-                color: var(--color-secondary) !important; /* Khi hover vẫn là màu hồng */
-            }
-        }
-       
         /* === Tours Section === */
         .tours {
             padding: 80px 0;
             background: white;
         }
 
-        /* Dòng chữ "Hành trình tiêu biểu cho các đối tượng" */
         .tour-objective-title {
             text-align: center;
             margin-bottom: 30px;
@@ -907,7 +1213,7 @@
             color: var(--color-secondary);
             display: inline-block;
             padding: 10px 25px;
-            background: rgba(144, 238, 144, 0.3); /* Xanh lá nhạt */
+            background: rgba(144, 238, 144, 0.3);
             border-radius: 30px;
             animation: pulse 2s infinite;
         }
@@ -927,7 +1233,7 @@
         .tour-card {
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--box-shadow-card);
             transition: var(--transition);
             position: relative;
             background-color: #f5fbf5;
@@ -1059,16 +1365,12 @@
        
         /* === Footer === */
         footer {
-            background: #0b562a; /* Một màu xanh đậm duy nhất */
+            background: #0b562a;
             color: white;
-            padding: 40px 0 20px; /* Giảm padding trên để giảm chiều cao */
+            padding: 40px 0 20px;
             position: relative;
-            text-align: left; /* Căn trái toàn bộ chữ */
-            border-top: 3px solid #f21970; /* Đường ngăn cách phân biệt vùng chân và thân */
-        }
-
-        footer::before {
-            display: none; /* Ẩn gradient trước đó */
+            text-align: left;
+            border-top: 3px solid #f21970;
         }
        
         .footer-content {
@@ -1111,7 +1413,7 @@
             text-align: left;
         }
        
-        /* CSS cho các biểu tượng mạng xã hội - HIỆN 1 HÀNG NGANG */
+        /* CSS cho các biểu tượng mạng xã hội */
         .social-links-grid {
             display: flex;
             flex-direction: row;
@@ -1210,10 +1512,10 @@
        
         /* === About Panel New === */
         .about-panel-new {
-            background: var(--color-primary); /* Màu xanh */
-            border-radius: 25px;
+            background: var(--color-primary);
+            border-radius: var(--border-radius-lg);
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: var(--box-shadow-card);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1310,15 +1612,15 @@
         }
 
         .intro-section {
-            background: #e8f5e9; /* Màu xanh nhạt hơn */
-            border-radius: 20px;
+            background: var(--color-healing-green);
+            border-radius: var(--border-radius-lg);
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: var(--box-shadow);
             border: 2px solid transparent;
             background-clip: padding-box;
             position: relative;
             overflow: hidden;
-            text-align: center; /* Căn giữa nội dung */
+            text-align: center;
         }
 
         .intro-section::before {
@@ -1344,7 +1646,7 @@
         .intro-title {
             font-size: 1.8rem;
             font-weight: 900;
-            color: #f72e7b; /* Màu hồng nhạt */
+            color: #f72e7b;
             margin-bottom: 15px;
             line-height: 1.2;
         }
@@ -1352,26 +1654,26 @@
         .intro-text {
             font-size: 1.1rem;
             font-style: italic;
-            color: #257b0a; /* Màu hồng nhạt */
+            color: #257b0a;
             margin-bottom: 15px;
         }
 
         .intro-icon {
             font-size: 2rem;
-            color: #fa24a1; /* Màu hồng nhạt */
+            color: #fa24a1;
             margin-top: 10px;
         }
 
         .menu-section {
-            background: #e8f5e9; /* Màu xanh nhạt hơn */
-            border-radius: 20px;
+            background: var(--color-healing-green);
+            border-radius: var(--border-radius-lg);
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: var(--box-shadow);
             border: 2px solid transparent;
             background-clip: padding-box;
             position: relative;
             overflow: hidden;
-            text-align: center; /* Căn giữa nội dung */
+            text-align: center;
         }
 
         .menu-section::before {
@@ -1399,7 +1701,7 @@
 
         .menu-icon-large {
             margin-bottom: 15px;
-            color: #fc188a; /* Màu hồng nhạt */
+            color: #fc188a;
         }
 
         .menu-text-content {
@@ -1410,14 +1712,14 @@
             display: block;
             font-size: 1.8rem;
             font-weight: 900;
-            color: #dd6006; /* Màu hồng nhạt */
+            color: #dd6006;
             margin-bottom: 5px;
         }
 
         .menu-subtitle {
             display: block;
             font-size: 1rem;
-            color: #f66b08; /* Màu hồng nhạt */
+            color: #f66b08;
             font-style: italic;
         }
 
@@ -1428,9 +1730,9 @@
             justify-content: space-between;
             gap: 25px;
             flex-wrap: wrap;
-            background: #b8e8c8; /* Màu nền đậm hơn */
+            background: var(--color-nature-light);
             padding: 25px;
-            border-radius: 15px;
+            border-radius: var(--border-radius-lg);
             box-shadow: 0 6px 18px rgba(0,0,0,0.15);
             max-width: 1200px;
             margin: 0 auto;
@@ -1440,7 +1742,7 @@
             flex: 0 0 240px;
             background: #fff;
             border: 2px solid var(--color-secondary);
-            border-radius: 15px;
+            border-radius: var(--border-radius-lg);
             text-align: center;
             padding: 15px;
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
@@ -1473,14 +1775,14 @@
             color: #fff;
         }
 
-        /* KHỐI CHỮ GIỮA - CẢI THIỆN HIỆU ỨNG */
+        /* KHỐI CHỮ GIỮA */
         .center-text {
             flex: 1;
             text-align: center;
             cursor: pointer;
-            background: #b8e8c8; /* Màu nền đậm hơn */
+            background: var(--color-nature-light);
             padding: 20px;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             box-shadow: 0 6px 12px rgba(0,0,0,0.12);
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             color: var(--color-primary);
@@ -1490,7 +1792,7 @@
         .center-text:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-            background: linear-gradient(135deg, #b8e8c8, #a0d8b0);
+            background: linear-gradient(135deg, var(--color-nature-light), #a0d8b0);
             animation: pulse-blue 2s infinite;
         }
         .center-title {
@@ -1500,7 +1802,7 @@
             transition: color 0.3s ease;
         }
         .center-sub {
-            color: var(--color-secondary); /* Màu hồng tươi */
+            color: var(--color-secondary);
             font-size: 1.1rem;
             margin-bottom: 8px;
             transition: color 0.3s ease;
@@ -1528,7 +1830,7 @@
         .right-img {
             width: 100%;
             height: auto;
-            border-radius: 15px;
+            border-radius: var(--border-radius-lg);
             border: 2px solid var(--color-secondary);
             transition: var(--transition);
         }
@@ -1577,7 +1879,7 @@
 
         .international-section a h2 {
             display: inline-block;
-            background: #e8f5e8;
+            background: var(--color-healing-green);
             color: var(--color-secondary);
             padding: 10px 30px;
             border-radius: 30px;
@@ -1591,7 +1893,7 @@
 
         .international-section a:hover h2 {
             background: var(--color-secondary);
-            color: #e8f5e8;
+            color: var(--color-healing-green);
         }
 
         .international-section img {
@@ -1600,12 +1902,12 @@
             object-fit: contain;
         }
 
-        /* === KHẮC PHỤC LỖI CRITICAL - FIX NGAY LẬP TỨC === */
+        /* === KHẮC PHỤC LỖI CRITICAL === */
 
         /* 1. SỬA LỖI MÀU NỀN ĐIỆN THOẠI - CRITICAL FIX */
         @media (max-width: 768px) {
             body {
-                background-color: #1e6b47 !important; /* Màu xanh đậm cho mobile */
+                background-color: #1e6b47 !important;
                 color: white !important;
             }
             
@@ -1655,7 +1957,7 @@
             /* Giảm chiều cao footer trên mobile */
             footer {
                 padding: 30px 0 15px !important;
-                background: #0a4520 !important; /* Màu xanh đậm hơn cho footer trên mobile */
+                background: #0a4520 !important;
             }
 
             .footer-content {
@@ -1837,6 +2139,29 @@
             .search-box {
                 max-width: 90%;
             }
+
+            /* Search system mobile adjustments */
+            .search-title {
+                font-size: 2rem;
+            }
+
+            .search-button {
+                min-width: 120px;
+                padding: 15px 20px;
+            }
+
+            .search-input {
+                padding: 15px 20px;
+            }
+
+            .results-filters {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .result-card {
+                padding: 15px;
+            }
         }
        
         @media (max-width: 480px) {
@@ -1908,7 +2233,7 @@
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-image-container">
-                    <img src="images/logofxf.png" alt="Ruby Wings Travel Logo - Du lịch trải nghiệm cảm xúc và chữa lành">
+                    <img src="images/logofxf.png" alt="Ruby Wings Travel Logo - Du lịch trải nghiệm cảm xúc và chữa lành" width="90" height="90">
                 </div>
                 <div class="logo-content">
                     <div class="logo-main">RUBY WINGS</div>
@@ -1952,8 +2277,53 @@
     <main>
         <!-- Search Section thay thế Hero Section -->
         <section class="search-section">
-            <div class="search-container">
+            <div class="container search-container">
+                <div class="search-header">
+                   
+                </div>
                 
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Nhập từ khóa tìm kiếm..." id="searchInput">
+                    <button class="search-button" id="searchButton">
+                        <i class="fas fa-search"></i>
+                        <span>Tìm Kiếm</span>
+                    </button>
+                </div>
+                
+                <div class="search-suggestions" id="searchSuggestions">
+                    <!-- Suggestions will be populated by JavaScript -->
+                </div>
+                
+                <div class="search-results" id="searchResults">
+                    <div class="results-header">
+                        <div class="results-count" id="resultsCount">0 kết quả</div>
+                        <div class="results-filters">
+                            <button class="filter-btn active" data-filter="all">Tất cả</button>
+                            <button class="filter-btn" data-filter="journey">Hành trình</button>
+                            <button class="filter-btn" data-filter="nature">Thiên nhiên</button>
+                            <button class="filter-btn" data-filter="healing">Chữa lành</button>
+                        </div>
+                    </div>
+                    <div class="results-grid" id="resultsGrid">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>Không tìm thấy kết quả phù hợp</h3>
+                    <p>Hãy thử với từ khóa khác hoặc tìm kiếm trên Google</p>
+                    <div class="google-fallback">
+                        <a href="https://www.google.com/" class="google-btn" id="googleSearchBtn" target="_blank">
+                            <i class="fab fa-google"></i>
+                            Tìm trên Google
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="search-loading" id="searchLoading" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Đang tìm kiếm...</p>
                 </div>
             </div>
         </section>
@@ -1968,7 +2338,7 @@
                     <div class="logo-center">
                         <a href="04-y-nghia-logo-bieu-tuong.html" class="logo-link">
                             <div class="logo-container pulse">
-                                <img src="logo-tuyen-ngon.png" alt="Ruby Wings Logo - Ý nghĩa biểu tượng và tuyên ngôn sáng lập" class="main-logo">
+                                <img src="logo-tuyen-ngon.png" alt="Ruby Wings Logo - Ý nghĩa biểu tượng và tuyên ngôn sáng lập" class="main-logo" width="140" height="140">
                             </div>
                         </a>
                     </div>
@@ -2078,7 +2448,7 @@
         <div class="container trio-wrapper">
             <!-- QR BOX TRÁI -->
             <div class="qr-box" onclick="window.location.href='QR-menu.html'">
-                <img src="images/QR-tu-thien.jpg" alt="QR Code tạo mã miễn phí cho các nền tảng Ruby Wings" class="qr-img">
+                <img src="images/QR-tu-thien.jpg" alt="QR Code tạo mã miễn phí cho các nền tảng Ruby Wings" class="qr-img" width="200" height="200">
                 <p class="qr-text">TẠO MÃ QR CHO CÁC NỀN TẢNG 🍃🍃MIỄN PHÍ🍃🍃</p>
             </div>
 
@@ -2091,7 +2461,7 @@
 
             <!-- ẢNH PHẢI -->
             <div class="right-img-box">
-                <img src="images/hanh-trinh-tieu-bieu.jpg" alt="Hình ảnh hành trình tiêu biểu Ruby Wings - Trải nghiệm du lịch cảm xúc" class="right-img">
+                <img src="images/hanh-trinh-tieu-bieu.jpg" alt="Hình ảnh hành trình tiêu biểu Ruby Wings - Trải nghiệm du lịch cảm xúc" class="right-img" width="240" height="160">
             </div>
         </div>
 
@@ -2255,7 +2625,7 @@
                     <div class="tour-card">
                         <a href="Mua-do-ky-uc-truong-son.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-ccb.jpg" alt="Hành trình Mưa đỏ và Tây Trường Sơn - Trải nghiệm lịch sử Quảng Trị">
+                                <img src="assets/images/tour-ccb.jpg" alt="Hành trình Mưa đỏ và Tây Trường Sơn - Trải nghiệm lịch sử Quảng Trị" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>Mưa đỏ và Tây Trường Sơn</h3>
@@ -2273,7 +2643,7 @@
                     <div class="tour-card">
                         <a href="xem-chi-tiet-hanh-trinh-ket-noi-the-he.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-youth.jpg" alt="Hành trình Ngọn Lửa Trường Sơn - Kết nối thế hệ thanh niên">
+                                <img src="assets/images/tour-youth.jpg" alt="Hành trình Ngọn Lửa Trường Sơn - Kết nối thế hệ thanh niên" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>Ngọn Lửa Trường Sơn – Ký ức và khát vọng</h3>
@@ -2291,7 +2661,7 @@
                     <div class="tour-card">
                         <a href="hanh-trinh-lanh-dao.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-leaders.jpg" alt="Hành trình Lãnh Đạo - Phát triển tư duy chiến lược">
+                                <img src="assets/images/tour-leaders.jpg" alt="Hành trình Lãnh Đạo - Phát triển tư duy chiến lược" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>Hành Trình Lãnh Đạo</h3>
@@ -2309,7 +2679,7 @@
                     <div class="tour-card">
                         <a href="di-san-quoc-gia.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-officials.jpg" alt="Hành trình Di Sản Quốc Gia - Giáo dục truyền thống">
+                                <img src="assets/images/tour-officials.jpg" alt="Hành trình Di Sản Quốc Gia - Giáo dục truyền thống" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>Di Sản Quốc Gia</h3>
@@ -2327,7 +2697,7 @@
                     <div class="tour-card">
                         <a href="huyen-thoai-phu-nu.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-women.jpg" alt="Hành trình Huyền Thoại Người Phụ nữ Việt Nam">
+                                <img src="assets/images/tour-women.jpg" alt="Hành trình Huyền Thoại Người Phụ nữ Việt Nam" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>Người Phụ nữ Việt Nam</h3>
@@ -2345,7 +2715,7 @@
                     <div class="tour-card">
                         <a href="dmz-hoa-giai.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-international.jpg" alt="Hành trình DMZ - Hòa Giải - Bản Sắc - Thiên Nhiên cho du khách quốc tế">
+                                <img src="assets/images/tour-international.jpg" alt="Hành trình DMZ - Hòa Giải - Bản Sắc - Thiên Nhiên cho du khách quốc tế" width="280" height="200">
                             </div>
                             <div class="tour-info">
                                 <h3>DMZ - Bản sắc - Thiên Nhiên</h3>
@@ -2454,7 +2824,7 @@
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                             <a href="https://zalo.me/84332510486" target="_blank" class="social-icon zalo" title="Zalo Nhắn tin Ruby Wings">
-                                <img src="images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon">
+                                <img src="images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon" width="20" height="20">
                             </a>
                             <a href="https://www.youtube.com/@rubywing-slsa" target="_blank" class="social-icon youtube" title="YouTube Ruby Wings">
                                 <i class="fab fa-youtube"></i>
@@ -2637,71 +3007,364 @@
             } else {
                 setTimeout(preloadCriticalImages, 1000);
             }
-            
-           // Search functionality
-const searchButton = document.getElementById('searchButton');
-const searchInput = document.querySelector('.search-input');
 
-function performSearch() {
-    const searchTerm = searchInput.value.trim();
-    if (searchTerm) {
-        // Redirect to Google search with the search term
-        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchTerm)}`;
-    } else {
-        // If search term is empty, focus on the input
-        searchInput.focus();
-    }
-}
-
-// Add event listeners for search functionality
-if (searchButton && searchInput) {
-    // Search on button click
-    searchButton.addEventListener('click', performSearch);
-    
-    // Search on Enter key press
-    searchInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            performSearch();
-        }
-    });
-    
-    // Optional: Add focus to search input when page loads for better UX
-    searchInput.addEventListener('focus', function() {
-        this.select();
-    });
-}
-
-// Load critical images when idle
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(preloadCriticalImages);
-} else {
-    setTimeout(preloadCriticalImages, 1000);
-}
-            
-            searchButton.addEventListener('click', performSearch);
-            
-            // Also allow pressing Enter to search
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-        });
-
-        // Enhanced Smooth Scrolling with Offset for Fixed Header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            // === HỆ THỐNG TÌM KIẾM CHUYÊN NGHIỆP ===
+            class ProfessionalSearch {
+                constructor() {
+                    this.searchIndex = null;
+                    this.searchInput = document.getElementById('searchInput');
+                    this.searchButton = document.getElementById('searchButton');
+                    this.searchSuggestions = document.getElementById('searchSuggestions');
+                    this.searchResults = document.getElementById('searchResults');
+                    this.resultsGrid = document.getElementById('resultsGrid');
+                    this.resultsCount = document.getElementById('resultsCount');
+                    this.noResults = document.getElementById('noResults');
+                    this.searchLoading = document.getElementById('searchLoading');
+                    this.googleSearchBtn = document.getElementById('googleSearchBtn');
+                    this.filterButtons = document.querySelectorAll('.filter-btn');
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    this.currentFilter = 'all';
+                    this.debounceTimer = null;
+                    this.init();
+                }
+                
+                async init() {
+                    await this.loadSearchIndex();
+                    this.setupEventListeners();
+                }
+                
+                async loadSearchIndex() {
+                    try {
+                        const response = await fetch('search-index.json');
+                        this.searchIndex = await response.json();
+                        console.log('Search index loaded successfully:', this.searchIndex);
+                    } catch (error) {
+                        console.error('Error loading search index:', error);
+                        // Fallback to embedded data
+                        this.searchIndex = {
+                            "pages": [
+                                {
+                                    "url": "01-mo-dau-ruby-wings-la-ai.html",
+                                    "title": "Ruby Wings là ai? - Giới thiệu",
+                                    "keywords": ["Ruby Wings", "giới thiệu", "triết lý", "logo", "hệ sinh thái", "du lịch trải nghiệm", "chữa lành", "sống chậm", "du lịch có chiều sâu", "thân tâm thiên nhiên niềm tin"]
+                                },
+                                {
+                                    "url": "02-cau-chuyen-khoi-nguon.html",
+                                    "title": "Câu chuyện khởi nguồn",
+                                    "keywords": ["khởi nguồn", "người sáng lập", "bệnh tật", "khí công", "thiền", "hồi phục", "du lịch chữa lành", "cộng đồng", "hành trình hồi sinh", "triết lý sống"]
+                                },
+                                // ... other pages from your search-index.json
+                            ],
+                            "metadata": {
+                                "totalPages": 26,
+                                "lastUpdated": "2024-01-20",
+                                "version": "1.0"
+                            }
+                        };
+                    }
+                }
+                
+                setupEventListeners() {
+                    // Search input events
+                    this.searchInput.addEventListener('input', (e) => {
+                        this.handleInput(e.target.value);
+                    });
+                    
+                    this.searchInput.addEventListener('focus', () => {
+                        if (this.searchInput.value.length >= 2) {
+                            this.showSuggestions(this.searchInput.value);
+                        }
+                    });
+                    
+                    // Search button click
+                    this.searchButton.addEventListener('click', () => {
+                        this.performSearch(this.searchInput.value);
+                    });
+                    
+                    // Enter key press
+                    this.searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.performSearch(this.searchInput.value);
+                        }
+                    });
+                    
+                    // Filter buttons
+                    this.filterButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            this.setFilter(e.target.dataset.filter);
+                        });
+                    });
+                    
+                    // Click outside to close suggestions
+                    document.addEventListener('click', (e) => {
+                        if (!this.searchInput.contains(e.target) && !this.searchSuggestions.contains(e.target)) {
+                            this.hideSuggestions();
+                        }
                     });
                 }
+                
+                handleInput(value) {
+                    clearTimeout(this.debounceTimer);
+                    
+                    if (value.length < 2) {
+                        this.hideSuggestions();
+                        this.hideResults();
+                        return;
+                    }
+                    
+                    this.debounceTimer = setTimeout(() => {
+                        this.showSuggestions(value);
+                    }, 300);
+                }
+                
+                showSuggestions(query) {
+                    if (!this.searchIndex) return;
+                    
+                    const suggestions = this.getSuggestions(query);
+                    this.renderSuggestions(suggestions);
+                    this.searchSuggestions.classList.add('active');
+                }
+                
+                hideSuggestions() {
+                    this.searchSuggestions.classList.remove('active');
+                }
+                
+                getSuggestions(query) {
+                    const queryLower = query.toLowerCase();
+                    const results = [];
+                    
+                    this.searchIndex.pages.forEach(page => {
+                        const titleMatch = page.title.toLowerCase().includes(queryLower);
+                        const keywordMatch = page.keywords.some(keyword => 
+                            keyword.toLowerCase().includes(queryLower)
+                        );
+                        
+                        if (titleMatch || keywordMatch) {
+                            results.push({
+                                ...page,
+                                relevance: titleMatch ? 2 : 1 // Higher score for title matches
+                            });
+                        }
+                    });
+                    
+                    // Sort by relevance and limit to 5 suggestions
+                    return results
+                        .sort((a, b) => b.relevance - a.relevance)
+                        .slice(0, 5);
+                }
+                
+                renderSuggestions(suggestions) {
+                    if (suggestions.length === 0) {
+                        this.searchSuggestions.innerHTML = `
+                            <div class="suggestion-item">
+                                <div class="suggestion-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="suggestion-text">
+                                    <div class="suggestion-title">Không tìm thấy gợi ý</div>
+                                    <div class="suggestion-keywords">Thử với từ khóa khác</div>
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    this.searchSuggestions.innerHTML = suggestions.map(suggestion => `
+                        <div class="suggestion-item" data-url="${suggestion.url}">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="suggestion-text">
+                                <div class="suggestion-title">${this.highlightText(suggestion.title, this.searchInput.value)}</div>
+                                <div class="suggestion-keywords">${suggestion.keywords.slice(0, 3).join(', ')}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    // Add click handlers to suggestion items
+                    this.searchSuggestions.querySelectorAll('.suggestion-item').forEach(item => {
+                        item.addEventListener('click', () => {
+                            window.location.href = item.dataset.url;
+                        });
+                    });
+                }
+                
+                async performSearch(query) {
+                    if (!query.trim()) return;
+                    
+                    this.showLoading();
+                    this.hideSuggestions();
+                    
+                    // Simulate search delay for better UX
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    
+                    const results = this.search(query);
+                    this.renderResults(results, query);
+                    this.hideLoading();
+                    
+                    // Update Google search fallback
+                    this.googleSearchBtn.href = `https://www.google.com/search?q=${encodeURIComponent(query + ' site:rubywings.vn')}`;
+                }
+                
+                search(query) {
+                    if (!this.searchIndex) return [];
+                    
+                    const queryLower = query.toLowerCase();
+                    const results = [];
+                    
+                    this.searchIndex.pages.forEach(page => {
+                        let score = 0;
+                        
+                        // Title match (highest priority)
+                        if (page.title.toLowerCase().includes(queryLower)) {
+                            score += 10;
+                        }
+                        
+                        // Keyword matches
+                        const keywordMatches = page.keywords.filter(keyword => 
+                            keyword.toLowerCase().includes(queryLower)
+                        ).length;
+                        score += keywordMatches * 3;
+                        
+                        // URL match (lowest priority)
+                        if (page.url.toLowerCase().includes(queryLower)) {
+                            score += 1;
+                        }
+                        
+                        if (score > 0) {
+                            results.push({
+                                ...page,
+                                score,
+                                category: this.determineCategory(page)
+                            });
+                        }
+                    });
+                    
+                    return results.sort((a, b) => b.score - a.score);
+                }
+                
+                determineCategory(page) {
+                    const healingKeywords = ['thiền', 'khí công', 'chữa lành', 'sức khỏe', 'retreat'];
+                    const natureKeywords = ['thiên nhiên', 'rừng', 'biển', 'núi', 'du lịch xanh', 'bền vững'];
+                    const journeyKeywords = ['hành trình', 'tour', 'trải nghiệm', 'du lịch'];
+                    
+                    const allKeywords = [...page.keywords, page.title].join(' ').toLowerCase();
+                    
+                    if (healingKeywords.some(keyword => allKeywords.includes(keyword))) {
+                        return 'healing';
+                    } else if (natureKeywords.some(keyword => allKeywords.includes(keyword))) {
+                        return 'nature';
+                    } else if (journeyKeywords.some(keyword => allKeywords.includes(keyword))) {
+                        return 'journey';
+                    }
+                    
+                    return 'other';
+                }
+                
+                renderResults(results, query) {
+                    this.resultsCount.textContent = `${results.length} kết quả cho "${query}"`;
+                    
+                    if (results.length === 0) {
+                        this.noResults.style.display = 'block';
+                        this.searchResults.classList.remove('active');
+                        return;
+                    }
+                    
+                    this.noResults.style.display = 'none';
+                    this.searchResults.classList.add('active');
+                    
+                    const filteredResults = this.currentFilter === 'all' 
+                        ? results 
+                        : results.filter(result => result.category === this.currentFilter);
+                    
+                    this.resultsGrid.innerHTML = filteredResults.map(result => `
+                        <div class="result-card" onclick="window.location.href='${result.url}'">
+                            <div class="result-category">${this.getCategoryLabel(result.category)}</div>
+                            <h3 class="result-title">${this.highlightText(result.title, query)}</h3>
+                            <div class="result-keywords">
+                                ${result.keywords.slice(0, 5).map(keyword => `
+                                    <span class="keyword-tag">${this.highlightText(keyword, query)}</span>
+                                `).join('')}
+                            </div>
+                            <div class="result-url">
+                                <i class="fas fa-link"></i>
+                                ${result.url}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                getCategoryLabel(category) {
+                    const labels = {
+                        'healing': 'Chữa Lành',
+                        'nature': 'Thiên Nhiên',
+                        'journey': 'Hành Trình',
+                        'other': 'Khác'
+                    };
+                    return labels[category] || 'Khác';
+                }
+                
+                setFilter(filter) {
+                    this.currentFilter = filter;
+                    
+                    // Update active filter button
+                    this.filterButtons.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.filter === filter);
+                    });
+                    
+                    // Re-render results with new filter
+                    const currentQuery = this.searchInput.value;
+                    if (currentQuery) {
+                        const results = this.search(currentQuery);
+                        this.renderResults(results, currentQuery);
+                    }
+                }
+                
+                highlightText(text, query) {
+                    if (!query) return text;
+                    
+                    const regex = new RegExp(`(${this.escapeRegex(query)})`, 'gi');
+                    return text.replace(regex, '<mark>$1</mark>');
+                }
+                
+                escapeRegex(string) {
+                    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                }
+                
+                showLoading() {
+                    this.searchLoading.style.display = 'block';
+                    this.searchButton.classList.add('loading');
+                }
+                
+                hideLoading() {
+                    this.searchLoading.style.display = 'none';
+                    this.searchButton.classList.remove('loading');
+                }
+                
+                hideResults() {
+                    this.searchResults.classList.remove('active');
+                    this.noResults.style.display = 'none';
+                }
+            }
+            
+            // Initialize the search system
+            const searchSystem = new ProfessionalSearch();
+            
+            // Enhanced Smooth Scrolling with Offset for Fixed Header
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
     </script>
