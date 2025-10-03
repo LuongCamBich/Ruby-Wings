@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby Wings Content Manager - Công cụ tạo bài viết chuyên nghiệp</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* === Biến CSS Ruby Wings === */
+        :root {
+            --color-primary: #0b562a;
+            --color-primary-light: #2bb559;
+            --color-secondary: #f21970;
+            --color-secondary-light: #f84288;
+            --color-accent: #ebaf16;
+            --color-dark: #2F4F4F;
+            --color-light: #F5F5F5;
+            --color-nature: #0b8b34;
+            --color-healing-green: #e8f5e9;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --box-shadow-hover: 0 10px 25px rgba(0,0,0,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+        }
+
+        /* === Reset & Base Styles === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* === Header === */
+        .manager-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manager-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.05)"><path d="M500 50Q550 0 600 50T700 50T800 50T900 50T1000 50V100H0V50Q100 50 200 50T300 50T400 50T500 50Z"/></svg>');
+            background-size: cover;
+        }
+
+        .manager-header h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .manager-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === Editor Layout === */
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 800px;
+        }
+
+        .input-section, .preview-section {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            border-right: 3px solid #e9ecef;
+        }
+
+        .preview-section {
+            background: white;
+        }
+
+        /* === Section Headers === */
+        .section-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--color-secondary);
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* === Text Areas === */
+        .input-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 25px;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            transition: var(--transition);
+            background: white;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(11, 86, 42, 0.1);
+        }
+
+        #contentInput {
+            min-height: 400px;
+        }
+
+        #htmlOutput {
+            background: #f8f9fa;
+            font-size: 13px;
+        }
+
+        /* === Controls === */
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* === Preview Area === */
+        .preview-area {
+            flex: 1;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+        }
+
+        #preview {
+            height: 100%;
+            overflow-y: auto;
+            padding: 30px;
+            background: white;
+        }
+
+        /* === Instructions === */
+        .instructions {
+            background: var(--color-healing-green);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-top: 25px;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .instructions h3 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+        }
+
+        .instructions ul {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .instructions code {
+            background: rgba(11, 86, 42, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        /* === Success Message === */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === Formatting Guide === */
+        .formatting-guide {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .formatting-guide h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+        }
+
+        .format-examples {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.9em;
+        }
+
+        .format-example {
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid var(--color-secondary);
+        }
+
+        .format-input {
+            font-family: monospace;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .format-output {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 1024px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-section {
+                border-right: none;
+                border-bottom: 3px solid #e9ecef;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .manager-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .input-section, .preview-section {
+                padding: 25px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                justify-content: center;
+            }
+            
+            .format-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* === Ruby Wings Article Styles (for preview) === */
+        .ruby-article {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ruby-article h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--color-secondary);
+            padding-bottom: 15px;
+        }
+
+        .ruby-article h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin: 35px 0 20px 0;
+            border-left: 4px solid var(--color-secondary);
+            padding-left: 15px;
+        }
+
+        .ruby-article h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-nature);
+            margin: 25px 0 15px 0;
+        }
+
+        .ruby-article h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--color-primary-light);
+            margin: 20px 0 12px 0;
+        }
+
+        .ruby-article p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .ruby-article strong {
+            color: var(--color-secondary);
+            font-weight: 600;
+        }
+
+        .ruby-article em {
+            color: #666;
+            font-style: italic;
+        }
+
+        .ruby-article ul, .ruby-article ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .ruby-article li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .ruby-article ul li::before {
+            content: '▪';
+            color: var(--color-secondary);
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        .ruby-article blockquote {
+            border-left: 4px solid var(--color-primary);
+            background: var(--color-healing-green);
+            padding: 25px;
+            margin: 25px 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .ruby-article .article-meta {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .ruby-article .discovery-highlight {
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-nature));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ruby-article .discovery-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="manager-header">
+            <h1>🎯 RUBY WINGS CONTENT MANAGER</h1>
+            <p>Công cụ tạo bài viết chuyên nghiệp - Chỉ cần copy paste nội dung</p>
+        </div>
+
+        <!-- Main Editor -->
+        <div class="editor-container">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> NHẬP NỘI DUNG BÀI VIẾT</h2>
+                </div>
+                
+                <div class="input-area">
+                    <textarea id="contentInput" placeholder="Copy và paste nội dung bài viết của bạn vào đây...
+
+Ví dụ:
+LỢI ÍCH CỦA THIỀN KHÍ CÔNG
+
+Bài tổng hợp của Lương Tiến Sỹ - dựa trên các tài liệu uy tín...
+
+KHI KHOA HỌC GẶP GỠ TRÍ TUỆ PHƯƠNG ĐÔNG
+
+Trong thế giới hiện đại đầy áp lực...
+
+CƠ CHẾ KHOA HỌC
+
+Điều hòa hệ thần kinh tự động...
+
+**Lợi ích chính:**
+- Giảm căng thẳng
+- Tăng cường miễn dịch
+- Cải thiện giấc ngủ
+
+> Trích dẫn quan trọng sẽ được highlight"></textarea>
+
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="generateArticle()">
+                            <i class="fas fa-magic"></i> 🎯 TẠO BÀI VIẾT
+                        </button>
+                        <button class="btn btn-secondary" onclick="copyHTML()">
+                            <i class="fas fa-copy"></i> 📋 COPY HTML
+                        </button>
+                        <button class="btn btn-outline" onclick="clearContent()">
+                            <i class="fas fa-broom"></i> XÓA NỘI DUNG
+                        </button>
+                    </div>
+
+                    <div id="successMessage" class="success-message">
+                        ✅ Đã copy HTML thành công! Bây giờ bạn có thể paste vào website.
+                    </div>
+
+                    <!-- Formatting Guide -->
+                    <div class="formatting-guide">
+                        <h4>📝 HƯỚNG DẪN ĐỊNH DẠNG:</h4>
+                        <div class="format-examples">
+                            <div class="format-example">
+                                <div class="format-input"># Tiêu đề chính</div>
+                                <div class="format-output">→ Tiêu đề lớn (H1)</div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-input">## Tiêu đề phụ</div>
+                                <div class="format-output">→ Tiêu đề vừa (H2)</div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-input">**chữ in đậm**</div>
+                                <div class="format-output">→ <strong>chữ in đậm</strong></div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-input">- mục danh sách</div>
+                                <div class="format-output">→ • mục danh sách</div>
+                            </div>
+                            <div class="format-example">
+                                <div class="format-input">> trích dẫn</div>
+                                <div class="format-output">→ Khối trích dẫn nổi bật</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-eye"></i> XEM TRƯỚC BÀI VIẾT</h2>
+                </div>
+                
+                <div class="preview-area">
+                    <div id="preview">
+                        <div style="text-align: center; color: #666; padding: 60px 20px;">
+                            <i class="fas fa-file-alt" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                            <h3 style="color: #999; font-family: var(--font-heading);">Nội dung xem trước sẽ hiển thị ở đây</h3>
+                            <p>Hãy nhập nội dung và click "TẠO BÀI VIẾT" để xem kết quả</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h3>🚀 HƯỚNG DẪN SỬ DỤNG:</h3>
+                    <ul>
+                        <li><strong>Bước 1:</strong> Copy nội dung bài viết và paste vào khung bên trái</li>
+                        <li><strong>Bước 2:</strong> Click "🎯 TẠO BÀI VIẾT" để xem trước định dạng</li>
+                        <li><strong>Bước 3:</strong> Click "📋 COPY HTML" để copy code hoàn chỉnh</li>
+                        <li><strong>Bước 4:</strong> Paste HTML vào website Ruby Wings của bạn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Biến lưu HTML hoàn chỉnh
+        let currentFullHTML = '';
+        
+        function generateArticle() {
+            const content = document.getElementById('contentInput').value;
+            
+            if (!content.trim()) {
+                alert('⚠️ Vui lòng nhập nội dung bài viết!');
+                return;
+            }
+            
+            const htmlContent = convertToHTML(content);
+            
+            // Hiển thị preview
+            document.getElementById('preview').innerHTML = `
+                <div class="ruby-article">
+                    ${htmlContent}
+                    <div class="discovery-highlight">
+                        <h3>❤️ "Khám phá hành trình toàn diện nuôi dưỡng sức khoẻ tinh thần và thể chất."</h3>
+                        <div style="margin-top: 20px;">
+                            <a href="thien-va-khi-cong/" style="background: white; color: var(--color-primary); padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; margin: 0 10px; display: inline-block;">
+                                Khám phá hành trình
+                            </a>
+                            <a href="Con-duong-thoat-khoi-ton-thuong.html" style="background: var(--color-secondary); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; margin: 0 10px; display: inline-block;">
+                                Con đường thoát khỏi tổn thương
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Tạo HTML hoàn chỉnh với header và footer Ruby Wings
+            currentFullHTML = createFullHTML(htmlContent);
+            
+            // Cuộn đến phần preview
+            document.getElementById('preview').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function convertToHTML(text) {
+            let html = text;
+            
+            // Xử lý tiêu đề
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            
+            // Xử lý in đậm và in nghiêng
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Xử lý blockquote
+            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+            
+            // Xử lý danh sách không thứ tự
+            html = html.replace(/^- (.*$)/gim, '<li>$1</li>');
+            const ulRegex = /(<li>.*<\/li>)(?![^<]*<\/ul>)/gs;
+            html = html.replace(ulRegex, '<ul>$1</ul>');
+            
+            // Xử lý danh sách có thứ tự
+            html = html.replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+            const olRegex = /(<li>.*<\/li>)(?![^<]*<\/ol>)/gs;
+            html = html.replace(olRegex, '<ol>$1</ol>');
+            
+            // Xử lý đoạn văn
+            const lines = html.split('\n');
+            let processedHTML = '';
+            let inList = false;
+            
+            lines.forEach(line => {
+                if (line.trim() === '') {
+                    if (inList) {
+                        inList = false;
+                    }
+                    return;
+                }
+                
+                if (line.startsWith('<ul>') || line.startsWith('<ol>') || line.startsWith('<li>') || 
+                    line.startsWith('</ul>') || line.startsWith('</ol>') || 
+                    line.startsWith('<h1>') || line.startsWith('<h2>') || line.startsWith('<h3>') || line.startsWith('<h4>') ||
+                    line.startsWith('<blockquote>')) {
+                    processedHTML += line + '\n';
+                    if (line.startsWith('<ul>') || line.startsWith('<ol>') || line.startsWith('<li>')) {
+                        inList = true;
+                    }
+                } else if (!inList) {
+                    processedHTML += `<p>${line}</p>\n`;
+                } else {
+                    processedHTML += line + '\n';
+                }
+            });
+            
+            return processedHTML;
+        }
+        
+        function createFullHTML(content) {
+            const titleMatch = content.match(/<h1>(.*?)<\/h1>/);
+            const title = titleMatch ? titleMatch[1] : 'Bài viết Ruby Wings';
+            
+            return `<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} | Ruby Wings</title>
+    <meta name="description" content="Khám phá những lợi ích tuyệt vời của thiền và khí công cho sức khỏe tinh thần và thể chất">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS của Ruby Wings */
+        :root {
+            --color-primary: #0b562a;
+            --color-primary-light: #2bb559;
+            --color-secondary: #f21970;
+            --color-secondary-light: #f84288;
+            --color-accent: #ebaf16;
+            --color-dark: #2F4F4F;
+            --color-light: #F5F5F5;
+            --color-nature: #0b8b34;
+            --color-healing-green: #e8f5e9;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --box-shadow-hover: 0 10px 25px rgba(0,0,0,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .article-content {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .article-content h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--color-secondary);
+            padding-bottom: 15px;
+        }
+
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin: 35px 0 20px 0;
+            border-left: 4px solid var(--color-secondary);
+            padding-left: 15px;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-nature);
+            margin: 25px 0 15px 0;
+        }
+
+        .article-content h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            color: var(--color-primary-light);
+            margin: 20px 0 12px 0;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-content strong {
+            color: var(--color-secondary);
+            font-weight: 600;
+        }
+
+        .article-content em {
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .article-content li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .article-content ul li::before {
+            content: '▪';
+            color: var(--color-secondary);
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--color-primary);
+            background: var(--color-healing-green);
+            padding: 25px;
+            margin: 25px 0;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .discovery-highlight {
+            background: linear-gradient(135deg, var(--color-primary-light), var(--color-nature));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discovery-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .article-actions {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-secondary-light);
+        }
+
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 20px;
+            }
+            
+            .article-content h1 {
+                font-size: 2rem;
+            }
+            
+            .article-content h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="article-container">
+        <article class="article-content">
+            ${content}
+            
+            <div class="discovery-highlight">
+                <h3>❤️ "Khám phá hành trình toàn diện nuôi dưỡng sức khoẻ tinh thần và thể chất."</h3>
+                <div class="article-actions">
+                    <a href="thien-va-khi-cong/" class="btn">🧘 Khám phá hành trình</a>
+                    <a href="Con-duong-thoat-khoi-ton-thuong.html" class="btn btn-secondary">💖 Thoát khỏi tổn thương</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>`;
+        }
+        
+        function copyHTML() {
+            if (!currentFullHTML) {
+                alert('⚠️ Vui lòng tạo bài viết trước khi copy!');
+                return;
+            }
+            
+            navigator.clipboard.writeText(currentFullHTML).then(() => {
+                const successMsg = document.getElementById('successMessage');
+                successMsg.style.display = 'block';
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 4000);
+            }).catch(err => {
+                alert('❌ Lỗi khi copy: ' + err);
+            });
+        }
+        
+        function clearContent() {
+            document.getElementById('contentInput').value = '';
+            document.getElementById('preview').innerHTML = `
+                <div style="text-align: center; color: #666; padding: 60px 20px;">
+                    <i class="fas fa-file-alt" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                    <h3 style="color: #999; font-family: var(--font-heading);">Nội dung xem trước sẽ hiển thị ở đây</h3>
+                    <p>Hãy nhập nội dung và click "TẠO BÀI VIẾT" để xem kết quả</p>
+                </div>
+            `;
+            currentFullHTML = '';
+        }
+        
+        // Auto-save content to localStorage
+        document.getElementById('contentInput').addEventListener('input', function() {
+            localStorage.setItem('rubyWingsContent', this.value);
+        });
+        
+        // Load saved content
+        window.addEventListener('load', function() {
+            const savedContent = localStorage.getItem('rubyWingsContent');
+            if (savedContent) {
+                document.getElementById('contentInput').value = savedContent;
+            }
+        });
+    </script>
+</body>
+</html>
