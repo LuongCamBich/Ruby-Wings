@@ -694,7 +694,7 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: var(--transition);
-            z-index: 1000;
+            z-index: 1002; /* Tăng z-index để hiển thị trên các phần khác */
             max-height: 300px;
             overflow-y: auto;
         }
@@ -748,6 +748,8 @@
         .search-results {
             margin-top: 30px;
             display: none;
+            position: relative;
+            z-index: 1001;
         }
 
         .search-results.active {
@@ -1978,6 +1980,43 @@
             .social-icon {
                 flex-shrink: 0;
             }
+            
+            /* Sửa lỗi tìm kiếm trên điện thoại */
+            .search-box {
+                flex-direction: column;
+                border-radius: 20px;
+                overflow: visible;
+            }
+            
+            .search-input {
+                padding: 15px 20px;
+                border-radius: 20px 20px 0 0;
+                width: 100%;
+            }
+            
+            .search-button {
+                min-width: 100%;
+                padding: 15px 20px;
+                border-radius: 0 0 20px 20px;
+                width: 100%;
+            }
+            
+            .search-suggestions {
+                position: relative;
+                margin-top: 5px;
+                border-radius: 15px;
+                z-index: 1002;
+            }
+            
+            /* Đổi màu xanh lá nhạt cho các dòng liên kết trên điện thoại */
+            .nature-highlight a {
+                color: #a0ffa0 !important;
+                font-weight: bold;
+            }
+            
+            .nature-highlight a:hover {
+                color: #90EE90 !important;
+            }
         }
 
         /* === Responsive Design - Mobile First === */
@@ -2231,16 +2270,15 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="logo">
-                <div class="logo-image-container">
-                    <img src="images/logofxf.png" alt="Ruby Wings Travel Logo - Du lịch trải nghiệm cảm xúc và chữa lành" width="90" height="90">
-                </div>
-                <div class="logo-content">
-                    <div class="logo-main">RUBY WINGS</div>
-                    <div class="logo-tagline">Hành trình trải nghiệm cảm xúc</div>
-                </div>
-            </div>
-            
+    <a href="04-y-nghia-logo-bieu-tuong.html" class="logo">
+        <div class="logo-image-container">
+            <img src="images/logofxf.png" alt="Ruby Wings Travel Logo - Du lịch trải nghiệm cảm xúc và chữa lành" width="90" height="90">
+        </div>
+        <div class="logo-content">
+            <div class="logo-main">RUBY WINGS</div>
+            <div class="logo-tagline">Hành trình trải nghiệm cảm xúc</div>
+        </div>
+    </a>
             <!-- Desktop Navigation -->
             <nav class="nav-links">
                 <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings</a>
@@ -2329,19 +2367,6 @@
         </section>
 
         <hr style="border: 3px solid var(--color-secondary); margin: 30px 0;">
-
-       <!-- About Section - Thiết kế mới -->
-        <section class="about" id="about">
-            <div class="container">
-                <div class="about-panel-new">
-                    <!-- Logo lớn ở giữa phía trên -->
-                    <div class="logo-center">
-                        <a href="04-y-nghia-logo-bieu-tuong.html" class="logo-link">
-                            <div class="logo-container pulse">
-                                <img src="logo-tuyen-ngon.png" alt="Ruby Wings Logo - Ý nghĩa biểu tượng và tuyên ngôn sáng lập" class="main-logo" width="140" height="140">
-                            </div>
-                        </a>
-                    </div>
 
                     <!-- Hai phần nội dung phía dưới -->
                     <div class="content-bottom">
