@@ -1,225 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- TRANG CHỦ VÀ TRANG GIỚI THIỆU CHÍNH -->
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+
+  <!-- ======================= -->
+  <!-- 🔰 TRANG CHỦ & GIỚI THIỆU -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="canonical" href="https://www.rubywing.vn/"/>
   </url>
   <url>
     <loc>https://www.rubywing.vn/01-mo-dau-ruby-wings-la-ai.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://www.rubywing.vn/images/logo-ruby-wings.png</image:loc>
+      <image:caption>Ruby Wings – Tổ chức trải nghiệm giáo dục và du lịch truyền cảm hứng</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.rubywing.vn/02-cau-chuyen-khoi-nguon.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/03-tuyen-ngon-sang-lap.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/04-y-nghia-logo-bieu-tuong.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/08-su-menh-tam-nhin.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/tuyen-ngon-sang-lap-ruby-wings.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- TRANG HÀNH TRÌNH VÀ TRẢI NGHIỆM -->
+  <!-- ======================= -->
+  <!-- 🧭 HÀNH TRÌNH & TRẢI NGHIỆM -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/nhung-hanh-trinh-tieu-bieu.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/Hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rubywing.vn/images/hanh-trinh-tieu-bieu.jpg</image:loc>
+      <image:caption>Những hành trình trải nghiệm tiêu biểu cùng Ruby Wings</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.rubywing.vn/hanh-trinh-lanh-dao.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
 
-  <!-- TRANG ĐỊA ĐIỂM VÀ THIÊN NHIÊN -->
-  <url>
-    <loc>https://www.rubywing.vn/ve-dep-thien-nhien-viet-nam.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- ======================= -->
+  <!-- 🌿 THIÊN NHIÊN & ĐỊA ĐIỂM -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/ve-dep-quang-tri.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/non-nuoc-bach-ma.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/pha-tam-giang.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/dmz-hoa-giai.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- TRANG VĂN HÓA VÀ LỊCH SỬ -->
+  <!-- ======================= -->
+  <!-- 🏛️ VĂN HÓA & LỊCH SỬ -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/di-san-quoc-gia.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.rubywing.vn/lich-su-va-dai-ngan-huong-hoa-hue.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <loc>https://www.rubywing.vn/mua-do-ky-uc-truong-son.html</loc>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/Mua-do-ky-uc-truong-son.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/theo-dau-chan-anh.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/tieng-vong-non-song.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- TRANG PHÁT TRIỂN CÁ NHÂN VÀ XÃ HỘI -->
+  <!-- ======================= -->
+  <!-- 💫 PHÁT TRIỂN CÁ NHÂN -->
+  <!-- ======================= -->
   <url>
-    <loc>https://www.rubywing.vn/thanh-thieu-nien-hoc-hoi-phat-trien.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/khung-hoang-tinh-than-tre-em.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/Con-duong-thoat-khoi-ton-thuong.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.rubywing.vn/con-duong-thoat-khoi-ton-thuong.html</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/huyen-thoai-phu-nu.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- TRANG KẾT NỐI VÀ QUỐC TẾ -->
+  <!-- ======================= -->
+  <!-- 🌍 KẾT NỐI & QUỐC TẾ -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/ket-noi.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.rubywing.vn/ket-noi-quoc-te.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/tieng-goi-vi-tuyen.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.75</priority>
   </url>
 
-  <!-- TRANG DU LỊCH VÀ SỨC KHỎE -->
+  <!-- ======================= -->
+  <!-- 🌱 DU LỊCH XANH & SỨC KHỎE -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/du-lich-xanh.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/thien-va-suc-khoe.html</loc>
-    <lastmod>2024-12-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
-  <!-- TRANG TRI ÂN VÀ TIỆN ÍCH -->
+  <!-- ======================= -->
+  <!-- ❤️ TRI ÂN & TIỆN ÍCH -->
+  <!-- ======================= -->
   <url>
     <loc>https://www.rubywing.vn/tri-an.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.65</priority>
   </url>
   <url>
     <loc>https://www.rubywing.vn/QR-menu.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+
+  <!-- ======================= -->
+  <!-- ⚙️ LIÊN KẾT KHÁC -->
+  <!-- ======================= -->
   <url>
     <loc>https://rubywings.com/thien-khi-cong.html</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 </urlset>
