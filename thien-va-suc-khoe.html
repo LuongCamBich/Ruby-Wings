@@ -1328,14 +1328,186 @@
         <div class="container">
             <div class="section-header">
               
-            </div>
-            
-            
-            
-            <!-- Vùng khám phá hành trình mới -->
+                        <!-- Vùng khám phá hành trình mới - Premium Design -->
             <div class="discovery-highlight">
-                <p class="discovery-text">❤️“Khám phá hành trình toàn diện nuôi dưỡng sức khoẻ tinh thần và thể chất.”</p>
+                <div class="discovery-content">
+                    <div class="discovery-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <p class="discovery-text">❤️ "Khám phá hành trình toàn diện nuôi dưỡng sức khoẻ tinh thần và thể chất."</p>
+                    <div class="discovery-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
             </div>
+
+            <style>
+                .discovery-highlight {
+                    background: linear-gradient(135deg, 
+                        rgba(46, 125, 50, 0.95) 0%, 
+                        rgba(56, 142, 60, 0.9) 50%, 
+                        rgba(76, 175, 80, 0.85) 100%);
+                    border-radius: 20px;
+                    padding: 20px 30px;
+                    margin: 30px 0;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    backdrop-filter: blur(10px);
+                    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    cursor: pointer;
+                }
+
+                .discovery-highlight::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: radial-gradient(circle, 
+                        rgba(255, 255, 255, 0.1) 0%, 
+                        rgba(255, 255, 255, 0) 70%);
+                    opacity: 0;
+                    transition: opacity 0.6s ease;
+                }
+
+                .discovery-highlight:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 40px rgba(46, 125, 50, 0.4);
+                    background: linear-gradient(135deg, 
+                        rgba(46, 125, 50, 0.98) 0%, 
+                        rgba(56, 142, 60, 0.93) 50%, 
+                        rgba(76, 175, 80, 0.88) 100%);
+                }
+
+                .discovery-highlight:hover::before {
+                    opacity: 1;
+                }
+
+                .discovery-content {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 20px;
+                    position: relative;
+                    z-index: 2;
+                }
+
+                .discovery-icon {
+                    color: #fe4ec6;
+                    font-size: 2rem;
+                    animation: heartbeat 2s ease-in-out infinite;
+                    flex-shrink: 0;
+                }
+
+                @keyframes heartbeat {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+
+                .discovery-text {
+                    flex: 1;
+                    color: #f7e11d !important;
+                    font-size: 1.3rem;
+                    font-weight: 700;
+                    line-height: 1.2;
+                    text-align: center;
+                    margin: 0;
+                    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                    font-family: 'Noto Serif', serif;
+                    letter-spacing: -0.1px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .discovery-arrow {
+                    color: #FFEB3B;
+                    font-size: 1.3rem;
+                    transition: all 0.3s ease;
+                    flex-shrink: 0;
+                    opacity: 0.8;
+                }
+
+                .discovery-highlight:hover .discovery-arrow {
+                    transform: translateX(5px);
+                    opacity: 1;
+                    color: #FFFFFF;
+                }
+
+                /* Mobile Responsive */
+                @media (max-width: 768px) {
+                    .discovery-highlight {
+                        padding: 18px 20px;
+                        margin: 25px 0;
+                        border-radius: 16px;
+                    }
+
+                    .discovery-content {
+                        gap: 15px;
+                    }
+
+                    .discovery-icon {
+                        font-size: 1.8rem;
+                    }
+
+                    .discovery-text {
+                        font-size: 1.1rem;
+                        white-space: normal;
+                        line-height: 1.3;
+                        color: #FFEB3B !important;
+                    }
+
+                    .discovery-arrow {
+                        font-size: 1.1rem;
+                    }
+
+                    .discovery-highlight:hover {
+                        transform: translateY(-3px);
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .discovery-highlight {
+                        padding: 16px 18px;
+                        margin: 20px 0;
+                    }
+
+                    .discovery-text {
+                        font-size: 1rem;
+                        line-height: 1.2;
+                        color: #FFEB3B !important;
+                    }
+
+                    .discovery-icon {
+                        font-size: 1.6rem;
+                    }
+                }
+
+                /* High-DPI Screens Enhancement */
+                @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                    .discovery-highlight {
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                    }
+                }
+
+                /* Reduced Motion Support */
+                @media (prefers-reduced-motion: reduce) {
+                    .discovery-highlight,
+                    .discovery-arrow,
+                    .discovery-icon {
+                        transition: none;
+                        animation: none;
+                    }
+                    
+                    .discovery-highlight:hover {
+                        transform: none;
+                    }
+                }
+            </style>
             
             <!-- Khối 3 hình ảnh đồng trục -->
             <div class="three-images-section">
