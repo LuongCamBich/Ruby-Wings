@@ -1,0 +1,4 @@
+git add .
+git commit -m "cập nhật web"
+git pull --rebase origin main
+git push origin main

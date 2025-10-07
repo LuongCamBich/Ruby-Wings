@@ -2478,25 +2478,475 @@
 
         <hr style="border: 3px solid var(--color-secondary); margin: 20px 0;">
 
-        <div class="container trio-wrapper">
-            <!-- QR BOX TRÁI -->
-            <div class="qr-box" onclick="window.location.href='QR-menu.html'">
-                <img src="images/QR-tu-thien.jpg" alt="QR Code tạo mã miễn phí cho các nền tảng Ruby Wings" class="qr-img" width="200" height="200">
-                <p class="qr-text">TẠO MÃ QR CHO CÁC NỀN TẢNG 🍃🍃MIỄN PHÍ🍃🍃</p>
-            </div>
 
-            <!-- KHỐI CHỮ GIỮA - ĐÃ THÊM HIỆU ỨNG PULSE -->
-            <div class="center-text" onclick="window.location.href='nhung-hanh-trinh-tieu-bieu.html'">
-                <h1 class="center-title"><strong>NHỮNG HÀNH TRÌNH TIÊU BIỂU</strong></h1>
-                <p class="center-sub"><strong>🍃 Hành trình khám phá những trải nghiệm ý nghĩa và cảm xúc🍃</strong></p>
-                
-            </div>
-
-            <!-- ẢNH PHẢI -->
-            <div class="right-img-box">
-                <img src="images/hanh-trinh-tieu-bieu.jpg" alt="Hình ảnh hành trình tiêu biểu Ruby Wings - Trải nghiệm du lịch cảm xúc" class="right-img" width="240" height="160">
+<div class="container trio-wrapper">
+    <!-- QR BOX TRÁI -->
+    <div class="qr-box" onclick="window.location.href='QR-menu.html'">
+        <div class="qr-box-inner">
+            <div class="qr-glow"></div>
+            <img src="images/QR-tu-thien.jpg" alt="QR Code tạo mã miễn phí cho các nền tảng Ruby Wings" class="qr-img" width="200" height="200">
+            <p class="qr-text">TẠO MÃ QR CHO CÁC NỀN TẢNG 🍃🍃MIỄN PHÍ🍃🍃</p>
+            <div class="qr-overlay">
+                <span class="qr-icon">📱</span>
+                <span class="qr-hover-text">Nhấn để tạo mã QR</span>
             </div>
         </div>
+    </div>
+
+    <!-- KHỐI CHỮ GIỮA - ĐÃ THÊM HIỆU ỨNG PULSE -->
+    <div class="center-content">
+        <div class="center-text" onclick="window.location.href='nhung-hanh-trinh-tieu-bieu.html'">
+            <div class="center-glow"></div>
+            <h1 class="center-title"><strong>NHỮNG HÀNH TRÌNH TIÊU BIỂU</strong></h1>
+            <p class="center-sub"><strong>🍃 Hành trình khám phá những trải nghiệm ý nghĩa và cảm xúc🍃</strong></p>
+            <div class="center-overlay">
+                <span class="center-icon">🌟</span>
+                <span class="center-hover-text">Khám phá ngay</span>
+            </div>
+        </div>
+        
+        <!-- NÚT MỚI THÊM VÀO -->
+        <div class="new-button" onclick="window.location.href='nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html'">
+            <div class="button-glow"></div>
+            <span class="button-icon">🚀</span>
+            <span class="button-text">HÀNH TRÌNH TRẢI NGHIỆM LINH HOẠT</span>
+            <div class="button-overlay">
+                <span class="button-hover-text">Khám phá thêm</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ẢNH PHẢI -->
+    <div class="right-img-box">
+        <div class="img-box-inner">
+            <div class="img-glow"></div>
+            <img src="images/hanh-trinh-tieu-bieu.jpg" alt="Hình ảnh hành trình tiêu biểu Ruby Wings - Trải nghiệm du lịch cảm xúc" class="right-img" width="240" height="160">
+            <div class="img-overlay">
+                <span class="img-icon">📸</span>
+                <span class="img-hover-text">Xem hình ảnh</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* CSS cho thiết kế mới */
+.trio-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #fce4ec 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.trio-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50, #e91e63, #ff9800);
+    z-index: 1;
+}
+
+/* QR Box */
+.qr-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.qr-box-inner {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.qr-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(76, 175, 80, 0.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.qr-box:hover .qr-glow {
+    opacity: 1;
+}
+
+.qr-img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.qr-box:hover .qr-img {
+    transform: scale(1.05);
+}
+
+.qr-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: #2e7d32;
+    margin: 0;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+    font-size: 16px;
+}
+
+.qr-box:hover .qr-text {
+    color: #e91e63;
+}
+
+.qr-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 175, 80, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+}
+
+.qr-box:hover .qr-overlay {
+    opacity: 1;
+}
+
+.qr-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.qr-hover-text {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Center Content */
+.center-content {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.center-text {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    padding: 25px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.center-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.center-text:hover .center-glow {
+    opacity: 1;
+}
+
+.center-text:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #388e3c 0%, #66bb6a 100%);
+}
+
+.center-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin: 0 0 15px 0;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.center-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.center-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(233, 30, 99, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+}
+
+.center-text:hover .center-overlay {
+    opacity: 1;
+}
+
+.center-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.center-hover-text {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* New Button */
+.new-button {
+    position: relative;
+    cursor: pointer;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.button-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.new-button:hover .button-glow {
+    opacity: 1;
+}
+
+.new-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #f57c00 0%, #ffa726 100%);
+}
+
+.button-icon {
+    font-size: 24px;
+}
+
+.button-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+    flex: 1;
+}
+
+.button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(156, 39, 176, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+}
+
+.new-button:hover .button-overlay {
+    opacity: 1;
+}
+
+.button-hover-text {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Right Image Box */
+.right-img-box {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.img-box-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.img-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(33, 150, 243, 0.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.right-img-box:hover .img-glow {
+    opacity: 1;
+}
+
+.right-img {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+}
+
+.right-img-box:hover .right-img {
+    transform: scale(1.05);
+}
+
+.img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(33, 150, 243, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+}
+
+.right-img-box:hover .img-overlay {
+    opacity: 1;
+}
+
+.img-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.img-hover-text {
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .trio-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .qr-box, .center-content, .right-img-box {
+        min-width: 100%;
+    }
+    
+    .center-title {
+        font-size: 20px;
+    }
+    
+    .center-sub, .qr-text, .button-text {
+        font-size: 14px;
+    }
+    
+    .qr-img, .right-img {
+        max-width: 180px;
+    }
+}
+
+/* Animation for pulse effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+.center-text {
+    animation: pulse 2s infinite;
+}
+</style>
+
+
 
         <!-- Nature & Sustainability Section -->
         <section class="nature-section" id="nature">
