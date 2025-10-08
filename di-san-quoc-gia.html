@@ -38,7 +38,7 @@
 <meta name="twitter:image" content="https://rubywings.vn/images/di-san-quoc-gia.jpg">
 <meta name="twitter:image:alt" content="Di Sản Quốc Gia Ruby Wings - Khám Phá Di Sản Văn Hóa & Lịch Sử Vĩ Tuyến 17">
 <meta name="twitter:creator" content="@TienSy379">
-
+<script src="facebook-pixel-complete.js"></script>
 <!-- Canonical -->
 <link rel="canonical" href="https://rubywings.vn/di-san-quoc-gia.html">
 
@@ -978,9 +978,22 @@
 </div>
 
 <script>
-// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
+// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
 function trackConsultationClick() {
-    // Google Analytics tracking
+    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: 'Đăng ký tư vấn chung - ' + document.title,
+            content_category: 'General Consultation',
+            page_url: window.location.href,
+            button_type: 'General CTA'
+        });
+        console.log('Facebook Pixel: Tracked consultation click');
+    } else {
+        console.warn('Facebook Pixel not loaded yet');
+    }
+    
+    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
     if (typeof gtag !== 'undefined') {
         gtag('event', 'consultation_click', {
             'event_category': 'engagement',
@@ -989,9 +1002,14 @@ function trackConsultationClick() {
     }
     
     console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
+    
+    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
+    setTimeout(function() {
+        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+    }, 100);
 }
 
-// Thêm hiệu ứng khi load trang
+// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.rw-consult-btn-main');
     if (btn) {
@@ -1006,12 +1024,31 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(-4px) scale(1.05)';
         });
         
+        // Xử lý sự kiện click để đảm bảo tracking
+        btn.addEventListener('click', function(e) {
+            // Ngăn mở link ngay lập tức
+            e.preventDefault();
+            // Gọi hàm tracking
+            trackConsultationClick();
+        });
+        
         // Kiểm tra mobile
         if (window.innerWidth <= 768) {
             console.log('Mobile mode: Green background, no arrow, single line');
         }
     }
 });
+
+// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
+function ensurePixelTracking() {
+    if (typeof fbq === 'undefined') {
+        console.log('Waiting for Facebook Pixel to load...');
+        setTimeout(ensurePixelTracking, 500);
+    }
+}
+
+// Khởi động backup tracking
+ensurePixelTracking();
 </script>
 <!-- Footer -->
 <footer id="contact">
