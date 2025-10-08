@@ -1,10 +1,7 @@
 # ============================================================
-# 🚀 Ruby Wings | Robots.txt - Ultimate SEO + AI Optimization
-# Version: 2025.10.05 | Author: Khổng Hà & GPT-5 Strategic Suite
-# Mục tiêu: Tối ưu cho Google, Bing, OpenAI, Applebot, SEO quốc tế
+# 🚀 RubyWings.vn | Robots.txt - Tối ưu SEO & AI 2024
 # ============================================================
 
-# --- Quy định chung ---
 User-agent: *
 Allow: /
 Disallow: /admin/
@@ -12,100 +9,74 @@ Disallow: /private/
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /wp-admin/
+Disallow: /search/
 Crawl-delay: 1
 
-# --- Sitemap chuẩn quốc tế ---
-Sitemap: https://www.rubywings.vn/sitemap.xml
-Sitemap: https://www.rubywings.vn/sitemap_index.xml
-
 # ============================================================
-# 🤖 CHO PHÉP CÁC CÔNG CỤ AI / SEARCH ENGINE TRUY CẬP
+# 🤖 AI & SEARCH ENGINE BOTS
 # ============================================================
 
-# --- Google ---
+# Google
 User-agent: Googlebot
 Allow: /
-
 User-agent: Google-Image
 Allow: /
-
-User-agent: Google-News
+User-agent: Googlebot-News
 Allow: /
-
 User-agent: Google-Extended
 Allow: /
 
-# --- Bing & Microsoft ---
+# Bing/Microsoft
 User-agent: Bingbot
 Allow: /
-
 User-agent: BingPreview
 Allow: /
 
-User-agent: BingAI
-Allow: /
-
-# --- OpenAI / ChatGPT Search ---
+# OpenAI
 User-agent: GPTBot
 Allow: /
-
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: OAI-SearchBot
-Allow: /
-
-# --- Apple Spotlight / Siri / Applebot ---
+# Apple
 User-agent: Applebot
 Allow: /
 
-# --- Anthropic ClaudeBot (AI Search) ---
+# Anthropic Claude
 User-agent: ClaudeBot
 Allow: /
 
-# --- Common social preview bots ---
-User-agent: Twitterbot
-Allow: /
-
+# Social Media
 User-agent: FacebookExternalHit
 Allow: /
-
+User-agent: Twitterbot
+Allow: /
 User-agent: LinkedInBot
 Allow: /
 
 # ============================================================
-# 🧱 CHẶN CÁC BOT KHÔNG MONG MUỐN / TỐN BĂNG THÔNG
+# 🚫 BLOCK UNWANTED BOTS
 # ============================================================
 
 User-agent: MJ12bot
 Disallow: /
-
 User-agent: AhrefsBot
 Crawl-delay: 10
-
 User-agent: SemrushBot
 Crawl-delay: 10
-
 User-agent: DotBot
 Disallow: /
-
 User-agent: spbot
 Disallow: /
 
-User-agent: PetalBot
-Crawl-delay: 10
+# ============================================================
+# 📊 SITEMAPS
+# ============================================================
+
+Sitemap: https://www.rubywings.vn/sitemap.xml
+Sitemap: https://www.rubywings.vn/sitemap-images.xml
+Sitemap: https://www.rubywings.vn/sitemap-videos.xml
 
 # ============================================================
-# 💡 GHI CHÚ & KHUYẾN NGHỊ
-# ============================================================
-# 1️⃣ Đảm bảo sitemap.xml hoạt động và được khai báo tại Google Search Console.
-# 2️⃣ Giữ cấu trúc internal link sạch, tránh redirect chain quá 2 cấp.
-# 3️⃣ Mỗi trang quan trọng nên có dữ liệu cấu trúc (Schema.org) hợp lệ.
-# 4️⃣ Kiểm tra định kỳ file robots.txt tại:
-#     https://search.google.com/search-console/robots-testing-tool
-# 5️⃣ Bật logging để đo lượt truy cập AI bots (GPTBot, Google-Extended…).
-# 6️⃣ Tối ưu metadata và ngữ nghĩa nội dung để tăng “AI Search Visibility”.
-
-# ============================================================
-# ✨ Ruby Wings - One Day In Nature | Be Found Everywhere ✨
+# ✅ RubyWings.vn - Du lịch trải nghiệm cảm xúc
 # ============================================================
