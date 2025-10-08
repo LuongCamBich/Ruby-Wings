@@ -36,7 +36,7 @@
     <meta name="twitter:description" content="Khám phá hành trình đặc biệt kết nối Vĩ tuyến 17, DMZ với thiền chánh niệm và khí công chữa lành">
     <meta name="twitter:image" content="https://rubywings.vn/images/nhung-hanh-trinh-tieu-bieu.jpg">
     <meta name="twitter:creator" content="@TienSy379">
-
+    <script src="facebook-pixel-complete.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
@@ -1399,10 +1399,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="tour-actions">
                             <a href="xem-chi-tiet-hanh-trinh-ket-noi-the-he.html" class="cta-button">
                                 CHI TIẾT
-                            </a>
-                            <a href="https://forms.gle/4dWUSesN7pHysiYu8" class="cta-button register">
-                                ĐĂNG KÝ
-                            </a>
+                            <a href="https://forms.gle/4dWUSesN7pHysiYu8" 
+   class="cta-button register"
+   onclick="trackTourRegistration('Ngọn Lửa Trường Sơn - Ký ức - Khát vọng', 'Historical Tourism')">
+   ĐĂNG KÝ
+</a>
                         </div>
                     </div>
                 </div>
@@ -1442,10 +1443,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <div class="tour-actions">
                             <a href="Mua-do-ky-uc-truong-son.html" class="cta-button">
-                                CHI TIẾT
-                            </a>
-                            <a href="https://forms.gle/Ehfiykrz7qwfCE3e9" class="cta-button register">
-                                ĐĂNG KÝ
+    CHI TIẾT
+</a>
+<a href="https://forms.gle/Ehfiykrz7qwfCE3e9" class="cta-button register" onclick="trackTourRegistration('Sống cùng Mưa Đỏ - Tây Trường Sơn', 'Historical Tourism')">
+    ĐĂNG KÝ
+</a>
                             </a>
                         </div>
                     </div>
@@ -1480,11 +1482,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div class="tour-actions">
-                            <a href="pha-tam-giang.html" class="cta-button">
-                                CHI TIẾT
-                            </a>
-                            <a href="https://forms.gle/5kJRdnThNbotaPYa6" class="cta-button register">
-                                ĐĂNG KÝ
+                           <a href="pha-tam-giang.html" class="cta-button">
+    CHI TIẾT
+</a>
+<a href="https://forms.gle/5kJRdnThNbotaPYa6" class="cta-button register" onclick="trackTourRegistration('Hoàng Hôn Phá Tam Giang & Di Sản', 'Eco Tourism')">
+    ĐĂNG KÝ
+</a>
                             </a>
                         </div>
                     </div>
@@ -1519,11 +1522,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div class="tour-actions">
-                            <a href="non-nuoc-bach-ma.html" class="cta-button">
-                                CHI TIẾT
-                            </a>
-                            <a href="https://forms.gle/e74TXiUf2adhzWmZ8" class="cta-button register">
-                                ĐĂNG KÝ
+                           <a href="non-nuoc-bach-ma.html" class="cta-button">
+    CHI TIẾT
+</a>
+<a href="https://forms.gle/e74TXiUf2adhzWmZ8" class="cta-button register" onclick="trackTourRegistration('Non nước Bạch Mã', 'Healing Tourism')">
+    ĐĂNG KÝ
+</a>
                             </a>
                         </div>
                     </div>
@@ -1558,11 +1562,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div class="tour-actions">
-                            <a href="lich-su-va-dai-ngan-huong-hoa-hue.html" class="cta-button">
-                                CHI TIẾT
-                            </a>
-                            <a href="https://forms.gle/zsfMwsqCx54cevVz5" class="cta-button register">
-                                ĐĂNG KÝ
+                           <a href="lich-su-va-dai-ngan-huong-hoa-hue.html" class="cta-button">
+    CHI TIẾT
+</a>
+<a href="https://forms.gle/zsfMwsqCx54cevVz5" class="cta-button register" onclick="trackTourRegistration('Ký Ức - Lịch Sử và Đại Ngàn - Tĩnh Lặng', 'Historical Tourism')">
+    ĐĂNG KÝ
+</a>
                             </a>
                         </div>
                     </div>
@@ -1930,9 +1935,22 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <script>
-// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
+// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
 function trackConsultationClick() {
-    // Google Analytics tracking
+    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: 'Đăng ký tư vấn chung - ' + document.title,
+            content_category: 'General Consultation',
+            page_url: window.location.href,
+            button_type: 'General CTA'
+        });
+        console.log('Facebook Pixel: Tracked consultation click');
+    } else {
+        console.warn('Facebook Pixel not loaded yet');
+    }
+    
+    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
     if (typeof gtag !== 'undefined') {
         gtag('event', 'consultation_click', {
             'event_category': 'engagement',
@@ -1941,9 +1959,14 @@ function trackConsultationClick() {
     }
     
     console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
+    
+    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
+    setTimeout(function() {
+        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+    }, 100);
 }
 
-// Thêm hiệu ứng khi load trang
+// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.rw-consult-btn-main');
     if (btn) {
@@ -1958,12 +1981,31 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(-4px) scale(1.05)';
         });
         
+        // Xử lý sự kiện click để đảm bảo tracking
+        btn.addEventListener('click', function(e) {
+            // Ngăn mở link ngay lập tức
+            e.preventDefault();
+            // Gọi hàm tracking
+            trackConsultationClick();
+        });
+        
         // Kiểm tra mobile
         if (window.innerWidth <= 768) {
             console.log('Mobile mode: Green background, no arrow, single line');
         }
     }
 });
+
+// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
+function ensurePixelTracking() {
+    if (typeof fbq === 'undefined') {
+        console.log('Waiting for Facebook Pixel to load...');
+        setTimeout(ensurePixelTracking, 500);
+    }
+}
+
+// Khởi động backup tracking
+ensurePixelTracking();
 </script>
     <!-- Footer -->
     <footer id="contact">

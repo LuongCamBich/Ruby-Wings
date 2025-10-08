@@ -36,7 +36,7 @@ gtag('config', 'G-BD5GXRQFQZ');
 <meta name="twitter:description" content="Hành trình tri ân từ Vĩ tuyến 17 - nơi lịch sử và hiện tại giao hòa, cùng giữ gìn non sông gấm vóc.">
 <meta name="twitter:image" content="https://rubywings.vn/images/tieng-vong-non-song.jpg">
 <meta name="twitter:creator" content="@TienSy379">
-
+<script src="facebook-pixel-complete.js"></script>
 <!-- Favicon -->
 <link rel="icon" href="https://rubywings.vn/favicon.ico" type="image/x-icon">
 
@@ -1028,7 +1028,7 @@ gtag('config', 'G-BD5GXRQFQZ');
             <div class="poem-content">
                 <div class="poem-header">
                     <div class="memorial-icon">🕊️</div>
-                    <h2 class="poem-title">Đất Mẹ Và Những Người Con Bất Tử</h2>
+                    <h1 class="poem-title">Đất Mẹ Và Những Người Con Bất Tử</h1>
                     <div class="poem-author">(Vô Danh)</div>
                 </div>
                 
@@ -1110,7 +1110,62 @@ gtag('config', 'G-BD5GXRQFQZ');
 
         </div>
     </section>
+</main>
 
+<div class="button-container">
+    <a href="Mua-do-ky-uc-truong-son.html" class="cta-button">
+        CHI TIẾT
+    </a>
+    <a href="https://forms.gle/Ehfiykrz7qwfCE3e9" class="cta-button register" onclick="trackTourRegistration('Sống cùng Mưa Đỏ - Tây Trường Sơn', 'Historical Tourism')">
+        ĐĂNG KÝ
+    </a>
+</div>
+
+<style>
+    /* Container căn giữa */
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin: 20px 0;
+        gap: 15px;
+    }
+
+    /* Kiểu dáng nút cơ bản */
+    .cta-button {
+        display: inline-block;
+        background-color: #6c757d;
+        color: white;
+        padding: 12px 30px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    /* Kiểu dáng nút đăng ký */
+    .cta-button.register {
+        background-color: #4CAF50;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .cta-button.register:hover {
+        background-color: #45a049;
+    }
+
+    .cta-button:not(.register):hover {
+        background-color: #5a6268;
+    }
+</style>
     <!-- Section Link to Hành Trình Tiêu Biểu -->
     <section class="journey-link-section">
         <div class="container">
@@ -1450,9 +1505,22 @@ gtag('config', 'G-BD5GXRQFQZ');
 </div>
 
 <script>
-// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
+// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
 function trackConsultationClick() {
-    // Google Analytics tracking
+    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: 'Đăng ký tư vấn chung - ' + document.title,
+            content_category: 'General Consultation',
+            page_url: window.location.href,
+            button_type: 'General CTA'
+        });
+        console.log('Facebook Pixel: Tracked consultation click');
+    } else {
+        console.warn('Facebook Pixel not loaded yet');
+    }
+    
+    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
     if (typeof gtag !== 'undefined') {
         gtag('event', 'consultation_click', {
             'event_category': 'engagement',
@@ -1461,9 +1529,14 @@ function trackConsultationClick() {
     }
     
     console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
+    
+    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
+    setTimeout(function() {
+        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+    }, 100);
 }
 
-// Thêm hiệu ứng khi load trang
+// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.rw-consult-btn-main');
     if (btn) {
@@ -1478,12 +1551,31 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(-4px) scale(1.05)';
         });
         
+        // Xử lý sự kiện click để đảm bảo tracking
+        btn.addEventListener('click', function(e) {
+            // Ngăn mở link ngay lập tức
+            e.preventDefault();
+            // Gọi hàm tracking
+            trackConsultationClick();
+        });
+        
         // Kiểm tra mobile
         if (window.innerWidth <= 768) {
             console.log('Mobile mode: Green background, no arrow, single line');
         }
     }
 });
+
+// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
+function ensurePixelTracking() {
+    if (typeof fbq === 'undefined') {
+        console.log('Waiting for Facebook Pixel to load...');
+        setTimeout(ensurePixelTracking, 500);
+    }
+}
+
+// Khởi động backup tracking
+ensurePixelTracking();
 </script>
   <!-- Footer -->
 <footer id="contact">

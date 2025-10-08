@@ -2,44 +2,34 @@
 # 🔰 CHUẨN HÓA DOMAIN – CHUYỂN TẤT CẢ VỀ HTTPS + WWW
 # ==========================================
 
-# Chuyển http://rubywings.vn → https://www.rubywings.vn
 http://rubywings.vn/* https://www.rubywings.vn/:splat 301!
-
-# Chuyển http://www.rubywings.vn → https://www.rubywings.vn
 http://www.rubywings.vn/* https://www.rubywings.vn/:splat 301!
-
-# Chuyển https://rubywings.vn → https://www.rubywings.vn
 https://rubywings.vn/* https://www.rubywings.vn/:splat 301!
 
 # ==========================================
 # ✨ GIỮ TRẠNG THÁI 200 CHO SPA / SITE TĨNH
-# (dùng cho React, Vue, HTML tĩnh,...)
 # ==========================================
 /* /index.html 200
 
 # ==========================================
 # ⚙️ CHUẨN HÓA URL – THÊM DẤU GẠCH CHÉO CUỐI & XỬ LÝ SEO
 # ==========================================
-
-# Tự động thêm dấu “/” ở cuối URL để tránh duplicate
 https://www.rubywings.vn/:path https://www.rubywings.vn/:path/ 301!
-  Conditions: {Path: "[^\\.]*$"}   # Không áp dụng cho file .html, .css, .js
+  Conditions: {Path: "[^\\.]*$"}
 
 # ==========================================
 # 🧭 CHUYỂN HƯỚNG NỘI BỘ (CÓ THỂ BỔ SUNG SAU)
 # ==========================================
-# Ví dụ: /about → /01-mo-dau-ruby-wings-la-ai.html
 /about https://www.rubywings.vn/01-mo-dau-ruby-wings-la-ai.html 301!
+
+# ==========================================
+# 🔄 FACEBOOK CAPI GATEWAY - META PIXEL SERVER-SIDE
+# ==========================================
+/capi/* https://graph.facebook.com/v19.0/862531473384426/events:splat 200!
 
 # ==========================================
 # ⚡ CHỐNG TRÙNG NỘI DUNG & CẢI THIỆN SEO
 # ==========================================
-
-# Loại bỏ URL có www và không www lẫn nhau
-# (đã xử lý đầu trên, đảm bảo chỉ còn 1 domain chính)
-
-# Ngăn cache cũ trong khi deploy mới
-# (chỉ kích hoạt nếu bạn có build CI/CD)
 /* 
   Cache-Control: no-cache
   Pragma: no-cache

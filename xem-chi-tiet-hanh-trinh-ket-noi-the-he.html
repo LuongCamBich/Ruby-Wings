@@ -51,7 +51,7 @@
     <meta name="msapplication-TileColor" content="#2E8B57">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    
+     <script src="facebook-pixel-complete.js"></script>
     <!-- Favicon -->
     <link rel="icon" href="https://rubywings.vn/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -1387,37 +1387,38 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
 
     <!-- Button: Đăng ký nhận tư vấn và ưu đãi -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdR4-JBUs7wtyZH-a1tHrCBAYj3M2PAhFRKrCo_ZOvWwCvZEQ/viewform" 
-       target="_blank"
-       style="display: inline-block;
-              padding: 16px 40px;
-              background: linear-gradient(135deg, #FF4081 0%, #FF1493 100%);
-              color: white;
-              font-weight: 700;
-              text-transform: uppercase;
-              font-size: 1.3rem;
-              border-radius: 50px;
-              text-decoration: none;
-              box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
-              animation: pulse 2s infinite;
-              transition: all 0.4s ease;
-              position: relative;
-              z-index: 1;">
-        ĐĂNG KÝ NHẬN TƯ VẤN
-        <span style="position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    left: 0;
-                    bottom: -40px;
-                    font-size: 1rem;
-                    color: #FF4081;
-                    opacity: 0;
-                    transition: all 0.4s ease;
-                    font-weight: 500;
-                    text-transform: none;
-                    white-space: nowrap;">
-            ❤️ Tham gia hành trình của quý vị là niềm vinh hạnh của chúng tôi, bao gồm cả cộng đồng dân tộc Vân Kiều - Pa Kô nghèo khó miền Tây Quảng Trị
-        </span>
-    </a>
+   target="_blank"
+   style="display: inline-block;
+          padding: 16px 40px;
+          background: linear-gradient(135deg, #FF4081 0%, #FF1493 100%);
+          color: white;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 1.3rem;
+          border-radius: 50px;
+          text-decoration: none;
+          box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
+          animation: pulse 2s infinite;
+          transition: all 0.4s ease;
+          position: relative;
+          z-index: 1;"
+   onclick="trackTourRegistration('Ngọn Lửa Trường Sơn - Ký ức và khát vọng', 'Historical Tourism')">
+    ĐĂNG KÝ HÀNH TRÌNH
+    <span style="position: absolute;
+                width: 100%;
+                text-align: center;
+                left: 0;
+                bottom: -40px;
+                font-size: 1rem;
+                color: #FF4081;
+                opacity: 0;
+                transition: all 0.4s ease;
+                font-weight: 500;
+                text-transform: none;
+                white-space: nowrap;">
+        ❤️ Tham gia hành trình của quý vị là niềm vinh hạnh của chúng tôi, bao gồm cả cộng đồng dân tộc Vân Kiều - Pa Kô nghèo khó miền Tây Quảng Trị
+    </span>
+</a>
 </div>
 </main>
 <style>
@@ -1576,19 +1577,32 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
 <!-- === HTML CHÈN VÀO TRANG === -->
 <div class="rw-consult-btn-container">
     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-       class="rw-consult-btn-main" 
-       target="_blank"
-       rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
-        <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
-        <span class="rw-btn-arrow">→</span>
-    </a>
+   class="rw-consult-btn-main" 
+   target="_blank"
+   rel="noopener noreferrer"
+   onclick="trackConsultationClick()">
+    <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
+    <span class="rw-btn-arrow">→</span>
+</a>
 </div>
 
 <script>
-// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
+// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
 function trackConsultationClick() {
-    // Google Analytics tracking
+    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: 'Đăng ký tư vấn chung - ' + document.title,
+            content_category: 'General Consultation',
+            page_url: window.location.href,
+            button_type: 'General CTA'
+        });
+        console.log('Facebook Pixel: Tracked consultation click');
+    } else {
+        console.warn('Facebook Pixel not loaded yet');
+    }
+    
+    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
     if (typeof gtag !== 'undefined') {
         gtag('event', 'consultation_click', {
             'event_category': 'engagement',
@@ -1597,9 +1611,14 @@ function trackConsultationClick() {
     }
     
     console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
+    
+    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
+    setTimeout(function() {
+        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+    }, 100);
 }
 
-// Thêm hiệu ứng khi load trang
+// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.rw-consult-btn-main');
     if (btn) {
@@ -1614,12 +1633,31 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(-4px) scale(1.05)';
         });
         
+        // Xử lý sự kiện click để đảm bảo tracking
+        btn.addEventListener('click', function(e) {
+            // Ngăn mở link ngay lập tức
+            e.preventDefault();
+            // Gọi hàm tracking
+            trackConsultationClick();
+        });
+        
         // Kiểm tra mobile
         if (window.innerWidth <= 768) {
             console.log('Mobile mode: Green background, no arrow, single line');
         }
     }
 });
+
+// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
+function ensurePixelTracking() {
+    if (typeof fbq === 'undefined') {
+        console.log('Waiting for Facebook Pixel to load...');
+        setTimeout(ensurePixelTracking, 500);
+    }
+}
+
+// Khởi động backup tracking
+ensurePixelTracking();
 </script>
     <!-- Footer -->
     <footer id="contact">
