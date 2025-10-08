@@ -1107,7 +1107,207 @@ kh
     <a href="#" class="thank-you-button">Chân thành cám ơn các bạn</a>
   </div>
 </main>
+<style>
+/* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
+.rw-consult-btn-container {
+    display: block !important;
+    margin: 25px 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
 
+.rw-consult-btn-main {
+    /* Reset mọi style mặc định */
+    all: unset !important;
+    
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    
+    /* Kích thước và khoảng cách */
+    padding: 18px 35px !important;
+    margin: 10px auto !important;
+    
+    /* Kiểu dáng */
+    border-radius: 50px !important;
+    border: 3px solid #2cec2c !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    
+    /* Màu sắc - XANH LÁ CÂY + CHỮ VÀNG */
+    background: linear-gradient(135deg, #2cec2c 0%, #22cc22 100%) !important;
+    color: #ffd700 !important;
+    cursor: pointer !important;
+    
+    /* Hiệu ứng */
+    transition: all 0.4s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 0 6px 20px rgba(44, 236, 44, 0.3) !important;
+    
+    /* Font chữ rõ ràng */
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+}
+
+/* TEXT - CHỮ MÀU VÀNG NỔI BẬT */
+.rw-consult-btn-main .rw-btn-text {
+    color: #f3f5f8 !important;
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+    z-index: 2 !important;
+    position: relative !important;
+}
+
+/* === HIỆU ỨNG HOVER - CHUYỂN MÀU ĐẬM DẦN === */
+.rw-consult-btn-main:hover {
+    transform: translateY(-4px) scale(1.05) !important;
+    box-shadow: 0 12px 30px rgba(44, 236, 44, 0.5) !important;
+    background: linear-gradient(135deg, #32ff32 0%, #1a991a 100%) !important;
+    border-color: #32ff32 !important;
+    color: #ffd700 !important;
+}
+
+.rw-consult-btn-main:hover .rw-btn-text {
+    color: #ffd700 !important;
+}
+
+/* Hiệu ứng ánh sáng trượt */
+.rw-consult-btn-main::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.7s ease !important;
+    z-index: 1 !important;
+}
+
+.rw-consult-btn-main:hover::before {
+    left: 100% !important;
+}
+
+/* === MOBILE RESPONSIVE - 1 DÒNG & TỐI ƯU === */
+@media (max-width: 768px) {
+    .rw-consult-btn-main {
+        padding: 16px 25px !important;
+        font-size: 16px !important;
+        width: 95% !important;
+        max-width: 320px !important;
+        display: flex !important; /* Đảm bảo 1 dòng */
+        flex-wrap: nowrap !important;
+        white-space: nowrap !important;
+    }
+    
+    .rw-consult-btn-main .rw-btn-text {
+        font-size: 16px !important;
+        white-space: nowrap !important;
+        /* BỎ MŨI TÊN - chỉ hiển thị text */
+    }
+    
+    /* Ẩn hoàn toàn mũi tên trên mobile */
+    .rw-consult-btn-main .rw-btn-arrow {
+        display: none !important;
+    }
+    
+    /* Màu mobile - xanh lá nhạt */
+    .rw-consult-btn-main {
+        background: linear-gradient(135deg, #2bdc2b 0%, #1a9f1a 100%) !important;
+        border-color: #2cec2c !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .rw-consult-btn-main {
+        padding: 14px 20px !important;
+        font-size: 15px !important;
+        margin: 8px auto !important;
+    }
+    
+    .rw-consult-btn-main .rw-btn-text {
+        font-size: 15px !important;
+        letter-spacing: 0.5px !important;
+    }
+}
+
+/* Desktop - vẫn giữ mũi tên */
+@media (min-width: 769px) {
+    .rw-consult-btn-main .rw-btn-arrow {
+        margin-left: 12px !important;
+        transition: transform 0.3s ease !important;
+        font-weight: bold !important;
+        font-size: 18px !important;
+        color: #fff3af !important;
+        z-index: 2 !important;
+        position: relative !important;
+    }
+    
+    .rw-consult-btn-main:hover .rw-btn-arrow {
+        transform: translateX(4px) !important;
+    }
+}
+
+/* Đảm bảo không bị ảnh hưởng bởi CSS khác */
+.rw-consult-btn-container * {
+    box-sizing: border-box !important;
+}
+</style>
+
+<!-- === HTML CHÈN VÀO TRANG === -->
+<div class="rw-consult-btn-container">
+    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+       class="rw-consult-btn-main" 
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="trackConsultationClick()">
+        <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
+        <span class="rw-btn-arrow">→</span>
+    </a>
+</div>
+
+<script>
+// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
+function trackConsultationClick() {
+    // Google Analytics tracking
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'consultation_click', {
+            'event_category': 'engagement',
+            'event_label': 'Google Forms Consultation Button'
+        });
+    }
+    
+    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
+}
+
+// Thêm hiệu ứng khi load trang
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.querySelector('.rw-consult-btn-main');
+    if (btn) {
+        console.log('Ruby Wings Consultation Button loaded successfully');
+        
+        // Thêm hiệu ứng click
+        btn.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        
+        btn.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-4px) scale(1.05)';
+        });
+        
+        // Kiểm tra mobile
+        if (window.innerWidth <= 768) {
+            console.log('Mobile mode: Green background, no arrow, single line');
+        }
+    }
+});
+</script>
 <!-- Footer -->
 <footer id="contact">
     <div class="footer-content">
