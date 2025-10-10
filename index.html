@@ -3417,15 +3417,302 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
 
                 <!-- Bổ sung dòng KẾT NỐI KHÁCH QUỐC TẾ -->
-                <div class="international-section">
-                    <div style="display: inline-flex; align-items: center; gap: 15px;">
-                        <img src="assets/images/globe-animation.gif" alt="Quả địa cầu kết nối quốc tế Ruby Wings" 
-                             style="display: block; width: 100px; height: 100px; object-fit: contain;">
-                        <a href="ket-noi-quoc-te.html" style="text-decoration: none;">
-                            <h2>DÀNH CHO CÁC BẠN Ở NƯỚC NGOÀI MUỐN ĐẾN VIỆT NAM</h2>
-                        </a>
-                    </div>
-                </div>
+                <style>
+/* CSS Variables for Brand Colors */
+:root {
+  --primary-green: #2E8B57;
+  --light-green: #90EE90;
+  --accent-pink: #FF69B4;
+  --warm-brown: #D2691E;
+  --deep-blue: #1E6FB9;
+  --neutral-light: #F8F9FA;
+  --neutral-dark: #343A40;
+}
+
+/* International Section Styling */
+.international-section {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+  border-radius: 16px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.international-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-pink), var(--warm-brown), var(--deep-blue));
+  z-index: 1;
+}
+
+.international-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.international-content {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.international-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.international-section:hover .international-glow {
+  opacity: 1;
+}
+
+.globe-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.globe-img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.international-section:hover .globe-img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.globe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 105, 180, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.international-section:hover .globe-overlay {
+  opacity: 1;
+}
+
+.globe-overlay-text {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.international-link {
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.international-link:hover {
+  transform: translateX(10px);
+}
+
+.international-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 15px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: inline-block;
+}
+
+.international-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent-pink);
+  transition: width 0.3s ease;
+}
+
+.international-link:hover .international-title::after {
+  width: 100%;
+}
+
+.international-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--neutral-light);
+  margin: 15px 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-pink);
+}
+
+.international-image {
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.quoc-te-img {
+  width: 180px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.international-section:hover .quoc-te-img {
+  transform: scale(1.05);
+  border-color: var(--accent-pink);
+}
+
+/* Active State */
+.international-section.active {
+  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--primary-green) 100%);
+}
+
+.international-section.active .international-title {
+  color: var(--accent-pink);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .international-section {
+    padding: 20px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+  }
+  
+  .international-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .international-title {
+    font-size: 22px;
+  }
+  
+  .international-description {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  .globe-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .quoc-te-img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    margin-left: 0;
+  }
+  
+  .international-image {
+    margin-left: 0;
+    order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .international-section {
+    padding: 15px;
+  }
+  
+  .international-title {
+    font-size: 20px;
+  }
+  
+  .international-description {
+    font-size: 13px;
+    padding: 10px;
+  }
+  
+  .globe-img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Animation for Active State */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+  }
+}
+
+.international-section.active {
+  animation: pulse-glow 2s infinite;
+}
+</style>
+
+<div class="international-section">
+  <div class="international-glow"></div>
+  <div class="international-content">
+    <div class="globe-container">
+      <img src="assets/images/globe-animation.gif" alt="Quả địa cầu kết nối quốc tế Ruby Wings" class="globe-img">
+      <div class="globe-overlay">
+        <span class="globe-overlay-text">Khám phá Việt Nam</span>
+      </div>
+    </div>
+    
+    <div class="text-content">
+      <a href="ket-noi-quoc-te.html" class="international-link">
+        <h2 class="international-title">DÀNH CHO CÁC BẠN Ở NƯỚC NGOÀI</h2>
+      </a>
+      
+      <p class="international-description">
+        Ruby Wings is a leading travel company in Central Vietnam. We are passionate about showcasing the beauty of Vietnam to the world. While our international tour packages are in development, explore the magnificent landscapes and rich culture of Vietnam below (越南中部领先旅游公司 - Ruby Wings 是越南中部领先的旅游公司。我们热切渴望向世界展现越南之美。在国际旅游套餐完善期间，诚邀您在此先行探索越南雄奇壮丽的自然景观与丰富多彩的文化底蕴。
+
+采用意译优化版 -Ruby Wings 是越南中部知名的旅游企业，始终致力于向全球展示越南的独特魅力。在我们精心打造国际旅游线路的同时，您仍可在此领略越南震撼人心的自然奇观与多元交融的文化风采).
+      </p>
+    </div>
+    
+    <div class="international-image">
+      <img src="images/quoc-te.jpg" alt="Du lịch quốc tế Ruby Wings" class="quoc-te-img">
+    </div>
+  </div>
+</div>
             </div>
         </section>
 
