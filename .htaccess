@@ -1,3 +1,31 @@
+# === FIX COEP URGENT - THÊM ĐẦU FILE ===
+<IfModule mod_headers.c>
+    # FIX COEP FOR ALL RESOURCES
+    Header always set Cross-Origin-Embedder-Policy "unsafe-none"
+    Header always set Cross-Origin-Opener-Policy "unsafe-none"
+    Header always set Cross-Origin-Resource-Policy "cross-origin"
+    
+    # FIX CORS FOR ALL FILES
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header always set Access-Control-Allow-Headers "*"
+    
+    # ĐẶC BIỆT cho images và fonts
+    <FilesMatch "\.(jpg|jpeg|png|gif|ico|webp|svg|woff|woff2)$">
+        Header always set Cross-Origin-Embedder-Policy "unsafe-none"
+        Header always set Cross-Origin-Resource-Policy "cross-origin"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Handle CORS preflight requests
+    RewriteCond %{REQUEST_METHOD} OPTIONS
+    RewriteRule ^(.*)$ $1 [R=200,L]
+</IfModule>
+# === END COEP FIX ===
+
+RewriteEngine On
 RewriteEngine On
 
 # Redirect HTTP to HTTPS và non-www to www (GỘP LẠI)
