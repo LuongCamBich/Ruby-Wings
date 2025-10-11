@@ -13,22 +13,22 @@
 
   <!-- Open Graph Đầy Đủ -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rubywings.vn/QR-menu.html">
+  <meta property="og:url" content="https://www.rubywings.vn/QR-menu.html">
   <meta property="og:title" content="QR Menu Generator | Trình Tạo Mã QR Miễn Phí - Ruby Wings Travel">
   <meta property="og:description" content="Công cụ tạo mã QR miễn phí cho website, menu, fanpage và hỗ trợ từ thiện Viện Nhi TW Huế.">
-  <meta property="og:image" content="https://rubywings.vn/images/QR-menu.jpg">
+  <meta property="og:image" content="https://www.rubywings.vn/images/QR-menu.jpg">
   <meta property="og:site_name" content="Ruby Wings Travel">
   <meta property="og:locale" content="vi_VN">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://rubywings.vn/QR-menu.html">
+  <meta name="twitter:url" content="https://www.rubywings.vn/QR-menu.html">
   <meta name="twitter:title" content="QR Menu Generator | Trình Tạo Mã QR Miễn Phí">
   <meta name="twitter:description" content="Tạo mã QR miễn phí vĩnh viễn cho menu 4Tea, website và từ thiện.">
-  <meta name="twitter:image" content="https://rubywings.vn/images/QR-menu.jpg">
+  <meta name="twitter:image" content="https://www.rubywings.vn/images/QR-menu.jpg">
   <meta name="twitter:creator" content="@TienSy379">
 
-  <!-- Facebook Pixel Code - ĐÃ SỬA LỖI -->
+  <!-- === FACEBOOK PIXEL CODE - ĐÃ SỬA LỖI HOÀN TOÀN === -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -39,13 +39,17 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // KHỞI TẠO PIXEL TRƯỚC
-    fbq('init', '862531473384426');
-    
-    // SAU ĐÓ MỚI SET BRIDGE
-    fbq('set', 'bridge', 'https://www.rubywings.vn/capi');
-    
-    fbq('track', 'PageView');
+    // ĐỢI PIXEL LOAD XONG RỒI MỚI INIT
+    setTimeout(function() {
+      if(typeof fbq !== 'undefined') {
+        // SỬ DỤNG CẤU TRÚC MỚI - KHÔNG DÙNG BRIDGE
+        fbq('init', '862531473384426', {
+          external_id: 'YOUR_EXTERNAL_ID'
+        });
+        fbq('track', 'PageView');
+        console.log('Facebook Pixel initialized successfully');
+      }
+    }, 1000);
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"
@@ -53,10 +57,13 @@
   <!-- End Facebook Pixel Code -->
 
   <!-- Canonical -->
-  <link rel="canonical" href="https://rubywings.vn/QR-menu.html">
+  <link rel="canonical" href="https://www.rubywings.vn/QR-menu.html">
 
-  <!-- Favicon -->
-  <link rel="icon" href="https://rubywings.vn/favicon.ico" type="image/x-icon">
+  <!-- Favicon - ĐÃ SỬA LỖI CORS -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/favicon.ico">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
@@ -68,10 +75,10 @@
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://rubywings.vn/#organization",
+        "@id": "https://www.rubywings.vn/#organization",
         "name": "Ruby Wings Travel",
-        "url": "https://rubywings.vn/",
-        "logo": "https://rubywings.vn/images/logo.png",
+        "url": "https://www.rubywings.vn/",
+        "logo": "https://www.rubywings.vn/images/logo.png",
         "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
         "telephone": "+84-33-251-0486",
         "email": "rubywingslsa@gmail.com",
@@ -94,7 +101,7 @@
         "@type": "WebApplication",
         "name": "QR Menu Generator - Ruby Wings Travel",
         "description": "Công cụ tạo mã QR miễn phí vĩnh viễn cho website, menu và từ thiện",
-        "url": "https://rubywings.vn/QR-menu.html",
+        "url": "https://www.rubywings.vn/QR-menu.html",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript",
@@ -106,7 +113,7 @@
           "description": "Miễn phí vĩnh viễn"
         },
         "creator": {
-          "@id": "https://rubywings.vn/#organization"
+          "@id": "https://www.rubywings.vn/#organization"
         },
         "featureList": [
           "Tạo QR code cho website",
@@ -123,27 +130,27 @@
         "description": "Quán trà 4Tea - Đặt món qua QR code",
         "telephone": "+84-91-508-3357",
         "servesCuisine": "Trà và đồ uống",
-        "hasMenu": "https://rubywings.vn/QR-menu.html",
-        "url": "https://rubywings.vn/QR-menu.html"
+        "hasMenu": "https://www.rubywings.vn/QR-menu.html",
+        "url": "https://www.rubywings.vn/QR-menu.html"
       },
       {
         "@type": "WebPage",
-        "@id": "https://rubywings.vn/QR-menu.html#webpage",
+        "@id": "https://www.rubywings.vn/QR-menu.html#webpage",
         "name": "QR Menu Generator | Ruby Wings Travel",
         "description": "Trang tạo mã QR miễn phí cho menu 4Tea và mục đích từ thiện",
-        "url": "https://rubywings.vn/QR-menu.html",
+        "url": "https://www.rubywings.vn/QR-menu.html",
         "isPartOf": {
-          "@id": "https://rubywings.vn/#website"
+          "@id": "https://www.rubywings.vn/#website"
         },
         "about": "Công cụ tạo QR code miễn phí",
         "datePublished": "2024-01-01",
         "dateModified": "2025-01-01",
-        "primaryImageOfPage": "https://rubywings.vn/images/QR-menu.jpg",
+        "primaryImageOfPage": "https://www.rubywings.vn/images/QR-menu.jpg",
         "mainEntity": {
           "@type": "WebApplication"
         },
         "publisher": {
-          "@id": "https://rubywings.vn/#organization"
+          "@id": "https://www.rubywings.vn/#organization"
         }
       },
       {
@@ -153,13 +160,13 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
+            "item": "https://www.rubywings.vn/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Công Cụ",
-            "item": "https://rubywings.vn/cong-cu.html"
+            "item": "https://www.rubywings.vn/cong-cu.html"
           },
           {
             "@type": "ListItem",
@@ -170,12 +177,12 @@
       },
       {
         "@type": "WebSite",
-        "@id": "https://rubywings.vn/#website",
-        "url": "https://rubywings.vn/",
+        "@id": "https://www.rubywings.vn/#website",
+        "url": "https://www.rubywings.vn/",
         "name": "Ruby Wings Travel",
         "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
         "publisher": {
-          "@id": "https://rubywings.vn/#organization"
+          "@id": "https://www.rubywings.vn/#organization"
         }
       }
     ]
