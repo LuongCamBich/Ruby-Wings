@@ -1,53 +1,21 @@
+<!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-
-// === INIT PIXEL ===
-fbq('init', '862531473384426', {
-    external_id: getVisitorID(),
-    em: getHashedEmail(),
-    ph: getHashedPhone(),
-    tn: 'Ruby Wings Travel'
-});
-
-// === PAGEVIEW ===
-fbq('track', 'PageView', {
-    content_name: document.title,
-    page_url: window.location.href
-});
-
-// === WAIT UNTIL PIXEL LOADED, THEN SET BRIDGE ===
-function waitForPixelReady(callback) {
-    if (typeof fbq === 'undefined' || !fbq.getState) {
-        return setTimeout(() => waitForPixelReady(callback), 300);
-    }
-    const state = fbq.getState();
-    if (state && state.pixels && state.pixels.length > 0) {
-        callback(state.pixels[0].id); // ✅ pixel_id now defined
-    } else {
-        setTimeout(() => waitForPixelReady(callback), 300);
-    }
-}
-
-waitForPixelReady(function(pixelId) {
-    fbq('set', 'bridge', 'https://www.rubywings.vn/capi');
-    console.log(`[Ruby Wings] Bridge connected for pixel ${pixelId}`);
-});
-
-function getVisitorID() {
-    let id = localStorage.getItem('rw_visitor_id');
-    if (!id) {
-        id = 'rw_' + Date.now() + '_' + Math.random().toString(36).substr(2,9);
-        localStorage.setItem('rw_visitor_id', id);
-    }
-    return id;
-}
-function getHashedEmail(){ return ''; }
-function getHashedPhone(){ return ''; }
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)
+  }(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '862531473384426'); 
+  fbq('set', 'autoConfig', 'false', 'YOUR_PIXEL_ID_HERE');
+  fbq('set', 'bridge', 'https://www.rubywings.vn/capi'); 
+  fbq('track', 'PageView');
 </script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
