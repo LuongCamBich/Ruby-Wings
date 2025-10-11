@@ -24,7 +24,7 @@
     fbq('track', 'PageView');
     
     // CAPI Gateway endpoint CHO NETLIFY
-    fbq('set', 'bridge', 'https://www.rubywings.vn/capi');
+  fbq('set', 'bridge', 'https://www.rubywings.vn/capi', '862531473384426');
 })();
 
 // Hàm lấy Visitor ID cho CAPI
