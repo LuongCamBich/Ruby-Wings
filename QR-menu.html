@@ -937,8 +937,7 @@ ensurePixelTracking();
         });
       });
     }
-    
-    // QR Code Generator
+       // QR Code Generator - Enhanced with Multiple Fallback APIs
     const generateBtn = document.getElementById('generateBtn');
     const urlInput = document.getElementById('url-input');
     const qrDisplay = document.getElementById('qrcode');
@@ -960,16 +959,21 @@ ensurePixelTracking();
           return;
         }
         
-        // Basic URL validation
+        // Enhanced URL validation with auto protocol
+        let validUrl = url;
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+          validUrl = 'https://' + url;
+        }
+        
         try {
-          new URL(url);
+          new URL(validUrl);
         } catch (e) {
-          showError('Địa chỉ web không hợp lệ. Vui lòng nhập URL đầy đủ (bao gồm http:// hoặc https://)');
+          showError('Địa chỉ web không hợp lệ. Vui lòng nhập URL đúng định dạng');
           return;
         }
         
         // Generate QR code
-        generateQRCode(url);
+        generateQRCode(validUrl);
       });
     }
     
@@ -989,32 +993,109 @@ ensurePixelTracking();
       // Clear previous QR code
       qrDisplay.innerHTML = '';
       
-      // Create QR code using simple API (you can replace with a library if needed)
+      // Show loading
+      const loadingDiv = document.createElement('div');
+      loadingDiv.innerHTML = '<p>Đang tạo mã QR...</p>';
+      loadingDiv.style.textAlign = 'center';
+      loadingDiv.style.padding = '20px';
+      loadingDiv.style.color = '#2E7D32';
+      qrDisplay.appendChild(loadingDiv);
+      
+      // Create QR code using multiple reliable APIs
       const qrImg = document.createElement('img');
       qrImg.alt = `Mã QR cho địa chỉ: ${url}`;
       qrImg.style.maxWidth = '200px';
       qrImg.style.maxHeight = '200px';
+      qrImg.style.border = '1px solid #ddd';
+      qrImg.style.borderRadius = '8px';
       
-      // Using a free QR code API
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+      // Enhanced API endpoints with multiple fallbacks
+      const qrData = encodeURIComponent(url);
+      const timestamp = '&t=' + new Date().getTime();
       
-      qrImg.onload = function() {
-        qrDisplay.appendChild(qrImg);
-        downloadBtn.style.display = 'inline-flex';
-        showSuccess('Mã QR đã được tạo thành công!');
+      const apiEndpoints = [
+        // Primary APIs
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrData}&format=png&qzone=2${timestamp}`,
+        `https://quickchart.io/qr?text=${qrData}&size=200&margin=2${timestamp}`,
+        `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${qrData}&choe=UTF-8${timestamp}`,
         
-        // Set up download functionality
-        downloadBtn.onclick = function() {
-          const link = document.createElement('a');
-          link.download = 'qrcode.png';
-          link.href = qrImg.src;
-          link.click();
-        };
-      };
+        // Secondary APIs
+        `https://api.hiztrix.org/qr?size=200&data=${qrData}${timestamp}`,
+        `https://qr.africa/api/qr?size=200&data=${qrData}${timestamp}`,
+        `https://scanme.cc/api/qr?size=200&data=${qrData}${timestamp}`,
+        
+        // Tertiary APIs
+        `https://qrickit.com/api/qr.php?d=${qrData}&qrsize=200${timestamp}`,
+        `https://www.qrtag.net/api/qr_6.png?url=${qrData}${timestamp}`,
+        `https://qrcode.tec-it.com/API/QRCode?data=${qrData}&size=medium${timestamp}`,
+        
+        // Backup APIs
+        `https://barcode.tec-it.com/barcode.ashx?data=${qrData}&code=QRCode&size=medium${timestamp}`,
+        `https://qrcode-monkey.com/qr/custom?size=200&data=${qrData}${timestamp}`,
+        `https://goqr.me/api/doc/create-qr-code/?size=200x200&data=${qrData}${timestamp}`,
+        
+        // Final fallbacks
+        `https://qrtiger.com/api/qr/static?text=${qrData}&size=200${timestamp}`,
+        `https://qrickit.com/api/qr.php?d=${qrData}&qrsize=200&t=p${timestamp}`,
+        `https://api.qr-code-generator.com/v1/create?access-token=free&qr_size=200&qr_data=${qrData}${timestamp}`
+      ];
       
-      qrImg.onerror = function() {
-        showError('Có lỗi xảy ra khi tạo mã QR. Vui lòng thử lại.');
-      };
+      let currentApi = 0;
+      let retryCount = 0;
+      const maxRetries = 3;
+      
+      function tryCreateQR() {
+        if (currentApi >= apiEndpoints.length) {
+          showError('Không thể tạo mã QR. Tất cả API đều không khả dụng. Vui lòng thử lại sau.');
+          qrDisplay.innerHTML = '';
+          return;
+        }
+        
+        console.log(`Thử API ${currentApi + 1}: ${apiEndpoints[currentApi].split('?')[0]}`);
+        
+        qrImg.src = apiEndpoints[currentApi];
+        
+        qrImg.onload = function() {
+          qrDisplay.innerHTML = '';
+          qrDisplay.appendChild(qrImg);
+          downloadBtn.style.display = 'inline-flex';
+          showSuccess(`Mã QR đã được tạo thành công! (Sử dụng API ${currentApi + 1})`);
+          
+          // Set up download functionality
+          downloadBtn.onclick = function() {
+            const link = document.createElement('a');
+            link.download = 'qrcode-' + Date.now() + '.png';
+            link.href = qrImg.src;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          };
+        };
+        
+        qrImg.onerror = function() {
+          retryCount++;
+          if (retryCount <= maxRetries) {
+            // Retry same API
+            setTimeout(tryCreateQR, 500);
+          } else {
+            // Move to next API
+            currentApi++;
+            retryCount = 0;
+            setTimeout(tryCreateQR, 300);
+          }
+        };
+      }
+      
+      tryCreateQR();
+    }
+    
+    // Enter key support for URL input
+    if (urlInput) {
+      urlInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          generateBtn.click();
+        }
+      });
     }
     
     // Header scroll behavior
@@ -1036,4 +1117,5 @@ ensurePixelTracking();
   });
 </script>
 </body>
-</html>
+</html> 
+    
