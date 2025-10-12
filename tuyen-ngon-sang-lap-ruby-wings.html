@@ -1048,91 +1048,243 @@ gtag('config', 'G-BD5GXRQFQZ');
 }
 </style>
 
-<!-- === HTML CHÈN VÀO TRANG === -->
-<div class="rw-consult-btn-container">
+<!-- === RUBY WINGS - CODE ĐẦY ĐỦ & FIX LỖI === -->
+
+<style>
+/* CSS AN TOÀN - KHÔNG XUNG ĐỘT */
+#rubyWingsBtnContainer {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    z-index: 9999 !important;
+}
+
+#rubyWingsMainBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #3edb36 0%, #509d0c 100%) !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 16px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease !important;
+    max-width: 140px !important;
+    line-height: 1 !important;
+}
+
+#rubyWingsMainBtn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+.ruby-btn-text {
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+}
+
+.ruby-btn-arrow {
+    font-weight: bold !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    #rubyWingsBtnContainer {
+        bottom: 10px !important;
+        right: 10px !important;
+    }
+    
+    #rubyWingsMainBtn {
+        padding: 5px 10px !important;
+        font-size: 10px !important;
+        max-width: 120px !important;
+    }
+}
+</style>
+
+<!-- NÚT TƯ VẤN -->
+<div id="rubyWingsBtnContainer">
     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-       class="rw-consult-btn-main" 
+       id="rubyWingsMainBtn"
        target="_blank"
        rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
-        <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
-        <span class="rw-btn-arrow">→</span>
+       onclick="rubyWingsTrackClick()">
+        <span class="ruby-btn-text">NƠI NHẬN TƯ VẤN</span>
+        <span class="ruby-btn-arrow">→</span>
     </a>
 </div>
 
+<!-- PIXEL FACEBOOK -->
 <script>
-// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
-function trackConsultationClick() {
-    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','862531473384426');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"/></noscript>
+
+<!-- MESSENGER CHAT PLUGIN -->
+<div id="fb-root"></div>
+<div id="fb-customer-chat" class="fb-customerchat"></div>
+
+<script>
+// === TÍNH NĂNG ĐẦY ĐỦ ===
+
+// 1. XÁC ĐỊNH LOẠI TRANG
+function getRubyPageType() {
+    const url = window.location.href.toLowerCase();
+    if (url.includes('team-building') || url.includes('teambuilding')) return 'landing_teambuilding';
+    if (url.includes('retreat') || url.includes('thien')) return 'landing_retreat';
+    if (url.includes('coaching') || url.includes('cam-xuc')) return 'landing_coaching';
+    if (url.includes('khoa-hoc') || url.includes('training')) return 'landing_training';
+    if (url.includes('blog') || url.includes('tin-tuc')) return 'blog';
+    if (url.includes('dich-vu') || url.includes('service')) return 'service_page';
+    if (url === '/' || url.includes('home') || url.includes('index')) return 'homepage';
+    return 'landing_other';
+}
+
+// 2. TRACKING KHI CLICK
+function rubyWingsTrackClick() {
+    const pageType = getRubyPageType();
+    console.log('🎯 Ruby Wings - Click từ:', pageType);
+
+    // FACEBOOK PIXEL TRACKING
     if (typeof fbq !== 'undefined') {
+        // Lead Event
         fbq('track', 'Lead', {
-            content_name: 'Đăng ký tư vấn chung - ' + document.title,
-            content_category: 'General Consultation',
-            page_url: window.location.href,
-            button_type: 'General CTA'
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'travel_consultation',
+            value: 150000,
+            currency: 'VND',
+            page_type: pageType,
+            fanpage_connected: true
         });
-        console.log('Facebook Pixel: Tracked consultation click');
-    } else {
-        console.warn('Facebook Pixel not loaded yet');
+
+        // CompleteRegistration Event
+        fbq('track', 'CompleteRegistration', {
+            content_name: 'Ruby Wings Consultation - ' + pageType,
+            status: 'success',
+            predicted_ltv: 5000000,
+            fanpage_id: '393607737167958'
+        });
+
+        // Custom Event
+        fbq('trackCustom', 'FanpageLead', {
+            fanpage_name: 'Ruby Wings - Hành trình trải nghiệm cảm xúc',
+            fanpage_id: '393607737167958',
+            source: 'landing_page',
+            page_type: pageType,
+            catalog_id: '1145041937161910'
+        });
     }
-    
-    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
+
+    // GOOGLE ANALYTICS
     if (typeof gtag !== 'undefined') {
         gtag('event', 'consultation_click', {
-            'event_category': 'engagement',
-            'event_label': 'Google Forms Consultation Button'
+            'event_category': pageType,
+            'event_label': 'Consultation Button - ' + pageType,
+            'value': 150000
         });
     }
-    
-    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
-    
-    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
-    setTimeout(function() {
-        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
-    }, 100);
 }
 
-// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.querySelector('.rw-consult-btn-main');
-    if (btn) {
-        console.log('Ruby Wings Consultation Button loaded successfully');
-        
-        // Thêm hiệu ứng click
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
-        });
-        
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        // Xử lý sự kiện click để đảm bảo tracking
-        btn.addEventListener('click', function(e) {
-            // Ngăn mở link ngay lập tức
-            e.preventDefault();
-            // Gọi hàm tracking
-            trackConsultationClick();
-        });
-        
-        // Kiểm tra mobile
-        if (window.innerWidth <= 768) {
-            console.log('Mobile mode: Green background, no arrow, single line');
-        }
+// 3. MESSENGER CHAT SETUP
+function initRubyMessenger() {
+    var chatbox = document.getElementById('fb-customer-chat');
+    if (chatbox) {
+        chatbox.setAttribute("page_id", "393607737167958");
+        chatbox.setAttribute("attribution", "biz_inbox");
     }
+    
+    // Load Facebook SDK nếu chưa có
+    if (typeof FB === 'undefined') {
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v20.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+}
+
+// 4. AUTO TRACKING KHI TRANG LOAD
+function initRubyTracking() {
+    const pageType = getRubyPageType();
+    console.log('🚀 Ruby Wings - Trang:', pageType);
+
+    // Track ViewContent
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'Travel',
+            content_ids: ['1145041937161910'],
+            fanpage_connected: true
+        });
+
+        fbq('trackCustom', 'LandingPageView', {
+            fanpage_id: '393607737167958',
+            page_url: window.location.href,
+            page_type: pageType
+        });
+    }
+}
+
+// 5. KHỞI CHẠY MỌI THỨ KHI TRANG SẴN SÀNG
+document.addEventListener('DOMContentLoaded', function() {
+    // Kiểm tra nút có hiển thị không
+    const btn = document.getElementById('rubyWingsBtnContainer');
+    if (btn) {
+        console.log('✅ Ruby Wings - Nút đã hiển thị thành công');
+    } else {
+        console.log('❌ Ruby Wings - Lỗi: Nút không hiển thị');
+        // Fallback: Tạo nút nếu bị mất
+        createFallbackButton();
+    }
+    
+    // Khởi động tracking
+    initRubyTracking();
+    
+    // Khởi động Messenger
+    initRubyMessenger();
 });
 
-// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
-function ensurePixelTracking() {
-    if (typeof fbq === 'undefined') {
-        console.log('Waiting for Facebook Pixel to load...');
-        setTimeout(ensurePixelTracking, 500);
-    }
+// 6. FALLBACK NẾU NÚT BỊ MẤT
+function createFallbackButton() {
+    const fallbackHTML = `
+        <div id="rubyWingsBtnContainer" style="position:fixed;bottom:15px;right:15px;z-index:9999;">
+            <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+               style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:6px 12px;border-radius:16px;text-decoration:none;font-weight:600;font-size:11px;font-family:'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);"
+               target="_blank"
+               rel="noopener noreferrer"
+               onclick="rubyWingsTrackClick()">
+                <span style="margin-right:5px;">NƠI NHẬN TƯ VẤN</span>
+                <span style="font-weight:bold;">→</span>
+            </a>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', fallbackHTML);
+    console.log('🔄 Ruby Wings - Đã tạo nút fallback');
 }
-
-// Khởi động backup tracking
-ensurePixelTracking();
 </script>
+
     <!-- Footer -->
     <footer id="contact">
         <div class="container">

@@ -1539,7 +1539,9 @@
 }
 </style>
 
-<!-- === HTML CHÈN VÀO TRANG === -->
+<!-- === COPY TOÀN BỘ ĐOẠN NÀY VÀ DÁN VÀO CUỐI LANDING PAGE === -->
+
+<!-- NÚT ĐĂNG KÝ TƯ VẤN -->
 <div class="rw-consult-btn-container">
     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
        class="rw-consult-btn-main" 
@@ -1550,6 +1552,231 @@
         <span class="rw-btn-arrow">→</span>
     </a>
 </div>
+
+<!-- META PIXEL & TRACKING CODE -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','862531473384426');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"/></noscript>
+
+<script>
+// HÀM TỰ ĐỘNG NHẬN DIỆN LANDING PAGE
+function getCurrentPageType() {
+    const url = window.location.href.toLowerCase();
+    
+    // TỰ ĐỘNG NHẬN DIỆN TRANG QUA URL
+    if (url.includes('team-building') || url.includes('teambuilding')) return 'landing_teambuilding';
+    if (url.includes('retreat') || url.includes('thien')) return 'landing_retreat';
+    if (url.includes('coaching') || url.includes('cam-xuc')) return 'landing_coaching';
+    if (url.includes('khoa-hoc') || url.includes('training')) return 'landing_training';
+    if (url.includes('blog') || url.includes('tin-tuc')) return 'blog';
+    if (url.includes('dich-vu') || url.includes('service')) return 'service_page';
+    if (url === '/' || url.includes('home') || url.includes('index')) return 'homepage';
+    
+    return 'landing_other'; // Mặc định
+}
+
+// HÀM TRACKING KHI CLICK NÚT - ĐÃ TÍCH HỢP FANPAGE
+function trackConsultationClick() {
+    const pageType = getCurrentPageType();
+    
+    console.log('🎯 Click từ landing page:', pageType, '- Gửi data đến Fanpage...');
+
+    // FACEBOOK PIXEL TRACKING - TỐI ƯU CHO FANPAGE
+    if (typeof fbq !== 'undefined') {
+        // 1. SỰ KIỆN LEAD - cho quảng cáo conversion
+        fbq('track', 'Lead', {
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'travel_consultation',
+            content_ids: ['1145041937161910'],
+            value: 150000, // 💰 GIÁ TRỊ LEAD - quan trọng cho ROI
+            currency: 'VND',
+            page_type: pageType,
+            fanpage_connected: true // ✅ Đánh dấu kết nối fanpage
+        });
+
+        // 2. SỰ KIỆN COMPLETE REGISTRATION - Facebook ưa thích
+        fbq('track', 'CompleteRegistration', {
+            content_name: 'Ruby Wings Consultation - ' + pageType,
+            status: 'success',
+            predicted_ltv: 5000000, // 📈 Dự đoán giá trị khách hàng
+            content_category: pageType,
+            fanpage_id: '393607737167958' // ✅ ID Fanpage Ruby Wings
+        });
+
+        // 3. CUSTOM EVENT - cho fanpage insights
+        fbq('trackCustom', 'FanpageLead', {
+            fanpage_name: 'Ruby Wings - Hành trình trải nghiệm cảm xúc',
+            fanpage_id: '393607737167958',
+            source: 'landing_page',
+            page_type: pageType,
+            catalog_id: '1145041937161910',
+            button_location: 'fixed_bottom'
+        });
+
+        console.log('✅ Đã gửi 3 sự kiện đến Fanpage & Pixel');
+    }
+
+    // GOOGLE ANALYTICS
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'consultation_click', {
+            'event_category': pageType,
+            'event_label': 'Consultation Button - ' + pageType,
+            'value': 150000
+        });
+    }
+}
+
+// TỰ ĐỘNG CHẠY KHI TRANG LOAD - GỬI DATA ĐẾN FANPAGE
+document.addEventListener('DOMContentLoaded', function() {
+    const pageType = getCurrentPageType();
+    console.log('🚀 Ruby Wings Landing loaded:', pageType, '- Khởi tạo Fanpage tracking...');
+    
+    // TỰ ĐỘNG TRACK CÁC SỰ KIỆN CHO FANPAGE
+    if (typeof fbq !== 'undefined') {
+        // 1. VIEW CONTENT - fanpage biết trang được xem
+        fbq('track', 'ViewContent', {
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'Travel',
+            content_ids: ['1145041937161910'],
+            content_type: 'product',
+            fanpage_connected: true
+        });
+
+        // 2. CUSTOM EVENT - gửi page info đến fanpage
+        fbq('trackCustom', 'LandingPageView', {
+            fanpage_id: '393607737167958',
+            page_url: window.location.href,
+            page_type: pageType,
+            landing_name: getLandingPageName(pageType),
+            catalog_connected: true
+        });
+    }
+    
+    // HIỆU ỨNG NÚT BẤM
+    const btn = document.querySelector('.rw-consult-btn-main');
+    if (btn) {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translateY(0) scale(1)';
+        });
+        btn.addEventListener('mousedown', () => {
+            btn.style.transform = 'translateY(1px) scale(0.98)';
+        });
+        btn.addEventListener('mouseup', () => {
+            btn.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+    }
+});
+
+// HÀM LẤY TÊN HIỂN THỊ CHO LANDING PAGE
+function getLandingPageName(pageType) {
+    const nameMap = {
+        'landing_teambuilding': 'Team Building - Trải nghiệm gắn kết',
+        'landing_retreat': 'Retreat & Thiền định - Cân bằng cảm xúc',
+        'landing_coaching': 'Coaching cảm xúc - Thấu hiểu bản thân',
+        'landing_training': 'Khóa học phát triển bản thân',
+        'blog': 'Blog chia sẻ kinh nghiệm',
+        'service_page': 'Trang dịch vụ Ruby Wings',
+        'homepage': 'Trang chủ Ruby Wings',
+        'landing_other': 'Landing Page khác'
+    };
+    return nameMap[pageType] || 'Ruby Wings Landing Page';
+}
+
+// THEO DÕI SCROLL - gửi data đến fanpage khi user tương tác
+let maxScroll = 0;
+window.addEventListener('scroll', function() {
+    const currentScroll = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    if (currentScroll > maxScroll) {
+        maxScroll = currentScroll;
+        
+        // Gửi scroll data đến fanpage ở các mốc quan trọng
+        if (maxScroll > 50 && typeof fbq !== 'undefined') {
+            fbq('trackCustom', 'PageScroll', {
+                fanpage_id: '393607737167958',
+                scroll_percentage: Math.round(maxScroll),
+                page_type: getCurrentPageType(),
+                engagement: 'high'
+            });
+        }
+    }
+});
+</script>
+
+<style>
+.rw-consult-btn-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.rw-consult-btn-main {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+.rw-consult-btn-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    border-color: rgba(255,255,255,0.3);
+}
+.rw-btn-text {
+    margin-right: 8px;
+    font-size: 14px;
+}
+.rw-btn-arrow {
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+.rw-consult-btn-main:hover .rw-btn-arrow {
+    transform: translateX(3px);
+}
+@media (max-width: 768px) {
+    .rw-consult-btn-container {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    .rw-consult-btn-main {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 20px;
+    }
+    .rw-btn-text {
+        font-size: 13px;
+    }
+}
+
+/* Hiệu ứng pulse để thu hút attention */
+@keyframes pulse-gentle {
+    0% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+    50% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6); }
+    100% { box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+}
+
+.rw-consult-btn-main {
+    animation: pulse-gentle 2s infinite;
+}
+</style>
 
 <script>
 // === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
