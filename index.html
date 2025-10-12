@@ -2694,53 +2694,420 @@
 }
 </style>
 
-<!-- === HTML CHÈN VÀO TRANG === -->
-<div class="rw-consult-btn-container">
+<style>
+/* === RUBY WINGS - OPTIMIZED VERSION === */
+#rubyWingsBtnContainer {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+}
+
+#rubyWingsMainBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease !important;
+    max-width: 180px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+}
+
+#rubyWingsMainBtn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+#rubyWingsMainBtn:active {
+    transform: translateY(0) !important;
+}
+
+.ruby-btn-text {
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+    font-size: 13px !important;
+}
+
+.ruby-btn-arrow {
+    font-weight: bold !important;
+    font-size: 16px !important;
+    transition: transform 0.2s ease !important;
+}
+
+#rubyWingsMainBtn:hover .ruby-btn-arrow {
+    transform: translateX(2px) !important;
+}
+
+/* Loading State */
+#rubyWingsMainBtn.loading {
+    opacity: 0.7 !important;
+    pointer-events: none !important;
+}
+
+#rubyWingsMainBtn.loading .ruby-btn-arrow::after {
+    content: '...' !important;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    #rubyWingsBtnContainer {
+        bottom: 15px !important;
+        right: 15px !important;
+        left: 15px !important;
+        text-align: center !important;
+    }
+    
+    #rubyWingsMainBtn {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+        max-width: none !important;
+        width: auto !important;
+        display: inline-flex !important;
+        border-radius: 25px !important;
+    }
+    
+    .ruby-btn-text {
+        font-size: 14px !important;
+    }
+    
+    .ruby-btn-arrow {
+        font-size: 18px !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    #rubyWingsMainBtn {
+        border: 2px solid white !important;
+        background: #000 !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    #rubyWingsMainBtn,
+    #rubyWingsMainBtn:hover,
+    .ruby-btn-arrow {
+        transition: none !important;
+        transform: none !important;
+    }
+}
+</style>
+
+<!-- NÚT TƯ VẤN TRANG CHỦ -->
+<div id="rubyWingsBtnContainer">
     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-       class="rw-consult-btn-main" 
+       id="rubyWingsMainBtn"
        target="_blank"
        rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
-        <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
-        <span class="rw-btn-arrow">→</span>
+       aria-label="Nhận tư vấn từ Ruby Wings - Mở form trong tab mới">
+        <span class="ruby-btn-text">NƠI NHẬN TƯ VẤN</span>
+        <span class="ruby-btn-arrow">→</span>
     </a>
 </div>
 
+<!-- MESSENGER CHAT PLUGIN -->
+<div id="fb-root"></div>
+<div id="fb-customer-chat" class="fb-customerchat"></div>
+
 <script>
-// === JAVASCRIPT ĐẢM BẢO HOẠT ĐỘNG ===
-function trackConsultationClick() {
-    // Google Analytics tracking
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'consultation_click', {
-            'event_category': 'engagement',
-            'event_label': 'Google Forms Consultation Button'
-        });
+// === RUBY WINGS - OPTIMIZED SCRIPT ===
+(function() {
+    'use strict';
+    
+    // Cache DOM elements
+    let rubyElements = {
+        btn: null,
+        container: null,
+        messengerLoaded: false
+    };
+    
+    // Configuration
+    const CONFIG = {
+        FACEBOOK_PIXEL_ID: '862531473384426',
+        FANPAGE_ID: '393607737167958',
+        CATALOG_ID: '1145041937161910',
+        FORM_URL: 'https://forms.gle/XCWf6zgFRp4Vhbw39',
+        TRACKING_DELAY: 300
+    };
+    
+    // Debounce function for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
     
-    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
-}
-
-// Thêm hiệu ứng khi load trang
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.querySelector('.rw-consult-btn-main');
-    if (btn) {
-        console.log('Ruby Wings Consultation Button loaded successfully');
-        
-        // Thêm hiệu ứng click
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
-        });
-        
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        // Kiểm tra mobile
-        if (window.innerWidth <= 768) {
-            console.log('Mobile mode: Green background, no arrow, single line');
+    // Get page type - simplified for homepage
+    function getCurrentPageType() {
+        const path = window.location.pathname.toLowerCase();
+        if (path === '/' || path.includes('home') || path.includes('index')) {
+            return 'homepage';
+        }
+        return 'other_page';
+    }
+    
+    // Enhanced tracking with error handling
+    function trackEvent(eventName, parameters = {}) {
+        try {
+            // Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', eventName, {
+                    ...parameters,
+                    page_type: getCurrentPageType(),
+                    timestamp: Date.now(),
+                    url: window.location.href
+                });
+            }
+            
+            // Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, parameters);
+            }
+            
+            console.log(`🎯 Ruby Wings - Tracked: ${eventName}`, parameters);
+        } catch (error) {
+            console.warn('❌ Ruby Wings - Tracking error:', error);
         }
     }
-});
+    
+    // Optimized click tracking with debouncing
+    const trackClick = debounce(function() {
+        const pageType = getCurrentPageType();
+        
+        // Batch Facebook events
+        if (typeof fbq !== 'undefined') {
+            // Single combined event with all data
+            fbq('track', 'Lead', {
+                content_name: `${pageType} - Ruby Wings`,
+                content_category: 'travel_consultation',
+                content_ids: [CONFIG.CATALOG_ID],
+                value: 150000,
+                currency: 'VND',
+                page_type: pageType,
+                fanpage_connected: true,
+                fanpage_id: CONFIG.FANPAGE_ID,
+                catalog_id: CONFIG.CATALOG_ID,
+                status: 'success',
+                predicted_ltv: 5000000,
+                source: 'homepage'
+            });
+        }
+        
+        // Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'consultation_click', {
+                'event_category': pageType,
+                'event_label': 'Consultation Button - ' + pageType,
+                'value': 150000
+            });
+        }
+        
+        console.log('🎯 Ruby Wings - Click tracked from:', pageType);
+    }, CONFIG.TRACKING_DELAY);
+    
+    // Enhanced click handler
+    function handleConsultationClick(event) {
+        // Prevent multiple clicks
+        if (rubyElements.btn.classList.contains('loading')) {
+            event.preventDefault();
+            return;
+        }
+        
+        // Add loading state
+        rubyElements.btn.classList.add('loading');
+        
+        // Track the click
+        trackClick();
+        
+        // Remove loading state after delay
+        setTimeout(() => {
+            if (rubyElements.btn) {
+                rubyElements.btn.classList.remove('loading');
+            }
+        }, 1000);
+        
+        // Open in new tab (already handled by target="_blank")
+        console.log('✅ Ruby Wings - Opening consultation form');
+    }
+    
+    // Lazy load Messenger
+    function initMessengerLazy() {
+        if (rubyElements.messengerLoaded) return;
+        
+        // Only load messenger when user interacts with page
+        const interactionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
+        const loadMessenger = () => {
+            if (rubyElements.messengerLoaded) return;
+            
+            try {
+                const chatbox = document.getElementById('fb-customer-chat');
+                if (chatbox) {
+                    chatbox.setAttribute("page_id", CONFIG.FANPAGE_ID);
+                    chatbox.setAttribute("attribution", "biz_inbox");
+                }
+                
+                if (typeof FB === 'undefined') {
+                    window.fbAsyncInit = function() {
+                        FB.init({
+                            xfbml: true,
+                            version: 'v20.0'
+                        });
+                    };
+
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); 
+                        js.id = id;
+                        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                        js.async = true;
+                        js.defer = true;
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                }
+                
+                rubyElements.messengerLoaded = true;
+                console.log('✅ Ruby Wings - Messenger loaded lazily');
+                
+                // Remove event listeners after loading
+                interactionEvents.forEach(event => {
+                    document.removeEventListener(event, loadMessenger);
+                });
+            } catch (error) {
+                console.warn('❌ Ruby Wings - Messenger load error:', error);
+            }
+        };
+        
+        // Add event listeners for lazy loading
+        interactionEvents.forEach(event => {
+            document.addEventListener(event, loadMessenger, { 
+                once: true, 
+                passive: true 
+            });
+        });
+        
+        // Auto-load after 5 seconds if no interaction
+        setTimeout(loadMessenger, 5000);
+    }
+    
+    // Page view tracking
+    function trackPageView() {
+        const pageType = getCurrentPageType();
+        
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'ViewContent', {
+                content_name: `${pageType} - Ruby Wings`,
+                content_category: 'Travel',
+                content_ids: [CONFIG.CATALOG_ID],
+                fanpage_connected: true,
+                page_type: pageType,
+                fanpage_id: CONFIG.FANPAGE_ID
+            });
+        }
+        
+        console.log('🚀 Ruby Wings - Page view tracked:', pageType);
+    }
+    
+    // Fallback system
+    function createFallbackButton() {
+        if (document.getElementById('rubyWingsBtnContainer')) return;
+        
+        const fallbackHTML = `
+            <div id="rubyWingsBtnContainer" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+                <a href="${CONFIG.FORM_URL}" 
+                   id="rubyWingsMainBtn"
+                   style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:600;font-size:14px;font-family:'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);cursor:pointer;"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Nhận tư vấn từ Ruby Wings">
+                    <span style="margin-right:5px;font-size:13px;">NƠI NHẬN TƯ VẤN</span>
+                    <span style="font-weight:bold;font-size:16px;">→</span>
+                </a>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', fallbackHTML);
+        initializeElements();
+        console.log('🔄 Ruby Wings - Fallback button created');
+    }
+    
+    // Initialize DOM elements
+    function initializeElements() {
+        rubyElements.btn = document.getElementById('rubyWingsMainBtn');
+        rubyElements.container = document.getElementById('rubyWingsBtnContainer');
+        
+        if (rubyElements.btn) {
+            // Remove existing listeners to avoid duplicates
+            rubyElements.btn.replaceWith(rubyElements.btn.cloneNode(true));
+            rubyElements.btn = document.getElementById('rubyWingsMainBtn');
+            
+            // Add click listener
+            rubyElements.btn.addEventListener('click', handleConsultationClick, {
+                passive: true
+            });
+        }
+    }
+    
+    // Cleanup function
+    function cleanup() {
+        if (rubyElements.btn) {
+            rubyElements.btn.removeEventListener('click', handleConsultationClick);
+        }
+    }
+    
+    // Initialize everything
+    function initRubyWings() {
+        try {
+            initializeElements();
+            
+            if (!rubyElements.container) {
+                createFallbackButton();
+            }
+            
+            // Track page view after a short delay
+            setTimeout(trackPageView, 100);
+            
+            // Initialize lazy messenger
+            initMessengerLazy();
+            
+            // Add cleanup on page unload
+            window.addEventListener('beforeunload', cleanup);
+            
+            console.log('✅ Ruby Wings - Optimized version initialized successfully');
+        } catch (error) {
+            console.error('❌ Ruby Wings - Initialization error:', error);
+            // Ensure fallback button is created even if other parts fail
+            createFallbackButton();
+        }
+    }
+    
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initRubyWings);
+    } else {
+        initRubyWings();
+    }
+    
+    // Global function for external access
+    window.rubyWingsTrackClick = trackClick;
+    
+})();
 </script>
 
 <style>
