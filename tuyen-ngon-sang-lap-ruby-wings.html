@@ -1062,7 +1062,7 @@ gtag('config', 'G-BD5GXRQFQZ');
 #rubyWingsMainBtn {
     display: inline-flex !important;
     align-items: center !important;
-    background: linear-gradient(135deg, #3edb36 0%, #509d0c 100%) !important;
+    background: linear-gradient(135deg, #72e66c 0%, #509d0c 100%) !important;
     color: white !important;
     padding: 6px 12px !important;
     border-radius: 16px !important;
@@ -1283,175 +1283,245 @@ function createFallbackButton() {
     document.body.insertAdjacentHTML('beforeend', fallbackHTML);
     console.log('🔄 Ruby Wings - Đã tạo nút fallback');
 }
+<!-- === RUBY WINGS - CODE ĐÃ FIX MESSENGER === -->
+
+<style>
+/* CSS NÚT TƯ VẤN */
+#rubyWingsBtnContainer {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    z-index: 9999 !important;
+}
+
+#rubyWingsMainBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 16px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease !important;
+    max-width: 140px !important;
+    line-height: 1 !important;
+}
+
+#rubyWingsMainBtn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+.ruby-btn-text {
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+}
+
+.ruby-btn-arrow {
+    font-weight: bold !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    #rubyWingsBtnContainer {
+        bottom: 10px !important;
+        right: 10px !important;
+    }
+    
+    #rubyWingsMainBtn {
+        padding: 5px 10px !important;
+        font-size: 10px !important;
+        max-width: 120px !important;
+    }
+}
+</style>
+
+<!-- NÚT TƯ VẤN -->
+<div id="rubyWingsBtnContainer">
+    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+       id="rubyWingsMainBtn"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="rubyWingsTrackClick()">
+        <span class="ruby-btn-text">NƠI NHẬN TƯ VẤN</span>
+        <span class="ruby-btn-arrow">→</span>
+    </a>
+</div>
+
+<!-- PIXEL FACEBOOK -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','862531473384426');
+fbq('track','PageView');
 </script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"/></noscript>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3><a href="tuyen-ngon-sang-lap-ruby-wings.html" class="footer-title-link">Về chúng tôi</a></h3>
-                    <p>Ruby Wings Travel - "Hành trình của chiều sâu cảm xúc, nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
-                    <p> MST: 3301743759</p>
-                    <div class="social-links-grid">
-                        <a href="https://www.facebook.com/profile.php?id=61563772112138" target="_blank" class="social-icon facebook" title="Facebook Fanpage">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.facebook.com/tien.sy.5011/" target="_blank" class="social-icon facebook-personal" title="Facebook Cá nhân">
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <a href="https://x.com/TienSy379/status/1971778015232421915?t=UsXdMD8FrwjF3OO3ZnoUGg&s=19" target="_blank" class="social-icon twitter" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.instagram.com/tiensyrubywings?igsh=MWV3czBwMmYwYnIydA==" target="_blank" class="social-icon instagram" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/@syluong379?_t=ZS-904eIdTTG12&_r=1" target="_blank" class="social-icon tiktok" title="TikTok">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-icon linkedin" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://wa.me/84332510486" target="_blank" class="social-icon whatsapp" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://zalo.me/84332510486" target="_blank" class="social-icon zalo" title="Zalo Nhắn tin">
-                            <img src="images/zalo.jpg" alt="Zalo" class="zalo-icon">
-                        </a>
-                        <a href="https://www.youtube.com/@rubywing-slsa" target="_blank" class="social-icon youtube" title="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="https://m.me/tien.sy.5011?hash=AbY3ty4r4j7255Yb&source=qr_link_share" target="_blank" class="social-icon messenger" title="Messenger">
-                            <i class="fab fa-facebook-messenger"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Liên Hệ</h3>
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>148 Trương Gia Mô, Vỹ Dạ TP. Huế</span>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <span>0332510486 - 0915083357</span>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>0332510586 (WhatsApp/Zalo)</span>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <span><a href="mailto:rubywingslsa@gmail.com">rubywingslsa@gmail.com</a></span>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Tham gia cộng đồng</h3>
-                    <p>Tham gia nhóm cộng đồng Ruby Wings Travel để nhận những thông tin mới nhất, chia sẻ trải nghiệm và lan tỏa giá trị du lịch có trách nhiệm.</p>
-                    <a href="https://www.facebook.com/groups/4107197836205156/" target="_blank" class="community-btn">
-                        Tham gia nhóm <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Ruby Wings Travel. All rights reserved.</p>
-            </div>
+<!-- MESSENGER CHAT PLUGIN - ĐÃ SỬA LỖI -->
+<div id="fb-root"></div>
+<div id="fb-customer-chat" class="fb-customerchat"
+     page_id="393607737167958"
+     attribution="biz_inbox"
+     theme_color="#667eea"
+     logged_in_greeting="Xin chào! Ruby Wings có thể giúp gì cho bạn?"
+     logged_out_greeting="Xin chào! Ruby Wings có thể giúp gì cho bạn?">
+</div>
+
+<script>
+// === TÍNH NĂNG ĐẦY ĐỦ ===
+
+// 1. XÁC ĐỊNH LOẠI TRANG
+function getRubyPageType() {
+    const url = window.location.href.toLowerCase();
+    if (url.includes('team-building') || url.includes('teambuilding')) return 'landing_teambuilding';
+    if (url.includes('retreat') || url.includes('thien')) return 'landing_retreat';
+    if (url.includes('coaching') || url.includes('cam-xuc')) return 'landing_coaching';
+    if (url.includes('khoa-hoc') || url.includes('training')) return 'landing_training';
+    if (url.includes('blog') || url.includes('tin-tuc')) return 'blog';
+    if (url.includes('dich-vu') || url.includes('service')) return 'service_page';
+    if (url === '/' || url.includes('home') || url.includes('index')) return 'homepage';
+    return 'landing_other';
+}
+
+// 2. TRACKING KHI CLICK
+function rubyWingsTrackClick() {
+    const pageType = getRubyPageType();
+    console.log('🎯 Ruby Wings - Click từ:', pageType);
+
+    // FACEBOOK PIXEL TRACKING
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'travel_consultation',
+            value: 150000,
+            currency: 'VND',
+            page_type: pageType,
+            fanpage_connected: true
+        });
+
+        fbq('track', 'CompleteRegistration', {
+            content_name: 'Ruby Wings Consultation - ' + pageType,
+            status: 'success',
+            predicted_ltv: 5000000,
+            fanpage_id: '393607737167958'
+        });
+
+        fbq('trackCustom', 'FanpageLead', {
+            fanpage_name: 'Ruby Wings - Hành trình trải nghiệm cảm xúc',
+            fanpage_id: '393607737167958',
+            source: 'landing_page',
+            page_type: pageType,
+            catalog_id: '1145041937161910'
+        });
+    }
+
+    // GOOGLE ANALYTICS
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'consultation_click', {
+            'event_category': pageType,
+            'event_label': 'Consultation Button - ' + pageType,
+            'value': 150000
+        });
+    }
+}
+
+// 3. MESSENGER CHAT SETUP - ĐÃ SỬA
+function initRubyMessenger() {
+    console.log('🔧 Đang khởi động Messenger Chat...');
+    
+    // Facebook SDK Setup
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v20.0'
+        });
+        console.log('✅ Facebook SDK đã khởi tạo');
+    };
+
+    // Load SDK
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        js.onload = function() {
+            console.log('✅ Messenger Chat plugin đã tải');
+        };
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+}
+
+// 4. AUTO TRACKING KHI TRANG LOAD
+function initRubyTracking() {
+    const pageType = getRubyPageType();
+    console.log('🚀 Ruby Wings - Trang:', pageType);
+
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+            content_name: pageType + ' - Ruby Wings',
+            content_category: 'Travel',
+            content_ids: ['1145041937161910'],
+            fanpage_connected: true
+        });
+
+        fbq('trackCustom', 'LandingPageView', {
+            fanpage_id: '393607737167958',
+            page_url: window.location.href,
+            page_type: pageType
+        });
+    }
+}
+
+// 5. KHỞI CHẠY MỌI THỨ KHI TRANG SẴN SÀNG
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 Trang đã load - Khởi chạy Ruby Wings...');
+    
+    // Kiểm tra nút
+    const btn = document.getElementById('rubyWingsBtnContainer');
+    if (btn) {
+        console.log('✅ Nút tư vấn đã hiển thị');
+    } else {
+        createFallbackButton();
+    }
+    
+    // Khởi động tracking
+    initRubyTracking();
+    
+    // Khởi động Messenger
+    initRubyMessenger();
+    
+    console.log('🎉 Ruby Wings đã khởi động hoàn tất');
+});
+
+// 6. FALLBACK NẾU NÚT BỊ MẤT
+function createFallbackButton() {
+    console.log('🔄 Tạo nút fallback...');
+    const fallbackHTML = `
+        <div id="rubyWingsBtnContainer" style="position:fixed;bottom:15px;right:15px;z-index:9999;">
+            <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+               style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:6px 12px;border-radius:16px;text-decoration:none;font-weight:600;font-size:11px;font-family:'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);"
+               target="_blank"
+               rel="noopener noreferrer"
+               onclick="rubyWingsTrackClick()">
+                <span style="margin-right:5px;">NƠI NHẬN TƯ VẤN</span>
+                <span style="font-weight:bold;">→</span>
+            </a>
         </div>
-    </footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script>
-        // Mobile Menu Toggle Functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        const overlay = document.getElementById('overlay');
-        const body = document.body;
-
-        function toggleMobileMenu() {
-            navLinks.classList.toggle('active');
-            overlay.classList.toggle('active');
-            body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        }
-
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        overlay.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-                body.style.overflow = '';
-            });
-        });
-
-        // Header scroll behavior
-        let lastScrollTop = 0;
-        const header = document.querySelector('header');
-        const scrollThreshold = 100; // Khoảng cách cuộn trước khi ẩn header
-
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                // Cuộn xuống - ẩn header
-                header.classList.add('hidden');
-            } else {
-                // Cuộn lên - hiện header
-                header.classList.remove('hidden');
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-       
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
-
-        // Reduce motion respect + ensure snap behavior only on mobile
-        (function(){
-            // Respect prefers-reduced-motion
-            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if(reduce){
-                document.documentElement.style.setProperty('--transition','150ms');
-                // disable heavy transforms
-                document.querySelectorAll('.rw-card').forEach(c => c.style.transition = 'none');
-                document.querySelectorAll('.rw-media img').forEach(i => i.style.transition = 'none');
-            }
-
-            // ensure scroll snap is applied on mobile only
-            function toggleSnap(){
-                const section = document.getElementById('rw-intro');
-                if(!section) return;
-                if(window.innerWidth <= 979){
-                    section.style.scrollSnapType = 'y mandatory';
-                } else {
-                    section.style.scrollSnapType = 'none';
-                }
-            }
-            toggleSnap();
-            window.addEventListener('resize', toggleSnap);
-        })();
-    </script>
+    `;
+    document.body.insertAdjacentHTML('beforeend', fallbackHTML);
+}
+</script>
 
     <style>
         /* Self-contained pink divider */
