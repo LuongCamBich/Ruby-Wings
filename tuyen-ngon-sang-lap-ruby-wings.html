@@ -1283,10 +1283,187 @@ function createFallbackButton() {
     document.body.insertAdjacentHTML('beforeend', fallbackHTML);
     console.log('🔄 Ruby Wings - Đã tạo nút fallback');
 }
-if (typeof window.fbqInitialized === 'undefined') {
-    window.fbqInitialized = true;
-    // Code chỉ chạy 1 lần
+<!-- === RUBY WINGS - CODE ĐÃ FIX LỖI SYNTAX === -->
+
+<style>
+/* CSS NÚT TƯ VẤN */
+#rubyWingsBtnContainer {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    z-index: 9999 !important;
 }
+
+#rubyWingsMainBtn {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    padding: 6px 12px !important;
+    border-radius: 16px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    transition: all 0.3s ease !important;
+    max-width: 140px !important;
+    line-height: 1 !important;
+}
+
+#rubyWingsMainBtn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+}
+
+.ruby-btn-text {
+    margin-right: 5px !important;
+    white-space: nowrap !important;
+}
+
+.ruby-btn-arrow {
+    font-weight: bold !important;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    #rubyWingsBtnContainer {
+        bottom: 10px !important;
+        right: 10px !important;
+    }
+    
+    #rubyWingsMainBtn {
+        padding: 5px 10px !important;
+        font-size: 10px !important;
+        max-width: 120px !important;
+    }
+}
+</style>
+
+<!-- NÚT TƯ VẤN -->
+<div id="rubyWingsBtnContainer">
+    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+       id="rubyWingsMainBtn"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="rubyWingsTrackClick()">
+        <span class="ruby-btn-text">NƠI NHẬN TƯ VẤN</span>
+        <span class="ruby-btn-arrow">→</span>
+    </a>
+</div>
+
+<!-- PIXEL FACEBOOK - CODE ĐƠN GIẢN -->
+<script>
+// Chỉ chạy pixel nếu chưa chạy
+if (!window.pixelLoaded) {
+    window.pixelLoaded = true;
+    
+    !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Khởi tạo pixel sau khi SDK load
+    setTimeout(function() {
+        if (typeof fbq !== 'undefined') {
+            fbq('init', '862531473384426');
+            fbq('track', 'PageView');
+        }
+    }, 500);
+}
+</script>
+
+<noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"/>
+</noscript>
+
+<!-- MESSENGER CHAT - CODE RIÊNG -->
+<div id="fb-root"></div>
+<div class="fb-customerchat"
+     page_id="393607737167958"
+     attribution="setup_tool"
+     theme_color="#667eea">
+</div>
+
+<script>
+// Messenger SDK - Code độc lập
+if (!window.messengerLoaded) {
+    window.messengerLoaded = true;
+    
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml: true,
+            version: 'v18.0'
+        });
+    };
+    
+    (function(d, s, id) {
+        if (d.getElementById(id)) return;
+        var js, fjs = d.getElementsByTagName(s)[0];
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+}
+</script>
+
+<script>
+// === TRACKING FUNCTIONS ===
+
+// Xác định loại trang
+function getRubyPageType() {
+    const url = window.location.href.toLowerCase();
+    if (url.includes('team-building') || url.includes('teambuilding')) return 'landing_teambuilding';
+    if (url.includes('retreat') || url.includes('thien')) return 'landing_retreat';
+    if (url.includes('coaching') || url.includes('cam-xuc')) return 'landing_coaching';
+    if (url.includes('khoa-hoc') || url.includes('training')) return 'landing_training';
+    if (url.includes('blog') || url.includes('tin-tuc')) return 'blog';
+    if (url.includes('dich-vu') || url.includes('service')) return 'service_page';
+    if (url === '/' || url.includes('home') || url.includes('index')) return 'homepage';
+    return 'landing_other';
+}
+
+// Tracking khi click
+function rubyWingsTrackClick() {
+    const pageType = getRubyPageType();
+    
+    // Facebook Pixel
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: pageType + ' - Ruby Wings',
+            value: 150000,
+            currency: 'VND'
+        });
+    }
+    
+    // Google Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'consultation_click', {
+            'event_category': pageType,
+            'value': 150000
+        });
+    }
+}
+
+// Auto tracking khi trang load
+document.addEventListener('DOMContentLoaded', function() {
+    const pageType = getRubyPageType();
+    
+    if (typeof fbq !== 'undefined') {
+        setTimeout(function() {
+            fbq('track', 'ViewContent', {
+                content_name: pageType + ' - Ruby Wings',
+                content_category: 'Travel'
+            });
+        }, 1000);
+    }
+});
+</script>
 
     <style>
         /* Self-contained pink divider */
