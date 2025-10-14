@@ -3684,466 +3684,7 @@
                 </div>
             </div>
         </section>
-<!-- === COPY VÀO VÙNG TRẢI NGHIỆM CẢM XÚC === -->
-<style>
-.ruby-wings-btn-emotion-container {
-    display: block !important;
-    margin: 30px 0 !important;
-    text-align: center !important;
-    width: 100% !important;
-}
 
-.ruby-wings-btn-emotion {
-    /* RESET & BASE */
-    all: unset !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    
-    /* SIZING */
-    padding: 16px 32px !important;
-    margin: 0 auto !important;
-    
-    /* DESIGN - MÀU CẢM XÚC (Tím) */
-    border-radius: 50px !important;
-    border: 3px solid #9b59b6 !important;
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    
-    /* GRADIENT TÍM CẢM XÚC */
-    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%) !important;
-    color: white !important;
-    cursor: pointer !important;
-    
-    /* EFFECTS */
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3) !important;
-    
-    /* FONT */
-    font-family: 'Segoe UI', 'Arial', sans-serif !important;
-}
-
-.ruby-wings-btn-emotion:hover {
-    transform: translateY(-3px) scale(1.02) !important;
-    box-shadow: 0 10px 30px rgba(142, 68, 173, 0.5) !important;
-    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%) !important;
-    border-color: #a569bd !important;
-}
-
-.ruby-wings-btn-emotion:active {
-    transform: translateY(-1px) scale(1.01) !important;
-}
-
-.ruby-wings-btn-emotion-text {
-    color: white !important;
-    font-weight: 700 !important;
-    font-size: 16px !important;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
-    z-index: 2 !important;
-    position: relative !important;
-    white-space: nowrap !important;
-}
-
-.ruby-wings-btn-emotion-arrow {
-    margin-left: 10px !important;
-    transition: all 0.3s ease !important;
-    font-weight: bold !important;
-    font-size: 18px !important;
-    color: #f1c40f !important;
-    z-index: 2 !important;
-    position: relative !important;
-}
-
-.ruby-wings-btn-emotion:hover .ruby-wings-btn-emotion-arrow {
-    transform: translateX(4px) !important;
-    color: #f39c12 !important;
-}
-
-/* GLOW EFFECT */
-.ruby-wings-btn-emotion::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: -100% !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
-    transition: left 0.8s ease !important;
-    z-index: 1 !important;
-}
-
-.ruby-wings-btn-emotion:hover::before {
-    left: 100% !important;
-}
-
-/* MOBILE OPTIMIZATION */
-@media (max-width: 768px) {
-    .ruby-wings-btn-emotion-container {
-        margin: 25px 0 !important;
-    }
-    
-    .ruby-wings-btn-emotion {
-        padding: 14px 28px !important;
-        font-size: 15px !important;
-        width: 95% !important;
-        max-width: 320px !important;
-        display: flex !important;
-        border-radius: 45px !important;
-    }
-    
-    .ruby-wings-btn-emotion-text {
-        font-size: 15px !important;
-        white-space: nowrap !important;
-    }
-    
-    .ruby-wings-btn-emotion-arrow {
-        font-size: 16px !important;
-        margin-left: 8px !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .ruby-wings-btn-emotion {
-        padding: 12px 24px !important;
-        font-size: 14px !important;
-        margin: 5px auto !important;
-    }
-    
-    .ruby-wings-btn-emotion-text {
-        font-size: 14px !important;
-        letter-spacing: 0.3px !important;
-    }
-}
-
-/* LOADING STATE */
-.ruby-wings-btn-emotion.loading {
-    opacity: 0.8 !important;
-    pointer-events: none !important;
-}
-
-.ruby-wings-btn-emotion.loading .ruby-wings-btn-emotion-arrow::after {
-    content: '...' !important;
-    animation: rubyWingsLoadingDots 1.5s infinite !important;
-}
-
-@keyframes rubyWingsLoadingDots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
-}
-
-/* ACCESSIBILITY */
-@media (prefers-reduced-motion: reduce) {
-    .ruby-wings-btn-emotion,
-    .ruby-wings-btn-emotion:hover,
-    .ruby-wings-btn-emotion-arrow {
-        transition: none !important;
-        transform: none !important;
-    }
-}
-</style>
-
-<div class="ruby-wings-btn-emotion-container">
-    <a href="trai-nghiem-cam-xuc.html" 
-       class="ruby-wings-btn-emotion"
-       onclick="rubyWingsTrackEmotionClick(event)">
-        <span class="ruby-wings-btn-emotion-text">KHÁM PHÁ TRẢI NGHIỆM CẢM XÚC</span>
-        <span class="ruby-wings-btn-emotion-arrow">→</span>
-    </a>
-</div>
-
-<script>
-// === RUBY WINGS ADVANCED TRACKING - TRẢI NGHIỆM CẢM XÚC ===
-(function() {
-    'use strict';
-    
-    // CONFIGURATION - SAFE & ISOLATED
-    const RUBY_WINGS_CONFIG = {
-        FACEBOOK_PIXEL_ID: '862531473384426',
-        GOOGLE_ADS_ID: 'AW-17558768270/GT-NGSCPMMF',
-        SERVICE_TYPE: 'emotional_experience',
-        SERVICE_NAME: 'Trải Nghiệm Cảm Xúc',
-        BUTTON_SELECTOR: '.ruby-wings-btn-emotion',
-        CONVERSION_VALUE: 250000
-    };
-    
-    // PERFORMANCE DEBOUNCE
-    function rubyWingsDebounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-    
-    // VALIDATION FUNCTIONS
-    function rubyWingsIsFacebookPixelLoaded() {
-        return typeof fbq !== 'undefined' && typeof fbq === 'function';
-    }
-    
-    function rubyWingsIsGoogleGTagLoaded() {
-        return typeof gtag !== 'undefined' && typeof gtag === 'function';
-    }
-    
-    // FACEBOOK PIXEL TRACKING WITH VALIDATION
-    function rubyWingsTrackFacebookEvent(eventName, parameters = {}) {
-        try {
-            if (!rubyWingsIsFacebookPixelLoaded()) {
-                console.log('Ruby Wings: Facebook Pixel chưa sẵn sàng');
-                return false;
-            }
-            
-            const enhancedParams = {
-                ...parameters,
-                content_type: 'product',
-                content_category: 'travel_experience',
-                service_type: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                service_name: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                page_url: window.location.href,
-                timestamp: Math.floor(Date.now() / 1000)
-            };
-            
-            fbq('track', eventName, enhancedParams);
-            
-            // CUSTOM CONVERSION FOR BETTER OPTIMIZATION
-            fbq('trackCustom', 'RubyWingsServiceClick', {
-                service_type: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                button_location: 'inline_section',
-                page_section: 'emotional_experience',
-                source: 'homepage',
-                conversion_value: RUBY_WINGS_CONFIG.CONVERSION_VALUE
-            });
-            
-            console.log('✅ Ruby Wings Facebook Event:', eventName);
-            return true;
-            
-        } catch (error) {
-            console.warn('❌ Ruby Wings Facebook Tracking Error:', error);
-            return false;
-        }
-    }
-    
-    // GOOGLE ADS CONVERSION TRACKING - VỚI ID THẬT
-    function rubyWingsTrackGoogleAds() {
-        try {
-            // GOOGLE ANALYTICS 4 - CONTENT SELECTION
-            if (rubyWingsIsGoogleGTagLoaded()) {
-                gtag('event', 'select_content', {
-                    content_type: 'travel_service',
-                    content_id: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                    content_name: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                    items: [{
-                        item_id: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                        item_name: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                        item_category: 'emotional_travel',
-                        price: RUBY_WINGS_CONFIG.CONVERSION_VALUE / 100000
-                    }]
-                });
-            }
-            
-            // GOOGLE ADS CONVERSION TRACKING - ID THẬT
-            if (rubyWingsIsGoogleGTagLoaded()) {
-                gtag('event', 'conversion', {
-                    'send_to': RUBY_WINGS_CONFIG.GOOGLE_ADS_ID,
-                    'value': RUBY_WINGS_CONFIG.CONVERSION_VALUE,
-                    'currency': 'VND',
-                    'transaction_id': 'ruby_wings_' + RUBY_WINGS_CONFIG.SERVICE_TYPE + '_' + Date.now()
-                });
-                
-                console.log('✅ Ruby Wings Google Ads Conversion Tracked');
-            }
-            
-            return true;
-            
-        } catch (error) {
-            console.warn('❌ Ruby Wings Google Tracking Error:', error);
-            return false;
-        }
-    }
-    
-    // COMPREHENSIVE CLICK TRACKING
-    const rubyWingsTrackEmotionClick = rubyWingsDebounce(function(event) {
-        if (!event || !event.currentTarget) {
-            console.warn('Ruby Wings: Event không hợp lệ');
-            return true;
-        }
-        
-        const button = event.currentTarget;
-        
-        // PREVENT MULTIPLE CLICKS
-        if (button.classList.contains('loading')) {
-            event.preventDefault();
-            return false;
-        }
-        
-        // ADD LOADING STATE
-        button.classList.add('loading');
-        
-        // TRACKING EXECUTION
-        let facebookTracked = false;
-        let googleTracked = false;
-        
-        try {
-            // FACEBOOK PIXEL TRACKING
-            facebookTracked = rubyWingsTrackFacebookEvent('Lead', {
-                content_name: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                content_category: 'emotional_travel',
-                content_ids: [RUBY_WINGS_CONFIG.SERVICE_TYPE],
-                value: RUBY_WINGS_CONFIG.CONVERSION_VALUE,
-                currency: 'VND',
-                predicted_ltv: 7500000
-            });
-            
-            // ADDITIONAL FACEBOOK EVENTS
-            rubyWingsTrackFacebookEvent('ViewContent', {
-                content_name: RUBY_WINGS_CONFIG.SERVICE_NAME + ' - Button Conversion',
-                content_type: 'product'
-            });
-            
-            // GOOGLE ADS TRACKING
-            googleTracked = rubyWingsTrackGoogleAds();
-            
-            // SUCCESS LOG
-            console.log('🎯 Ruby Wings - Emotion Experience Tracked:', {
-                service: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                facebook: facebookTracked ? '✅' : '❌',
-                google: googleTracked ? '✅' : '❌',
-                value: RUBY_WINGS_CONFIG.CONVERSION_VALUE,
-                timestamp: new Date().toISOString()
-            });
-            
-        } catch (error) {
-            console.error('❌ Ruby Wings Tracking Execution Error:', error);
-        }
-        
-        // REMOVE LOADING STATE AFTER DELAY
-        setTimeout(() => {
-            if (button && button.classList) {
-                button.classList.remove('loading');
-            }
-        }, 1200);
-        
-        // ALLOW DEFAULT LINK BEHAVIOR
-        return true;
-        
-    }, 350);
-    
-    // BUTTON VISIBILITY TRACKING
-    function rubyWingsTrackButtonView() {
-        try {
-            const button = document.querySelector(RUBY_WINGS_CONFIG.BUTTON_SELECTOR);
-            if (!button) {
-                console.log('Ruby Wings: Không tìm thấy button');
-                return;
-            }
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                        
-                        // FACEBOOK VIEW TRACKING
-                        if (rubyWingsIsFacebookPixelLoaded()) {
-                            fbq('trackCustom', 'ButtonView', {
-                                service_type: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                                button_location: 'inline_section',
-                                view_percentage: Math.round(entry.intersectionRatio * 100),
-                                timestamp: Date.now()
-                            });
-                        }
-                        
-                        // GOOGLE ANALYTICS VIEW TRACKING
-                        if (rubyWingsIsGoogleGTagLoaded()) {
-                            gtag('event', 'view_item', {
-                                items: [{
-                                    item_id: RUBY_WINGS_CONFIG.SERVICE_TYPE,
-                                    item_name: RUBY_WINGS_CONFIG.SERVICE_NAME,
-                                    category: 'emotional_travel'
-                                }]
-                            });
-                        }
-                        
-                        console.log('👀 Ruby Wings Button Viewed:', RUBY_WINGS_CONFIG.SERVICE_NAME);
-                    }
-                });
-            }, { 
-                threshold: [0.3, 0.5, 0.8],
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            observer.observe(button);
-            
-        } catch (error) {
-            console.warn('Ruby Wings View Tracking Error:', error);
-        }
-    }
-    
-    // SAFE INITIALIZATION
-    function rubyWingsInitEmotionButton() {
-        try {
-            const button = document.querySelector(RUBY_WINGS_CONFIG.BUTTON_SELECTOR);
-            if (!button) {
-                console.log('❌ Ruby Wings: Không tìm thấy button element');
-                return;
-            }
-            
-            // CLEAN EXISTING EVENT LISTENERS
-            const newButton = button.cloneNode(true);
-            button.parentNode.replaceChild(newButton, button);
-            
-            // ADD ENHANCED CLICK HANDLER
-            newButton.addEventListener('click', rubyWingsTrackEmotionClick, {
-                passive: true,
-                capture: false
-            });
-            
-            // INITIATE VIEW TRACKING
-            setTimeout(rubyWingsTrackButtonView, 500);
-            
-            console.log('✅ Ruby Wings Emotion Button - Initialized Successfully');
-            
-        } catch (error) {
-            console.error('❌ Ruby Wings Emotion Button - Initialization Failed:', error);
-        }
-    }
-    
-    // DOM READY CHECK WITH MULTIPLE FALLBACKS
-    function rubyWingsStartInitialization() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', rubyWingsInitEmotionButton);
-        } else {
-            // DELAYED INIT FOR BETTER STABILITY
-            setTimeout(rubyWingsInitEmotionButton, 100);
-        }
-    }
-    
-    // START INITIALIZATION
-    rubyWingsStartInitialization();
-    
-    // GLOBAL FUNCTION FOR HTML ONCLICK
-    window.rubyWingsTrackEmotionClick = rubyWingsTrackEmotionClick;
-    
-    // ERROR BOUNDARY
-    window.addEventListener('error', function(e) {
-        if (e.message && e.message.includes('rubyWings')) {
-            console.warn('Ruby Wings Error Caught:', e.error);
-            e.preventDefault();
-        }
-    });
-    
-})();
-</script>
-<!-- === HẾT CODE TRẢI NGHIỆM CẢM XÚC === -->
         <hr style="border: 3px solid var(--color-secondary); margin: 20px 0;">
 
         <!-- Tours Section -->
@@ -4612,6 +4153,7 @@
         </section>
     </main>
 <style>
+<style>
 /* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
 .rw-consult-btn-container {
     display: block !important;
@@ -4660,7 +4202,7 @@
 
 /* TEXT - CHỮ MÀU VÀNG NỔI BẬT */
 .rw-consult-btn-main .rw-btn-text {
-    color: #f3f5f8 !important;
+    color: #ffd700 !important;
     font-weight: 800 !important;
     font-size: 18px !important;
     text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
@@ -4674,11 +4216,10 @@
     box-shadow: 0 12px 30px rgba(44, 236, 44, 0.5) !important;
     background: linear-gradient(135deg, #32ff32 0%, #1a991a 100%) !important;
     border-color: #32ff32 !important;
-    color: #ffd700 !important;
 }
 
 .rw-consult-btn-main:hover .rw-btn-text {
-    color: #ffd700 !important;
+    color: #fff3af !important;
 }
 
 /* Hiệu ứng ánh sáng trượt */
@@ -4713,7 +4254,6 @@
     .rw-consult-btn-main .rw-btn-text {
         font-size: 16px !important;
         white-space: nowrap !important;
-        /* BỎ MŨI TÊN - chỉ hiển thị text */
     }
     
     /* Ẩn hoàn toàn mũi tên trên mobile */
@@ -4758,6 +4298,23 @@
     }
 }
 
+/* LOADING STATE */
+.rw-consult-btn-main.loading {
+    opacity: 0.8 !important;
+    pointer-events: none !important;
+}
+
+.rw-consult-btn-main.loading .rw-btn-text::after {
+    content: '...' !important;
+    animation: loadingDots 1.5s infinite !important;
+}
+
+@keyframes loadingDots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
 /* Đảm bảo không bị ảnh hưởng bởi CSS khác */
 .rw-consult-btn-container * {
     box-sizing: border-box !important;
@@ -4770,70 +4327,159 @@
        class="rw-consult-btn-main" 
        target="_blank"
        rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
+       onclick="trackConsultationClick(event)">
         <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
         <span class="rw-btn-arrow">→</span>
     </a>
 </div>
 
 <script>
-// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
-function trackConsultationClick() {
-    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
-            content_name: 'Đăng ký tư vấn chung - ' + document.title,
-            content_category: 'General Consultation',
-            page_url: window.location.href,
-            button_type: 'General CTA'
-        });
-        console.log('Facebook Pixel: Tracked consultation click');
-    } else {
-        console.warn('Facebook Pixel not loaded yet');
-    }
-    
-    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'consultation_click', {
-            'event_category': 'engagement',
-            'event_label': 'Google Forms Consultation Button'
-        });
-    }
-    
-    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
-    
-    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
-    setTimeout(function() {
-        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
-    }, 100);
+// === CONFIGURATION - GOOGLE ADS CONVERSION ID THẬT ===
+const CONSULTATION_CONFIG = {
+    GOOGLE_ADS_CONVERSION_ID: 'AW-17558768270/GT-NGSCPMMF',
+    SERVICE_NAME: 'Đăng Ký Tư Vấn Chung',
+    SERVICE_TYPE: 'general_consultation'
+};
+
+// === DEBOUNCE ĐỂ TRÁNH CLICK NHIỀU LẦN ===
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
+
+// === GOOGLE ADS CONVERSION TRACKING ===
+function trackGoogleAdsConversion() {
+    try {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'conversion', {
+                'send_to': CONSULTATION_CONFIG.GOOGLE_ADS_CONVERSION_ID,
+                'value': 150000, // Giá trị tư vấn
+                'currency': 'VND',
+                'transaction_id': 'consultation_' + Date.now()
+            });
+            console.log('✅ Google Ads Conversion tracked');
+        } else {
+            console.warn('❌ gtag not found - Google Ads conversion not sent');
+        }
+    } catch (error) {
+        console.error('Google Ads tracking error:', error);
+    }
+}
+
+// === GOOGLE ANALYTICS 4 TRACKING ===
+function trackGA4Event() {
+    try {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'generate_lead', {
+                'event_category': 'consultation',
+                'event_label': CONSULTATION_CONFIG.SERVICE_NAME,
+                'value': 150000,
+                'currency': 'VND'
+            });
+            console.log('✅ GA4 Lead Event tracked');
+        }
+    } catch (error) {
+        console.warn('GA4 tracking error:', error);
+    }
+}
+
+// === FACEBOOK PIXEL TRACKING ===
+function trackFacebookPixel() {
+    try {
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Lead', {
+                content_name: CONSULTATION_CONFIG.SERVICE_NAME,
+                content_category: CONSULTATION_CONFIG.SERVICE_TYPE,
+                value: 150000,
+                currency: 'VND',
+                page_url: window.location.href
+            });
+            console.log('✅ Facebook Pixel Lead tracked');
+        } else {
+            console.warn('Facebook Pixel not loaded');
+        }
+    } catch (error) {
+        console.warn('Facebook Pixel error:', error);
+    }
+}
+
+// === MAIN TRACKING FUNCTION VỚI DEBOUNCE ===
+const trackConsultationClick = debounce(function(event) {
+    if (!event) return;
+    
+    const button = event.currentTarget;
+    
+    // NGĂN CHẶN CLICK NHIỀU LẦN
+    if (button.classList.contains('loading')) {
+        event.preventDefault();
+        return false;
+    }
+    
+    // THÊM LOADING STATE
+    button.classList.add('loading');
+    
+    console.log('🎯 Ruby Wings Consultation Tracking Started...');
+    
+    // THỰC HIỆN TẤT CẢ TRACKING
+    try {
+        // 1. GOOGLE ADS CONVERSION
+        trackGoogleAdsConversion();
+        
+        // 2. GOOGLE ANALYTICS 4
+        trackGA4Event();
+        
+        // 3. FACEBOOK PIXEL
+        trackFacebookPixel();
+        
+        // 4. CONSOLE LOG CHO DEBUG
+        console.log('🎯 Consultation Button Clicked - All tracking sent', {
+            service: CONSULTATION_CONFIG.SERVICE_NAME,
+            conversion_id: CONSULTATION_CONFIG.GOOGLE_ADS_CONVERSION_ID,
+            timestamp: new Date().toISOString()
+        });
+        
+    } catch (error) {
+        console.error('Tracking error:', error);
+    }
+    
+    // MỞ FORM SAU 500ms (đảm bảo tracking hoàn tất)
+    setTimeout(() => {
+        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+        
+        // XÓA LOADING STATE SAU 1.5s
+        setTimeout(() => {
+            button.classList.remove('loading');
+        }, 1500);
+    }, 500);
+    
+    // NGĂN MỞ LINK TỰ ĐỘNG
+    event.preventDefault();
+    return false;
+    
+}, 300);
 
 // === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
 document.addEventListener('DOMContentLoaded', function() {
     const btn = document.querySelector('.rw-consult-btn-main');
     if (btn) {
-        console.log('Ruby Wings Consultation Button loaded successfully');
+        console.log('✅ Ruby Wings Consultation Button loaded successfully');
         
-        // Thêm hiệu ứng click
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
+        // THÊM EVENT LISTENER ĐỂ ĐẢM BẢO TRACKING
+        btn.addEventListener('click', trackConsultationClick, {
+            passive: false,
+            capture: false
         });
         
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        // Xử lý sự kiện click để đảm bảo tracking
-        btn.addEventListener('click', function(e) {
-            // Ngăn mở link ngay lập tức
-            e.preventDefault();
-            // Gọi hàm tracking
-            trackConsultationClick();
-        });
-        
-        // Kiểm tra mobile
+        // KIỂM TRA MOBILE
         if (window.innerWidth <= 768) {
-            console.log('Mobile mode: Green background, no arrow, single line');
+            console.log('📱 Mobile mode: Green background, no arrow, single line');
         }
     }
 });
@@ -4841,13 +4487,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
 function ensurePixelTracking() {
     if (typeof fbq === 'undefined') {
-        console.log('Waiting for Facebook Pixel to load...');
         setTimeout(ensurePixelTracking, 500);
     }
 }
 
-// Khởi động backup tracking
+// KHỞI ĐỘNG BACKUP TRACKING
 ensurePixelTracking();
+
+// GLOBAL FUNCTION CHO HTML ONCLICK
+window.trackConsultationClick = trackConsultationClick;
+
+console.log('🚀 Ruby Wings Consultation Button - Ready with Google Ads Conversion Tracking');
 </script>
     <!-- Footer -->
     <footer id="contact">
