@@ -2948,14 +2948,31 @@
         messengerLoaded: false
     };
     
-    // Configuration
-    const CONFIG = {
-        FACEBOOK_PIXEL_ID: '862531473384426',
-        FANPAGE_ID: '393607737167958',
-        CATALOG_ID: '1145041937161910',
-        FORM_URL: 'https://forms.gle/XCWf6zgFRp4Vhbw39',
-        TRACKING_DELAY: 300
-    };
+   // Configuration
+const CONFIG = {
+    FACEBOOK_PIXEL_ID: '862531473384426',
+    FANPAGE_ID: '393607737167958',
+    CATALOG_ID: '1145041937161910',
+    FORM_URL: 'https://forms.gle/XCWf6zgFRp4Vhbw39',
+    TRACKING_DELAY: 300
+};
+
+// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead) ===
+try {
+    function disableAutoButtonClick() {
+        if (typeof fbq !== 'undefined') {
+            fbq('consent', 'revoke'); // Ngăn Meta auto track button click
+            console.log('🚫 Meta auto Button Click tracking disabled');
+        } else {
+            // Nếu fbq chưa load thì thử lại sau 2 giây
+            setTimeout(disableAutoButtonClick, 2000);
+        }
+    }
+    disableAutoButtonClick();
+} catch (e) {
+    console.warn('⚠️ Error disabling auto Button Click tracking:', e);
+}
+
     
     // Debounce function for performance
     function debounce(func, wait) {
@@ -3003,27 +3020,6 @@
         }
     }
     
-    // Optimized click tracking with debouncing
-    const trackClick = debounce(function() {
-        const pageType = getCurrentPageType();
-        
-        // Batch Facebook events
-        if (typeof fbq !== 'undefined') {
-            // Single combined event with all data
-            fbq('track', 'Lead', {
-                content_name: `${pageType} - Ruby Wings`,
-                content_category: 'travel_consultation',
-                content_ids: [CONFIG.CATALOG_ID],
-                value: 150000,
-                currency: 'VND',
-                page_type: pageType,
-                fanpage_connected: true,
-                fanpage_id: CONFIG.FANPAGE_ID,
-                catalog_id: CONFIG.CATALOG_ID,
-                status: 'success',
-                predicted_ltv: 5000000,
-                source: 'homepage'
-            });
         }
         
         // Google Analytics
@@ -5169,5 +5165,38 @@ console.log('🚀 Ruby Wings Consultation Button - Ready with Google Ads Convers
             });
         });
     </script>
+    <!-- Inject Catalog ID safely -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  try {
+    const catalogMap = {
+      "rubywings.vn/hanh-trinh-bach-ma": "1145041937161910",
+      "rubywings.vn/vi-tuyen-quang-tri": "123456789012345",
+      "rubywings.vn/hue-experience": "234567890123456"
+    };
+
+    const currentURL = window.location.href;
+    let detectedCatalogId = "1145041937161910"; // fallback mặc định
+
+    for (const key in catalogMap) {
+      if (currentURL.includes(key)) {
+        detectedCatalogId = catalogMap[key];
+        break;
+      }
+    }
+
+    // Đảm bảo không ghi đè bất kỳ biến nào khác
+    window.CONFIG = window.CONFIG || {};
+    if (!window.CONFIG.CATALOG_ID) {
+      window.CONFIG.CATALOG_ID = detectedCatalogId;
+    }
+
+    console.log("✅ Catalog ID detected:", window.CONFIG.CATALOG_ID);
+  } catch (e) {
+    console.warn("⚠️ Catalog detection error:", e);
+  }
+});
+</script>
+
 </body>
 </html>
