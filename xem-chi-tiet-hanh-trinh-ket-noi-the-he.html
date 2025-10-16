@@ -2,120 +2,205 @@
 <html lang="vi">
 
 <head>
-    <!-- Google tag (gtag.js) -->
+    <!-- === GOOGLE TAG MANAGER & TRACKING OPTIMIZED === -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD5GXRQFQZ"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-BD5GXRQFQZ');
+    
+    // GOOGLE ADS CONVERSION TRACKING
+    gtag('config', 'AW-17558768270');
     </script>
-<!-- === CHÈN CODE NÀY NGAY SAU ĐÓ === -->
-<script>
-// === RUBY WINGS - AUTOMATIC EVENT TRACKING ===
-(function() {
-    'use strict';
-    
-    // Đợi DOM ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTracking);
-    } else {
-        initTracking();
-    }
-    
-    function initTracking() {
-        // 1. TRACK PAGE_VIEW - Ngay khi trang load
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                page_title: document.title,
-                page_location: window.location.href,
-                page_path: window.location.pathname
-            });
+
+    <!-- === FACEBOOK PIXEL CODE === -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '862531473384426');
+    fbq('track', 'PageView');
+    </script>
+
+    <!-- === RUBY WINGS - OPTIMIZED TRACKING === -->
+    <script>
+    (function() {
+        'use strict';
+        
+        // Load khi DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTracking);
+        } else {
+            initTracking();
         }
         
-        // 2. TRACK SESSION_START - Mỗi phiên mới
-        if (!sessionStorage.getItem('ruby_session_started')) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'session_start');
-            }
-            sessionStorage.setItem('ruby_session_started', 'true');
-        }
-        
-        // 3. TRACK FIRST_VISIT - Chỉ lần đầu
-        if (!localStorage.getItem('ruby_first_visit')) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'first_visit');
-            }
-            localStorage.setItem('ruby_first_visit', new Date().toISOString());
-        }
-        
-        // 4. TRACK SCROLL - Khi cuộn 90% trang
-        let scrollTracked = false;
-        window.addEventListener('scroll', function() {
-            if (!scrollTracked) {
-                const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-                if (scrolled >= 0.9) {
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'scroll', {
-                            scroll_percentage: 90,
-                            page_path: window.location.pathname
-                        });
-                    }
-                    scrollTracked = true;
+        function initTracking() {
+            console.log('🚀 Ruby Wings - Optimized tracking initialized');
+            
+            // Universal event tracking function
+            function trackEvent(eventName, parameters = {}) {
+                const defaultParams = {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname,
+                    event_time: new Date().toISOString()
+                };
+                
+                const eventParams = {...defaultParams, ...parameters};
+                
+                // Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, eventParams);
+                }
+                
+                // Facebook Pixel for key events
+                if (typeof fbq !== 'undefined' && isKeyEvent(eventName)) {
+                    fbq('track', getFacebookEventName(eventName), eventParams);
+                }
+                
+                // Google Ads Conversion Tracking for key events
+                if (typeof gtag !== 'undefined' && isConversionEvent(eventName)) {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17558768270/GT-NGSCPMMF',
+                        'value': parameters.value || 1.0,
+                        'currency': parameters.currency || 'VND',
+                        'transaction_id': parameters.transaction_id || ''
+                    });
                 }
             }
-        }, { passive: true });
-        
-        // 5. TRACK USER_ENGAGEMENT - Sau 30 giây
-        setTimeout(function() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'user_engagement', {
-                    engagement_time: 30,
-                    page_path: window.location.pathname
-                });
+            
+            function isKeyEvent(eventName) {
+                const keyEvents = ['purchase', 'lead', 'complete_registration', 'consultation_click', 'submit_lead'];
+                return keyEvents.includes(eventName);
             }
-        }, 30000);
-        
-        // 6. TRACK CLICK - Tất cả click cơ bản
-        document.addEventListener('click', function(e) {
-            if (typeof gtag !== 'undefined') {
-                const target = e.target;
-                gtag('event', 'click', {
-                    element_text: target.textContent?.substring(0, 50) || 'unknown',
-                    element_tag: target.tagName,
-                    page_path: window.location.pathname
-                });
+            
+            function isConversionEvent(eventName) {
+                const conversionEvents = ['purchase', 'close_convert_lead', 'qualify_lead', 'consultation_click'];
+                return conversionEvents.includes(eventName);
             }
-        }, { passive: true });
-        
-        // 7. TRACK CONSULTATION_CLICK - Click nút tư vấn
-        function trackConsultationClick() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'consultation_click', {
+            
+            function getFacebookEventName(eventName) {
+                const eventMap = {
+                    'purchase': 'Purchase',
+                    'close_convert_lead': 'Lead',
+                    'qualify_lead': 'Lead',
+                    'consultation_click': 'Lead',
+                    'submit_lead': 'CompleteRegistration'
+                };
+                return eventMap[eventName] || eventName;
+            }
+            
+            // 1. PAGE VIEW - Gửi cho cả Google Ads & Facebook
+            trackEvent('page_view');
+            
+            // 2. SESSION START
+            if (!sessionStorage.getItem('ruby_session_started')) {
+                trackEvent('session_start');
+                sessionStorage.setItem('ruby_session_started', 'true');
+            }
+            
+            // 3. FIRST VISIT
+            if (!localStorage.getItem('ruby_first_visit')) {
+                trackEvent('first_visit');
+                localStorage.setItem('ruby_first_visit', new Date().toISOString());
+            }
+            
+            // 4. SCROLL DEPTH (90%)
+            let scrollTracked = false;
+            window.addEventListener('scroll', function() {
+                if (!scrollTracked) {
+                    const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+                    if (scrolled >= 0.9) {
+                        trackEvent('scroll', {scroll_percentage: 90});
+                        scrollTracked = true;
+                    }
+                }
+            }, { passive: true });
+            
+            // 5. USER ENGAGEMENT (30s)
+            setTimeout(() => {
+                trackEvent('user_engagement', {engagement_time: 30});
+            }, 30000);
+            
+            // 6. CONSULTATION CLICKS - QUAN TRỌNG CHO ADS & FACEBOOK
+            function trackConsultationClick(event) {
+                event.preventDefault();
+                
+                // Track trước khi chuyển trang
+                trackEvent('consultation_click', {
                     button_location: 'consultation_form',
                     page_section: 'main_content',
-                    page_path: window.location.pathname
+                    value: 100000,
+                    currency: 'VND'
                 });
+                
+                // Mở form sau 100ms để đảm bảo tracking hoàn tất
+                setTimeout(() => {
+                    window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+                }, 100);
             }
+            
+            const consultButtons = document.querySelectorAll([
+                '[href*="forms.gle"]',
+                '.rw-consult-btn-main',
+                '[class*="consult"]'
+            ].join(','));
+            
+            consultButtons.forEach(btn => {
+                btn.addEventListener('click', trackConsultationClick, { passive: false });
+            });
+            
+            // 7. TOUR REGISTRATION TRACKING
+            function trackTourRegistration(tourName, category) {
+                trackEvent('close_convert_lead', {
+                    tour_name: tourName,
+                    tour_category: category,
+                    value: 2290000,
+                    currency: 'VND'
+                });
+                
+                // Facebook Lead Event
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: tourName,
+                        content_category: category,
+                        value: 2290000,
+                        currency: 'VND'
+                    });
+                }
+            }
+            
+            // 8. FORM SUBMISSIONS
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    trackEvent('submit_lead', {
+                        form_id: form.id || 'unknown_form',
+                        form_name: form.getAttribute('name') || 'unknown'
+                    });
+                });
+            });
+            
+            // 9. PURCHASE TRACKING (khi có đơn hàng)
+            window.trackPurchase = function(transactionId, value, items = []) {
+                trackEvent('purchase', {
+                    transaction_id: transactionId,
+                    value: value,
+                    currency: 'VND',
+                    items: items
+                });
+            };
         }
-        
-        // Tự động thêm tracking cho các nút consultation
-        const consultButtons = document.querySelectorAll([
-            '[href*="forms.gle"]',
-            '[onclick*="consultation"]',
-            '[class*="consult"]',
-            '.rw-consult-btn-main'
-        ].join(','));
-        
-        consultButtons.forEach(btn => {
-            btn.addEventListener('click', trackConsultationClick, { passive: true });
-        });
-        
-        console.log('✅ Ruby Wings - Automatic tracking initialized');
-    }
-})();
-</script>
-<!-- === HẾT CODE TRACKING === -->
+    })();
+    </script>
+    <!-- === HẾT CODE TRACKING === -->
+
     <!-- === META TAGS SEO TỐI ƯU HOÀN CHỈNH === -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.5">
@@ -156,7 +241,10 @@
     <meta name="msapplication-TileColor" content="#2E8B57">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-     <script src="facebook-pixel-complete.js"></script>
+    
+    <!-- Facebook Domain Verification -->
+    <meta name="facebook-domain-verification" content="your-domain-verification" />
+    
     <!-- Favicon -->
     <link rel="icon" href="https://rubywings.vn/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -266,7 +354,7 @@
                 "offers": {
                     "@type": "Offer",
                     "priceCurrency": "VND",
-                    "price": "2500000",
+                    "price": "2290000",
                     "availability": "https://schema.org/InStock",
                     "validFrom": "2024-01-01",
                     "seller": {
@@ -1048,33 +1136,33 @@
         /* 1. SỬA LỖI MÀU NỀN ĐIỆN THOẠI - CRITICAL FIX */
         @media (max-width: 768px) {
             body {
-                background-color: #29a66c !important;
-                color: white !important;
+                background-color: #f0f0f0 !important;
+                color: var(--color-text-dark) !important;
             }
             
-            /* Đảm bảo các section chính cũng có màu nền xanh */
+            /* Đảm bảo các section chính giữ nguyên thiết kế */
             .about, .tours, .featured-tours {
-                background:  !important;
-                color: white;
+                background: inherit !important;
+                color: inherit;
             }
             
-            /* Điều chỉnh màu chữ cho rõ ràng trên nền xanh */
+            /* Điều chỉnh màu chữ cho rõ ràng */
             .section-title h2, 
             .about-card h3, .about-card p,
             .tour-info h3, .tour-info p {
-                color: white !important;
+                color: inherit !important;
             }
             
             /* Card backgrounds cho mobile */
             .about-card, .tour-card {
-                background: rgba(255, 255, 255, 0.1) !important;
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255,255,255,0.1);
+                background: white !important;
+                backdrop-filter: none;
+                border: 1px solid rgba(0,0,0,0.1);
             }
             
             /* Điều chỉnh màu chữ trong card cho rõ ràng */
             .about-card p, .tour-info p {
-                color: white !important;
+                color: var(--color-text-dark) !important;
             }
 
             /* Header mobile adjustment */
@@ -1086,13 +1174,13 @@
             /* Tăng kích thước chữ cho các thông tin tour trên mobile */
             .tour-meta {
                 font-size: 1rem !important;
-                color: white !important;
+                color: inherit !important;
             }
 
             /* Giảm chiều cao footer trên mobile */
             footer {
                 padding: 25px 0 12px !important;
-                background: #0a4520 !important;
+                background: #0b562a !important;
             }
 
             .footer-content {
@@ -1525,9 +1613,21 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     </span>
 </a>
 </div>
-</main>
+
+<!-- === RUBY WINGS CONSULTATION BUTTON - OPTIMIZED === -->
+<div class="rw-consult-btn-container">
+    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+   class="rw-consult-btn-main" 
+   target="_blank"
+   rel="noopener noreferrer"
+   onclick="trackConsultationClick()">
+    <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
+    <span class="rw-btn-arrow">→</span>
+</a>
+</div>
+
 <style>
-/* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
+/* === RUBY WINGS CONSULTATION BUTTON - OPTIMIZED STYLES === */
 .rw-consult-btn-container {
     display: block !important;
     margin: 25px 0 !important;
@@ -1536,19 +1636,13 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
 }
 
 .rw-consult-btn-main {
-    /* Reset mọi style mặc định */
     all: unset !important;
-    
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-decoration: none !important;
-    
-    /* Kích thước và khoảng cách */
     padding: 18px 35px !important;
     margin: 10px auto !important;
-    
-    /* Kiểu dáng */
     border-radius: 50px !important;
     border: 3px solid #2cec2c !important;
     font-weight: 800 !important;
@@ -1557,23 +1651,16 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     text-align: center !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
-    
-    /* Màu sắc - XANH LÁ CÂY + CHỮ VÀNG */
     background: linear-gradient(135deg, #2cec2c 0%, #22cc22 100%) !important;
     color: #ffd700 !important;
     cursor: pointer !important;
-    
-    /* Hiệu ứng */
     transition: all 0.4s ease !important;
     position: relative !important;
     overflow: hidden !important;
     box-shadow: 0 6px 20px rgba(44, 236, 44, 0.3) !important;
-    
-    /* Font chữ rõ ràng */
     font-family: 'Arial', 'Helvetica', sans-serif !important;
 }
 
-/* TEXT - CHỮ MÀU VÀNG NỔI BẬT */
 .rw-consult-btn-main .rw-btn-text {
     color: #f3f5f8 !important;
     font-weight: 800 !important;
@@ -1583,7 +1670,6 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     position: relative !important;
 }
 
-/* === HIỆU ỨNG HOVER - CHUYỂN MÀU ĐẬM DẦN === */
 .rw-consult-btn-main:hover {
     transform: translateY(-4px) scale(1.05) !important;
     box-shadow: 0 12px 30px rgba(44, 236, 44, 0.5) !important;
@@ -1596,7 +1682,6 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     color: #ffd700 !important;
 }
 
-/* Hiệu ứng ánh sáng trượt */
 .rw-consult-btn-main::before {
     content: '' !important;
     position: absolute !important;
@@ -1613,14 +1698,14 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     left: 100% !important;
 }
 
-/* === MOBILE RESPONSIVE - 1 DÒNG & TỐI ƯU === */
+/* === MOBILE RESPONSIVE - OPTIMIZED === */
 @media (max-width: 768px) {
     .rw-consult-btn-main {
         padding: 16px 25px !important;
         font-size: 16px !important;
         width: 95% !important;
         max-width: 320px !important;
-        display: flex !important; /* Đảm bảo 1 dòng */
+        display: flex !important;
         flex-wrap: nowrap !important;
         white-space: nowrap !important;
     }
@@ -1628,15 +1713,12 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     .rw-consult-btn-main .rw-btn-text {
         font-size: 16px !important;
         white-space: nowrap !important;
-        /* BỎ MŨI TÊN - chỉ hiển thị text */
     }
     
-    /* Ẩn hoàn toàn mũi tên trên mobile */
     .rw-consult-btn-main .rw-btn-arrow {
         display: none !important;
     }
     
-    /* Màu mobile - xanh lá nhạt */
     .rw-consult-btn-main {
         background: linear-gradient(135deg, #2bdc2b 0%, #1a9f1a 100%) !important;
         border-color: #2cec2c !important;
@@ -1656,7 +1738,7 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     }
 }
 
-/* Desktop - vẫn giữ mũi tên */
+/* Desktop - keep arrow */
 @media (min-width: 769px) {
     .rw-consult-btn-main .rw-btn-arrow {
         margin-left: 12px !important;
@@ -1673,97 +1755,86 @@ Tại đây, quý khách có 15-20 phút để tự do đi dạo, hồi tưởng
     }
 }
 
-/* Đảm bảo không bị ảnh hưởng bởi CSS khác */
 .rw-consult-btn-container * {
     box-sizing: border-box !important;
 }
 </style>
 
-<!-- === HTML CHÈN VÀO TRANG === -->
-<div class="rw-consult-btn-container">
-    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-   class="rw-consult-btn-main" 
-   target="_blank"
-   rel="noopener noreferrer"
-   onclick="trackConsultationClick()">
-    <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
-    <span class="rw-btn-arrow">→</span>
-</a>
-</div>
-
 <script>
-// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
+// === OPTIMIZED TRACKING FUNCTIONS ===
 function trackConsultationClick() {
-    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
+    // Facebook Pixel Tracking
     if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
-            content_name: 'Đăng ký tư vấn chung - ' + document.title,
+            content_name: 'Đăng ký tư vấn - ' + document.title,
             content_category: 'General Consultation',
             page_url: window.location.href,
-            button_type: 'General CTA'
+            value: 100000,
+            currency: 'VND'
         });
-        console.log('Facebook Pixel: Tracked consultation click');
-    } else {
-        console.warn('Facebook Pixel not loaded yet');
     }
     
-    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
+    // Google Ads Conversion Tracking
     if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17558768270/GT-NGSCPMMF',
+            'value': 100000,
+            'currency': 'VND'
+        });
+        
         gtag('event', 'consultation_click', {
             'event_category': 'engagement',
             'event_label': 'Google Forms Consultation Button'
         });
     }
     
-    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
-    
-    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
+    // Open form after tracking
     setTimeout(function() {
         window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
     }, 100);
 }
 
-// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.querySelector('.rw-consult-btn-main');
-    if (btn) {
-        console.log('Ruby Wings Consultation Button loaded successfully');
-        
-        // Thêm hiệu ứng click
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
+function trackTourRegistration(tourName, category) {
+    // Facebook Pixel Tracking
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+            content_name: tourName,
+            content_category: category,
+            value: 2290000,
+            currency: 'VND'
         });
-        
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        // Xử lý sự kiện click để đảm bảo tracking
-        btn.addEventListener('click', function(e) {
-            // Ngăn mở link ngay lập tức
-            e.preventDefault();
-            // Gọi hàm tracking
-            trackConsultationClick();
-        });
-        
-        // Kiểm tra mobile
-        if (window.innerWidth <= 768) {
-            console.log('Mobile mode: Green background, no arrow, single line');
-        }
     }
-});
-
-// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
-function ensurePixelTracking() {
-    if (typeof fbq === 'undefined') {
-        console.log('Waiting for Facebook Pixel to load...');
-        setTimeout(ensurePixelTracking, 500);
+    
+    // Google Ads Conversion Tracking
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17558768270/GT-NGSCPMMF',
+            'value': 2290000,
+            'currency': 'VND'
+        });
+        
+        gtag('event', 'close_convert_lead', {
+            tour_name: tourName,
+            tour_category: category,
+            value: 2290000,
+            currency: 'VND'
+        });
     }
 }
 
-// Khởi động backup tracking
-ensurePixelTracking();
+// Initialize button interactions
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.querySelector('.rw-consult-btn-main');
+    if (btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            trackConsultationClick();
+        });
+    }
+});
 </script>
+</main>
+
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
@@ -1815,7 +1886,7 @@ ensurePixelTracking();
                     </div>
                     <div class="contact-info">
                         <i class="fas fa-phone"></i>
-                        <span>0332510486 - 0915083357</span>
+                        <span>0332510486</span>
                     </div>
                     <div class="contact-info">
                         <i class="fab fa-whatsapp"></i>
