@@ -2957,46 +2957,46 @@ const CONFIG = {
     TRACKING_DELAY: 300
 };
 
-// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead & auto tracking) ===
-try {
-    function disableAutoButtonClick() {
-        if (typeof fbq !== 'undefined') {
-            try {
-                // Ngăn Meta tự động theo dõi hành vi (auto button, scroll, form...)
+// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead) ===
+(function () {
+    function hardBlockMetaAutoEvents() {
+        try {
+            if (typeof fbq !== 'undefined') {
+                // Thu hồi quyền tự động
                 fbq('consent', 'revoke');
-                console.log('🚫 Meta auto Button Click tracking disabled');
+                console.log('🚫 Meta auto consent revoked');
 
-                // Nếu hàm disableAutoEvents tồn tại, chặn toàn bộ auto events
+                // Ngăn auto button click / scroll / form submit
                 if (typeof fbq.disableAutoEvents === 'function') {
                     fbq.disableAutoEvents();
                     console.log('🛑 Meta auto events globally disabled');
-                } else {
-                    console.log('ℹ️ fbq.disableAutoEvents() not available — will retry');
-                    setTimeout(disableAutoButtonClick, 2000);
                 }
-            } catch (innerErr) {
-                console.warn('⚠️ Inner disable call failed:', innerErr);
+
+                // Chặn luôn listener tự động của Meta
+                if (window._fbq && _fbq.handlers) {
+                    _fbq.handlers = [];
+                    console.log('🧱 Meta auto event handlers cleared');
+                }
+            } else {
+                setTimeout(hardBlockMetaAutoEvents, 2000);
             }
-        } else {
-            // Nếu fbq chưa load, thử lại sau 2 giây
-            setTimeout(disableAutoButtonClick, 2000);
+        } catch (err) {
+            console.warn('⚠️ Error blocking Meta auto events:', err);
         }
     }
 
-    // Thử lần đầu sau khi trang load 1.5s để tránh conflict với Meta init
-    setTimeout(disableAutoButtonClick, 1500);
-} catch (e) {
-    console.warn('⚠️ Error disabling auto Button Click tracking:', e);
-}
+    // Kích hoạt ngay khi load
+    hardBlockMetaAutoEvents();
 
-// === Debounce function for performance ===
-function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
+    // Debounce helper để tối ưu hiệu suất
+    window.debounce = function (func, wait) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), wait);
+        };
     };
-}
+})();
 
     
     // Get page type - simplified for homepage
