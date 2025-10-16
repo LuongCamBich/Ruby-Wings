@@ -2957,30 +2957,34 @@ const CONFIG = {
     TRACKING_DELAY: 300
 };
 
-/// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead) ===
+// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead & auto tracking) ===
 try {
     function disableAutoButtonClick() {
         if (typeof fbq !== 'undefined') {
             try {
-                fbq('consent', 'revoke'); // Ngăn Meta auto track button click
+                // Ngăn Meta tự động theo dõi hành vi (auto button, scroll, form...)
+                fbq('consent', 'revoke');
                 console.log('🚫 Meta auto Button Click tracking disabled');
 
-                // Ngăn toàn bộ auto event (scroll, form submit, button click…)
+                // Nếu hàm disableAutoEvents tồn tại, chặn toàn bộ auto events
                 if (typeof fbq.disableAutoEvents === 'function') {
                     fbq.disableAutoEvents();
                     console.log('🛑 Meta auto events globally disabled');
+                } else {
+                    console.log('ℹ️ fbq.disableAutoEvents() not available — will retry');
+                    setTimeout(disableAutoButtonClick, 2000);
                 }
             } catch (innerErr) {
                 console.warn('⚠️ Inner disable call failed:', innerErr);
             }
         } else {
-            // Nếu fbq chưa load thì thử lại sau 2 giây
+            // Nếu fbq chưa load, thử lại sau 2 giây
             setTimeout(disableAutoButtonClick, 2000);
         }
     }
 
-    // Gọi hàm ngay khi script load
-    disableAutoButtonClick();
+    // Thử lần đầu sau khi trang load 1.5s để tránh conflict với Meta init
+    setTimeout(disableAutoButtonClick, 1500);
 } catch (e) {
     console.warn('⚠️ Error disabling auto Button Click tracking:', e);
 }
