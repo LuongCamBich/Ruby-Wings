@@ -2957,35 +2957,43 @@ const CONFIG = {
     TRACKING_DELAY: 300
 };
 
-// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead) ===
+/// === DISABLE META AUTO BUTTON CLICK (prevent duplicate Lead) ===
 try {
     function disableAutoButtonClick() {
         if (typeof fbq !== 'undefined') {
-            fbq('consent', 'revoke'); // Ngăn Meta auto track button click
-            console.log('🚫 Meta auto Button Click tracking disabled');
+            try {
+                fbq('consent', 'revoke'); // Ngăn Meta auto track button click
+                console.log('🚫 Meta auto Button Click tracking disabled');
+
+                // Ngăn toàn bộ auto event (scroll, form submit, button click…)
+                if (typeof fbq.disableAutoEvents === 'function') {
+                    fbq.disableAutoEvents();
+                    console.log('🛑 Meta auto events globally disabled');
+                }
+            } catch (innerErr) {
+                console.warn('⚠️ Inner disable call failed:', innerErr);
+            }
         } else {
             // Nếu fbq chưa load thì thử lại sau 2 giây
             setTimeout(disableAutoButtonClick, 2000);
         }
     }
+
+    // Gọi hàm ngay khi script load
     disableAutoButtonClick();
 } catch (e) {
     console.warn('⚠️ Error disabling auto Button Click tracking:', e);
 }
 
-    
-    // Debounce function for performance
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
+// === Debounce function for performance ===
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+}
+
     
     // Get page type - simplified for homepage
     function getCurrentPageType() {
