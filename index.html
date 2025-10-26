@@ -2932,9 +2932,17 @@
     </a>
 </div>
 
-<!-- MESSENGER CHAT PLUGIN -->
+<!-- MESSENGER CHAT PLUGIN - ĐÃ VÔ HIỆU HÓA -->
+<!-- 
 <div id="fb-root"></div>
 <div id="fb-customer-chat" class="fb-customerchat"></div>
+-->
+
+
+
+<script>
+// === RUBY WINGS - OPTIMIZED SCRIPT ===
+(function() {
 
 <script>
 // === RUBY WINGS - OPTIMIZED SCRIPT ===
@@ -5181,5 +5189,26 @@ console.log('🚀 Ruby Wings Consultation Button - Ready with Google Ads Convers
             });
         });
     </script>
+
+<!-- MANYCHAT CHAT WIDGET -->
+<script>
+  // Tự chạy độc lập, không cần thêm DOMContentLoaded vì script này chỉ chèn async
+  // Ẩn plugin Facebook cũ (phòng trường hợp còn sót)
+  const fbChat = document.getElementById("fb-customer-chat");
+  if (fbChat) fbChat.style.display = "none";
+  const fbSdk = document.querySelector('script[src*="customerchat.js"]');
+  if (fbSdk) fbSdk.remove();
+
+  // Nhúng Manychat widget chính thức
+  (function(m, a, n, y, c, h){
+    m.MC=function(){(m.MC.q=m.MC.q||[]).push(arguments)};
+    c=a.createElement(n);c.async=1;
+    // ⚙️ Thay YOUR_PAGE_ID bằng ID Manychat thật (VD: 393607737167958)
+    c.src="https://widget.manychat.com/YOUR_PAGE_ID.js";
+    h=a.getElementsByTagName(n)[0];
+    h.parentNode.insertBefore(c,h);
+  })(window, document, "script");
+</script>
+
 </body>
 </html>
