@@ -111,7 +111,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
   
   <title>QR Menu Generator | Trình Tạo Mã QR Miễn Phí - Ruby Wings Travel</title>
-  <meta name="description" content="Trình tạo mã QR miễn phí vĩnh viễn của Ruby Wings Travel. Tạo mã QR cho website, fanpage, menu 4Tea, và hỗ trợ từ thiện Viện Nhi TW Huế.">
+  <meta name="description" content="Trình tạo mã QR miễn phí của Ruby Wings Travel. Tạo mã QR cho website, fanpage, menu 4Tea, và hỗ trợ từ thiện Viện Nhi TW Huế.">
   <meta name="keywords" content="tạo mã qr miễn phí, trình tạo qr code, mã qr menu, qr từ thiện, ruby wings travel, menu 4tea, công cụ qr code, generator qr">
   <meta name="author" content="Ruby Wings Travel">
   <meta name="robots" content="index, follow">
@@ -651,76 +651,168 @@
   </header>
 
   <!-- Main -->
-  <main class="container" role="main">
-    <!-- HERO (centered) -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <h1 id="heroTitle"><i class="fas fa-qrcode" style="color:var(--primary-pink);margin-right:8px"></i>Trình Tạo Mã QR Vĩnh Viễn Miễn Phí</h1>
-      <div class="underline" aria-hidden="true"></div>
-      <p class="lead">
-        <i class="fas fa-link" style="color:var(--brand-green);margin-right:8px"></i>
-        <strong>Mã QR để kết nối tức thì thế giới thực với không gian online — dẫn khách đến website, fanpage, video giới thiệu...</strong>
-      </p>
-    </section>
+<main class="container" role="main">
+  <!-- HERO (centered) -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <h1 id="heroTitle"><i class="fas fa-qrcode" style="color:var(--primary-pink);margin-right:8px"></i>Trình Tạo Mã QR Vĩnh Viễn Miễn Phí</h1>
+    <div class="underline" aria-hidden="true"></div>
+    <p class="lead">
+      <i class="fas fa-link" style="color:var(--brand-green);margin-right:8px"></i>
+      <strong>Mã QR để kết nối tức thì thế giới thực với không gian online — dẫn khách đến website, fanpage, video giới thiệu...</strong>
+    </p>
+  </section>
 
-    <!-- Stack: Menu first, then QR -->
-    <section class="stack container" aria-label="Nội dung chính">
-      <!-- MENU card -->
-      <article class="card menu-card" aria-labelledby="menuTitle">
-        <div id="menuTitle" class="title"><i class="fas fa-utensils" style="color:var(--primary-pink);"></i> Menu 4Tea</div>
-        <div class="phone"><i class="fas fa-phone" style="color:var(--primary-pink);margin-right:8px"></i>0915083357</div>
-        <div class="invite"><i class="fas fa-hand-point-right" style="color:var(--brand-green);margin-right:6px"></i>Mời bạn chọn món</div>
+  <!-- Stack: Menu first, then QR -->
+  <section class="stack container" aria-label="Nội dung chính">
+    <!-- MENU card -->
+    <article class="card menu-card" aria-labelledby="menuTitle">
+      <div id="menuTitle" class="title"><i class="fas fa-utensils" style="color:var(--primary-pink);"></i> Menu 4Tea</div>
+      <div class="phone"><i class="fas fa-phone" style="color:var(--primary-pink);margin-right:8px"></i>0915083357</div>
+      <div class="invite"><i class="fas fa-hand-point-right" style="color:var(--brand-green);margin-right:6px"></i>Mời bạn chọn món</div>
 
-        <div style="margin-top:12px" class="menu-image">
-          <img crossorigin="anonymous" src="images/me-nu-4tea.jpg" alt="Menu 4Tea - Quán trà 4Tea với các loại đồ uống đa dạng" loading="lazy">
+      <div style="margin-top:12px" class="menu-image">
+        <img crossorigin="anonymous" src="images/me-nu-4tea.jpg" alt="Menu 4Tea - Quán trà 4Tea với các loại đồ uống đa dạng" loading="lazy">
+      </div>
+
+      <div style="margin-top:12px;color:var(--muted);font-size:0.95rem">
+        <p>Dùng 2 ngón để phóng to. Có thể gọi đặt món qua số điện thoại.</p>
+      </div>
+    </article>
+
+    <!-- QR generator card -->
+    <article class="card" aria-labelledby="qrTitle">
+      <div id="qrTitle" class="section-title"><i class="fas fa-mobile-alt" style="color:var(--primary-pink)"></i> Tạo Mã QR Của Bạn</div>
+
+      <div class="input-group">
+        <label class="input-label" for="url-input"><i class="fas fa-globe" style="color:var(--primary-pink)"></i> Nhập địa chỉ web:</label>
+        <input id="url-input" class="input" type="text" placeholder="https://vi-example.com" inputmode="url" autocomplete="url" />
+      </div>
+
+      <button id="generateBtn" class="btn" aria-controls="qrcode"><i class="fas fa-cog"></i> Tạo Mã QR</button>
+
+      <div id="qrcode" class="qr-display" role="region" aria-live="polite" aria-label="Mã QR">
+        <div class="qr-placeholder">
+          <i class="fas fa-qrcode" aria-hidden="true"></i>
+          <div>Mã QR sẽ xuất hiện ở đây</div>
+          <div style="font-size:0.9rem;color:var(--muted);margin-top:6px">Hỗ trợ vĩnh viễn nếu URL không thay đổi</div>
         </div>
+      </div>
 
-        <div style="margin-top:12px;color:var(--muted);font-size:0.95rem">
-          <p>Dùng 2 ngón để phóng to. Có thể gọi đặt món qua số điện thoại.</p>
+      <div id="error-message" class="msg error" role="alert" aria-hidden="true"></div>
+      <div id="success-message" class="msg success" role="status" aria-hidden="true"></div>
+
+      <button id="download-btn" class="btn secondary" style="display:none;margin-top:10px"><i class="fas fa-download"></i> Tải Mã QR Về Máy</button>
+
+      <div class="charity" aria-label="Hoạt động từ thiện" style="margin-top:14px">
+        <div class="thumb"><img crossorigin="anonymous" src="images/QR-tu-thien.jpg" alt="QR Code từ thiện - Ủng hộ các cháu bệnh nhi tại Viện Nhi TW Huế"></div>
+        <div>
+          <h3><i class="fas fa-heart" style="color:var(--primary-pink);margin-right:6px"></i> Hoạt động Trao yêu thương</h3>
+          <p>Tạo 1 mã QR: Bạn gửi đến 5000vnđ <strong>cho các cháu viện Nhi TW Huế (bệnh K)</strong> — bạn có thể bỏ qua nếu không muốn vẫn dùng được QR như bình thường.</p>
+          <p style="font-size:0.88rem;color:var(--muted);margin-top:6px">Thông tin tài khoản MB Bank - LUONG TIEN SY - QR như trên</p>
         </div>
-      </article>
+      </div>
+    </article>
+  </section>
 
-      <!-- QR generator card -->
-      <article class="card" aria-labelledby="qrTitle">
-        <div id="qrTitle" class="section-title"><i class="fas fa-mobile-alt" style="color:var(--primary-pink)"></i> Tạo Mã QR Của Bạn</div>
+  <div style="text-align:center;margin-top:18px">
+    <a href="nhung-hanh-trinh-tieu-bieu.html" class="btn secondary" style="display:inline-flex;align-items:center;gap:10px;max-width:720px">
+      <i class="fas fa-heart"></i> Khám phá hành trình trải nghiệm cảm xúc <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</main>
 
-        <div class="input-group">
-          <label class="input-label" for="url-input"><i class="fas fa-globe" style="color:var(--primary-pink)"></i> Nhập địa chỉ web:</label>
-          <input id="url-input" class="input" type="text" placeholder="https://vi-example.com" inputmode="url" autocomplete="url" />
-        </div>
+<!-- Thêm thư viện QR Code -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
-        <button id="generateBtn" class="btn" aria-controls="qrcode"><i class="fas fa-cog"></i> Tạo Mã QR</button>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const urlInput = document.getElementById('url-input');
+  const generateBtn = document.getElementById('generateBtn');
+  const qrcodeDiv = document.getElementById('qrcode');
+  const downloadBtn = document.getElementById('download-btn');
+  const errorMsg = document.getElementById('error-message');
+  const successMsg = document.getElementById('success-message');
+  
+  // Ẩn thông báo lỗi và thành công lúc đầu
+  errorMsg.style.display = 'none';
+  successMsg.style.display = 'none';
 
-        <div id="qrcode" class="qr-display" role="region" aria-live="polite" aria-label="Mã QR">
-          <div class="qr-placeholder">
-            <i class="fas fa-qrcode" aria-hidden="true"></i>
-            <div>Mã QR sẽ xuất hiện ở đây</div>
-            <div style="font-size:0.9rem;color:var(--muted);margin-top:6px">Hỗ trợ vĩnh viễn nếu URL không thay đổi</div>
-          </div>
-        </div>
+  generateBtn.addEventListener('click', function() {
+    const url = urlInput.value.trim();
+    
+    // Kiểm tra URL
+    if (!url) {
+      showError('Vui lòng nhập URL');
+      return;
+    }
+    
+    // Kiểm tra định dạng URL cơ bản
+    try {
+      new URL(url);
+    } catch (e) {
+      showError('URL không hợp lệ. Vui lòng nhập URL đầy đủ (bao gồm http:// hoặc https://)');
+      return;
+    }
+    
+    // Xóa nội dung cũ trong qrcodeDiv
+    qrcodeDiv.innerHTML = '';
+    // Ẩn placeholder
+    qrcodeDiv.classList.remove('qr-placeholder');
+    
+    // Tạo mã QR
+    QRCode.toCanvas(url, { errorCorrectionLevel: 'H', width: 256, margin: 1 }, function(err, canvas) {
+      if (err) {
+        showError('Có lỗi xảy ra khi tạo mã QR: ' + err.message);
+        return;
+      }
+      
+      // Thêm canvas vào div
+      qrcodeDiv.appendChild(canvas);
+      // Hiển thị nút tải về
+      downloadBtn.style.display = 'block';
+      // Ẩn thông báo lỗi (nếu có) và hiển thị thành công
+      hideError();
+      showSuccess('Mã QR đã được tạo thành công!');
+    });
+  });
+  
+  downloadBtn.addEventListener('click', function() {
+    const canvas = qrcodeDiv.querySelector('canvas');
+    if (!canvas) {
+      showError('Không có mã QR để tải về');
+      return;
+    }
+    
+    // Chuyển canvas thành data URL
+    const dataURL = canvas.toDataURL('image/png');
+    // Tạo một thẻ a để tải về
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'qrcode.png';
+    link.click();
+  });
+  
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.style.display = 'block';
+    successMsg.style.display = 'none';
+  }
+  
+  function showSuccess(message) {
+    successMsg.textContent = message;
+    successMsg.style.display = 'block';
+    errorMsg.style.display = 'none';
+  }
+  
+  function hideError() {
+    errorMsg.style.display = 'none';
+  }
+});
+</script>
 
-        <div id="error-message" class="msg error" role="alert" aria-hidden="true"></div>
-        <div id="success-message" class="msg success" role="status" aria-hidden="true"></div>
-
-        <button id="download-btn" class="btn secondary" style="display:none;margin-top:10px"><i class="fas fa-download"></i> Tải Mã QR Về Máy</button>
-
-        <div class="charity" aria-label="Hoạt động từ thiện" style="margin-top:14px">
-          <div class="thumb"><img crossorigin="anonymous" src="images/QR-tu-thien.jpg" alt="QR Code từ thiện - Ủng hộ các cháu bệnh nhi tại Viện Nhi TW Huế"></div>
-          <div>
-            <h3><i class="fas fa-heart" style="color:var(--primary-pink);margin-right:6px"></i> Hoạt động Trao yêu thương</h3>
-            <p>Tạo 1 mã QR: Bạn gửi đến 5000vnđ <strong>cho các cháu viện Nhi TW Huế (bệnh K)</strong> — bạn có thể bỏ qua nếu không muốn vẫn dùng được QR như bình thường.</p>
-            <p style="font-size:0.88rem;color:var(--muted);margin-top:6px">Thông tin tài khoản MB Bank - LUONG TIEN SY - QR như trên</p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <div style="text-align:center;margin-top:18px">
-      <a href="nhung-hanh-trinh-tieu-bieu.html" class="btn secondary" style="display:inline-flex;align-items:center;gap:10px;max-width:720px">
-        <i class="fas fa-heart"></i> Khám phá hành trình trải nghiệm cảm xúc <i class="fas fa-arrow-right"></i>
-      </a>
-    </div>
-  </main>
 <style>
+/* CSS hiện tại của bạn giữ nguyên */
+</style>
 /* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
 .rw-consult-btn-container {
     display: block !important;
