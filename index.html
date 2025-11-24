@@ -227,7 +227,7 @@
                         "name": "Ruby Wings có những loại hình du lịch nào?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Chúng tôi cung cấp các hành trình: Du lịch di sản lịch sử, Retreat thiền và khí công, Hành trình xanh bền vững, Forest bathing và các chương trình giáo dục kỹ năng cho thanh thiếu niên."
+                            "text": "Chúng tôi cung cấp các hành trình: Du lịch di sản lịch sử, Retreat thiền và khí công, Hành trình xanh bền vững, Forest bathing và các chương trình giáo dục kỹ năng cho thanh thiếu niên. Ngoài ra chúng tôi cũng cung cấp những hành trình linh hoạt thông thường theo nhu cầu quý khách"
                         }
                     },
                     {
@@ -4822,5 +4822,748 @@
 })();
 </script>
 
+<script>
+/*
+  Ruby Wings Chat Widget - Optimized Width & Design
+  - Chiều rộng tăng thêm ~5cm trên máy tính
+  - Tiêu đề mới: "Trợ lý Ruby Wings AI"
+  - Màu xanh lá tươi hơn
+  - Nút chatbot có chữ "AI" ở giữa
+*/
+const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
+
+(function createChatWidget() {
+  // CSS với màu xanh lá tươi hơn
+  const STYLE = `
+  #rw-chat-root{ 
+    --primary: #00d97e;
+    --primary-dark: #00b368;
+    --primary-light: #33e19b;
+    --pink-glow: rgba(236, 72, 153, 0.4);
+    --bg-dark: #0f1724;
+    --bg-light: #f8fafc;
+    --text-light: #f1f5f9;
+    --text-dark: #0f172a;
+    --shadow: rgba(0, 217, 126, 0.2);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial; 
+  }
+  
+  /* TĂNG CHIỀU RỘNG: từ 400px lên 500px (tương đương +5cm) */
+  #rw-chat { 
+    position: fixed; 
+    left: 20px; 
+    bottom: 20px; 
+    width: 500px; /* ĐÃ TĂNG CHIỀU RỘNG */
+    max-width: 90vw; 
+    z-index: 2147483647; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    align-items: flex-start; 
+  }
+  
+  .rw-floating-btn { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 999px; 
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+    box-shadow: 0 10px 35px var(--shadow), 0 0 0 15px var(--pink-glow); 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    font-size: 28px;
+    animation: pulse-glow-wide 2s infinite, gentle-bounce 3s infinite;
+    z-index: 1000;
+    position: relative;
+    font-weight: 700;
+  }
+  
+  /* THÊM CHỮ "AI" VÀO NÚT CHAT */
+  .rw-floating-btn::after {
+    content: "AI";
+    position: absolute;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    bottom: 8px;
+  }
+  
+  .rw-floating-btn:hover { 
+    transform: scale(1.05); 
+    box-shadow: 0 15px 40px var(--shadow), 0 0 0 25px var(--pink-glow);
+    animation: none;
+  }
+  
+  .rw-floating-btn:active{ 
+    transform: scale(0.95); 
+  }
+  
+  @keyframes pulse-glow-wide {
+    0% { 
+      box-shadow: 0 10px 35px var(--shadow), 0 0 0 15px var(--pink-glow); 
+    }
+    50% { 
+      box-shadow: 0 10px 35px var(--shadow), 0 0 0 30px rgba(236, 72, 153, 0.2); 
+    }
+    100% { 
+      box-shadow: 0 10px 35px var(--shadow), 0 0 0 15px var(--pink-glow); 
+    }
+  }
+
+  @keyframes gentle-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  .rw-widget { 
+    width: 100%; 
+    max-height: 75vh; 
+    background: var(--bg-light); 
+    border-radius: 20px; 
+    box-shadow: 0 25px 50px rgba(2, 6, 23, 0.3); 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column; 
+    transform-origin: bottom left; 
+    border: 1px solid rgba(0, 217, 126, 0.1); 
+    backdrop-filter: blur(10px); 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+  }
+  
+  .rw-widget.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  
+  .rw-header { 
+    display: flex; 
+    gap: 12px; 
+    align-items: center; 
+    padding: 18px 20px; 
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark)); 
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  
+  .rw-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+  
+  .rw-title { 
+    font-weight: 700; 
+    color: var(--text-light); 
+    font-size: 18px; 
+    line-height: 1; 
+  }
+  
+  .rw-sub { 
+    color: rgba(255,255,255,0.8); 
+    font-size: 13px; 
+    margin-top: 4px;
+  }
+  
+  .rw-close { 
+    margin-left: auto; 
+    background: transparent; 
+    border: none; 
+    color: rgba(255,255,255,0.9); 
+    font-size: 20px; 
+    cursor: pointer; 
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+  
+  .rw-close:hover {
+    background: rgba(255,255,255,0.1);
+    transform: rotate(90deg);
+  }
+
+  .rw-body { 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+    overflow: auto; 
+    height: 400px; 
+    background: var(--bg-light);
+    scroll-behavior: smooth;
+  }
+  
+  .rw-msg { 
+    display: flex; 
+    gap: 12px; 
+    align-items: flex-end; 
+    max-width: 100%; 
+    animation: fadeInUp 0.4s ease;
+  }
+  
+  .rw-msg.user { 
+    justify-content: flex-end; 
+  }
+  
+  .rw-bubble { 
+    padding: 14px 18px; 
+    border-radius: 18px; 
+    font-size: 15px; 
+    line-height: 1.4; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+    max-width: 78%; 
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .rw-bubble.bot { 
+    background: white; 
+    color: var(--text-dark); 
+    border: 1px solid rgba(0, 217, 126, 0.1);
+    border-bottom-left-radius: 6px;
+  }
+  
+  .rw-bubble.user { 
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark)); 
+    color: white; 
+    border: 1px solid rgba(255,255,255,0.1);
+    border-bottom-right-radius: 6px;
+  }
+  
+  .rw-avatar { 
+    width: 42px; 
+    height: 42px; 
+    border-radius: 12px; 
+    flex-shrink: 0; 
+    display: inline-grid; 
+    place-items: center; 
+    color: white; 
+    font-weight: 700; 
+    font-size: 15px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .rw-avatar.bot { 
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+    border: 1px solid rgba(255,255,255,0.1); 
+  }
+  
+  .rw-avatar.user { 
+    background: linear-gradient(135deg, #64748b, #475569); 
+    opacity: 0.95; 
+  }
+
+  .rw-dots { 
+    display: inline-flex; 
+    gap: 6px; 
+    align-items: center; 
+  }
+  
+  .rw-dots span{ 
+    width: 8px; 
+    height: 8px; 
+    border-radius: 50%; 
+    background: var(--primary); 
+    opacity: .6; 
+    animation: dot 1s infinite; 
+  }
+  
+  .rw-dots span:nth-child(2) { 
+    animation-delay: 0.12s; 
+  }
+  
+  .rw-dots span:nth-child(3) { 
+    animation-delay: 0.24s; 
+  }
+  
+  @keyframes dot { 
+    0% { transform: translateY(0); opacity: .6 } 
+    50% { transform: translateY(-6px); opacity: 1 } 
+    100% { transform: translateY(0); opacity: .6 } 
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .rw-input-wrap { 
+    display: flex; 
+    gap: 10px; 
+    padding: 16px; 
+    border-top: 1px solid rgba(0,0,0,0.05); 
+    align-items: center; 
+    background: white; 
+    position: relative;
+  }
+  
+  .rw-input-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.3;
+  }
+  
+  .rw-input { 
+    flex: 1; 
+    min-height: 50px; 
+    border-radius: 12px; 
+    padding: 12px 16px; 
+    border: 2px solid rgba(0, 217, 126, 0.2); 
+    background: #ffffff; 
+    color: var(--text-dark); 
+    outline: none; 
+    font-size: 15px; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+  }
+  
+  .rw-input:focus { 
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 217, 126, 0.1);
+  }
+  
+  .rw-input::placeholder { 
+    color: #94a3b8; 
+  }
+  
+  .rw-send { 
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark)); 
+    border: none; 
+    color: white; 
+    padding: 12px 18px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    box-shadow: 0 6px 18px var(--shadow);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .rw-send::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .rw-send:hover::before {
+    left: 100%;
+  }
+  
+  .rw-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow);
+  }
+  
+  .rw-send:active {
+    transform: translateY(0);
+  }
+  
+  .rw-send:disabled{ 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+    transform: none; 
+    box-shadow: none; 
+  }
+
+  .rw-knowledge-badge {
+    display: inline-block;
+    background: rgba(0, 217, 126, 0.1);
+    color: var(--primary-dark);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-weight: 600;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px){
+    #rw-chat { 
+      left: 5%; 
+      bottom: 20px; 
+      width: 90vw;
+      max-width: 90vw;
+    }
+    
+    .rw-floating-btn {
+      width: 70px;
+      height: 70px;
+      font-size: 26px;
+    }
+    
+    .rw-floating-btn::after {
+      font-size: 13px;
+      bottom: 6px;
+    }
+    
+    .rw-widget { 
+      width: 100%;
+      max-height: 80vh;
+      bottom: 80px;
+    }
+    
+    .rw-body { 
+      height: 50vh; 
+    }
+  }
+
+  @media (max-width: 480px){
+    #rw-chat {
+      left: 5%;
+      bottom: 15px;
+      width: 90vw;
+    }
+    
+    .rw-floating-btn {
+      width: 65px;
+      height: 65px;
+      font-size: 24px;
+    }
+    
+    .rw-floating-btn::after {
+      font-size: 12px;
+      bottom: 5px;
+    }
+    
+    .rw-widget {
+      bottom: 75px;
+    }
+    
+    .rw-bubble {
+      max-width: 85%;
+    }
+  }
+
+  .rw-note { 
+    display: block; 
+    font-size: 12px; 
+    color: #64748b; 
+    margin-top: 6px; 
+  }
+  
+  .rw-time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  .rw-typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  `;
+
+  // Insert style
+  const styleEl = document.createElement('style');
+  styleEl.id = 'rw-chat-style';
+  if (document.getElementById('rw-chat-style')) {
+    document.getElementById('rw-chat-style').remove();
+  }
+  styleEl.innerHTML = STYLE;
+  document.head.appendChild(styleEl);
+
+  // Markup với tiêu đề mới và nút có chữ AI
+  const widgetHTML = `
+    <div id="rw-chat" aria-hidden="true">
+      <button class="rw-floating-btn" id="rw-open-btn" aria-label="Mở chat trợ lý Ruby Wings AI">
+        <span style="font-size: 32px;">💬</span>
+      </button>
+
+      <div class="rw-widget" id="rw-widget" role="dialog" aria-modal="false">
+        <div class="rw-header">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <div class="rw-avatar bot" aria-hidden="true" style="font-size: 16px; font-weight: 800;">AI</div>
+            <div>
+              <div class="rw-title">Trợ lý Ruby Wings AI</div>
+              <div class="rw-sub">Hỗ trợ du lịch trải nghiệm 24/7</div>
+            </div>
+          </div>
+          <button class="rw-close" id="rw-close" aria-label="Đóng chat">✕</button>
+        </div>
+
+        <div class="rw-body" id="rw-body" aria-live="polite" aria-atomic="false"></div>
+
+        <div class="rw-input-wrap">
+          <input id="rw-input" class="rw-input" type="text" placeholder="Nhập câu hỏi về du lịch trải nghiệm..." aria-label="Nhập câu hỏi">
+          <button id="rw-send" class="rw-send">Gửi</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Remove existing widget if any
+  if (document.getElementById('rw-chat-root')) {
+    document.getElementById('rw-chat-root').remove();
+  }
+
+  const container = document.createElement('div');
+  container.id = 'rw-chat-root';
+  container.innerHTML = widgetHTML;
+  document.body.appendChild(container);
+
+  // Elements
+  const openBtn = document.getElementById('rw-open-btn');
+  const widget = document.getElementById('rw-widget');
+  const closeBtn = document.getElementById('rw-close');
+  const body = document.getElementById('rw-body');
+  const input = document.getElementById('rw-input');
+  const sendBtn = document.getElementById('rw-send');
+
+  // Utilities
+  const scrollToBottom = () => { 
+    body.scrollTo({
+      top: body.scrollHeight,
+      behavior: 'smooth'
+    });
+  };
+
+  // Message rendering
+  function appendMessage({text, sender = 'bot', isTyping = false, note = '', fromKnowledge = false}) {
+    const wrap = document.createElement('div');
+    wrap.className = 'rw-msg ' + (sender === 'user' ? 'user' : 'bot');
+
+    const avatar = document.createElement('div');
+    avatar.className = 'rw-avatar ' + (sender === 'user' ? 'user' : 'bot');
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.textContent = sender === 'user' ? 'You' : 'AI';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'rw-bubble ' + (sender === 'user' ? 'user' : 'bot');
+
+    if (isTyping) {
+      bubble.classList.add('rw-typing');
+      const typingContainer = document.createElement('div');
+      typingContainer.innerHTML = `
+        <div class="rw-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="rw-typing-indicator">Ruby Wings AI đang trả lời...</div>
+      `;
+      bubble.appendChild(typingContainer);
+    } else {
+      bubble.textContent = text || '';
+      if (note) {
+        const noteEl = document.createElement('div');
+        noteEl.className = 'rw-note';
+        noteEl.textContent = note;
+        bubble.appendChild(noteEl);
+      }
+      
+      if (fromKnowledge) {
+        const badge = document.createElement('span');
+        badge.className = 'rw-knowledge-badge';
+        badge.textContent = 'Từ cơ sở tri thức';
+        bubble.appendChild(badge);
+      }
+      
+      const timeEl = document.createElement('div');
+      timeEl.className = 'rw-time';
+      timeEl.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      bubble.appendChild(timeEl);
+    }
+
+    if (sender === 'user') {
+      wrap.appendChild(bubble);
+      wrap.appendChild(avatar);
+    } else {
+      wrap.appendChild(avatar);
+      wrap.appendChild(bubble);
+    }
+
+    body.appendChild(wrap);
+    scrollToBottom();
+    return {wrap, bubble};
+  }
+
+  // Remove typing indicators
+  function removeTyping() {
+    const ty = body.querySelectorAll('.rw-typing');
+    ty.forEach(el => {
+      const parent = el.closest('.rw-msg');
+      if (parent) parent.remove();
+    });
+  }
+
+  // Simple toast message in widget
+  function showLocalNotice(msg) {
+    const el = document.createElement('div');
+    el.style.cssText = 'position:relative;padding:10px 14px;background:linear-gradient(90deg, var(--primary), var(--primary-dark));color:#fff;border-radius:10px;font-size:14px;margin-bottom:8px;opacity:0;transform:translateY(6px);transition:all .3s;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.1)';
+    el.textContent = msg;
+    body.appendChild(el);
+    setTimeout(()=>{ el.style.opacity = '1'; el.style.transform = 'translateY(0)'; scrollToBottom(); }, 20);
+    setTimeout(()=>{ el.style.opacity = '0'; el.style.transform = 'translateY(6px)'; }, 3800);
+    setTimeout(()=> el.remove(), 4200);
+  }
+
+  // Network: send message to backend
+  async function sendToBackend(message, signal) {
+    const payload = { message };
+    const res = await fetch(BACKEND_URL + '/chat', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+      signal
+    });
+    if (!res.ok) {
+      const txt = await res.text().catch(()=>null);
+      throw new Error(`Server lỗi: ${res.status} ${txt || res.statusText}`);
+    }
+    return res.json();
+  }
+
+  // Send message flow
+  let pendingAbort = null;
+  async function handleSend() {
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+    input.disabled = true;
+    sendBtn.disabled = true;
+
+    appendMessage({text: msg, sender: 'user'});
+    window.localStorage.setItem('rw_last_message', msg);
+
+    appendMessage({isTyping: true, sender: 'bot'});
+    scrollToBottom();
+
+    const controller = new AbortController();
+    pendingAbort = controller;
+    const timeoutId = setTimeout(()=>{
+      controller.abort();
+    }, 30000);
+
+    try {
+      const data = await sendToBackend(msg, controller.signal);
+      clearTimeout(timeoutId);
+      pendingAbort = null;
+      removeTyping();
+
+      const reply = (data && (data.reply || data.message || data.content)) ? (data.reply || data.message || data.content) : 'Không có phản hồi từ server.';
+      
+      const fromKnowledge = reply.length < 500;
+      
+      appendMessage({
+        text: reply, 
+        sender: 'bot', 
+        fromKnowledge: fromKnowledge
+      });
+    } catch (err) {
+      removeTyping();
+      const main = 'Xin lỗi, dịch vụ tạm thời gián đoạn hoặc hết thời gian chờ. Vui lòng thử lại.';
+      const detail = (err && err.message) ? err.message : '';
+      appendMessage({text: main, sender: 'bot', note: detail});
+      console.error('RW Chat Error:', err);
+      showLocalNotice('Đang kết nối với AI Ruby Wings...');
+    } finally {
+      clearTimeout(timeoutId);
+      pendingAbort = null;
+      input.disabled = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  }
+
+  // Open/close with animations
+  function openWidget() {
+    widget.classList.add('open');
+    document.getElementById('rw-chat').setAttribute('aria-hidden','false');
+    input.focus();
+    
+    if (body.children.length === 0) {
+      setTimeout(() => {
+        appendMessage({
+          text: "Xin chào! Tôi là trợ lý ảo Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn về các tour, địa điểm hoặc dịch vụ du lịch?",
+          sender: 'bot'
+        });
+      }, 300);
+    }
+  }
+  
+  function closeWidget() {
+    widget.classList.remove('open');
+    document.getElementById('rw-chat').setAttribute('aria-hidden','true');
+    if (pendingAbort) pendingAbort.abort();
+  }
+
+  // Events
+  openBtn.addEventListener('click', ()=> {
+    if (!widget.classList.contains('open')) {
+      openWidget();
+    } else {
+      closeWidget();
+    }
+  });
+  
+  closeBtn.addEventListener('click', closeWidget);
+
+  sendBtn.addEventListener('click', handleSend);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+    if (e.key === 'Escape') {
+      closeWidget();
+    }
+  });
+
+  // expose minimal API to window for debugging
+  window.RWChat = {
+    open: openWidget,
+    close: closeWidget,
+    send: (txt) => { input.value = txt; handleSend(); }
+  };
+
+  // Automatically open on first visit
+  const seen = localStorage.getItem('rw_seen_widget_rbw');
+  if (!seen) {
+    setTimeout(()=> { 
+      openWidget(); 
+      localStorage.setItem('rw_seen_widget_rbw','1'); 
+    }, 1500);
+  }
+
+  // Restore last message to input as convenience
+  const last = localStorage.getItem('rw_last_message');
+  if (last) {
+    input.placeholder = 'Gần đây: "' + last.slice(0,40) + (last.length>40? '...':'') + '" — nhập tin nhắn mới...';
+  }
+
+})();
+</script>
 </body>
 </html>
