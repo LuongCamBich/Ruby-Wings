@@ -1,4 +1,1 @@
-git add .
-git commit -m "cập nhật web"
-git pull --rebase origin main
-git push origin main
+PS C:\Users\Tien Sy\OneDrive\Desktop\Du lich\ruby-wings\ruby-wings-chatbot>
