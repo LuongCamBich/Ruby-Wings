@@ -1,0 +1,8 @@
+{
+  "created_at": "2025-11-30T10:30:21.510652Z",
+  "num_passages": 730,
+  "embedding_model": "text-embedding-3-small",
+  "dimension": 1536,
+  "faiss_available": true,
+  "notes": "Built with batch memmap flow; tour_entities.json produced if entities module present"
+}

@@ -1,27 +1,31 @@
-# app.py (patched)
+# app.py — "HOÀN HẢO NHẤT" phiên bản tối ưu cho openai>=1.0.0, FAISS fallback, ưu tiên lấy FIELD trong cùng TOUR
+# Mục tiêu: luôn trả lời bằng trường (field) đúng của tour khi user nhắc đến tên tour hoặc hỏi keyword liên quan.
+
 import os
 import json
-import time
 import threading
-import traceback
 import logging
+import re
+import unicodedata
 from functools import lru_cache
-from typing import List, Tuple
-
-from flask import Flask, request, jsonify, Response, stream_with_context
+from typing import List, Tuple, Dict, Optional
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import openai
 import numpy as np
 
-# Try to import faiss; if unavailable, we'll use a numpy fallback
+# Try FAISS; fallback to numpy-only index if missing
 HAS_FAISS = False
-FAISS_IMPORT_ERROR = None
 try:
-    import faiss  # type: ignore
+    import faiss
     HAS_FAISS = True
-except Exception as e:
-    FAISS_IMPORT_ERROR = str(e)
+except Exception:
     HAS_FAISS = False
+
+# ✅ OPENAI API MỚI
+try:
+    from openai import OpenAI
+except Exception:
+    OpenAI = None
 
 # ---------- Logging ----------
 logging.basicConfig(level=logging.INFO)
@@ -29,99 +33,277 @@ logger = logging.getLogger("rbw")
 
 # ---------- Config ----------
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
-OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+
+# ✅ KHỞI TẠO CLIENT OPENAI MỚI
+client = None
+if OPENAI_API_KEY and OpenAI is not None:
+    client = OpenAI(api_key=OPENAI_API_KEY)
+else:
+    logger.warning("OPENAI_API_KEY not set — embeddings/chat will fallback to deterministic behavior when possible.")
+
 KNOWLEDGE_PATH = os.environ.get("KNOWLEDGE_PATH", "knowledge.json")
 FAISS_INDEX_PATH = os.environ.get("FAISS_INDEX_PATH", "faiss_index.bin")
 FAISS_MAPPING_PATH = os.environ.get("FAISS_MAPPING_PATH", "faiss_mapping.json")
 FALLBACK_VECTORS_PATH = os.environ.get("FALLBACK_VECTORS_PATH", "vectors.npz")
-EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-3-large")  # 1536-dim
+
+EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-3-small")
 CHAT_MODEL = os.environ.get("CHAT_MODEL", "gpt-4o-mini")
 TOP_K = int(os.environ.get("TOP_K", "5"))
-# Allow toggling FAISS via env var (useful on platforms lacking faiss wheels)
-FAISS_ENABLED_ENV = os.environ.get("FAISS_ENABLED", "true").lower() in ("1", "true", "yes")
-
-if OPENAI_API_KEY:
-    openai.api_key = OPENAI_API_KEY
-    try:
-        openai.api_base = OPENAI_BASE_URL
-    except Exception:
-        # older sdk might ignore this
-        pass
-else:
-    logger.warning("OPENAI_API_KEY is missing. Running in limited mode (local fallback embeddings).")
-
-if not HAS_FAISS and FAISS_ENABLED_ENV:
-    logger.warning("FAISS not available (%s). Falling back to numpy index. Set FAISS_ENABLED=0 to silence.", FAISS_IMPORT_ERROR)
+FAISS_ENABLED = os.environ.get("FAISS_ENABLED", "true").lower() in ("1", "true", "yes")
 
 # ---------- Flask ----------
 app = Flask(__name__)
 CORS(app)
 
 # ---------- Global state ----------
-KNOWLEDGE = {}
-FLATTENED_TEXTS: List[str] = []
-# mapping: list of {"path":..., "text":...}
-MAPPING: List[dict] = []
-INDEX_LOCK = threading.Lock()
-# Index handle: may be faiss index or our NumpyFallbackIndex instance
+KNOW: Dict = {}
+FLAT_TEXTS: List[str] = []
+MAPPING: List[dict] = []  # list of {"path": "...", "text": "..."}
 INDEX = None
+INDEX_LOCK = threading.Lock()
 
-# ---------- Simple numpy fallback index ----------
-class NumpyFallbackIndex:
+# Mapping normalized tour name -> index (populated after load/build)
+TOUR_NAME_TO_INDEX: Dict[str, int] = {}
+
+# ---------- Keyword -> field mapping (priority) ----------
+KEYWORD_FIELD_MAP: Dict[str, Dict] = {
+    "tour_list": {
+        "keywords": [
+            "tên tour", "tour gì", "danh sách tour", "có những tour nào", "liệt kê tour",
+            "show tour", "tour hiện có", "tour available", "liệt kê các tour đang có",
+            "list tour", "tour đang bán", "tour hiện hành", "tour nào", "tours", "liệt kê các tour",
+            "liệt kê các hành trình", "list tours", "show tours", "các tour hiện tại"
+        ],
+        "field": "tour_name"
+    },
+    "mission": {"keywords": ["tầm nhìn", "sứ mệnh", "giá trị cốt lõi", "triết lý", "vision", "mission"], "field": "mission"},
+    "summary": {"keywords": ["tóm tắt chương trình tour", "tóm tắt", "overview", "brief", "mô tả ngắn"], "field": "summary"},
+    "style": {"keywords": ["phong cách hành trình", "tính chất hành trình", "concept tour", "vibe tour", "style"], "field": "style"},
+    "transport": {"keywords": ["vận chuyển", "phương tiện", "di chuyển", "xe gì", "transportation"], "field": "transport"},
+    "includes": {"keywords": ["lịch trình chi tiết", "chương trình chi tiết", "chi tiết hành trình", "itinerary", "schedule", "includes"], "field": "includes"},
+    "location": {"keywords": ["ở đâu", "đi đâu", "địa phương nào", "nơi nào", "điểm đến", "destination", "location"], "field": "location"},
+    "duration": {"keywords": ["thời gian tour", "kéo dài", "mấy ngày", "bao lâu", "ngày đêm", "duration", "tour dài bao lâu", "tour bao nhiêu ngày", "2 ngày 1 đêm", "3 ngày 2 đêm"], "field": "duration"},
+    "price": {"keywords": ["giá tour", "chi phí", "bao nhiêu tiền", "price", "cost"], "field": "price"},
+    "notes": {"keywords": ["lưu ý", "ghi chú", "notes", "cần chú ý"], "field": "notes"},
+    "accommodation": {"keywords": ["chỗ ở", "nơi lưu trú", "khách sạn", "homestay", "accommodation"], "field": "accommodation"},
+    "meals": {"keywords": ["ăn uống", "ẩm thực", "meals", "thực đơn", "bữa"], "field": "meals"},
+    "event_support": {"keywords": ["hỗ trợ", "dịch vụ hỗ trợ", "event support", "dịch vụ tăng cường"], "field": "event_support"},
+    "cancellation_policy": {"keywords": ["phí huỷ", "chính sách huỷ", "cancellation", "refund policy"], "field": "cancellation_policy"},
+    "booking_method": {"keywords": ["đặt chỗ", "đặt tour", "booking", "cách đặt"], "field": "booking_method"},
+    "who_can_join": {"keywords": ["phù hợp đối tượng", "ai tham gia", "who should join"], "field": "who_can_join"},
+    "hotline": {"keywords": ["hotline", "số điện thoại", "liên hệ", "contact number"], "field": "hotline"},
+}
+
+# ---------- Utilities ----------
+def normalize_text_simple(s: str) -> str:
+    """Lowercase, remove diacritics, strip punctuation, collapse spaces."""
+    if not s:
+        return ""
+    s = s.lower()
+    s = unicodedata.normalize("NFD", s)
+    s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn")  # remove diacritics
+    s = re.sub(r"[^\w\s]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+
+# ---------- Index-tour-name helpers ----------
+def index_tour_names():
+    """Populate TOUR_NAME_TO_INDEX from MAPPING entries that end with .tour_name."""
+    global TOUR_NAME_TO_INDEX
+    TOUR_NAME_TO_INDEX = {}
+    for m in MAPPING:
+        path = m.get("path", "")
+        if path.endswith(".tour_name"):
+            txt = m.get("text", "") or ""
+            norm = normalize_text_simple(txt)
+            if not norm:
+                continue
+            # extract index within brackets: root.tours[2].tour_name
+            match = re.search(r"\[(\d+)\]", path)
+            if match:
+                idx = int(match.group(1))
+                # if duplicate normalized name, keep the first/longest or override heuristics
+                prev = TOUR_NAME_TO_INDEX.get(norm)
+                if prev is None:
+                    TOUR_NAME_TO_INDEX[norm] = idx
+                else:
+                    # prefer longer original name (less likely to be ambiguous)
+                    if len(txt) > len(MAPPING[next(i for i,m2 in enumerate(MAPPING) if re.search(rf"\[{prev}\]", m2.get('path','')) )].get("text","")):
+                        TOUR_NAME_TO_INDEX[norm] = idx
+
+def find_tour_indices_from_message(message: str) -> List[int]:
+    """Improved tour detection with fuzzy matching"""
+    if not message:
+        return []
+    
+    msg_n = normalize_text_simple(message)
+    if not msg_n:
+        return []
+    
+    # Thêm fuzzy matching đơn giản
+    matches = []
+    for norm_name, idx in TOUR_NAME_TO_INDEX.items():
+        # Kiểm tra từng từ trong tên tour
+        tour_words = set(norm_name.split())
+        msg_words = set(msg_n.split())
+        
+        # Match nếu có từ khóa trùng
+        common_words = tour_words & msg_words
+        if len(common_words) >= 1:  # Giảm ngưỡng match
+            matches.append((len(common_words), norm_name))
+    
+    if matches:
+        matches.sort(reverse=True)
+        best_score = matches[0][0]
+        selected = [TOUR_NAME_TO_INDEX[nm] for sc, nm in matches if sc == best_score]
+        return sorted(set(selected))
+    
+    return []
+
+# ---------- MAPPING helpers ----------
+def get_passages_by_field(field_name: str, limit: int = 50, tour_indices: Optional[List[int]] = None) -> List[Tuple[float, dict]]:
     """
-    Simple cosine-similarity index stored in memory.
-    Keeps matrix (n,d) float32 and supports add and search.
-    Persists to .npz (vectors + ids).
+    Return passages whose path ends with field_name.
+    If tour_indices provided, RESTRICT and PRIORITIZE entries matching those tour index brackets.
+    Returned score is 2.0 for exact tour match, 1.0 for global match.
     """
-    def __init__(self, mat: np.ndarray = None):
-        self.mat = mat.astype("float32") if (mat is not None and mat.size>0) else np.empty((0,0), dtype="float32")
-        if self.mat.size == 0:
+    exact_matches: List[Tuple[float, dict]] = []
+    global_matches: List[Tuple[float, dict]] = []
+    
+    for m in MAPPING:
+        path = m.get("path", "")
+        # match exact field location (ending with .field) or field somewhere in path
+        if path.endswith(f".{field_name}") or f".{field_name}" in path:
+            
+            # Check if this passage belongs to any of the mentioned tours
+            is_exact_match = False
+            if tour_indices:
+                for ti in tour_indices:
+                    if f"[{ti}]" in path:
+                        is_exact_match = True
+                        break
+            
+            if is_exact_match:
+                # ✅ ƯU TIÊN CAO: exact tour match
+                exact_matches.append((2.0, m))
+            elif not tour_indices:
+                # ✅ Global match (no specific tour mentioned)
+                global_matches.append((1.0, m))
+    
+    # ✅ COMBINE: Exact matches first, then global matches
+    all_results = exact_matches + global_matches
+    
+    # ✅ SORT by score (exact matches will come first)
+    all_results.sort(key=lambda x: x[0], reverse=True)
+    
+    return all_results[:limit]
+
+# ---------- Embeddings (robust) ----------
+@lru_cache(maxsize=8192)
+def embed_text(text: str) -> Tuple[List[float], int]:
+    """
+    Return (embedding list, dim)
+    Tries openai.Embedding.create (SDK 0.28.0). If API key missing or call fails, return deterministic fallback 1536-dim.
+    """
+    if not text:
+        return [], 0
+    short = text if len(text) <= 2000 else text[:2000]
+    
+    # ✅ SỬ DỤNG OPENAI API MỚI
+    if client is not None:
+        try:
+            resp = client.embeddings.create(
+                model=EMBEDDING_MODEL, 
+                input=short
+            )
+            # ✅ TRÍCH XUẤT DỮ LIỆU MỚI
+            if resp.data and len(resp.data) > 0:
+                emb = resp.data[0].embedding
+                return emb, len(emb)
+        except Exception:
+            logger.exception("OpenAI embedding call failed — falling back to deterministic embedding.")
+    
+    # Deterministic fallback (stable across runs)
+    try:
+        h = abs(hash(short)) % (10 ** 12)
+        fallback_dim = 1536
+        vec = [(float((h >> (i % 32)) & 0xFF) + (i % 7)) / 255.0 for i in range(fallback_dim)]
+        return vec, fallback_dim
+    except Exception:
+        logger.exception("Fallback embedding generation failed")
+        return [], 0
+
+# ---------- Index management ----------
+def _index_dim(idx) -> Optional[int]:
+    # Try common attributes then faiss-specific
+    try:
+        d = getattr(idx, "d", None)
+        if isinstance(d, int) and d > 0:
+            return d
+    except Exception:
+        pass
+    try:
+        d = getattr(idx, "dim", None)
+        if isinstance(d, int) and d > 0:
+            return d
+    except Exception:
+        pass
+    try:
+        if HAS_FAISS and isinstance(idx, faiss.Index):
+            return int(idx.d)
+    except Exception:
+        pass
+    return None
+
+def choose_embedding_model_for_dim(dim: int) -> str:
+    if dim == 1536:
+        return "text-embedding-3-small"
+    if dim == 3072:
+        return "text-embedding-3-large"
+    return os.environ.get("EMBEDDING_MODEL", EMBEDDING_MODEL)
+
+class NumpyIndex:
+    """Simple in-memory numpy index with cosine-similarity (via normalized dot product)."""
+    def __init__(self, mat: Optional[np.ndarray] = None):
+        if mat is None or getattr(mat, "size", 0) == 0:
+            self.mat = np.empty((0, 0), dtype="float32")
             self.dim = None
         else:
+            self.mat = mat.astype("float32")
             self.dim = self.mat.shape[1]
-        self._ntotal = 0 if self.mat.size==0 else self.mat.shape[0]
 
     def add(self, mat: np.ndarray):
-        if mat is None or mat.size == 0:
+        if getattr(mat, "size", 0) == 0:
             return
         mat = mat.astype("float32")
-        if self.mat.size == 0:
+        if getattr(self.mat, "size", 0) == 0:
             self.mat = mat.copy()
             self.dim = mat.shape[1]
         else:
             if mat.shape[1] != self.dim:
-                raise ValueError("Dimension mismatch in fallback index")
+                raise ValueError("Dimension mismatch")
             self.mat = np.vstack([self.mat, mat])
-        self._ntotal = self.mat.shape[0]
 
     def search(self, qvec: np.ndarray, k: int):
-        # qvec: (1,d)
-        if self.mat is None or self.mat.size == 0:
+        if self.mat is None or getattr(self.mat, "size", 0) == 0:
             return np.array([[]], dtype="float32"), np.array([[]], dtype="int64")
-        # normalize
         q = qvec.astype("float32")
-        q_norm = np.linalg.norm(q, axis=1, keepdims=True)
-        q = q / (q_norm + 1e-12)
-        mat_norm = np.linalg.norm(self.mat, axis=1, keepdims=True)
-        mat_normed = self.mat / (mat_norm + 1e-12)
-        sims = np.dot(q, mat_normed.T)  # (1, n)
-        # argsort descending
+        q = q / (np.linalg.norm(q, axis=1, keepdims=True) + 1e-12)
+        m = self.mat / (np.linalg.norm(self.mat, axis=1, keepdims=True) + 1e-12)
+        sims = np.dot(q, m.T)
         idx = np.argsort(-sims, axis=1)[:, :k]
-        # gather scores and indices, pad if needed
-        k_found = idx.shape[1]
         scores = np.take_along_axis(sims, idx, axis=1)
         return scores.astype("float32"), idx.astype("int64")
 
     @property
     def ntotal(self):
-        return 0 if self.mat is None or self.mat.size==0 else self.mat.shape[0]
+        return 0 if getattr(self.mat, "size", 0) == 0 else self.mat.shape[0]
 
     def save(self, path):
         try:
             np.savez_compressed(path, mat=self.mat)
-            logger.info("✅ Saved fallback vectors to %s", path)
         except Exception:
-            logger.exception("Failed saving fallback vectors to %s", path)
+            logger.exception("Failed to save fallback vectors")
 
     @classmethod
     def load(cls, path):
@@ -130,140 +312,81 @@ class NumpyFallbackIndex:
             mat = arr["mat"]
             return cls(mat=mat)
         except Exception:
-            logger.exception("Failed loading fallback vectors from %s", path)
+            logger.exception("Failed to load fallback vectors")
             return cls(None)
 
-# ---------- Utilities ----------
-def load_knowledge(path=KNOWLEDGE_PATH):
-    """
-    Load knowledge.json and flatten textual passages into FLATTENED_TEXTS and MAPPING.
-    """
-    global KNOWLEDGE, FLATTENED_TEXTS, MAPPING
+def load_mapping_from_disk(path=FAISS_MAPPING_PATH):
+    global MAPPING, FLAT_TEXTS
     try:
         with open(path, "r", encoding="utf-8") as f:
-            KNOWLEDGE = json.load(f)
+            MAPPING[:] = json.load(f)
+        FLAT_TEXTS[:] = [m.get("text", "") for m in MAPPING]
+        logger.info("Loaded mapping from %s (%d entries)", path, len(MAPPING))
+        return True
     except Exception:
-        logger.exception("Could not open knowledge.json; continuing with empty knowledge.")
-        KNOWLEDGE = {}
+        logger.exception("Failed to load mapping from disk")
+        return False
 
-    FLATTENED_TEXTS = []
-    MAPPING = []
-
-    def scan(obj, prefix="root"):
-        if isinstance(obj, dict):
-            for k, v in obj.items():
-                scan(v, f"{prefix}.{k}")
-        elif isinstance(obj, list):
-            for i, v in enumerate(obj):
-                scan(v, f"{prefix}[{i}]")
-        elif isinstance(obj, str):
-            text = obj.strip()
-            if len(text) >= 1:
-                FLATTENED_TEXTS.append(text)
-                MAPPING.append({"path": prefix, "text": text})
-
-    scan(KNOWLEDGE, "root")
-    logger.info("✅ knowledge loaded: %d passages", len(FLATTENED_TEXTS))
-    return len(FLATTENED_TEXTS)
-
-def save_mapping(path=FAISS_MAPPING_PATH):
+def save_mapping_to_disk(path=FAISS_MAPPING_PATH):
     try:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(MAPPING, f, ensure_ascii=False, indent=2)
-        logger.info("✅ Saved mapping to %s", path)
+        logger.info("Saved mapping to %s", path)
     except Exception:
-        logger.exception("Could not save mapping")
+        logger.exception("Failed to save mapping")
 
-def load_mapping(path=FAISS_MAPPING_PATH):
-    global MAPPING, FLATTENED_TEXTS
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            MAPPING = json.load(f)
-        FLATTENED_TEXTS = [m.get("text", "") for m in MAPPING]
-        logger.info("✅ Loaded mapping (%d entries).", len(MAPPING))
-    except Exception:
-        logger.exception("Could not load mapping; resetting mapping/flattened_texts")
-        MAPPING = []
-        FLATTENED_TEXTS = []
-
-# ---------- Embedding helpers ----------
-@lru_cache(maxsize=8192)
-def embed_text(text: str) -> Tuple[List[float], int]:
+def build_index(force_rebuild: bool = False) -> bool:
     """
-    Return embedding list and dimension.
-    Robustly tries modern and legacy OpenAI clients; falls back to deterministic synthetic vector.
+    Build or load index. If FAISS enabled and available, use it; otherwise NumpyIndex.
+    Will auto-detect saved index+mapping and choose embedding model if dims known.
     """
-    if not text:
-        return [], 0
-    short = text if len(text) <= 2000 else text[:2000]
-    # If OPENAI_API_KEY present, call actual API; else use deterministic fallback
-    if OPENAI_API_KEY:
-        try:
-            # Preferred modern call: openai.Embeddings.create
-            try:
-                resp = openai.Embeddings.create(model=EMBEDDING_MODEL, input=short)
-            except Exception:
-                resp = openai.Embedding.create(model=EMBEDDING_MODEL, input=short)
-            emb = None
-            if isinstance(resp, dict) and "data" in resp and len(resp["data"]) > 0:
-                emb = resp["data"][0].get("embedding") or resp["data"][0].get("vector")
-            elif hasattr(resp, "data") and len(resp.data) > 0:
-                emb = getattr(resp.data[0], "embedding", None)
-            if emb:
-                return emb, len(emb)
-            logger.warning("Embedding API returned no embedding field; resp type=%s", type(resp))
-        except Exception:
-            logger.exception("OpenAI embedding call failed; falling back to synthetic embedding.")
-    # deterministic synthetic fallback (stable across runs on same machine)
-    try:
-        h = abs(hash(short)) % (10 ** 12)
-        dim = 1536
-        vec = [(float((h >> (i % 32)) & 0xFF) + (i % 7)) / 255.0 for i in range(dim)]
-        return vec, dim
-    except Exception:
-        logger.exception("Fallback embedding generation failed")
-        return [], 0
-
-# ---------- Index management ----------
-def build_index(force_rebuild=False):
-    """
-    Build or load index. If FAISS enabled and available, use faiss IndexFlatIP,
-    otherwise use NumpyFallbackIndex.
-    Returns True when index available.
-    """
-    global INDEX, MAPPING, FLATTENED_TEXTS
+    global INDEX, MAPPING, FLAT_TEXTS, EMBEDDING_MODEL
     with INDEX_LOCK:
-        use_faiss = FAISS_ENABLED_ENV and HAS_FAISS
-        # Try loading persisted structures first
+        use_faiss = FAISS_ENABLED and HAS_FAISS
+
+        # try loading persisted structures first
         if not force_rebuild:
             if use_faiss and os.path.exists(FAISS_INDEX_PATH) and os.path.exists(FAISS_MAPPING_PATH):
                 try:
                     idx = faiss.read_index(FAISS_INDEX_PATH)
-                    load_mapping(FAISS_MAPPING_PATH)
+                    if load_mapping_from_disk(FAISS_MAPPING_PATH):
+                        FLAT_TEXTS[:] = [m.get("text", "") for m in MAPPING]
+                    idx_dim = _index_dim(idx)
+                    if idx_dim:
+                        EMBEDDING_MODEL = choose_embedding_model_for_dim(idx_dim)
+                        logger.info("Detected FAISS index dim=%s -> embedding_model=%s", idx_dim, EMBEDDING_MODEL)
                     INDEX = idx
+                    index_tour_names()
                     logger.info("✅ FAISS index loaded from disk.")
                     return True
                 except Exception:
-                    logger.exception("Failed to load existing FAISS index; will rebuild.")
-            elif (not use_faiss) and os.path.exists(FALLBACK_VECTORS_PATH) and os.path.exists(FAISS_MAPPING_PATH):
+                    logger.exception("Failed to load FAISS index; will rebuild.")
+            if os.path.exists(FALLBACK_VECTORS_PATH) and os.path.exists(FAISS_MAPPING_PATH):
                 try:
-                    idx = NumpyFallbackIndex.load(FALLBACK_VECTORS_PATH)
-                    load_mapping(FAISS_MAPPING_PATH)
+                    idx = NumpyIndex.load(FALLBACK_VECTORS_PATH)
+                    if load_mapping_from_disk(FAISS_MAPPING_PATH):
+                        FLAT_TEXTS[:] = [m.get("text", "") for m in MAPPING]
                     INDEX = idx
-                    logger.info("✅ Fallback numpy index loaded from disk.")
+                    idx_dim = getattr(idx, "dim", None)
+                    if idx_dim:
+                        EMBEDDING_MODEL = choose_embedding_model_for_dim(int(idx_dim))
+                        logger.info("Detected fallback vectors dim=%s -> embedding_model=%s", idx_dim, EMBEDDING_MODEL)
+                    index_tour_names()
+                    logger.info("✅ Fallback index loaded from disk.")
                     return True
                 except Exception:
-                    logger.exception("Failed to load existing fallback index; will rebuild.")
+                    logger.exception("Failed to load fallback vectors; will rebuild.")
 
-        if not FLATTENED_TEXTS:
+        # need to build from FLAT_TEXTS
+        if not FLAT_TEXTS:
             logger.warning("No flattened texts to index (build aborted).")
             INDEX = None
             return False
 
-        logger.info("🔧 Building index for %d passages... (faiss=%s)", len(FLATTENED_TEXTS), use_faiss)
+        logger.info("🔧 Building embeddings for %d passages (model=%s)...", len(FLAT_TEXTS), EMBEDDING_MODEL)
         vectors = []
         dims = None
-        for text in FLATTENED_TEXTS:
+        for text in FLAT_TEXTS:
             emb, d = embed_text(text)
             if not emb:
                 continue
@@ -277,7 +400,7 @@ def build_index(force_rebuild=False):
 
         try:
             mat = np.vstack(vectors).astype("float32")
-            # normalize rows
+            # normalize rows for cosine similarity
             row_norms = np.linalg.norm(mat, axis=1, keepdims=True)
             mat = mat / (row_norms + 1e-12)
 
@@ -287,19 +410,21 @@ def build_index(force_rebuild=False):
                 INDEX = index
                 try:
                     faiss.write_index(INDEX, FAISS_INDEX_PATH)
-                    save_mapping()
+                    save_mapping_to_disk()
                 except Exception:
-                    logger.exception("Failed to persist FAISS index or mapping")
+                    logger.exception("Failed to persist FAISS index/mapping")
+                index_tour_names()
                 logger.info("✅ FAISS index built (dims=%d, n=%d).", dims, index.ntotal)
                 return True
             else:
-                idx = NumpyFallbackIndex(mat)
+                idx = NumpyIndex(mat)
                 INDEX = idx
                 try:
                     idx.save(FALLBACK_VECTORS_PATH)
-                    save_mapping()
+                    save_mapping_to_disk()
                 except Exception:
-                    logger.exception("Failed to persist fallback vectors or mapping")
+                    logger.exception("Failed to persist fallback vectors/mapping")
+                index_tour_names()
                 logger.info("✅ Numpy fallback index built (dims=%d, n=%d).", dims, idx.ntotal)
                 return True
         except Exception:
@@ -307,271 +432,286 @@ def build_index(force_rebuild=False):
             INDEX = None
             return False
 
-def query_index(query: str, top_k=TOP_K) -> List[Tuple[float, dict]]:
-    """
-    Query the current index and return list of (score, mapping_entry).
-    If index not ready, attempt lazy build once.
-    """
-    global INDEX, MAPPING
+# ---------- Query index ----------
+def query_index(query: str, top_k: int = TOP_K) -> List[Tuple[float, dict]]:
+    global INDEX
     if not query:
         return []
     if INDEX is None:
         built = build_index(force_rebuild=False)
         if not built or INDEX is None:
-            logger.warning("Index not available; returning empty search results")
+            logger.warning("Index not available; semantic search skipped.")
             return []
     emb, d = embed_text(query)
     if not emb:
         return []
-    try:
-        vec = np.array(emb, dtype="float32").reshape(1, -1)
-        # normalize
-        vec = vec / (np.linalg.norm(vec, axis=1, keepdims=True) + 1e-12)
-        if HAS_FAISS and FAISS_ENABLED_ENV and isinstance(INDEX, type(faiss.IndexFlatIP(1))):
-            D, I = INDEX.search(vec, top_k)
+    vec = np.array(emb, dtype="float32").reshape(1, -1)
+    vec = vec / (np.linalg.norm(vec, axis=1, keepdims=True) + 1e-12)
+
+    idx_dim = _index_dim(INDEX)
+    if idx_dim and vec.shape[1] != idx_dim:
+        logger.error("Query dim %s != index dim %s; will attempt rebuild with matching model.", vec.shape[1], idx_dim)
+        desired_model = choose_embedding_model_for_dim(idx_dim)
+        if OPENAI_API_KEY:
+            global EMBEDDING_MODEL
+            EMBEDDING_MODEL = desired_model
+            logger.info("Setting EMBEDDING_MODEL=%s and rebuilding index...", EMBEDDING_MODEL)
+            rebuilt = build_index(force_rebuild=True)
+            if not rebuilt:
+                logger.error("Rebuild failed; cannot perform search.")
+                return []
+            emb2, d2 = embed_text(query)
+            if not emb2:
+                return []
+            vec = np.array(emb2, dtype="float32").reshape(1, -1)
+            vec = vec / (np.linalg.norm(vec, axis=1, keepdims=True) + 1e-12)
         else:
-            D, I = INDEX.search(vec, top_k)
+            logger.error("No OPENAI_API_KEY; cannot rebuild model-matched index.")
+            return []
+    try:
+        D, I = INDEX.search(vec, top_k)
     except Exception:
-        logger.exception("Error querying index")
+        logger.exception("Error executing index.search")
         return []
-    results = []
-    for score, idx in zip(D[0].tolist(), I[0].tolist()):
-        if idx < 0 or idx >= len(MAPPING):
-            continue
-        results.append((float(score), MAPPING[idx]))
+
+    results: List[Tuple[float, dict]] = []
+    try:
+        scores = D[0].tolist() if getattr(D, "shape", None) else []
+        idxs = I[0].tolist() if getattr(I, "shape", None) else []
+        for score, idx in zip(scores, idxs):
+            if idx < 0 or idx >= len(MAPPING):
+                continue
+            results.append((float(score), MAPPING[idx]))
+    except Exception:
+        logger.exception("Failed to parse search results")
     return results
 
 # ---------- Prompt composition ----------
 def compose_system_prompt(top_passages: List[Tuple[float, dict]]) -> str:
     header = (
-        "Bạn là trợ lý AI của Ruby Wings — chuyên tư vấn du lịch trải nghiệm, retreat, "
-        "thiền, khí công và các hành trình chữa lành. Trả lời ngắn gọn, chính xác, tử tế.\n\n"
+        "Bạn là trợ lý AI của Ruby Wings - chuyên tư vấn du lịch trải nghiệm.\n"
+        "TRẢ LỜI THEO CÁC NGUYÊN TẮC:\n"
+        "1. ƯU TIÊN CAO: Thông tin từ dữ liệu được cung cấp\n"
+        "2. Nếu thiếu thông tin CHI TIẾT, hãy trả lời dựa trên THÔNG TIN CHUNG có sẵn\n"
+        "3. Đối với tour cụ thể: tìm thông tin đúng tour trước, sau đó mới dùng thông tin chung\n"
+        "4. Luôn giữ thái độ nhiệt tình, hữu ích\n\n"
     )
     if not top_passages:
         return header + "Không tìm thấy dữ liệu nội bộ phù hợp."
-    content = header + "Dữ liệu nội bộ (theo độ liên quan):\n"
+    
+    content = header + "DỮ LIỆU NỘI BỘ (theo độ liên quan):\n"
     for i, (score, m) in enumerate(top_passages, start=1):
         content += f"\n[{i}] (score={score:.3f}) nguồn: {m.get('path','?')}\n{m.get('text','')}\n"
-    content += "\n---\nLưu ý: Ưu tiên sử dụng trích dẫn thông tin từ dữ liệu nội bộ ở trên. Nếu phải bổ sung, chỉ dùng kiến thức chuẩn xác."
+    
+    content += "\n---\nTUÂN THỦ: Chỉ dùng dữ liệu trên; không bịa; văn phong lịch sự."
     return content
 
-# ---------- Endpoints ----------
+# ---------- Routes ----------
 @app.route("/")
 def home():
     return jsonify({
         "status": "ok",
-        "message": "Ruby Wings index backend running.",
-        "knowledge_count": len(FLATTENED_TEXTS),
+        "knowledge_count": len(FLAT_TEXTS),
         "index_exists": INDEX is not None,
+        "index_dim": _index_dim(INDEX),
+        "embedding_model": EMBEDDING_MODEL,
         "faiss_available": HAS_FAISS,
-        "faiss_enabled_env": FAISS_ENABLED_ENV
+        "faiss_enabled": FAISS_ENABLED
     })
 
 @app.route("/reindex", methods=["POST"])
 def reindex():
-    try:
-        secret = request.headers.get("X-RBW-ADMIN", "")
-        if not secret and os.environ.get("RBW_ALLOW_REINDEX", "") != "1":
-            return jsonify({"error": "reindex not allowed (set RBW_ALLOW_REINDEX=1 or provide X-RBW-ADMIN)"}), 403
-        load_knowledge(KNOWLEDGE_PATH)
-        ok = build_index(force_rebuild=True)
-        return jsonify({"ok": ok, "count": len(FLATTENED_TEXTS)})
-    except Exception as e:
-        logger.exception("Unhandled error in /reindex")
-        return jsonify({"error": str(e)}), 500
+    # require header or env allow
+    secret = request.headers.get("X-RBW-ADMIN", "")
+    if not secret and os.environ.get("RBW_ALLOW_REINDEX", "") != "1":
+        return jsonify({"error": "reindex not allowed (set RBW_ALLOW_REINDEX=1 or provide X-RBW-ADMIN)"}), 403
+    load_knowledge()  # reload raw knowledge before building
+    ok = build_index(force_rebuild=True)
+    return jsonify({"ok": ok, "count": len(FLAT_TEXTS)})
 
 @app.route("/chat", methods=["POST"])
 def chat():
     """
-    Non-streaming chat endpoint.
-    Input: JSON { "message": "...", "max_tokens": 700, "top_k": 5 }
+    Chat endpoint behavior:
+      - If user message contains keywords mapping to a field, prioritize returning that field.
+      - If a tour name is mentioned, restrict to that tour's field values.
+      - If user asked for tour listing (tour_name), list all tour_name entries.
+      - Else fallback to semantic search and LLM reply.
     """
-    try:
-        data = request.get_json() or {}
-        user_message = data.get("message", "").strip()
-        if not user_message:
-            return jsonify({"reply": "Bạn chưa nhập câu hỏi."})
-        top_k = int(data.get("top_k", TOP_K))
-        top = query_index(user_message, top_k)
-        system_prompt = compose_system_prompt(top)
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message}
-        ]
+    data = request.get_json() or {}
+    user_message = (data.get("message") or "").strip()
+    if not user_message:
+        return jsonify({"reply": "Bạn chưa nhập câu hỏi."})
 
-        logger.info("CHAT: model=%s top_k=%d hits=%d", CHAT_MODEL, top_k, len(top))
+    text_l = user_message.lower()
+    requested_field: Optional[str] = None
+    # keyword detection (maintain insertion order of KEYWORD_FIELD_MAP)
+    for k, v in KEYWORD_FIELD_MAP.items():
+        for kw in v["keywords"]:
+            if kw in text_l:
+                requested_field = v["field"]
+                break
+        if requested_field:
+            break
 
-        # Try to call OpenAI chat; handle SDK variations
-        resp = None
-        if OPENAI_API_KEY:
-            try:
-                resp = openai.ChatCompletion.create(
-                    model=CHAT_MODEL,
-                    messages=messages,
-                    temperature=0.2,
-                    max_tokens=int(data.get("max_tokens", 700)),
-                    top_p=0.95
-                )
-            except Exception as e1:
-                logger.warning("ChatCompletion.create failed, trying alternate patterns: %s", e1)
-                try:
-                    if hasattr(openai, "chat") and hasattr(openai.chat, "completions"):
-                        resp = openai.chat.completions.create(model=CHAT_MODEL, messages=messages, stream=False)
-                    else:
-                        resp = None
-                except Exception as e2:
-                    logger.exception("All OpenAI chat attempts failed")
-                    return jsonify({"error": "OpenAI chat request failed", "detail": str(e2)}), 500
+    # detect tour mentions
+    tour_indices = find_tour_indices_from_message(user_message)
 
-        # If no OpenAI response (no key or API failed), fall back to rule-based
-        if not resp:
-            if top:
-                snippets = "\n\n".join([f"- {m.get('text')}" for _, m in top[:5]])
-                reply = f"Tôi tìm thấy thông tin nội bộ liên quan:\n\n{snippets}\n\nNếu bạn cần trích dẫn hoặc chi tiết, hãy hỏi cụ thể phần nào."
-            else:
-                reply = "Xin lỗi — hiện không có dữ liệu nội bộ liên quan và API OpenAI chưa sẵn sàng. Vui lòng thử lại sau."
-            return jsonify({"reply": reply, "sources": [m for _, m in top]})
+    top_results: List[Tuple[float, dict]] = []
 
-        # parse response robustly
-        content = ""
-        try:
-            if isinstance(resp, dict):
-                choices = resp.get("choices", [])
-                if choices:
-                    first = choices[0]
-                    if isinstance(first.get("message"), dict):
-                        content = first["message"].get("content", "") or ""
-                    elif "text" in first:
-                        content = first.get("text", "")
-                    else:
-                        content = str(first)
-                else:
-                    content = str(resp)
-            else:
-                choices = getattr(resp, "choices", None)
-                if choices and len(choices) > 0:
-                    first = choices[0]
-                    msg = getattr(first, "message", None)
-                    if msg and isinstance(msg, dict):
-                        content = msg.get("content", "")
-                    else:
-                        content = str(first)
-                else:
-                    content = str(resp)
-        except Exception:
-            logger.exception("Parsing OpenAI response failed")
-            content = str(resp)
-
-        return jsonify({"reply": content, "sources": [m for _, m in top]})
-    except Exception as e:
-        logger.exception("Unhandled error in /chat")
-        return jsonify({"error": str(e)}), 500
-
-@app.route("/stream", methods=["POST"])
-def stream():
-    """
-    Streaming SSE endpoint. Input JSON: { "message": "...", "top_k": 5 }
-    """
-    try:
-        data = request.get_json() or {}
-        user_message = data.get("message", "").strip()
-        if not user_message:
-            return jsonify({"error": "empty message"}), 400
-        top_k = int(data.get("top_k", TOP_K))
-        top = query_index(user_message, top_k)
-        system_prompt = compose_system_prompt(top)
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message}
-        ]
-
-        def gen():
-            try:
-                if not OPENAI_API_KEY:
-                    yield f"data: {json.dumps({'error':'openai_key_missing'})}\n\n"
-                    return
-                try:
-                    stream_iter = openai.ChatCompletion.create(model=CHAT_MODEL, messages=messages, temperature=0.2, stream=True)
-                except Exception as e1:
-                    logger.warning("stream create failed, trying alternate: %s", e1)
-                    try:
-                        if hasattr(openai, "chat") and hasattr(openai.chat, "completions"):
-                            stream_iter = openai.chat.completions.create(model=CHAT_MODEL, messages=messages, stream=True)
-                        else:
-                            stream_iter = None
-                    except Exception as e2:
-                        logger.exception("OpenAI streaming create failed")
-                        yield f"data: {json.dumps({'error':'openai_stream_create_failed','detail':str(e2)})}\n\n"
-                        return
-
-                if stream_iter is None:
-                    yield f"data: {json.dumps({'error':'openai_stream_iter_none'})}\n\n"
-                    return
-
-                for chunk in stream_iter:
-                    try:
-                        if not chunk:
-                            continue
-                        if isinstance(chunk, dict):
-                            choices = chunk.get("choices", [])
-                            if choices and len(choices) > 0:
-                                delta = choices[0].get("delta", {})
-                                content = delta.get("content", "")
-                                if content:
-                                    yield f"data: {json.dumps({'delta': content})}\n\n"
-                        else:
-                            choices = getattr(chunk, "choices", None)
-                            if choices and len(choices) > 0:
-                                delta = getattr(choices[0], "delta", None)
-                                if delta:
-                                    content = delta.get("content", "") if isinstance(delta, dict) else ""
-                                    if content:
-                                        yield f"data: {json.dumps({'delta': content})}\n\n"
-                    except Exception:
-                        logger.exception("stream chunk processing error")
-                        continue
-                # final payload
-                yield f"data: {json.dumps({'done': True, 'sources': [m for _, m in top]})}\n\n"
-            except Exception as ex:
-                logger.exception("stream generator error")
-                yield f"data: {json.dumps({'error': str(ex)})}\n\n"
-
-        return Response(stream_with_context(gen()), mimetype="text/event-stream")
-    except Exception as e:
-        logger.exception("Unhandled error in /stream")
-        return jsonify({"error": str(e)}), 500
-
-# ---------- Startup ----------
-# ---------- Initialization (run on import so Gunicorn workers have index) ----------
-try:
-    # load knowledge from configured path
-    count = load_knowledge(KNOWLEDGE_PATH)
-    # try loading existing mapping/index
-    if os.path.exists(FAISS_MAPPING_PATH):
-        load_mapping(FAISS_MAPPING_PATH)
-    # if FAISS index file exists and faiss enabled, try to load
-    if FAISS_ENABLED_ENV and HAS_FAISS and os.path.exists(FAISS_INDEX_PATH):
-        try:
-            INDEX = faiss.read_index(FAISS_INDEX_PATH)
-            logger.info("✅ FAISS index loaded at import time.")
-        except Exception:
-            logger.exception("Failed to load FAISS index at import; will rebuild in background.")
-            t = threading.Thread(target=build_index, kwargs={"force_rebuild": True}, daemon=True)
-            t.start()
-    elif (not FAISS_ENABLED_ENV or not HAS_FAISS) and os.path.exists(FALLBACK_VECTORS_PATH):
-        try:
-            INDEX = NumpyFallbackIndex.load(FALLBACK_VECTORS_PATH)
-            logger.info("✅ Fallback numpy index loaded at import time.")
-        except Exception:
-            logger.exception("Failed to load fallback index at import; will rebuild in background.")
-            t = threading.Thread(target=build_index, kwargs={"force_rebuild": True}, daemon=True)
-            t.start()
+    # If user explicitly asked for tour_name listing -> list all tour names (not restricted)
+    if requested_field == "tour_name":
+        top_results = get_passages_by_field("tour_name", tour_indices=None, limit=1000)
+    elif requested_field and tour_indices:
+        # user asked for a specific field AND mentioned a tour -> return that field restricted to the tour(s)
+        top_results = get_passages_by_field(requested_field, limit=TOP_K, tour_indices=tour_indices)
+        # If none found for the specific tour(s), fallback to global field
+        if not top_results:
+            top_results = get_passages_by_field(requested_field, limit=TOP_K, tour_indices=None)
+    elif requested_field:
+        # user asked for a field but didn't name a tour -> return global matches for that field
+        top_results = get_passages_by_field(requested_field, limit=TOP_K, tour_indices=None)
+        if not top_results:
+            # fallback to semantic search
+            top_results = query_index(user_message, TOP_K)
     else:
-        # build in background if knowledge exists
-        t = threading.Thread(target=build_index, kwargs={"force_rebuild": False}, daemon=True)
-        t.start()
+        # No keyword matched -> semantic search
+        top_k = int(data.get("top_k", TOP_K))
+        top_results = query_index(user_message, top_k)
+
+    # Compose system prompt from the top_results and call LLM for nicer phrasing
+    system_prompt = compose_system_prompt(top_results)
+    messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}]
+
+    reply = ""
+    # ✅ SỬ DỤNG OPENAI CHAT API MỚI
+    if client is not None:
+        try:
+            resp = client.chat.completions.create(
+                model=CHAT_MODEL,
+                messages=messages,
+                temperature=0.2,
+                max_tokens=int(data.get("max_tokens", 700)),
+                top_p=0.95
+            )
+            # ✅ TRÍCH XUẤT DỮ LIỆU MỚI
+            if resp.choices and len(resp.choices) > 0:
+                reply = resp.choices[0].message.content or ""
+        except Exception:
+            logger.exception("OpenAI chat failed; will fallback to deterministic reply.")
+
+    # If LLM returned nothing (or not allowed), build deterministic reply favoring requested_field and tour restriction
+    if not reply:
+        if top_results:
+            # If requested_field was tour_name, return a clean deduped list of tour names
+            if requested_field == "tour_name":
+                names = [m.get("text", "") for _, m in top_results]
+                seen = set()
+                names_u = [x for x in names if x and not (x in seen or seen.add(x))]
+                reply = "Các tour hiện có:\n" + "\n".join(f"- {n}" for n in names_u)
+            elif requested_field and tour_indices:
+                # Provide the requested field values grouped by tour
+                parts = []
+                for ti in tour_indices:
+                    # find tour_name by index
+                    tour_name = None
+                    for m in MAPPING:
+                        p = m.get("path", "")
+                        if p.endswith(f"tours[{ti}].tour_name"):
+                            tour_name = m.get("text", "")
+                            break
+                    # collect requested field passages for this tour
+                    field_passages = [m.get("text", "") for score, m in top_results if f"[{ti}]" in m.get("path", "")]
+                    if not field_passages:
+                        # explicit fetch per tour to ensure correctness if top_results were global
+                        field_passages = [m.get("text", "") for _, m in get_passages_by_field(requested_field, limit=TOP_K, tour_indices=[ti])]
+                    if field_passages:
+                        label = f'Tour "{tour_name}"' if tour_name else f"Tour #{ti}"
+                        parts.append(label + ":\n" + "\n".join(f"- {t}" for t in field_passages))
+                if parts:
+                    reply = "\n\n".join(parts)
+                else:
+                    # fallback to snippet list
+                    snippets = "\n\n".join([f"- {m.get('text')}" for _, m in top_results[:5]])
+                    reply = f"Tôi tìm thấy:\n\n{snippets}"
+            else:
+                # No tour restriction or not field-request -> provide top snippets
+                snippets = "\n\n".join([f"- {m.get('text')}" for _, m in top_results[:5]])
+                reply = f"Tôi tìm thấy thông tin nội bộ liên quan:\n\n{snippets}"
+        else:
+            reply = "Xin lỗi — hiện không có dữ liệu nội bộ liên quan."
+
+    return jsonify({"reply": reply, "sources": [m for _, m in top_results]})
+
+# ---------- Knowledge loader ----------
+def load_knowledge(path: str = KNOWLEDGE_PATH):
+    """Load knowledge.json and flatten into FLAT_TEXTS + MAPPING; then index tour names."""
+    global KNOW, FLAT_TEXTS, MAPPING
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            KNOW = json.load(f)
+    except Exception:
+        logger.exception("Could not open knowledge.json; continuing with empty knowledge.")
+        KNOW = {}
+    FLAT_TEXTS = []
+    MAPPING = []
+
+    def scan(obj, prefix="root"):
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                scan(v, f"{prefix}.{k}")
+        elif isinstance(obj, list):
+            for i, v in enumerate(obj):
+                scan(v, f"{prefix}[{i}]")
+        elif isinstance(obj, str):
+            t = obj.strip()
+            if t:
+                FLAT_TEXTS.append(t)
+                MAPPING.append({"path": prefix, "text": t})
+        else:
+            try:
+                s = str(obj).strip()
+                if s:
+                    FLAT_TEXTS.append(s)
+                    MAPPING.append({"path": prefix, "text": s})
+            except Exception:
+                pass
+
+    scan(KNOW)
+    index_tour_names()
+    logger.info("✅ Knowledge loaded: %d passages", len(FLAT_TEXTS))
+
+# ---------- Initialization ----------
+# Load knowledge and try to load or build index at import time (safe for Gunicorn workers)
+try:
+    load_knowledge()
+    # try loading existing mapping file into MAPPING if present (ensures mapping order stable)
+    if os.path.exists(FAISS_MAPPING_PATH):
+        try:
+            with open(FAISS_MAPPING_PATH, "r", encoding="utf-8") as f:
+                file_map = json.load(f)
+            # only update if file_map length matches current flattened passages OR if MAPPING empty
+            if file_map and (len(file_map) == len(MAPPING) or len(MAPPING) == 0):
+                MAPPING[:] = file_map
+                FLAT_TEXTS[:] = [m.get("text", "") for m in MAPPING]
+                index_tour_names()
+                logger.info("Mapping overwritten from disk mapping.json")
+        except Exception:
+            logger.exception("Could not load FAISS_MAPPING_PATH at startup; proceeding with runtime-scan mapping.")
+
+    # If index exists on disk, build_index will try to load it; otherwise it will build in background
+    t = threading.Thread(target=build_index, kwargs={"force_rebuild": False}, daemon=True)
+    t.start()
 except Exception:
     logger.exception("Initialization error")
-    port = int(os.environ.get("PORT", 10000))
-    logger.info("Server starting on port %d ...", port)
-    app.run(host="0.0.0.0", port=port)
+
+# When run directly, run flask dev server (note: for production use Gunicorn)
+if __name__ == "__main__":
+    # ensure mapping saved for reproducibility
+    if MAPPING and not os.path.exists(FAISS_MAPPING_PATH):
+        save_mapping_to_disk()
+    # block startup building index to ensure readiness
+    built = build_index(force_rebuild=False)
+    if not built:
+        logger.warning("Index not ready at startup; endpoint will attempt on-demand build.")
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
