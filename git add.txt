@@ -1,1 +1,1 @@
-PS C:\Users\Tien Sy\OneDrive\Desktop\Du lich\ruby-wings\ruby-wings-chatbot>
+PS C:\Code\Ruby-Wings-clean
