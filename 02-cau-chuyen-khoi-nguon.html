@@ -87,16 +87,6 @@
             }
         }, { passive: true });
         
-        // 7. TRACK CONSULTATION_CLICK - Click nút tư vấn
-        function trackConsultationClick() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'consultation_click', {
-                    button_location: 'consultation_form',
-                    page_section: 'main_content',
-                    page_path: window.location.pathname
-                });
-            }
-        }
         
         // Tự động thêm tracking cho các nút consultation
         const consultButtons = document.querySelectorAll([
@@ -166,7 +156,7 @@
         "name": "Ruby Wings Travel",
         "url": "https://rubywings.vn/",
         "logo": "https://rubywings.vn/images/logo.png",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
+        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
         "telephone": "+84-33-251-0486",
         "email": "rubywingslsa@gmail.com",
         "sameAs": [
@@ -253,7 +243,7 @@
         "@id": "https://rubywings.vn/#website",
         "url": "https://rubywings.vn/",
         "name": "Ruby Wings Travel",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
+        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
         "publisher": {
           "@id": "https://rubywings.vn/#organization"
         }
@@ -594,9 +584,6 @@
       }
     }
     
-    .chapter {
-      animation: fadeInUp 0.6s ease forwards;
-    }
     
     .chapter:nth-child(2) { animation-delay: 0.1s; }
     .chapter:nth-child(3) { animation-delay: 0.2s; }
@@ -767,7 +754,7 @@
       <img src="https://rubywings.vn/assets/images/ruby-wings-logo.png" alt="Ruby Wings Logo">
       <div class="logo-text">
         <div class="logo-main">RUBY WINGS</div>
-        <div class="logo-sub"><em>Travel - Hành trình trải nghiệm cảm xúc</em></div>
+        <div class="logo-sub"><em>Travel - Hành trình trải nghiệm</em></div>
       </div>
     </div>
     <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
@@ -775,7 +762,7 @@
       <!-- ĐÃ SỬA: Thêm HTTPS cho internal links -->
       <a href="https://rubywings.vn/index.html">Trang chủ</a>
       <a href="https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings chúng tôi</a>
-      <a href="https://rubywings.vn/ve-dep-quang-tri.html">Miền Trung ruột thịt</a>
+      <a href="https://rubywings.vn/ve-dep-quang-tri.html">Khám phá Miền Trung</a>
       <a href="https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
       <a href="https://rubywings.vn/ve-dep-thien-nhien-viet-nam.html">Non nước- Việt Nam</a>
       <a href="https://rubywings.vn/thien-va-suc-khoe.html">Retreat- Chữa lành</a>
@@ -789,14 +776,14 @@
     <div class="story-header">
       <span class="story-icon">🌱</span>
       <h1 class="story-title">Câu chuyện khởi nguồn</h1>
-      <p class="story-intro"><strong>Khác với kiểu khởi đầu của đa số tổ chức, doanh nghiệp, điểm khởi đầu Ruby Wings lại không nằm trên bàn giấy… mà bắt nguồn từ một thời điểm khá xa trong quá khứ, nằm trong một biến cố riêng của đời người.</strong></p>
+      <p class="story-intro"><strong> Điểm khởi đầu Ruby Wings lại không nằm trên bàn giấy… mà bắt nguồn từ một thời điểm khá xa trong quá khứ...</strong></p>
     </div>
     
     <div class="chapter">
-      <h2 class="chapter-title">Chương đặc biệt của cuộc đời</h2>
+      <h2 class="chapter-title">"Dấu ấn" của cuộc đời</h2>
       <div class="chapter-content">
-        <p>Năm 2015, người sáng lập Ruby Wings đối diện với cú sốc lớn: bệnh tật bất ngờ... </p>
-        <p>Cơ thể gầy gò chỉ còn hơn 40kg, những đêm dài trong bệnh viện đầy lo âu, và những chẩn đoán y khoa mơ hồ: "Viêm không đặc hiệu"; "Bệnh tự miễn..". Tưởng chừng như phải đặt dấu chấm hết cho tuổi trẻ và sự nghiệp rồi thì một cánh cửa khác mở ra.</p>
+        <p>Năm 2015, người thành lập Ruby Wings đối diện với cú sốc lớn: bệnh tật bất ngờ... </p>
+        <p>Cơ thể gầy gò chỉ còn hơn 40kg, những ngày dài trong bệnh viện lo âu với những chẩn đoán y khoa mơ hồ: "Viêm không đặc hiệu"; "Bệnh tự miễn..". Tưởng chừng như phải đặt dấu chấm hết thì một cánh cửa khác mở ra.</p>
         <p> Là người thích đọc sách, được biết (từ sách) Thiền, Khí công có thể chữa lành, Anh tìm đến khí công và chánh niệm – bắt đầu học cách thở, vận động, cách lắng nghe cơ thể, cách nuôi dưỡng tâm trí...</p>
         <p>Những ngày tháng kỷ luật và kiên trì ấy đã đưa anh trở lại từ vực thẳm, không chỉ hồi phục sức khỏe thể xác, mà còn thức tỉnh... Trải qua nhiều thăng trầm, cho đến những năm tháng gần đây, trải qua nhiều "sự kiện" như đã được sắp đặt trước - anh đặt một câu hỏi: "Có thể nào biến những trải nghiệm hồi sinh này thành một hành trình để lan toả đến mọi người?"</p>
       </div>
@@ -820,8 +807,8 @@
     <div class="chapter">
       <h2 class="chapter-title">Từ cá nhân đến cộng đồng</h2>
       <div class="chapter-content">
-        <p>Câu hỏi ấy không chỉ dành cho bản thân, mà cho cả một cộng đồng đang sống quá nhanh, quá vội. Ngày càng nhiều bạn dù rất trẻ vẫn cảm thấy kiệt sức, mất năng lượng, kết nối với cả chính mình.</p>
-        <p>Thế là ý tưởng về Ruby Wings hình thành – không phải như một công ty du lịch đơn thuần, mà như một hệ sinh thái chữa lành bằng trải nghiệm. Ruby Wings được thai nghén từ một trăn trở: "Liệu có thể tạo ra một mô hình du lịch vừa sống được – vừa đẹp – vừa có ích cho cộng đồng không?"</p>
+        <p>Câu hỏi ấy không chỉ dành cho bản thân mà cón có thể cho một bộ phận không nhỏ cộng đồng đang sống quá nhanh, quá vội với những áp lực và tích tụ tổn thươ<ng class=""></ng>. Ngày càng nhiều bạn dù rất trẻ vẫn cảm thấy kiệt sức, mất năng lượng, kết nối với cả chính mình.</p>
+        <p>Thế là ý tưởng về Ruby Wings hình thành – không phải như một công ty du lịch đơn thuần, mà có thể chữa lành bằng những hành trình trải nghiệm... Ruby Wings được thai nghén từ một trăn trở: "Liệu có thể tạo ra một mô hình du lịch vừa sống được – vừa đẹp – vừa có ích cho cộng đồng không?"</p>
       </div>
       
       <div class="highlight-box">
@@ -838,7 +825,7 @@
           <li><strong>Tìm hiểu - Kết nối cộng đồng bản địa:</strong> lắng nghe câu chuyện, hiểu văn hóa, tìm phương pháp, cách thức đồng hành....</li>
           <li><strong>Xây dựng nền móng:</strong> trước cả khi có hành trình, Ruby Wings đã có triết lý sống, hệ điều hành nhân sự, quy chế nội bộ, như những viên gạch đầu tiên cho một ngôi nhà bền vững.</li>
         </ul>
-        <p>Giai đoạn 2024–2025, Ruby Wings tạm gọi là thời kỳ "gieo hạt". Gieo một tư duy mới về du lịch, gieo một hạt mầm tử tế và gieo niềm tin rằng hành trình này đáng để đi đến cùng.</p>
+        <p>Giai đoạn 2024–2025, Ruby Wings tạm gọi là thời kỳ "gieo hạt", gieo một hạt mầm tử tế và gieo niềm tin rằng hành trình này đáng để đi đến cùng.</p>
       </div>
       
       <div class="media-container">
@@ -856,13 +843,13 @@
     <div class="chapter">
       <h2 class="chapter-title">Khởi nguồn từ triết lý sống</h2>
       <div class="chapter-content">
-        <p>Ruby Wings ra đời không từ bảng giá hay khuyến mãi, mà từ một triết lý sống sâu sắc:</p>
+        <p>Ruby Wings ra đời còn từ một triết lý sống...</p>
         <ul>
           <li>Du lịch không chỉ để đi, mà để cân bằng - chữa lành – kết nối – làm mới bản thân.</li>
-          <li>Mỗi chuyến đi không dừng lại ở cảnh quan, mà mở ra một cánh cửa nội tâm - "tìm thấy điều gì đó từ bên trong".</li>
+          <li>Mỗi chuyến đi không dừng lại ở cảnh quan, mà mở ra một cánh cửa bên trong - "tìm thấy điều gì đó từ bên trong..".</li>
           <li>Doanh nghiệp không chỉ để kiếm lợi nhuận, mà để lan tỏa giá trị tử tế.</li>
         </ul>
-        <p>Chính triết lý ấy đã trở thành "tuyên ngôn sáng lập": "Con người hôm nay và ngày mai cần những hành trình có cảm xúc, có giá trị thật và kết nối với giá trị thật."</p>
+        <p>Chính triết lý ấy như là một "tuyên ngôn sáng lập": "Con người hôm nay và ngày mai cần những hành trình có giá trị khác biệt..."</p>
       </div>
       
       <div class="video-player">
@@ -877,8 +864,8 @@
     <div class="chapter">
       <h2 class="chapter-title">Từ một câu chuyện – đến ý tưởng tạo một hành trình ý nghĩa</h2>
       <div class="chapter-content">
-        <p>Ruby Wings không còn là câu chuyện của riêng một cá nhân vượt qua bệnh tật. Nó sẽ trở thành hành trình tập thể – nơi đội ngũ, cộng sự và du khách cùng nhau kiến tạo một mô hình du lịch tử tế, trước mắt có sức cân bằng đến chữa lành – nhân văn, xanh và bền vững.</p>
-        <p>Và chúng tôi tin rằng, mỗi du khách khi rời đi, sẽ mang theo không chỉ là ký ức về một vùng đất, mà còn là niềm tin vào chính mình - sẽ vượt qua khó khăn tinh thần, thể xác, nghịch cảnh... .</p>
+        <p>Ruby Wings không còn là câu chuyện của riêng một cá nhân vượt qua bệnh tật, nó sẽ trở thành hành trình tập thể – nơi đội ngũ, cộng sự và du khách có thể cùng kiến tạo một mô hình du lịch tử tế, trước mắt có sức cân bằng đến chữa lành – nhân văn, xanh và bền vững.</p>
+        <p>Và chúng tôi tin rằng, mỗi du khách khi rời đi, sẽ mang theo không chỉ là ký ức về một vùng đất, mà còn là niềm tin vào chính mình - sẽ vượt qua khó khăn tinh thần, thể xác, sẽ tìm thấy bình yên bên trong... .</p>
       </div>
       
       <div class="media-container">
@@ -890,8 +877,8 @@
     </div>
     
     <div class="story-footer">
-      <p class="conclusion">💡 Câu chuyện khởi nguồn của Ruby Wings là minh chứng:</p>
-      <p><strong>Từ bóng tối có thể nảy mầm ánh sáng.<br>Từ một biến cố cá nhân có thể khai sinh một hành trình.</strong></p>
+      <p class="conclusion">💡 Câu chuyện khởi nguồn của Ruby Wings có thể thấy:</p>
+      <p><strong>"Trong bóng tối có thể tìm thấy   ánh sáng - Từ một biến cố cá nhân có thể khai sinh một hành trình".</strong></p>
       <p class="signature">Ruby Wings</p>
     </div>
   </div>
@@ -1061,8 +1048,7 @@
     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
        class="rw-consult-btn-main" 
        target="_blank"
-       rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
+       rel="noopener noreferrer">
         <span class="rw-btn-text">NƠI NHẬN THÔNG TIN TƯ VẤN</span> 
         <span class="rw-btn-arrow">→</span>
     </a>
@@ -1147,7 +1133,7 @@ ensurePixelTracking();
         <div class="footer-column">
             <!-- ĐÃ SỬA: Thêm HTTPS cho internal link -->
             <h3><a href="https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html" class="footer-title-link">Về chúng tôi</a></h3>
-            <p>Ruby Wings Travel - "Hành trình của chiều sâu cảm xúc, nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
+            <p>Ruby Wings Travel - "Hành trình của chiều sâu, nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
             <p> MST: 3301743759</p>
             <div class="social-links-grid">
                 <div class="social-row">
@@ -1209,7 +1195,7 @@ ensurePixelTracking();
         </div>
     </div>
     <div class="copyright">
-        <p>&copy; 2025 Ruby Wings Travel. All rights reserved.</p>
+      
     </div>
 </footer>
 
