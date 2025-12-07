@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+     <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '862531473384426');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lộ Trình Phát Triển Ruby Wings | Ruby Wings</title>
@@ -361,6 +375,7 @@
 <li> <strong>An toàn:</strong> Luôn tuân thủ hướng dẫn của trưởng đoàn và hướng dẫn viên để đảm bảo an toàn tuyệt đối trong suốt hành trình./.</li></ol>
 <p>Ruby Wings</p>
 
+<!-- === NÚT ĐĂNG KÝ VỚI TRACKING ĐẦY ĐỦ === -->
 <div style="text-align: center; margin: 40px 0;">
     <button onclick="handleRegistration()" style="
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -381,24 +396,101 @@
 </div>
 
 <script>
+// === HÀM XỬ LÝ CLICK NÚT VỚI TRACKING ===
 function handleRegistration() {
-    // Mở form đăng ký
-    window.open('https://forms.gle/rvSKz9p5CeJPj5nr7', '_blank');
-    
-    // Track Facebook Pixel
-    if(typeof fbq !== 'undefined') {
+    // 1. FACEBOOK PIXEL - Track chuyển đổi "Lead"
+    if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
-            content_name: 'Hành trình Phong Hương',
-            content_category: 'Tour Du Lịch'
+            content_name: 'Đăng ký thông tin chi phí - Hành trình Phong Hương',
+            content_category: 'Tour Du Lịch',
+            page_url: window.location.href,
+            button_type: 'Cost Registration',
+            tour_name: 'Hành trình Phong Hương'
         });
+        console.log('✅ Facebook Pixel: Tracked registration click');
+    } else {
+        console.warn('⚠️ Facebook Pixel chưa được tải');
     }
     
-    // Track Facebook Conversion API (nếu có)
+    // 2. GOOGLE ANALYTICS - Track sự kiện
+    if (typeof gtag !== 'undefined') {
+        // GA4 Event
+        gtag('event', 'registration_click', {
+            'event_category': 'conversion',
+            'event_label': 'Hành trình Phong Hương - Cost Registration',
+            'value': 1,
+            'tour_name': 'Hành trình Phong Hương'
+        });
+        
+        // GA4 Generate Lead Event
+        gtag('event', 'generate_lead', {
+            'event_category': 'engagement',
+            'event_label': 'Hành trình Phong Hương Registration',
+            'page_title': document.title,
+            'page_location': window.location.href
+        });
+        
+        console.log('✅ Google Analytics: Tracked registration event');
+    } else {
+        console.warn('⚠️ Google Analytics chưa được tải');
+    }
+    
+    console.log('🎯 Tracking completed - Opening registration form');
+    
+    // 3. MỞ FORM ĐĂNG KÝ
     setTimeout(function() {
-        // Có thể thêm tracking khác ở đây
-        console.log('Tracking completed after delay');
-    }, 300);
+        window.open('https://forms.gle/rvSKz9p5CeJPj5nr7', '_blank');
+    }, 200);
+    
+    return false;
 }
+
+// === ĐẢM BẢO TRACKING HOẠT ĐỘNG ===
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('📊 Registration button loaded - FB Pixel & GA4 ready');
+    
+    // Kiểm tra tracking scripts
+    const checkTracking = setInterval(function() {
+        if (typeof fbq !== 'undefined' && typeof gtag !== 'undefined') {
+            console.log('✅ All tracking scripts are loaded');
+            clearInterval(checkTracking);
+        }
+    }, 500);
+    
+    // Timeout sau 5 giây
+    setTimeout(function() {
+        clearInterval(checkTracking);
+        if (typeof fbq === 'undefined') {
+            console.warn('❌ Facebook Pixel not loaded after 5 seconds');
+        }
+        if (typeof gtag === 'undefined') {
+            console.warn('❌ Google Analytics not loaded after 5 seconds');
+        }
+    }, 5000);
+});
+
+// === XỬ LÝ PHÍM ENTER TRÊN NÚT ===
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.onclick && activeElement.onclick.name === 'handleRegistration') {
+            handleRegistration();
+        }
+    }
+});
+</script>
+
+<!-- === FALLBACK SCRIPT ĐẢM BẢO TRACKING HOẠT ĐỘNG === -->
+<script>
+// Fallback để đảm bảo handleRegistration luôn tồn tại
+if (typeof handleRegistration === 'undefined') {
+    window.handleRegistration = function() {
+        window.open('https://forms.gle/rvSKz9p5CeJPj5nr7', '_blank');
+        console.log('Fallback: Form opened without tracking');
+    };
+}
+</script>
+    
 </script>
 
 <div class="discovery-highlight">
