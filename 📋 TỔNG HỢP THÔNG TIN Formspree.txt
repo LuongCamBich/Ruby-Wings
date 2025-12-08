@@ -246,3 +246,25 @@ Documentation: https://formspree.io/help
 Email support: support@formspree.io
 
 Community: Stack Overflow tags
+
+
+
+
+
+    // Page view tracking
+    function trackPageView() {
+        const pageType = getCurrentPageType();
+        
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'ViewContent', {
+                content_name: `${pageType} - Ruby Wings`,
+                content_category: 'Travel',
+                content_ids: [CONFIG.CATALOG_ID],
+                fanpage_connected: true,
+                page_type: pageType,
+                fanpage_id: CONFIG.FANPAGE_ID
+            });
+        }
+        
+        console.log('🚀 Ruby Wings - Page view tracked:', pageType);
+    }

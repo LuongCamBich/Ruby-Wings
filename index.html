@@ -25,11 +25,7 @@
         gtag('config', 'G-BD5GXRQFQZ');
     </script>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-    <link rel="manifest" href="icon/site.webmanifest">
-    <link rel="shortcut icon" href="icon/favicon.ico">
+    
     <meta name="theme-color" content="#ffffff">
     <meta name="facebook-domain-verification" content="9tvsczh90ochfhg9byyr544ixf080p" />
     <link type="text/plain" rel="author" href="/humans.txt" />
@@ -141,7 +137,7 @@
                     "latitude": 16.4637,
                     "longitude": 107.5909
                 },
-                "areaServed": ["Quảng Trị", "Thừa Thiên Huế", "Đà N�ẵng", "Hội An", "Việt Nam"],
+                "areaServed": ["Quảng Trị", "Thừa Thiên Huế", "Đà Nẵng", "Hội An", "Việt Nam"],
                 "makesOffer": [
                     {
                         "@type": "Offer",
@@ -2810,65 +2806,8 @@
         console.log('✅ Ruby Wings - Opening consultation form');
     }
     
-    // Lazy load Messenger
-    function initMessengerLazy() {
-        if (rubyElements.messengerLoaded) return;
-        
-        // Only load messenger when user interacts with page
-        const interactionEvents = ['scroll', 'mousemove', 'touchstart', 'click'];
-        const loadMessenger = () => {
-            if (rubyElements.messengerLoaded) return;
-            
-            try {
-                const chatbox = document.getElementById('fb-customer-chat');
-                if (chatbox) {
-                    chatbox.setAttribute("page_id", CONFIG.FANPAGE_ID);
-                    chatbox.setAttribute("attribution", "biz_inbox");
-                }
-                
-                
-                
-                rubyElements.messengerLoaded = true;
-                console.log('✅ Ruby Wings - Messenger loaded lazily');
-                
-                // Remove event listeners after loading
-                interactionEvents.forEach(event => {
-                    document.removeEventListener(event, loadMessenger);
-                });
-            } catch (error) {
-                console.warn('❌ Ruby Wings - Messenger load error:', error);
-            }
-        };
-        
-        // Add event listeners for lazy loading
-        interactionEvents.forEach(event => {
-            document.addEventListener(event, loadMessenger, { 
-                once: true, 
-                passive: true 
-            });
-        });
-        
-        // Auto-load after 5 seconds if no interaction
-        setTimeout(loadMessenger, 5000);
-    }
+ 
     
-    // Page view tracking
-    function trackPageView() {
-        const pageType = getCurrentPageType();
-        
-        if (typeof fbq !== 'undefined') {
-            fbq('track', 'ViewContent', {
-                content_name: `${pageType} - Ruby Wings`,
-                content_category: 'Travel',
-                content_ids: [CONFIG.CATALOG_ID],
-                fanpage_connected: true,
-                page_type: pageType,
-                fanpage_id: CONFIG.FANPAGE_ID
-            });
-        }
-        
-        console.log('🚀 Ruby Wings - Page view tracked:', pageType);
-    }
     
     // Fallback system
     function createFallbackButton() {
@@ -4749,78 +4688,13 @@
     m.MC=function(){(m.MC.q=m.MC.q||[]).push(arguments)};
     c=a.createElement(n);c.async=1;
     // ⚙️ Thay YOUR_PAGE_ID bằng ID Manychat thật (VD: 393607737167958)
-    c.src="https://widget.manychat.com/YOUR_PAGE_ID.js";
+    c.src="https://widget.manychat.com/393607737167958.js";
     h=a.getElementsByTagName(n)[0];
     h.parentNode.insertBefore(c,h);
   })(window, document, "script");
 </script>
-<script>
-(function(){
-  // Tránh chèn nhiều lần
-  if (window.__rubyConsultHandlerAttached) return;
-  window.__rubyConsultHandlerAttached = true;
 
-  // Hỗ trợ: selector cho các nút tư vấn trong trang của bạn
-  const SELECTOR = '#rubyWingsMainBtn, .rw-consult-btn-main, a[href*="forms.gle"], [class*="consult"], [onclick*="consultation"]';
 
-  // Hàm gọi tracking chính: nếu dựa vào hàm đã có (window.trackConsultationClick) thì gọi nó,
-  // nếu không thì gửi fallback event cho fbq/gtag (an toàn, không throw).
-  function callTrackingOnce(el) {
-    try {
-      // Chống multi-fire trên cùng 1 click (ngăn multi-fire trong 1500ms)
-      if (el && el.dataset.__rubyFired === '1') return;
-      if (el) el.dataset.__rubyFired = '1';
-      setTimeout(()=> { if (el) el.dataset.__rubyFired = '0'; }, 1500);
-
-      if (typeof window.trackConsultationClick === 'function') {
-        // Nếu trang đã có hàm này, dùng nó (đúng nhất)
-        window.trackConsultationClick();
-        return;
-      }
-
-      // Fallback: gửi fbq và gtag nếu có (không bắt lỗi)
-      if (typeof fbq !== 'undefined') {
-        try {
-          fbq('track', 'Lead', {
-            content_name: 'Consultation Button',
-            content_category: 'consultation',
-            value: 150000,
-            currency: 'VND'
-          });
-        } catch(e) { console.warn('fbq fallback error', e); }
-      }
-      if (typeof gtag !== 'undefined') {
-        try {
-          gtag('event', 'generate_lead', { method: 'consultation_button' });
-          gtag('event', 'conversion', {
-            'send_to': 'AW-17558768270/GT-NGSCPMMF',
-            'value': 150000,
-            'currency': 'VND'
-          });
-        } catch(e) { console.warn('gtag fallback error', e); }
-      }
-    } catch(err) {
-      console.warn('Ruby consult tracking error', err);
-    }
-  }
-
-  // Event delegation: bắt 1 listener trên document (an toàn, minimal)
-  document.addEventListener('click', function(e){
-    const target = e.target;
-    if (!target) return;
-
-    // tìm nút phù hợp (closest để bắt cả icon/text trong a)
-    const btn = target.closest ? target.closest(SELECTOR) : null;
-    if (btn) {
-      // Không preventDefault — để link mở theo HTML (target="_blank")
-      callTrackingOnce(btn);
-    }
-  }, { passive: true });
-
-  // Nếu nút fallback được tạo động sau (createFallbackButton), cũng an toàn vì delegation.
-  console.log('Ruby Wings consult handler (delegation) attached.');
-})();
-</script>
 
 <script>
 // Ruby Wings Chat Widget - Complete Isolation
