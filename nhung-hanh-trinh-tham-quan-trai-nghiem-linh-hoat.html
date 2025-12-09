@@ -1,683 +1,609 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
- <<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BD5GXRQFQZ"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-BD5GXRQFQZ');
-</script>
-<!-- === CHÈN CODE NÀY NGAY SAU ĐÓ === -->
-<script>
-// === RUBY WINGS - AUTOMATIC EVENT TRACKING ===
-(function() {
-    'use strict';
-    
-    // Đợi DOM ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initTracking);
-    } else {
-        initTracking();
-    }
-    
-    function initTracking() {
-        // 1. TRACK PAGE_VIEW - Ngay khi trang load
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                page_title: document.title,
-                page_location: window.location.href,
-                page_path: window.location.pathname
-            });
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '862531473384426');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD5GXRQFQZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BD5GXRQFQZ');
+    </script>
+
+    <!-- === RUBY WINGS - AUTOMATIC EVENT TRACKING === -->
+    <script>
+    (function() {
+        'use strict';
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTracking);
+        } else {
+            initTracking();
         }
         
-        // 2. TRACK SESSION_START - Mỗi phiên mới
-        if (!sessionStorage.getItem('ruby_session_started')) {
+        function initTracking() {
+            // 1. PAGE_VIEW
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'session_start');
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
             }
-            sessionStorage.setItem('ruby_session_started', 'true');
-        }
-        
-        // 3. TRACK FIRST_VISIT - Chỉ lần đầu
-        if (!localStorage.getItem('ruby_first_visit')) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'first_visit');
-            }
-            localStorage.setItem('ruby_first_visit', new Date().toISOString());
-        }
-        
-        // 4. TRACK SCROLL - Khi cuộn 90% trang
-        let scrollTracked = false;
-        window.addEventListener('scroll', function() {
-            if (!scrollTracked) {
-                const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-                if (scrolled >= 0.9) {
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'scroll', {
-                            scroll_percentage: 90,
-                            page_path: window.location.pathname
-                        });
-                    }
-                    scrollTracked = true;
+            
+            // 2. SESSION_START
+            if (!sessionStorage.getItem('ruby_session_started')) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'session_start');
                 }
+                sessionStorage.setItem('ruby_session_started', 'true');
             }
-        }, { passive: true });
-        
-        // 5. TRACK USER_ENGAGEMENT - Sau 30 giây
-        setTimeout(function() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'user_engagement', {
-                    engagement_time: 30,
-                    page_path: window.location.pathname
-                });
+            
+            // 3. FIRST_VISIT
+            if (!localStorage.getItem('ruby_first_visit')) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'first_visit');
+                }
+                localStorage.setItem('ruby_first_visit', new Date().toISOString());
             }
-        }, 30000);
-        
-        // 6. TRACK CLICK - Tất cả click cơ bản
-        document.addEventListener('click', function(e) {
-            if (typeof gtag !== 'undefined') {
-                const target = e.target;
-                gtag('event', 'click', {
-                    element_text: target.textContent?.substring(0, 50) || 'unknown',
-                    element_tag: target.tagName,
-                    page_path: window.location.pathname
-                });
-            }
-        }, { passive: true });
-        
-        // 7. TRACK CONSULTATION_CLICK - Click nút tư vấn
-        function trackConsultationClick() {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'consultation_click', {
-                    button_location: 'consultation_form',
-                    page_section: 'main_content',
-                    page_path: window.location.pathname
-                });
-            }
+            
+            // 4. SCROLL 90%
+            let scrollTracked = false;
+            window.addEventListener('scroll', function() {
+                if (!scrollTracked) {
+                    const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+                    if (scrolled >= 0.9) {
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'scroll', {
+                                scroll_percentage: 90,
+                                page_path: window.location.pathname
+                            });
+                        }
+                        scrollTracked = true;
+                    }
+                }
+            }, { passive: true });
+            
+            // 5. USER_ENGAGEMENT 30s
+            setTimeout(function() {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'user_engagement', {
+                        engagement_time: 30,
+                        page_path: window.location.pathname
+                    });
+                }
+            }, 30000);
+            
+            // 6. CLICK ALL
+            document.addEventListener('click', function(e) {
+                if (typeof gtag !== 'undefined') {
+                    const target = e.target;
+                    gtag('event', 'click', {
+                        element_text: target.textContent?.substring(0, 50) || 'unknown',
+                        element_tag: target.tagName,
+                        page_path: window.location.pathname
+                    });
+                }
+            }, { passive: true });
+            
+            console.log('✅ Ruby Wings - Automatic tracking initialized');
         }
-        
-        // Tự động thêm tracking cho các nút consultation
-        const consultButtons = document.querySelectorAll([
-            '[href*="forms.gle"]',
-            '[onclick*="consultation"]',
-            '[class*="consult"]',
-            '.rw-consult-btn-main'
-        ].join(','));
-        
-        consultButtons.forEach(btn => {
-            btn.addEventListener('click', trackConsultationClick, { passive: true });
-        });
-        
-        console.log('✅ Ruby Wings - Automatic tracking initialized');
-    }
-})();
-</script>
-<!-- === HẾT CODE TRACKING === -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    })();
+    </script>
+    <!-- === HẾT CODE TRACKING TỰ ĐỘNG === -->
 
-<title>Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách</title>
-<meta name="description" content="Ruby Wings thiết kế hành trình trải nghiệm linh hoạt theo mong muốn của bạn: có thể lồng vào thiền chánh niệm, khí công, forest bathing, du lịch. Địa điểm, hoạt động tùy chọn - chúng tôi đáp ứng mọi yêu cầu với dịch vụ tốt nhất.">
-<meta name="keywords" content="hành trình linh hoạt, tour tùy chỉnh, trải nghiệm cá nhân hóa, forest bathing, nội tâm, Ruby Wings linh hoạt, tour riêng, trải nghiệm độc đáo, cá nhân hoá">
-<meta name="author" content="Ruby Wings Travel">
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+    <link rel="manifest" href="icon/site.webmanifest">
+    <link rel="shortcut icon" href="icon/favicon.ico">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="facebook-domain-verification" content="9tvsczh90ochfhg9byyr544ixf080p" />
+    <link type="text/plain" rel="author" href="/humans.txt" />
 
-<!-- Canonical -->
-<link rel="canonical" href="https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">
+    <!-- META TAGS SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách">
-<meta property="og:description" content="Thiết kế tour riêng theo ý bạn: địa điểm, hoạt động tùy chọn. Ruby Wings đáp ứng mọi yêu cầu với dịch vụ chữa lành và trải nghiệm cá nhân hóa.">
-<meta property="og:url" content="https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">
-<meta property="og:image" content="https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg">
-<meta property="og:site_name" content="Ruby Wings Travel">
+    <title>Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách</title>
+    <meta name="description" content="Ruby Wings thiết kế hành trình trải nghiệm linh hoạt theo mong muốn của bạn: có thể lồng vào thiền chánh niệm, khí công, forest bathing, du lịch. Địa điểm, hoạt động tùy chọn - chúng tôi đáp ứng mọi yêu cầu với dịch vụ tốt nhất.">
+    <meta name="keywords" content="hành trình linh hoạt, tour tùy chỉnh, trải nghiệm cá nhân hóa, forest bathing, nội tâm, Ruby Wings linh hoạt, tour riêng, trải nghiệm độc đáo, cá nhân hoá">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách">
-<meta name="twitter:description" content="Tour riêng theo ý bạn: địa điểm, hoạt động tùy chọn. Ruby Wings đáp ứng mọi yêu cầu trải nghiệm chữa lành cá nhân hóa.">
-<meta name="twitter:image" content="https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg">
-<meta name="twitter:creator" content="@TienSy379">
-<script src="facebook-pixel-complete.js"></script>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Canonical -->
+    <link rel="canonical" href="https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách">
+    <meta property="og:description" content="Thiết kế tour riêng theo ý bạn: địa điểm, hoạt động tùy chọn. Ruby Wings đáp ứng mọi yêu cầu với dịch vụ chữa lành và trải nghiệm cá nhân hóa.">
+    <meta property="og:url" content="https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">
+    <meta property="og:image" content="https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg">
+    <meta property="og:site_name" content="Ruby Wings Travel">
 
-<!-- Favicon -->
-<link rel="icon" href="https://rubywings.vn/favicon.ico" type="image/x-icon">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách">
+    <meta name="twitter:description" content="Tour riêng theo ý bạn: địa điểm, hoạt động tùy chọn. Ruby Wings đáp ứng mọi yêu cầu trải nghiệm chữa lành cá nhân hóa.">
+    <meta name="twitter:image" content="https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg">
+    <meta name="twitter:creator" content="@TienSy379">
 
-<!-- Schema JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
+    <!-- Google Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts cho phần card -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Schema JSON-LD -->
+    <script type="application/ld+json">
     {
-      "@type": "Organization",
-      "@id": "https://rubywings.vn/#organization",
-      "name": "Ruby Wings Travel",
-      "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Hành trình tổ chức theo yêu cầu của quý khách"
-      "sameAs": [
-        "https://www.facebook.com/profile.php?id=61563772112138",
-        "https://www.facebook.com/tien.sy.5011/",
-        "https://x.com/TienSy379",
-        "https://www.instagram.com/tiensyrubywings",
-        "https://www.tiktok.com/@syluong379",
-        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-      ],
-      "telephone": "+84-33-251-0486",
-      "email": "rubywingslsa@gmail.com",
-      "founder": {
-        "@type": "Person",
-        "name": "Lương Tiến Sỹ",
-        "jobTitle": "Founder & CEO",
-        "url": "https://www.facebook.com/tien.sy.5011/"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service",
-      "name": "Hành Trình Trải Nghiệm Linh Hoạt - Tùy Chỉnh Theo Ý Khách",
-      "description": "Dịch vụ thiết kế tour du lịch trải nghiệm cá nhân hóa theo yêu cầu riêng của từng khách hàng",
-      "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
-      "serviceType": "Du lịch trải nghiệm tùy chỉnh",
-      "provider": {
-        "@id": "https://rubywings.vn/#organization"
-      },
-      "areaServed": ["Việt Nam", "Đông Dương", "Đông Nam Á"],
-      "availableChannel": {
-        "@type": "ServiceChannel",
-        "serviceUrl": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
-        "servicePhone": "+84-33-251-0486"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Các Loại Hình Trải Nghiệm Linh Hoạt",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Trải Nghiệm Thiền Chánh Niệm",
-              "description": "Thiết kế không gian và thời gian thiền theo yêu cầu cá nhân"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Khí Công Trị Liệu",
-              "description": "Bài tập khí công phù hợp với thể trạng và mục tiêu chữa lành"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Forest Bathing & Kết Nối Thiên Nhiên",
-              "description": "Tùy chọn địa điểm rừng, núi, biển theo sở thích"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Du Lịch Văn Hóa & Cộng Đồng",
-              "description": "Tham quan di sản, giao lưu văn hóa địa phương theo yêu cầu"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Retreat Chữa Lành Tích Hợp",
-              "description": "Kết hợp đa dạng phương pháp trong một hành trình trọn vẹn"
-            }
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://rubywings.vn/#organization",
+          "name": "Ruby Wings Travel",
+          "url": "https://rubywings.vn/",
+          "logo": "https://rubywings.vn/images/logo.png",
+          "description": "Hành trình tổ chức theo yêu cầu của quý khách",
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61563772112138",
+            "https://www.facebook.com/tien.sy.5011/",
+            "https://x.com/TienSy379",
+            "https://www.instagram.com/tiensyrubywings",
+            "https://www.tiktok.com/@syluong379",
+            "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+          ],
+          "telephone": "+84-33-251-0486",
+          "email": "rubywingslsa@gmail.com",
+          "founder": {
+            "@type": "Person",
+            "name": "Lương Tiến Sỹ",
+            "jobTitle": "Founder & CEO",
+            "url": "https://www.facebook.com/tien.sy.5011/"
           }
-        ]
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#webpage",
-      "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
-      "name": "Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách",
-      "description": "Trang giới thiệu dịch vụ thiết kế tour trải nghiệm linh hoạt theo yêu cầu cá nhân của Ruby Wings Travel",
-      "isPartOf": {
-        "@id": "https://rubywings.vn/#website"
-      },
-      "about": {
-        "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service"
-      },
-      "datePublished": "2024-01-01",
-      "dateModified": "2024-01-01",
-      "primaryImageOfPage": "https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg",
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Trang chủ",
-          "item": "https://rubywings.vn/"
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Dịch vụ",
-          "item": "https://rubywings.vn/dich-vu.html"
+          "@type": "Service",
+          "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service",
+          "name": "Hành Trình Trải Nghiệm Linh Hoạt - Tùy Chỉnh Theo Ý Khách",
+          "description": "Dịch vụ thiết kế tour du lịch trải nghiệm cá nhân hóa theo yêu cầu riêng của từng khách hàng",
+          "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
+          "serviceType": "Du lịch trải nghiệm tùy chỉnh",
+          "provider": {
+            "@id": "https://rubywings.vn/#organization"
+          },
+          "areaServed": ["Việt Nam", "Đông Dương", "Đông Nam Á"],
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
+            "servicePhone": "+84-33-251-0486"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Các Loại Hình Trải Nghiệm Linh Hoạt",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Trải Nghiệm Thiền Chánh Niệm",
+                  "description": "Thiết kế không gian và thời gian thiền theo yêu cầu cá nhân"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Khí Công Trị Liệu",
+                  "description": "Bài tập khí công phù hợp với thể trạng và mục tiêu chữa lành"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Forest Bathing & Kết Nối Thiên Nhiên",
+                  "description": "Tùy chọn địa điểm rừng, núi, biển theo sở thích"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Du Lịch Văn Hóa & Cộng Đồng",
+                  "description": "Tham quan di sản, giao lưu văn hóa địa phương theo yêu cầu"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Retreat Chữa Lành Tích Hợp",
+                  "description": "Kết hợp đa dạng phương pháp trong một hành trình trọn vẹn"
+                }
+              }
+            ]
+          }
         },
         {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Hành trình linh hoạt"
+          "@type": "WebPage",
+          "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#webpage",
+          "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
+          "name": "Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách",
+          "description": "Trang giới thiệu dịch vụ thiết kế tour trải nghiệm linh hoạt theo yêu cầu cá nhân của Ruby Wings Travel",
+          "isPartOf": {
+            "@id": "https://rubywings.vn/#website"
+          },
+          "about": {
+            "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service"
+          },
+          "datePublished": "2024-01-01",
+          "dateModified": "2024-01-01",
+          "primaryImageOfPage": "https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg",
+          "publisher": {
+            "@id": "https://rubywings.vn/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Trang chủ",
+              "item": "https://rubywings.vn/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Dịch vụ",
+              "item": "https://rubywings.vn/dich-vu.html"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Hành trình linh hoạt"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://rubywings.vn/#website",
+          "url": "https://rubywings.vn/",
+          "name": "Ruby Wings Travel",
+          "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+          "publisher": {
+            "@id": "https://rubywings.vn/#organization"
+          }
         }
       ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://rubywings.vn/#website",
-      "url": "https://rubywings.vn/",
-      "name": "Ruby Wings Travel",
-      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      }
     }
-  ]
-}
-</script>
-    
+    </script>
+
     <style>
-        /* === Biến CSS === */
+        /* === Biến CSS Nâng Cao cho header & layout chung === */
         :root {
-            --color-primary: #FF4081;    /* Màu đỏ tươi pha hồng */
-            --color-secondary: #2E7D32;  /* Màu xanh lá cây đậm */
-            --color-secondary-light: #4CAF50; /* Màu xanh lá nhạt */
-            --color-accent: #e9c46a;     /* Màu vàng ánh kim */
-            --color-dark: #264653;       /* Màu xanh đậm */
-            --color-light: #f8f9fa;      /* Màu nền nhẹ */
-            --color-nature: #2a9d8f;     /* Màu xanh thiên nhiên */
+            --color-primary: #0b562a;
+            --color-primary-light: #2bb559;
+            --color-secondary: #f21970;
+            --color-secondary-light: #f84288;
+            --color-accent: #ebaf16;
+            --color-dark: #2F4F4F;
+            --color-light: #F5F5F5;
+            --color-nature: #0b8b34;
+            --color-fresh-pink: #f0ecee;
+            --color-dark-blue: #9cf379;
+            --color-search-green: #8bc34a;
+            --color-healing-green: #e8f5e9;
+            --color-nature-light: #a0d8b0;
+            --color-text-dark: #333;
+            --color-text-light: #fff;
             
-            --font-heading: 'Noto Serif', serif;
-            --font-body: 'Open Sans', sans-serif;
-            --font-special: 'Roboto', sans-serif;
+            --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-light) 100%);
+            --gradient-header: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            --gradient-logo: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
             
-            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --box-shadow-hover: 0 10px 25px rgba(0,0,0,0.15);
+            --box-shadow-logo: 0 8px 25px rgba(139, 46, 82, 0.3);
+            --box-shadow-card: 0 8px 30px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
         }
-       
-        /* === Reset CSS === */
+
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-       
+
         body {
             font-family: var(--font-body);
-            color: #333;
+            color: var(--color-text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            background-color: #fff;
+            background-color: #f4f4f4;
+            text-align: justify;
+            text-justify: inter-word;
+            font-size: 16px;
         }
-       
-        h1, h2, h3, h4 {
-            font-family: var(--font-heading);
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-       
+
         img {
             max-width: 100%;
             height: auto;
+            display: block;
         }
-       
-        ul {
-            list-style: none;
-        }
-       
+
         a {
             text-decoration: none;
             color: inherit;
+            transition: var(--transition);
         }
-       
+
+        ul {
+            list-style: none;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-       
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            text-align: center;
+        }
+
+        /* Nút chung */
         .btn {
             display: inline-block;
-            background: var(--color-primary);
+            background: var(--gradient-primary);
             color: white;
-            padding: 10px 25px;
+            padding: 14px 32px;
             border-radius: 30px;
             font-weight: 600;
-            transition: var(--transition);
             border: none;
             cursor: pointer;
             font-size: 1rem;
-        }
-       
-        .btn:hover {
-            background: var(--color-secondary);
-            transform: translateY(-3px);
             box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-body);
         }
-       
-        /* === Header === */
+        .btn:hover {
+            background: var(--gradient-secondary);
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        /* === HEADER GIỐNG MẪU === */
         header {
-            background-color: rgba(255, 255, 255, 0.98);
+            background: var(--gradient-header);
+            position: fixed;
             width: 100%;
+            top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: var(--transition);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+            transition: var(--transition-slow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0;
         }
-       
+        header.sticky {
+            background: var(--gradient-header);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 5px 0;
+        }
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            max-width: 1900px;
+            margin: 0 auto;
+            position: relative;
         }
-       
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-       
-        .logo img {
-            height: 100px;
-            width: auto;
-            transition: var(--transition);
-        }
-       
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-       
-        .logo-main {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            font-family: var(--font-heading);
-        }
-       
-        .logo-sub {
-            font-size: 1.2rem;
-            color: var(--color-secondary);
-            font-weight: 600;
-        }
-       
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-       
-        .nav-links a {
-            font-weight: 600;
+            gap: 15px;
             transition: var(--transition);
             position: relative;
-            font-size: 1.12rem;
+            z-index: 1001;
         }
-       
-        .nav-links a:hover {
-            color: var(--color-primary);
+
+        .logo-image-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: white;
+            padding: 5px;
+            box-shadow: var(--box-shadow-logo);
+            transition: var(--transition);
+            overflow: hidden;
         }
-       
+
+        .logo-image-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-logo);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.7;
+            filter: blur(10px);
+        }
+
+        .logo img {
+            height: 90px;
+            width: auto;
+            border-radius: 50%;
+            transition: var(--transition);
+            filter: brightness(1.1) contrast(1.1);
+            object-fit: cover;
+        }
+
+        .logo-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .logo-main {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ff1493;
+            letter-spacing: -0.5px;
+            font-family: var(--font-heading);
+            line-height: 1;
+            margin-bottom: 4px;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-tagline {
+            font-size: 1.1rem;
+            color: var(--color-dark-blue);
+            font-style: italic;
+            font-weight: 500;
+            line-height: 1.2;
+            text-align: left;
+            position: relative;
+            padding-left: 10px;
+        }
+        .logo-tagline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 70%;
+            background: var(--gradient-secondary);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white;
+            position: relative;
+            padding: 10px 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .nav-links a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            background: var(--color-primary);
-            bottom: -5px;
-            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, white, var(--color-secondary));
+            bottom: -2px;
+            left: 50%;
+            border-radius: 2px;
             transition: var(--transition);
+            transform: translateX(-50%);
         }
-       
         .nav-links a:hover::after {
             width: 100%;
         }
 
-        /* === Main Content === */
-        main {
-            padding-top: 30px; /* Giảm khoảng cách với header */
-            padding-bottom: 60px;
-            min-height: calc(100vh - 200px); /* Đảm bảo footer luôn ở dưới cùng */
-        }
-
-        /* === Footer === */
-        footer {
-            background: var(--color-dark);
-            color: white;
-            padding: 60px 0 20px;
-            background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-secondary) 100%);
-        }
-       
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 35px;
-        }
-       
-        .footer-column h3 {
-            color: var(--color-accent);
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-            font-size: 1.4rem;
-        }
-       
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background: var(--color-accent);
-            bottom: 0;
-            left: 0;
-        }
-       
-        .footer-column p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-       
-        .contact-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-       
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-       
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            transition: var(--transition);
-            font-size: 1.1rem;
-        }
-       
-        .social-links a:hover {
-            background: var(--color-accent);
-            color: var(--color-dark);
-            transform: translateY(-3px);
-        }
-       
-        .copyright {
-            text-align: center;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            font-size: 0.95rem;
-        }
-
-        /* === Experience Journey Button === */
-        .experience-btn {
-            display: inline-block;
-            margin: 30px auto;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, var(--color-primary) 0%, #ff1493 100%);
-            color: white;
-            border-radius: 50px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3);
-            transition: all 0.3s ease;
-            text-align: center;
-            font-size: 1rem;
-        }
-
-        .experience-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.4);
-            background: linear-gradient(135deg, #ff1493 0%, var(--color-primary) 100%);
-        }
-
-        /* === Mobile Navigation === */
-        .mobile-menu-btn {
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
             display: none;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--color-primary);
+            flex-direction: column;
             cursor: pointer;
             padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            border: 2px solid transparent;
+            z-index: 1001;
+        }
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: 0.3s;
         }
 
-        /* === Responsive === */
-        @media (max-width: 992px) {
-            .nav-links {
-                gap: 15px;
-            }
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--gradient-header);
+            flex-direction: column;
+            padding: 100px 20px 20px;
+            z-index: 999;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-       
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: row;
-                align-items: center;
-                padding: 10px 0;
-                position: relative;
-            }
-           
-            .logo img {
-                height: 60px;
-            }
-           
-            .logo-main {
-                font-size: 1.8rem;
-            }
-           
-            .logo-sub {
-                font-size: 0.9rem;
-            }
-
-            /* Mobile menu styles */
-            .mobile-menu-btn {
-                display: block;
-                z-index: 1001;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 80px 30px 30px;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 1000;
-                gap: 20px;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links a {
-                font-size: 1.1rem;
-                padding: 10px 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
-
-            main {
-                padding-top: 20px;
-            }
-
-            .experience-btn {
-                padding: 12px 25px;
-                font-size: 0.9rem;
-            }
+        .nav-mobile.active {
+            display: flex;
+            transform: translateX(0);
         }
-       
-        @media (max-width: 480px) {
-            .logo {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .logo img {
-                height: 50px;
-            }
-           
-            .logo-main {
-                font-size: 1.5rem;
-            }
-
-            .logo-sub {
-                font-size: 0.8rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .experience-btn {
-                padding: 10px 20px;
-                font-size: 0.85rem;
-                margin: 20px auto;
-            }
+        .nav-mobile a {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* Overlay for mobile menu */
+        /* Overlay cho mobile */
         .overlay {
             position: fixed;
             top: 0;
@@ -685,81 +611,24 @@ gtag('config', 'G-BD5GXRQFQZ');
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.5);
-            z-index: 999;
+            z-index: 998;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
         }
-
         .overlay.active {
             opacity: 1;
             visibility: visible;
         }
-    </style>
-</head>
 
-<body>
-    <!-- Header -->
-    <header>
-      <div class="container header-container">
-    <a href="04-y-nghia-logo-bieu-tuong.html" class="logo">
-        <img src="assets/images/ruby-wings-logo.png" alt="Ruby Wings Logo - Du lịch trải nghiệm" height="70">
-        <div class="logo-text">
-            <div class="logo-main">RUBY WINGS</div>
-            <div class="logo-sub">Travel - Hành trình trải nghiệm </div>
-        </div>
-    </a>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <nav class="nav-links" id="navLinks">
-                <a href="index.html">Trang chủ</a>
-                   <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings chúng tôi</a>
-                    <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
-                    <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
-                     <a href="ve-dep-thien-nhien-viet-nam.html">Non nước- Việt Nam</a>
-                    <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
-            </nav>
-            </nav>
-        </div>
-    </header>
-
-    <div class="overlay" id="overlay"></div>
-
-   
-
-        
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Những Hành Trình Tham Quan Trải Nghiệm Linh Hoạt</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
+        /* MAIN: chừa khoảng cho header fixed */
+        main {
+            padding-top: 140px;
+            padding-bottom: 60px;
             background: linear-gradient(135deg, #f8faf8 0%, #e8f5e9 100%);
-            color: #0b0b0b;
-            line-height: 1.6;
-            padding: 0;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            width: 100%;
-        }
-        
+
+        /* === PHẦN SECTION HÀNH TRÌNH LINH HOẠT (GIỮ Ý NGUYÊN NỘI DUNG, CSS ĐÃ GỌN LẠI) === */
         .section-header {
             text-align: center;
             margin-bottom: 40px;
@@ -767,15 +636,12 @@ gtag('config', 'G-BD5GXRQFQZ');
             background: linear-gradient(135deg, rgba(26, 95, 26, 0.05) 0%, rgba(26, 143, 26, 0.05) 100%);
             border-radius: 16px;
         }
-        
         .section-header h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             color: #f2477a;
             margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-        
         .section-subtitle {
             font-size: 1.3rem;
             color: #3ca542;
@@ -783,23 +649,20 @@ gtag('config', 'G-BD5GXRQFQZ');
             margin: 0 auto 10px;
             font-weight: 600;
         }
-        
         .section-description {
             font-size: 1.05rem;
             color: #4CAF50;
             max-width: 800px;
             margin: 0 auto;
             font-style: italic;
-            line-height: 1.5;
         }
-        
+
         .tour-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
             width: 100%;
         }
-        
         .tour-card {
             background: white;
             border-radius: 16px;
@@ -808,73 +671,53 @@ gtag('config', 'G-BD5GXRQFQZ');
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            height: 100%;
-            width: 100%;
         }
-        
         .tour-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
         }
-        
         .card-header {
             background: linear-gradient(135deg, #207620 0%, #25c625 100%);
             padding: 20px;
             text-align: center;
-            color: rgb(243, 242, 239);
+            color: #f3f2ef;
         }
-        
         .card-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             margin-bottom: 8px;
-            font-weight: 700;
         }
-        
-        .card-header p {
-            font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-        
         .card-content {
             padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
         .tour-highlight {
             font-size: 1.1rem;
             color: #2E7D32;
             font-weight: 600;
             margin-bottom: 15px;
             text-align: center;
-            line-height: 1.4;
         }
-        
         .tour-details {
             margin-bottom: 20px;
         }
-        
         .detail-item {
             display: flex;
             margin-bottom: 12px;
             align-items: flex-start;
         }
-        
         .detail-icon {
             color: #4CAF50;
             font-size: 1rem;
             margin-right: 12px;
             min-width: 20px;
         }
-        
         .detail-text {
             flex: 1;
             font-size: 0.95rem;
         }
-        
         .tour-description {
             background: #f8f9fa;
             padding: 15px;
@@ -889,14 +732,11 @@ gtag('config', 'G-BD5GXRQFQZ');
             justify-content: center;
             min-height: 90px;
         }
-        
         .tour-description p {
             margin: 0;
             font-size: 0.95rem;
-            line-height: 1.5;
             color: #555;
         }
-        
         .tour-actions {
             display: flex;
             flex-wrap: wrap;
@@ -904,7 +744,6 @@ gtag('config', 'G-BD5GXRQFQZ');
             justify-content: center;
             margin-top: 15px;
         }
-        
         .cta-button {
             display: inline-block;
             text-align: center;
@@ -912,32 +751,27 @@ gtag('config', 'G-BD5GXRQFQZ');
             background: linear-gradient(135deg, #3ea843 0%, #46ee51 100%);
             color: white;
             font-weight: 600;
-            text-decoration: none;
             border-radius: 25px;
             box-shadow: 0 3px 12px rgba(46, 125, 50, 0.25);
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border: 2px solid #eceaef;
-            transition: all 0.3s ease;
             min-width: 140px;
         }
-        
         .cta-button.register {
             background: linear-gradient(135deg, #ec3b5b 0%, #f15ab4 100%);
             border: 2px solid #ea4889;
             box-shadow: 0 3px 12px rgba(235, 65, 122, 0.25);
         }
-        
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(46, 125, 50, 0.35);
         }
-        
         .cta-button.register:hover {
             box-shadow: 0 5px 15px rgba(233, 30, 99, 0.35);
         }
-        
+
         .footer {
             text-align: center;
             margin-top: 40px;
@@ -945,491 +779,18 @@ gtag('config', 'G-BD5GXRQFQZ');
             font-size: 0.9rem;
             padding: 20px 0;
         }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .section-header {
-                padding: 20px 15px;
-                margin-bottom: 30px;
-            }
-            
-            .section-header h1 {
-                font-size: 2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .section-description {
-                font-size: 0.95rem;
-            }
-            
-            .tour-cards {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .card-header h2 {
-                font-size: 1.3rem;
-            }
-            
-            .tour-highlight {
-                font-size: 1rem;
-            }
-            
-            .detail-text {
-                font-size: 0.9rem;
-            }
-            
-            .tour-description p {
-                font-size: 0.9rem;
-            }
-            
-            .cta-button {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-                min-width: 120px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .section-header h1 {
-                font-size: 1.7rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1rem;
-            }
-            
-            .card-header {
-                padding: 15px;
-            }
-            
-            .card-content {
-                padding: 15px;
-            }
-            
-            .tour-highlight {
-                font-size: 0.95rem;
-            }
-            
-            .tour-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cta-button {
-                width: 100%;
-                max-width: 200px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="section-header">
-            <h1>NHỮNG HÀNH TRÌNH THAM QUAN TRẢI NGHIỆM LINH HOẠT THEO ĐỀ NGHỊ CỦA QUÝ KHÁCH</h1>
-            <p class="section-subtitle">Khám phá những trải nghiệm đầy ý nghĩa</p>
-            <p class="section-description">(Bao gồm những Hành trình được ưa chuộng nhất)</p>
-        </div>
-        
-        <div class="tour-cards">
-            <!-- Hành trình 01 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 4N3Đ</h2>
-                    <p>Khám phá Văn Hóa & Thiên Nhiên – Nha Trang – Đà Lạt</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Mời bạn đến với Nha Trang, thành phố biển xinh đẹpvà Đà Lạt - thành phố ngàn hoa thơ mộn...
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> 4 ngày 3 đêm </div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> Theo yêu cầu quý khách</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Trải nghiệm thú vị khác về đại dương và văn hóa Champa, nét tâm linh, nghệ thuật và môi trường sinh thái hài hòa.</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="kham_pha_van_hoa_thien_nhien_nha_trang_da_lat.html" class="cta-button">
-                            CHI TIẾT
-                        </a>
-                        <a href="https://forms.gle/Gbswj3BCrGHm1iSQA" class="cta-button register">
-                            ĐĂNG KÝ
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 02 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 02</h2>
-                    <p>"(Đang cập nhật)"</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                       Mời bạn về với ...(Đang cập nhật)
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">📍</div>
-                            <div class="detail-text">"Tìm hiểu (Đang cập nhật)"</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian</strong> 2 ngày 1 đêm - (Đang cập nhật)</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> 07.00 - Thứ Bảy hàng tuần (Đón khách từ 06.30)</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Trở về... (Đang cập nhật)…</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="-uc-truong-son.html" class="cta-button">
-                            CHI TIẾT
-                        </a>
-                        <a href="forms.gle/Ehfiykrz7qwfCE3e9" class="cta-button register">
-                            ĐĂNG KÝ
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 03 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 03</h2>
-                    <p>"(Đang cập nhật)"</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Mời bạn... (Đang cập nhật) 
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> 1 ngày  </div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> 07.00 - Thứ Sáu hàng tuần (Đón khách từ 06.30) </div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Chạm vào ...(Đang cập nhật)</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="tam-giang.html" class="cta-button">
-                            CHI TIẾT
-                        </a>
-                        <a href="//forms.gle/5kJRdnThNbotaPYa6" class="cta-button register">
-                            ĐĂNG KÝ
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 04 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 2N1Đ</h2>
-                    <p>"Dòng chảy yêu thương – Hành trình tri ân Phụ nữ"</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Giữa không gian xanh trong lành và những di sản lịch sử, mỗi người phụ nữ sẽ được tôn vinh, nâng niu như những đóa hoa rạng rỡ. Đây sẽ là món quà tinh thần trọn vẹn, lưu giữ kỷ niệm đẹp khó quên. 
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> 1 ngày, Đón khách 13.00; khởi hành 13.30</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> 13.30 - (Đón khách từ 13.00)</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Sự kết hợp giữa khám phá vẻ đẹp di sản Huế và tôn vinh nét đẹp, vai trò của người phụ nữ nhân ngày 20/10. Du khách không chỉ được chiêm ngưỡng cảnh sắc cổ kính – từ làng Hương rực rỡ, chùa Thiên Mụ thanh tịnh đến lăng Gia Long uy nghi – mà còn hòa mình trong không gian giao lưu, tiệc tối ấm áp đầy ý nghĩa.…</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html" class="cta-button">
-                            CHI TIĚT
-                        </a>
-                        <a href="https://forms.gle/tSN8nyEPMbHxmbnB6" class="cta-button register">
-                            ĐĂNG KÝ
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 05 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 05</h2>
-                    <p>(Đang cập nhật)</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Trở về ...(Đang cập nhật)
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> 2 ngày 1 đêm, Đón khách từ 06.30; khởi hành 07.00</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> 07.00 - Thứ Năm hàng tuần (Đón khách từ 06.30)</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>"Trở về ...(Đang cập nhật)."</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="-va-dai-ngan-huong-hoa-hue.html" class="cta-button">
-                            CHI TIẾT
-                        </a>
-                        <a href="//forms.gle/zsfMwsqCx54cevVz5" class="cta-button register">
-                            ĐĂNG KÝ
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 06 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 06</h2>
-                    <p>Hành trình đặc biệt sắp ra mắt</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="#" class="cta-button">
-                            THÔNG TIN
-                        </a>
-                        <a href="#" class="cta-button register">
-                            THÔNG BÁO
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 07 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 07</h2>
-                    <p>Hành trình đặc biệt sắp ra mắt</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="#" class="cta-button">
-                            THÔNG TIN
-                        </a>
-                        <a href="#" class="cta-button register">
-                            THÔNG BÁO
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 08 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 08</h2>
-                    <p>Hành trình đặc biệt sắp ra mắt</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="#" class="cta-button">
-                            THÔNG TIN
-                        </a>
-                        <a href="#" class="cta-button register">
-                            THÔNG BÁO
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hành trình 09 - VỊ TRÍ CHÈN: NGAY SAU HÀNH TRÌNH 08 -->
-            <div class="tour-card">
-                <div class="card-header">
-                    <h2>HÀNH TRÌNH 09</h2>
-                    <p>Hành trình đặc biệt sắp ra mắt</p>
-                </div>
-                
-                <div class="card-content">
-                    <div class="tour-highlight">
-                        Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
-                    </div>
-                    
-                    <div class="tour-details">
-                        <div class="detail-item">
-                            <div class="detail-icon">⏱</div>
-                            <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
-                        </div>
-                    </div>
-                    
-                    <div class="tour-description">
-                        <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
-                    </div>
-                    
-                    <div class="tour-actions">
-                        <a href="#" class="cta-button">
-                            THÔNG TIN
-                        </a>
-                        <a href="#form-link" class="cta-button register">
-                            THÔNG BÁO
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- VỊ TRÍ CHÈN LINK FORM CHO HÀNH TRÌNH 09 -->
-        <!-- 
-        Khi bạn có link Google Form cho hành trình 09, hãy thay thế:
-        <a href="#form-link" class="cta-button register">
-        thành:
-        <a href="https://forms.gle/..." class="cta-button register">
-        -->
-        
-      <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liên kết đến Trang Tạo Mã QR</title>
-    <style>
-        /* CSS chỉ ảnh hưởng đến liên kết QR, không ảnh hưởng đến trang hiện có */
+        /* QR link */
         .qr-link-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            margin: 30px 0;
             padding: 15px;
             background: linear-gradient(to right, #f3f4f6, #e5e7eb);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
         }
-        
-        .qr-link-container:hover {
-            background: linear-gradient(to right, #e0e7ff, #c7d2fe);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.15);
-            transform: translateY(-2px);
-        }
-        
         .qr-link {
             display: flex;
             align-items: center;
@@ -1437,592 +798,1150 @@ gtag('config', 'G-BD5GXRQFQZ');
             color: #374151;
             font-weight: 600;
             font-size: 16px;
-            transition: color 0.3s ease;
         }
-        
-        .qr-link:hover {
-            color: #4f46e5;
-        }
-        
         .qr-icon {
             width: 32px;
             height: 32px;
             margin-right: 12px;
             border-radius: 6px;
         }
-        
-        .qr-text {
-            flex: 1;
+
+        /* Nút ĐĂNG KÝ THÔNG TIN TƯ VẤN giữ nguyên style xanh lá */
+        .rw-consult-btn-container {
+            display: block !important;
+            margin: 25px 0 !important;
+            text-align: center !important;
+            width: 100% !important;
+        }
+        .rw-consult-btn-main {
+            all: unset !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 18px 35px !important;
+            margin: 10px auto !important;
+            border-radius: 50px !important;
+            border: 3px solid #2cec2c !important;
+            font-weight: 800 !important;
+            font-size: 18px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            background: linear-gradient(135deg, #2cec2c 0%, #22cc22 100%) !important;
+            color: #ffd700 !important;
+            cursor: pointer !important;
+            box-shadow: 0 6px 20px rgba(44, 236, 44, 0.3) !important;
+            font-family: 'Arial', 'Helvetica', sans-serif !important;
+        }
+        .rw-consult-btn-main .rw-btn-text {
+            color: #f3f5f8 !important;
+            font-weight: 800 !important;
+            font-size: 18px !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+        }
+
+        @media (max-width: 1200px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding-top: 120px;
+            }
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            .tour-cards {
+                grid-template-columns: 1fr;
+            }
+            .rw-consult-btn-main {
+                padding: 16px 25px !important;
+                font-size: 16px !important;
+                width: 95% !important;
+                max-width: 320px !important;
+            }
+        }
+
+        /* Footer (dùng style đẹp từ header mẫu) */
+        footer {
+            background: #0b562a;
+            color: white;
+            padding: 60px 0 30px;
+            border-top: 5px solid var(--color-secondary);
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        .footer-column h3 {
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+            font-size: 1.5rem;
+            text-align: left;
+        }
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--color-accent);
+            bottom: 0;
+            left: 0;
+        }
+        .footer-column p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-align: left;
+            line-height: 1.7;
+        }
+        .contact-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .social-links-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding: 5px 0;
+            width: 100%;
+        }
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            color: white !important;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .social-icon.facebook { background-color: #3b5998; }
+        .social-icon.facebook-personal { background-color: #40f218; }
+        .social-icon.twitter { background-color: #1da1f2; }
+        .social-icon.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-icon.tiktok { background-color: #000000; }
+        .social-icon.linkedin { background-color: #0077b5; }
+        .social-icon.whatsapp { background-color: #25D366; }
+        .social-icon.zalo { background-color: #0068FF; padding: 5px; }
+        .social-icon.youtube { background-color: #f01281; }
+        .social-icon.messenger { background: linear-gradient(135deg, #0084FF 0%, #00C6FF 100%); }
+        .zalo-icon { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+
+        .community-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: var(--color-secondary);
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .footer-title-link {
+            color: inherit;
+        }
+
+        @media (max-width: 480px) {
+            .social-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 13px;
+            }
+            .zalo-icon {
+                width: 16px;
+                height: 16px;
+            }
         }
     </style>
 </head>
+
 <body>
+    <!-- Meta Pixel Noscript -->
+    <noscript>
+        <img 
+            height="1" 
+            width="1" 
+            style="display:none"
+            src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"
+        />
+    </noscript>
 
-    <!-- Dán đoạn mã này vào vị trí bạn muốn -->
-    <div class="qr-link-container">
-        <a href="QR-menu.html" class="qr-link">
-            <img src="images/QR.jpg" alt="QR Code Icon" class="qr-icon">
-            <span class="qr-text">Tạo mã QR cho các địa chỉ Web - fanpage - group - google form</span>
-        </a>
-    </div>
+    <!-- Header theo mẫu -->
+    <header>
+        <div class="container header-container">
+            <a href="04-y-nghia-logo-bieu-tuong.html" class="logo">
+                <div class="logo-image-container">
+                    <img src="images/logofxf.png" alt="Ruby Wings Travel Logo - Du lịch trải nghiệm và chữa lành" width="90" height="90">
+                </div>
+                <div class="logo-content">
+                    <div class="logo-main">RUBY WINGS</div>
+                    <div class="logo-tagline">Hành trình trải nghiệm</div>
+                </div>
+            </a>
 
-</body>
-</html>
+            <!-- Desktop Navigation -->
+            <nav class="nav-links">
+                <a href="index.html">Trang chủ</a>
+                <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings</a>
+                <a href="trai-nghiem-cam-xuc.html">Thiên nhiên VN</a>
+                <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
+                <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
+                <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
+            </nav>
 
-</body>
-</html>
-<style>
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
-        }
-        70% {
-            transform: scale(1.05);
-            box-shadow: 0 0 0 15px rgba(46, 125, 50, 0);
-        }
-        100% {
-            transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
-        }
-    }
-</style>
-<style>
-/* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
-.rw-consult-btn-container {
-    display: block !important;
-    margin: 25px 0 !important;
-    text-align: center !important;
-    width: 100% !important;
-}
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-.rw-consult-btn-main {
-    /* Reset mọi style mặc định */
-    all: unset !important;
-    
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    
-    /* Kích thước và khoảng cách */
-    padding: 18px 35px !important;
-    margin: 10px auto !important;
-    
-    /* Kiểu dáng */
-    border-radius: 50px !important;
-    border: 3px solid #2cec2c !important;
-    font-weight: 800 !important;
-    font-size: 18px !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    
-    /* Màu sắc - XANH LÁ CÂY + CHỮ VÀNG */
-    background: linear-gradient(135deg, #2cec2c 0%, #22cc22 100%) !important;
-    color: #ffd700 !important;
-    cursor: pointer !important;
-    
-    /* Hiệu ứng */
-    transition: all 0.4s ease !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 6px 20px rgba(44, 236, 44, 0.3) !important;
-    
-    /* Font chữ rõ ràng */
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
-}
+            <!-- Mobile Navigation -->
+            <nav class="nav-mobile" id="mobileNav">
+                <a href="index.html">Trang chủ</a>
+                <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings</a>
+                <a href="trai-nghiem-cam-xuc.html">Trải nghiệm cảm xúc</a>
+                <a href="ve-dep-quang-tri.html">Miền Trung ruột thịt</a>
+                <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
+                <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
+            </nav>
+        </div>
+    </header>
 
-/* TEXT - CHỮ MÀU VÀNG NỔI BẬT */
-.rw-consult-btn-main .rw-btn-text {
-    color: #f3f5f8 !important;
-    font-weight: 800 !important;
-    font-size: 18px !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-    z-index: 2 !important;
-    position: relative !important;
-}
+    <main>
+        <div class="container">
+            <div class="section-header">
+                <h1>NHỮNG HÀNH TRÌNH THAM QUAN TRẢI NGHIỆM LINH HOẠT THEO ĐỀ NGHỊ CỦA QUÝ KHÁCH</h1>
+                <p class="section-subtitle">Khám phá những trải nghiệm đầy ý nghĩa</p>
+                <p class="section-description">(Bao gồm những Hành trình được ưa chuộng nhất)</p>
+            </div>
 
-/* === HIỆU ỨNG HOVER - CHUYỂN MÀU ĐẬM DẦN === */
-.rw-consult-btn-main:hover {
-    transform: translateY(-4px) scale(1.05) !important;
-    box-shadow: 0 12px 30px rgba(44, 236, 44, 0.5) !important;
-    background: linear-gradient(135deg, #32ff32 0%, #1a991a 100%) !important;
-    border-color: #32ff32 !important;
-    color: #ffd700 !important;
-}
+            <div class="tour-cards">
+                <!-- Hành trình 01 -->
+                <div class="tour-card" data-tour-code="HN01">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 01</h2>
+                        <p>Khám phá Văn Hóa & Thiên Nhiên – Nha Trang – Đà Lạt</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Mời bạn đến với Nha Trang, thành phố biển xinh đẹp và Đà Lạt - thành phố ngàn hoa thơ mộng...
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> 4 ngày 3 đêm </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Theo yêu cầu quý khách</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Trải nghiệm thú vị khác về đại dương và văn hóa Champa, nét tâm linh, nghệ thuật và môi trường sinh thái hài hòa.</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="kham_pha_van_hoa_thien_nhien_nha_trang_da_lat.html" class="cta-button tour-detail-link">
+                                CHI TIẾT
+                            </a>
+                            <a href="https://forms.gle/Gbswj3BCrGHm1iSQA" class="cta-button register tour-register-link">
+                                ĐĂNG KÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-.rw-consult-btn-main:hover .rw-btn-text {
-    color: #ffd700 !important;
-}
+                <!-- Hành trình 02 -->
+                <div class="tour-card" data-tour-code="HN02">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 02</h2>
+                        <p>"Trải Nghiệm Đảo Ngọc – tìm hiểu thưởng thức Văn Hóa & Thiên Nhiên"</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Mời bạn về với “đảo ngọc” của Việt Nam – là nơi hội tụ vẻ đẹp hoang sơ của rừng - biển xanh, cát trắng... 
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">📍</div>
+                                <div class="detail-text">"Tìm hiểu Văn hóa biển đảo, thiên nhiên rừng nguyên sinh, ẩm thực hải sản và đời sống ngư dân."</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> 4 ngày 3 đêm</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Theo yêu cầu quý khách</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Cuốn hút bởi biển xanh, cát trắng, rừng nguyên sinh và nhịp sống chậm rãi đầy an yên; buổi sớm nghe sóng vỗ, chiều ngắm hoàng hôn, hay khoảnh khắc lặng yên bên thiên nhiên giúp tâm trí tĩnh tại.</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="dao_ngoc_trai_nghiem_van_hoa_thien_nhien_phu_quoc.html" class="cta-button tour-detail-link">
+                                CHI TIẾT
+                            </a>
+                            <a href="https://forms.gle/Qx9v34GXhfEC9UEY6" class="cta-button register tour-register-link">
+                                ĐĂNG KÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-/* Hiệu ứng ánh sáng trượt */
-.rw-consult-btn-main::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: -100% !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
-    transition: left 0.7s ease !important;
-    z-index: 1 !important;
-}
+                <!-- Hành trình 03 -->
+                <div class="tour-card" data-tour-code="HN03">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 03</h2>
+                        <p>"(Đang cập nhật)"</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Mời bạn... (Đang cập nhật)
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> 1 ngày</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> 07.00 - Thứ Sáu hàng tuần (Đón khách từ 06.30)</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Chạm vào ...(Đang cập nhật)</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="tam-giang.html" class="cta-button tour-detail-link">
+                                CHI TIẾT
+                            </a>
+                            <a href="https://forms.gle/5kJRdnThNbotaPYa6" class="cta-button register tour-register-link">
+                                ĐĂNG KÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-.rw-consult-btn-main:hover::before {
-    left: 100% !important;
-}
+                <!-- Hành trình 04 -->
+                <div class="tour-card" data-tour-code="HN04">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 2N1Đ</h2>
+                        <p>"Dòng chảy yêu thương – Hành trình tri ân Phụ nữ"</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Giữa không gian xanh trong lành và những di sản lịch sử, mỗi người phụ nữ sẽ được tôn vinh, nâng niu như những đóa hoa rạng rỡ...
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> 1 ngày, Đón khách 13.00; khởi hành 13.30</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> 13.30 - (Đón khách từ 13.00)</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Sự kết hợp giữa khám phá vẻ đẹp di sản Huế và tôn vinh nét đẹp, vai trò của người phụ nữ nhân ngày 20/10... </p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html" class="cta-button tour-detail-link">
+                                CHI TIẾT
+                            </a>
+                            <a href="https://forms.gle/tSN8nyEPMbHxmbnB6" class="cta-button register tour-register-link">
+                                ĐĂNG KÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-/* === MOBILE RESPONSIVE - 1 DÒNG & TỐI ƯU === */
-@media (max-width: 768px) {
-    .rw-consult-btn-main {
-        padding: 16px 25px !important;
-        font-size: 16px !important;
-        width: 95% !important;
-        max-width: 320px !important;
-        display: flex !important; /* Đảm bảo 1 dòng */
-        flex-wrap: nowrap !important;
-        white-space: nowrap !important;
-    }
-    
-    .rw-consult-btn-main .rw-btn-text {
-        font-size: 16px !important;
-        white-space: nowrap !important;
-        /* BỎ MŨI TÊN - chỉ hiển thị text */
-    }
-    
-    /* Ẩn hoàn toàn mũi tên trên mobile */
-    .rw-consult-btn-main .rw-btn-arrow {
-        display: none !important;
-    }
-    
-    /* Màu mobile - xanh lá nhạt */
-    .rw-consult-btn-main {
-        background: linear-gradient(135deg, #2bdc2b 0%, #1a9f1a 100%) !important;
-        border-color: #2cec2c !important;
-    }
-}
+                <!-- Hành trình 05 -->
+                <div class="tour-card" data-tour-code="HN05">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 05</h2>
+                        <p>(Đang cập nhật)</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Trở về ...(Đang cập nhật)
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> 2 ngày 1 đêm, Đón khách từ 06.30; khởi hành 07.00</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> 07.00 - Thứ Năm hàng tuần (Đón khách từ 06.30)</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>"Trở về ...(Đang cập nhật)."</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="-va-dai-ngan-huong-hoa-hue.html" class="cta-button tour-detail-link">
+                                CHI TIẾT
+                            </a>
+                            <a href="https://forms.gle/zsfMwsqCx54cevVz5" class="cta-button register tour-register-link">
+                                ĐĂNG KÝ
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-@media (max-width: 480px) {
-    .rw-consult-btn-main {
-        padding: 14px 20px !important;
-        font-size: 15px !important;
-        margin: 8px auto !important;
-    }
-    
-    .rw-consult-btn-main .rw-btn-text {
-        font-size: 15px !important;
-        letter-spacing: 0.5px !important;
-    }
-}
+                <!-- Hành trình 06 -->
+                <div class="tour-card" data-tour-code="HN06">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 06</h2>
+                        <p>Hành trình đặc biệt sắp ra mắt</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="#" class="cta-button tour-detail-link">
+                                THÔNG TIN
+                            </a>
+                            <a href="#" class="cta-button register tour-register-link">
+                                THÔNG BÁO
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-/* Desktop - vẫn giữ mũi tên */
-@media (min-width: 769px) {
-    .rw-consult-btn-main .rw-btn-arrow {
-        margin-left: 12px !important;
-        transition: transform 0.3s ease !important;
-        font-weight: bold !important;
-        font-size: 18px !important;
-        color: #fff3af !important;
-        z-index: 2 !important;
-        position: relative !important;
-    }
-    
-    .rw-consult-btn-main:hover .rw-btn-arrow {
-        transform: translateX(4px) !important;
-    }
-}
+                <!-- Hành trình 07 -->
+                <div class="tour-card" data-tour-code="HN07">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 07</h2>
+                        <p>Hành trình đặc biệt sắp ra mắt</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="#" class="cta-button tour-detail-link">
+                                THÔNG TIN
+                            </a>
+                            <a href="#" class="cta-button register tour-register-link">
+                                THÔNG BÁO
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-/* Đảm bảo không bị ảnh hưởng bởi CSS khác */
-.rw-consult-btn-container * {
-    box-sizing: border-box !important;
-}
-</style>
+                <!-- Hành trình 08 -->
+                <div class="tour-card" data-tour-code="HN08">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 08</h2>
+                        <p>Hành trình đặc biệt sắp ra mắt</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="#" class="cta-button tour-detail-link">
+                                THÔNG TIN
+                            </a>
+                            <a href="#" class="cta-button register tour-register-link">
+                                THÔNG BÁO
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-<!-- === HTML CHÈN VÀO TRANG === -->
-<div class="rw-consult-btn-container">
-    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-       class="rw-consult-btn-main" 
-       target="_blank"
-       rel="noopener noreferrer"
-       onclick="trackConsultationClick()">
-        <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
-        <span class="rw-btn-arrow">→</span>
-    </a>
-</div>
+                <!-- Hành trình 09 -->
+                <div class="tour-card" data-tour-code="HN09">
+                    <div class="card-header">
+                        <h2>HÀNH TRÌNH 09</h2>
+                        <p>Hành trình đặc biệt sắp ra mắt</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tour-highlight">
+                            Chúng tôi đang chuẩn bị một hành trình đặc biệt dành riêng cho bạn
+                        </div>
+                        <div class="tour-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">⏱</div>
+                                <div class="detail-text"><strong>Thời gian:</strong> Đang cập nhật</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">📅</div>
+                                <div class="detail-text"><strong>Khởi hành:</strong> Đang cập nhật</div>
+                            </div>
+                        </div>
+                        <div class="tour-description">
+                            <p>Thông tin chi tiết sẽ được cập nhật sớm. Hãy theo dõi để không bỏ lỡ!</p>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="#" class="cta-button tour-detail-link">
+                                THÔNG TIN
+                            </a>
+                            <a href="#form-link" class="cta-button register tour-register-link">
+                                THÔNG BÁO
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<script>
-// === JAVASCRIPT HOÀN CHỈNH VỚI FACEBOOK PIXEL ===
-function trackConsultationClick() {
-    // === FACEBOOK PIXEL TRACKING - QUAN TRỌNG ===
-    if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
-            content_name: 'Đăng ký tư vấn chung - ' + document.title,
-            content_category: 'General Consultation',
-            page_url: window.location.href,
-            button_type: 'General CTA'
-        });
-        console.log('Facebook Pixel: Tracked consultation click');
-    } else {
-        console.warn('Facebook Pixel not loaded yet');
-    }
-    
-    // === GOOGLE ANALYTICS TRACKING (GIỮ NGUYÊN) ===
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'consultation_click', {
-            'event_category': 'engagement',
-            'event_label': 'Google Forms Consultation Button'
-        });
-    }
-    
-    console.log('Consultation button clicked - Opening: https://forms.gle/XCWf6zgFRp4Vhbw39');
-    
-    // === ĐẢM BẢO MỞ FORM SAU KHI TRACKING ===
-    setTimeout(function() {
-        window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
-    }, 100);
-}
+            <!-- Link tạo QR -->
+            <div class="qr-link-container">
+                <a href="QR-menu.html" class="qr-link">
+                    <img src="images/QR.jpg" alt="QR Code Icon" class="qr-icon">
+                    <span class="qr-text">Tạo mã QR cho các địa chỉ Web - fanpage - group - google form</span>
+                </a>
+            </div>
 
-// === HIỆU ỨNG VÀ XỬ LÝ BUTTON ===
-document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.querySelector('.rw-consult-btn-main');
-    if (btn) {
-        console.log('Ruby Wings Consultation Button loaded successfully');
-        
-        // Thêm hiệu ứng click
-        btn.addEventListener('mousedown', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
-        });
-        
-        btn.addEventListener('mouseup', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        // Xử lý sự kiện click để đảm bảo tracking
-        btn.addEventListener('click', function(e) {
-            // Ngăn mở link ngay lập tức
-            e.preventDefault();
-            // Gọi hàm tracking
-            trackConsultationClick();
-        });
-        
-        // Kiểm tra mobile
-        if (window.innerWidth <= 768) {
-            console.log('Mobile mode: Green background, no arrow, single line');
-        }
-    }
-});
+            <!-- Nút ĐĂNG KÝ THÔNG TIN TƯ VẤN (giữ nguyên logic tracking cũ) -->
+            <div class="rw-consult-btn-container">
+                <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
+                   class="rw-consult-btn-main" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="trackConsultationClick()">
+                    <span class="rw-btn-text">ĐĂNG KÝ THÔNG TIN TƯ VẤN</span>
+                    <span class="rw-btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </main>
 
-// === BACKUP TRACKING - NẾU PIXEL CHƯA LOAD ===
-function ensurePixelTracking() {
-    if (typeof fbq === 'undefined') {
-        console.log('Waiting for Facebook Pixel to load...');
-        setTimeout(ensurePixelTracking, 500);
-    }
-}
-
-// Khởi động backup tracking
-ensurePixelTracking();
-</script>
-<!-- Footer -->
-<footer id="contact">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3><a href="tuyen-ngon-sang-lap-ruby-wings.html" class="footer-title-link">Về chúng tôi</a></h3>
-                <p>Ruby Wings Travel - Nnơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
-                <p> MST: 3301743759</p>
-                <div class="social-links-grid">
-                    <div class="social-row">
-                        <a href="https://www.facebook.com/profile.php?id=61563772112138" target="_blank" class="social-icon facebook" title="Facebook Fanpage">
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><a href="tuyen-ngon-sang-lap-ruby-wings.html" class="footer-title-link">Về chúng tôi</a></h3>
+                    <p>Ruby Wings Travel - Nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
+                    <p>MST: 3301743759</p>
+                    <div class="social-links-grid">
+                        <a href="https://www.facebook.com/profile.php?id=61563772112138" target="_blank" class="social-icon facebook" title="Facebook Fanpage Ruby Wings">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.facebook.com/tien.sy.5011/" target="_blank" class="social-icon facebook-personal" title="Facebook Cá nhân">
+                        <a href="https://www.facebook.com/tien.sy.5011/" target="_blank" class="social-icon facebook-personal" title="Facebook Cá nhân Ruby Wings">
                             <i class="fas fa-user"></i>
                         </a>
-                        <a href="https://x.com/TienSy379/status/1971778015232421915?t=UsXdMD8FrwjF3OO3ZnoUGg&s=19" target="_blank" class="social-icon twitter" title="Twitter">
+                        <a href="https://x.com/TienSy379/status/1971778015232421915?t=UsXdMD8FrwjF3OO3ZnoUGg&s=19" target="_blank" class="social-icon twitter" title="Twitter Ruby Wings">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="https://www.instagram.com/tiensyrubywings?igsh=MWV3czBwMmYwYnIydA==" target="_blank" class="social-icon instagram" title="Instagram">
+                        <a href="https://www.instagram.com/tiensyrubywings?igsh=MWV3czBwMmYwYnIydA==" target="_blank" class="social-icon instagram" title="Instagram Ruby Wings">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@syluong379?_t=ZS-904eIdTTG12&_r=1" target="_blank" class="social-icon tiktok" title="TikTok">
+                        <a href="https://www.tiktok.com/@syluong379?_t=ZS-904eIdTTG12&_r=1" target="_blank" class="social-icon tiktok" title="TikTok Ruby Wings">
                             <i class="fab fa-tiktok"></i>
                         </a>
-                    </div>
-                    <div class="social-row">
-                        <a href="https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-icon linkedin" title="LinkedIn">
+                        <a href="https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-icon linkedin" title="LinkedIn Ruby Wings">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://wa.me/84332510486" target="_blank" class="social-icon whatsapp" title="WhatsApp">
+                        <a href="https://wa.me/84332510486" target="_blank" class="social-icon whatsapp" title="WhatsApp Ruby Wings">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://zalo.me/84332510486" target="_blank" class="social-icon zalo" title="Zalo Nhắn tin">
-                            <img src="images/zalo.jpg" alt="Zalo" class="zalo-icon">
+                        <a href="https://zalo.me/84332510486" target="_blank" class="social-icon zalo" title="Zalo Nhắn tin Ruby Wings">
+                            <img src="https://rubywings.vn/images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon" width="20" height="20">
                         </a>
-                        <a href="https://www.youtube.com/@rubywing-slsa" target="_blank" class="social-icon youtube" title="YouTube">
+                        <a href="https://www.youtube.com/@rubywing-slsa" target="_blank" class="social-icon youtube" title="YouTube Ruby Wings">
                             <i class="fab fa-youtube"></i>
                         </a>
-                        <a href="https://m.me/tien.sy.5011?hash=AbY3ty4r4j7255Yb&source=qr_link_share" target="_blank" class="social-icon messenger" title="Messenger">
+                        <a href="https://m.me/tien.sy.5011?hash=AbY3ty4r4j7255Yb&source=qr_link_share" target="_blank" class="social-icon messenger" title="Messenger Ruby Wings">
                             <i class="fab fa-facebook-messenger"></i>
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="footer-column">
-                <h3>Liên Hệ</h3>
-                <div class="contact-info">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>148 Trương Gia Mô, Vỹ Dạ TP. Huế</span>
+
+                <div class="footer-column">
+                    <h3>Liên Hệ</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>148 Trương Gia Mô, Vỹ Dạ TP. Huế</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>0332510486</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Hotline: 0332510586 (WhatsApp/Zalo)</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span><a href="mailto:rubywingslsa@gmail.com">rubywingslsa@gmail.com</a></span>
+                    </div>
                 </div>
-                <div class="contact-info">
-                    <i class="fas fa-phone"></i>
-                    <span>0332510486</span>
+
+                <div class="footer-column">
+                    <h3>Tham gia cộng đồng</h3>
+                    <p>Tham gia nhóm cộng đồng Ruby Wings để nhận những thông tin mới nhất, chia sẻ trải nghiệm và lan tỏa những thông điệp tốt đẹp.</p>
+                    <a href="https://www.facebook.com/groups/4107197836205156/" target="_blank" class="community-btn">
+                        Tham gia nhóm <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="contact-info">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>0332510586 (WhatsApp/Zalo)</span>
-                </div>
-                <div class="contact-info">
-                    <i class="fas fa-envelope"></i>
-                    <span><a href="mailto:rubywingslsa@gmail.com">rubywingslsa@gmail.com</a></span>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h3>Tham gia cộng đồng</h3>
-                <p>Tham gia nhóm cộng đồng Ruby Wings Travel để nhận những thông tin mới nhất, chia sẻ trải nghiệm và lan tỏa giá trị du lịch có trách nhiệm.</p>
-                <a href="https://www.facebook.com/groups/4107197836205156/" target="_blank" class="community-btn">
-                    Tham gia nhóm <i class="fas fa-arrow-right"></i>
-                </a>
             </div>
         </div>
-       
-    </div>
-</footer>
+    </footer>
 
-<style>
-/* CSS cho các biểu tượng mạng xã hội */
-.social-links-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 15px;
-}
+    <!-- JS: header, mobile menu, tracking chi tiết/đăng ký -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNav = document.getElementById('mobileNav');
 
-.social-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-}
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            document.body.appendChild(overlay);
 
-.social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    color: white !important;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 16px;
-}
+            // Sticky header + ẩn khi cuộn xuống
+            let lastScrollY = window.scrollY;
+            let ticking = false;
 
-.social-icon:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+            function updateHeader() {
+                const scrollY = window.scrollY;
+                const isMobile = window.innerWidth <= 768;
+                
+                if (!isMobile) {
+                    if (scrollY > 100) {
+                        header.classList.add('sticky');
+                    } else {
+                        header.classList.remove('sticky');
+                    }
+                }
 
-/* Màu sắc thương hiệu cho từng nền tảng */
-.social-icon.facebook {
-    background-color: #3b5998; /* Facebook blue */
-}
+                if (scrollY > lastScrollY && scrollY > 100) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
 
-.social-icon.facebook-personal {
-    background-color: #1877f2; /* Màu xanh Facebook mới */
-}
+                lastScrollY = scrollY;
+                ticking = false;
+            }
 
-.social-icon.twitter {
-    background-color: #1da1f2; /* Twitter blue */
-}
+            function onScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(updateHeader);
+                    ticking = true;
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
 
-.social-icon.instagram {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); /* Gradient Instagram */
-}
+            // Mobile menu
+            function toggleMobileMenu() {
+                const isActive = mobileNav.classList.contains('active');
+                if (isActive) {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else {
+                    mobileNav.classList.add('active');
+                    mobileMenuToggle.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', toggleMobileMenu);
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
 
-.social-icon.tiktok {
-    background-color: #000000; /* TikTok black */
-}
+            // === Tracking tối ưu cho các nút CHI TIẾT & ĐĂNG KÝ từng hành trình ===
+            function trackTourDetail(tourName, tourCode, url) {
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'ViewContent', {
+                        content_name: tourName,
+                        content_category: 'Tour Detail',
+                        content_ids: [tourCode],
+                        content_type: 'tour',
+                        page_url: window.location.href,
+                        detail_url: url
+                    });
+                }
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'tour_detail_click', {
+                        event_category: 'engagement',
+                        event_label: tourName + ' - ' + tourCode,
+                        tour_name: tourName,
+                        tour_code: tourCode,
+                        page_location: window.location.href,
+                        detail_url: url,
+                        value: 1
+                    });
+                }
+            }
 
-.social-icon.linkedin {
-    background-color: #0077b5; /* LinkedIn blue */
-}
+            function trackTourRegister(tourName, tourCode, formUrl) {
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: tourName,
+                        content_category: 'Tour Registration',
+                        content_ids: [tourCode],
+                        content_type: 'tour',
+                        page_url: window.location.href,
+                        form_url: formUrl
+                    });
+                }
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'tour_register_click', {
+                        event_category: 'conversion',
+                        event_label: tourName + ' - ' + tourCode,
+                        tour_name: tourName,
+                        tour_code: tourCode,
+                        page_location: window.location.href,
+                        form_url: formUrl,
+                        value: 1
+                    });
+                    gtag('event', 'generate_lead', {
+                        event_category: 'engagement',
+                        event_label: tourName + ' Registration',
+                        tour_name: tourName,
+                        tour_code: tourCode,
+                        page_location: window.location.href
+                    });
+                }
+            }
 
-.social-icon.whatsapp {
-    background-color: #25D366; /* WhatsApp green */
-}
+            const tourCards = document.querySelectorAll('.tour-card');
+            tourCards.forEach(card => {
+                const tourCode = card.getAttribute('data-tour-code') || 'UNKNOWN';
+                const titleEl = card.querySelector('.card-header h2');
+                const subtitleEl = card.querySelector('.card-header p');
+                const tourName = (titleEl ? titleEl.innerText.trim() : 'Hành trình') +
+                                 (subtitleEl ? ' - ' + subtitleEl.innerText.trim() : '');
 
-.social-icon.zalo {
-    background-color: #0068FF; /* Zalo blue */
-    padding: 5px;
-}
+                const detailLink = card.querySelector('.tour-detail-link');
+                const registerLink = card.querySelector('.tour-register-link');
 
-.social-icon.youtube {
-    background-color: #FF0000; /* YouTube red */
-}
+                if (detailLink) {
+                    detailLink.addEventListener('click', function() {
+                        const url = detailLink.getAttribute('href') || '';
+                        trackTourDetail(tourName, tourCode, url);
+                    });
+                }
 
-.social-icon.messenger {
-    background: linear-gradient(135deg, #0084FF 0%, #00C6FF 100%); /* Messenger gradient */
-}
+                if (registerLink) {
+                    registerLink.addEventListener('click', function(e) {
+                        const formUrl = registerLink.getAttribute('href') || '';
+                        // Nếu là placeholder '#' thì chỉ tracking, không mở tab mới
+                        if (formUrl === '#' || formUrl === '') {
+                            trackTourRegister(tourName, tourCode, formUrl);
+                            return;
+                        }
+                        e.preventDefault();
+                        trackTourRegister(tourName, tourCode, formUrl);
+                        setTimeout(function() {
+                            window.open(formUrl, '_blank');
+                        }, 200);
+                    });
+                }
+            });
+        });
 
-.zalo-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Link tiêu đề "Về chúng tôi" */
-.footer-title-link {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-title-link:hover {
-    color: #e91e63;
-}
-
-/* Nút tham gia cộng đồng */
-.community-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #e91e63; /* Màu hồng tươi */
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.community-btn:hover {
-    background-color: #90EE90; /* Màu xanh lá cây nhạt */
-    color: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-/* Đảm bảo các biểu tượng vừa với 10 mục */
-@media (max-width: 768px) {
-    .social-row {
-        gap: 6px;
-    }
-    
-    .social-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
-    }
-    
-    .zalo-icon {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-@media (max-width: 480px) {
-    .social-row {
-        gap: 4px;
-        flex-wrap: wrap;
-    }
-    
-    .social-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 13px;
-    }
-    
-    .zalo-icon {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-/* Điều chỉnh cho màn hình rất nhỏ */
-@media (max-width: 360px) {
-    .social-row {
-        gap: 3px;
-    }
-    
-    .social-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 12px;
-    }
-    
-    .zalo-icon {
-        width: 14px;
-        height: 14px;
-    }
-}
-</style>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script>
-    // Header scroll behavior
-    let lastScrollTop = 0;
-    const header = document.querySelector('header');
-    const scrollThreshold = 100; // Khoảng cách cuộn trước khi ẩn header
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-            // Cuộn xuống - ẩn header
-            header.classList.add('hidden');
-        } else {
-            // Cuộn lên - hiện header
-            header.classList.remove('hidden');
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-        const mobileNav = document.getElementById('mobileNav');
-        mobileNav.classList.toggle('active');
-    }
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
+        // Giữ nguyên hàm trackConsultationClick cho nút ĐĂNG KÝ THÔNG TIN TƯ VẤN
+        function trackConsultationClick() {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'Đăng ký tư vấn chung - ' + document.title,
+                    content_category: 'General Consultation',
+                    page_url: window.location.href,
+                    button_type: 'General CTA'
                 });
             }
-            // Close mobile menu if open
-            const mobileNav = document.getElementById('mobileNav');
-            mobileNav.classList.remove('active');
-        });
-    });
-   
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-        } else {
-            header.style.boxShadow = 'none';
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'consultation_click', {
+                    event_category: 'engagement',
+                    event_label: 'Google Forms Consultation Button'
+                });
+            }
+            setTimeout(function() {
+                window.open('https://forms.gle/XCWf6zgFRp4Vhbw39', '_blank');
+            }, 100);
         }
-    });
-</script>
+    </script>
+
+    <!-- Chatbot Ruby Wings AI (y nguyên mẫu) -->
+    <script>
+    const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
+
+    (function() {
+        'use strict';
+        
+        if (window.RW_CHAT_LOADED) return;
+        window.RW_CHAT_LOADED = true;
+        
+        const createIsolatedWidget = function() {
+            const oldWidgets = document.querySelectorAll('#rw-chat-isolated, .rw-chat-isolated');
+            oldWidgets.forEach(w => w.remove());
+            
+            const container = document.createElement('div');
+            container.id = 'rw-chat-isolated';
+            container.className = 'rw-chat-isolated';
+            
+            const styles = `
+                .rw-chat-isolated {
+                    position: fixed !important;
+                    left: 0 !important;
+                    bottom: 0 !important;
+                    width: auto !important;
+                    height: auto !important;
+                    z-index: 10000 !important;
+                    pointer-events: none !important;
+                    isolation: isolate !important;
+                    all: initial !important;
+                    font-family: Arial, sans-serif !important;
+                }
+                .rw-chat-isolated * {
+                    pointer-events: auto !important;
+                    box-sizing: border-box !important;
+                }
+                .rw-chat-btn-isolated {
+                    position: fixed !important;
+                    left: 15px !important;
+                    bottom: 15px !important;
+                    width: 60px !important;
+                    height: 60px !important;
+                    border-radius: 50% !important;
+                    background: linear-gradient(135deg, #00d97e, #00b368) !important;
+                    border: none !important;
+                    color: white !important;
+                    font-size: 24px !important;
+                    cursor: pointer !important;
+                    z-index: 10001 !important;
+                    box-shadow: 0 4px 20px rgba(0,217,126,0.4) !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    padding: 0 !important;
+                    margin: 0 !important;
+                }
+                .rw-chat-btn-isolated::after {
+                    content: "AI" !important;
+                    position: absolute !important;
+                    bottom: 5px !important;
+                    font-size: 11px !important;
+                    font-weight: bold !important;
+                    color: white !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    text-align: center !important;
+                }
+                .rw-chat-widget-isolated {
+                    position: fixed !important;
+                    left: 15px !important;
+                    bottom: 85px !important;
+                    width: calc(100vw - 30px) !important;
+                    max-width: 400px !important;
+                    height: 500px !important;
+                    background: white !important;
+                    border-radius: 12px !important;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
+                    z-index: 10002 !important;
+                    display: none !important;
+                    flex-direction: column !important;
+                    overflow: hidden !important;
+                    border: 1px solid #e2e8f0 !important;
+                    pointer-events: auto !important;
+                }
+                .rw-chat-widget-isolated.open {
+                    display: flex !important;
+                }
+                .rw-chat-header-isolated {
+                    background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                    color: white !important;
+                    padding: 15px !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 10px !important;
+                }
+                .rw-chat-avatar-isolated {
+                    width: 32px !important;
+                    height: 32px !important;
+                    border-radius: 8px !important;
+                    background: rgba(255,255,255,0.2) !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    font-weight: bold !important;
+                    font-size: 14px !important;
+                }
+                .rw-chat-title-isolated {
+                    font-weight: bold !important;
+                    font-size: 16px !important;
+                    flex: 1 !important;
+                }
+                .rw-chat-close-isolated {
+                    background: none !important;
+                    border: none !important;
+                    color: white !important;
+                    font-size: 18px !important;
+                    cursor: pointer !important;
+                    width: 30px !important;
+                    height: 30px !important;
+                    border-radius: 50% !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+                .rw-chat-body-isolated {
+                    flex: 1 !important;
+                    padding: 15px !important;
+                    overflow-y: auto !important;
+                    background: #f8fafc !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 12px !important;
+                }
+                .rw-chat-message-isolated {
+                    max-width: 85% !important;
+                    padding: 12px 16px !important;
+                    border-radius: 12px !important;
+                    font-size: 14px !important;
+                    line-height: 1.4 !important;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+                }
+                .rw-chat-message-bot-isolated {
+                    background: white !important;
+                    color: #1e293b !important;
+                    border-bottom-left-radius: 4px !important;
+                    align-self: flex-start !important;
+                }
+                .rw-chat-message-user-isolated {
+                    background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                    color: white !important;
+                    border-bottom-right-radius: 4px !important;
+                    align-self: flex-end !important;
+                }
+                .rw-chat-input-container-isolated {
+                    padding: 15px !important;
+                    background: white !important;
+                    border-top: 1px solid #e2e8f0 !important;
+                    display: flex !important;
+                    gap: 8px !important;
+                }
+                .rw-chat-input-isolated {
+                    flex: 1 !important;
+                    padding: 12px !important;
+                    border: 1px solid #cbd5e1 !important;
+                    border-radius: 8px !important;
+                    font-size: 14px !important;
+                    outline: none !important;
+                }
+                .rw-chat-send-isolated {
+                    background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                    color: white !important;
+                    border: none !important;
+                    padding: 12px 16px !important;
+                    border-radius: 8px !important;
+                    cursor: pointer !important;
+                    font-weight: bold !important;
+                    font-size: 14px !important;
+                }
+                @media (min-width: 769px) {
+                    .rw-chat-btn-isolated {
+                        left: 20px !important;
+                        bottom: 20px !important;
+                        width: 70px !important;
+                        height: 70px !important;
+                    }
+                    .rw-chat-btn-isolated::after {
+                        font-size: 12px !important;
+                        bottom: 8px !important;
+                    }
+                    .rw-chat-widget-isolated {
+                        left: 20px !important;
+                        bottom: 100px !important;
+                        width: 400px !important;
+                    }
+                }
+            `;
+            
+            const styleEl = document.createElement('style');
+            styleEl.textContent = styles;
+            document.head.appendChild(styleEl);
+            
+            container.innerHTML = `
+                <button class="rw-chat-btn-isolated" aria-label="Mở chat trợ lý Ruby Wings AI">💬</button>
+                <div class="rw-chat-widget-isolated">
+                    <div class="rw-chat-header-isolated">
+                        <div class="rw-chat-avatar-isolated">AI</div>
+                        <div class="rw-chat-title-isolated">Trợ lý Ruby Wings AI</div>
+                        <button class="rw-chat-close-isolated" aria-label="Đóng chat">✕</button>
+                    </div>
+                    <div class="rw-chat-body-isolated">
+                        <div class="rw-chat-message-isolated rw-chat-message-bot-isolated">
+                            Xin chào! Tôi là trợ lý ảo Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn?
+                            <div style="font-size:11px; color:#94a3b8; margin-top:4px; text-align:right;">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                        </div>
+                    </div>
+                    <div class="rw-chat-input-container-isolated">
+                        <input type="text" class="rw-chat-input-isolated" placeholder="Nhập câu hỏi về du lịch...">
+                        <button class="rw-chat-send-isolated">Gửi</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(container);
+            
+            const chatBtn = container.querySelector('.rw-chat-btn-isolated');
+            const chatWidget = container.querySelector('.rw-chat-widget-isolated');
+            const closeBtn = container.querySelector('.rw-chat-close-isolated');
+            const sendBtn = container.querySelector('.rw-chat-send-isolated');
+            const chatInput = container.querySelector('.rw-chat-input-isolated');
+            const chatBody = container.querySelector('.rw-chat-body-isolated');
+            
+            let isOpen = false;
+            
+            function toggleChat() {
+                isOpen = !isOpen;
+                chatWidget.classList.toggle('open', isOpen);
+                if (isOpen) {
+                    setTimeout(() => chatInput.focus(), 100);
+                }
+            }
+            
+            function closeChat() {
+                isOpen = false;
+                chatWidget.classList.remove('open');
+            }
+            
+            function addMessage(text, sender, isTyping = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `rw-chat-message-isolated rw-chat-message-${sender}-isolated`;
+                
+                if (isTyping) {
+                    messageDiv.innerHTML = `
+                        <div style="display:flex; gap:4px; align-items:center;">
+                            <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite"></div>
+                            <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.1s"></div>
+                            <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.2s"></div>
+                        </div>
+                        <style>
+                            @keyframes bounce {
+                                0%, 100% { transform: translateY(0); }
+                                50% { transform: translateY(-5px); }
+                            }
+                        </style>
+                    `;
+                } else {
+                    messageDiv.innerHTML = `
+                        <div>${text}</div>
+                        <div style="font-size:11px; opacity:0.7; margin-top:4px; text-align:${sender === 'user' ? 'left' : 'right'};">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    `;
+                }
+                
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+                return messageDiv;
+            }
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                addMessage(message, 'user');
+                chatInput.value = '';
+                
+                const typingMsg = addMessage('...', 'bot', true);
+                
+                fetch(BACKEND_URL + '/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ message: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    typingMsg.remove();
+                    const reply = data.reply || data.message || 'Không có phản hồi từ server.';
+                    addMessage(reply, 'bot');
+                })
+                .catch(error => {
+                    typingMsg.remove();
+                    addMessage('Xin lỗi, dịch vụ tạm thời gián đoạn. Vui lòng thử lại.', 'bot');
+                });
+            }
+            
+            chatBtn.addEventListener('click', toggleChat);
+            closeBtn.addEventListener('click', closeChat);
+            sendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+            document.addEventListener('click', (e) => {
+                if (isOpen && !chatWidget.contains(e.target) && !chatBtn.contains(e.target)) {
+                    closeChat();
+                }
+            });
+        };
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createIsolatedWidget);
+        } else {
+            createIsolatedWidget();
+        }
+    })();
+    </script>
 </body>
 </html>
