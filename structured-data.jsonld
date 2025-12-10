@@ -37,7 +37,7 @@
       "@id": "https://www.rubywings.vn/#website",
       "url": "https://www.rubywings.vn",
       "name": "Ruby Wings Travel",
-      "description": "Du lịch trải nghiệm cảm xúc, retreat thiền và khí công, du lịch chữa lành",
+      "description": "Du lịch trải nghiệm, retreat thiền và khí công, du lịch chữa lành",
       "publisher": {"@id": "https://www.rubywings.vn/#organization"},
       "potentialAction": {
         "@type": "SearchAction",
