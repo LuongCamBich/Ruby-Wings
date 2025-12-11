@@ -489,17 +489,15 @@ def query_index(query: str, top_k: int = TOP_K) -> List[Tuple[float, dict]]:
 # ---------- Prompt composition ----------
 def compose_system_prompt(top_passages: List[Tuple[float, dict]]) -> str:
     header = (
-<<<<<<< HEAD
+
         "Bạn là trợ lý AI của Ruby Wings - chuyên tư vấn du lịch trải nghiệm.\n"
         "TRẢ LỜI THEO CÁC NGUYÊN TẮC:\n"
         "1. ƯU TIÊN CAO: Thông tin từ dữ liệu được cung cấp\n"
         "2. Nếu thiếu thông tin CHI TIẾT, hãy trả lời dựa trên THÔNG TIN CHUNG có sẵn\n"
-        "3. Đối với tour cụ thể: tìm thông tin đúng tour trước, sau đó mới dùng thông tin chung\n"
+        "3. Đối với tour cụ thể: tìm thông tin đúng tour trước, sau đó mới dùng thông tin chung, nếu không có thông tin thì trả lời hiện nay Ruby Wings đang nâng cấp, cập nhật\n"
         "4. Luôn giữ thái độ nhiệt tình, hữu ích\n\n"
-=======
         "Bạn là trợ lý AI của Ruby Wings — chuyên tư vấn nghành du lịch trải nghiệm, retreat, "
         "thiền, khí công, hành trình chữa lành - Hành trình tham quan linh hoạt theo nhhu cầu. Trả lời ngắn gọn, chính xác, tử tế.\n\n"
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     )
     if not top_passages:
         return header + "Không tìm thấy dữ liệu nội bộ phù hợp."
@@ -507,12 +505,10 @@ def compose_system_prompt(top_passages: List[Tuple[float, dict]]) -> str:
     content = header + "DỮ LIỆU NỘI BỘ (theo độ liên quan):\n"
     for i, (score, m) in enumerate(top_passages, start=1):
         content += f"\n[{i}] (score={score:.3f}) nguồn: {m.get('path','?')}\n{m.get('text','')}\n"
-<<<<<<< HEAD
+
     
-    content += "\n---\nTUÂN THỦ: Chỉ dùng dữ liệu trên; không bịa; văn phong lịch sự."
-=======
+    content += "\n---\nTUÂN THỦ: Chỉ dùng dữ liệu trên; không bịa đặt nội dung không có thực; văn phong lịch sự."
     content += "\n---\nLưu ý: Ưu tiên sử dụng trích dẫn thông tin từ dữ liệu nội bộ ở trên. Nếu phải bổ sung, chỉ dùng kiến thức chuẩn xác, không được tự ý bịa ra khi chưa rõ đúng sai; sử dụng ngôn ngữ lịch sự, thân thiện, thông minh; khi khách gõ lời tạm biệt hoặc lời chúc thì chân thành cám ơn khách, chúc khách sức khoẻ tốt, may mắn, thành công..."
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     return content
 
 # ---------- Routes ----------
