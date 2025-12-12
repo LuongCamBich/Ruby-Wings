@@ -64,12 +64,6 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <style>
         /* === Biến CSS Nâng Cao === */
         :root {
@@ -1255,8 +1249,8 @@
             
             .nav-links {
                 gap: 25px;
-            display: none;
-            position: fixed;
+                display: none;
+                position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
@@ -1409,11 +1403,11 @@
             </a>
             <!-- Desktop Navigation -->
             <nav class="nav-links">
-                <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings</a>
-                <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
-                <a href="ve-dep-quang-tri.html">khám phá Miền Trung</a>
+                 <a href="index.html">Trang chủ</a>
+                 <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
+                <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
-                <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">hành trình linh hoạt</a>
+                <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình linh hoạt</a>
                 <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
             </nav>
 
@@ -1426,11 +1420,11 @@
 
             <!-- Mobile Navigation -->
             <nav class="nav-mobile" id="mobileNav">
-                <a href="tuyen-ngon-sang-lap-ruby-wings.html">Về Ruby Wings</a>
-                <a href="trai-nghiem-cam-xuc.html">Hành trình Trải Nghiệm</a>
+                <a href="index.html">Trang chủ</a>
+                <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
                 <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
-                <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">hành trình linh hoạt</a>
+                <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình linh hoạt</a>
                 <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
             </nav>
         </div>
@@ -1610,7 +1604,7 @@
                         <h3>Chi Phí Bao Gồm</h3>
                         <ul>
                             <li><strong>Vận chuyển:</strong> Xe du lịch chất lượng cao đưa đón đoàn theo chương trình.</li>
-                            <li><strong>Lưu trú:</strong> Khách sạn 3* (3 đêm). Nếu nâng cấp lên 4*: + 700.000VND/khách.</li>
+                            <li><strong>Lưu trú:</strong>  Khách sạn 3* (3 đêm). Nếu nâng cấp lên 4*: + 700.000VND/khách.</li>
                             <li><strong>Ăn uống:</strong> 08 bữa chính theo chương trình (150.000 vnđ/suất - menu thay đổi theo khu vực, địa phương).</li>
                             <li><strong>Vé tham quan:</strong> Vé vào cửa các điểm du lịch theo chương trình.</li>
                             <li><strong>Hướng dẫn viên:</strong> Hướng dẫn viên chuyên nghiệp, nhiệt tình đồng hành suốt tuyến.</li>
@@ -1924,97 +1918,186 @@
             }
         });
 
-        // === HÀM XỬ LÝ CLICK NÚT VỚI TRACKING ===
+        // === HÀM HỖ TRỢ TRACKING VÀ GỬI EVENT_ID (SỬA CHỈNH) ===
+        // Server endpoint để nhận event (server sẽ gọi CAPI). Thay đổi khi deploy thực tế.
+        const CAPI_ENDPOINT = '/server/capi/collect';
+
+        // Tạo event_id client-side (dễ đọc, unique)
+        function generateEventId() {
+            // Ví dụ: lead_1700000000000_ab12cd3
+            return 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2,9);
+        }
+
+        function safeOmitEmpty(obj) {
+            // Loại bỏ key có giá trị null/undefined/empty array/empty string
+            const out = {};
+            for (const k in obj) {
+                const v = obj[k];
+                if (v === null || v === undefined) continue;
+                if (Array.isArray(v) && v.length === 0) continue;
+                if (typeof v === 'string' && v.trim() === '') continue;
+                out[k] = v;
+            }
+            return out;
+        }
+
         function handleRegistration() {
-            // Chuẩn hoá dữ liệu động cho tour, trang, nút & form
-            var pageUrl = window.location.href;
-            var pageTitle = document.title;
-            var tourTitleElement = document.querySelector('.tour-hero h1');
-            var tourName = tourTitleElement ? tourTitleElement.innerText.trim() : 'Tour Nha Trang Đà Lạt 4N3Đ';
-            var registrationButton = document.getElementById('registrationCostButton');
+            try {
+                var registrationButton = document.getElementById('registrationCostButton');
+                // Ngăn double click / double firing
+                if (registrationButton && registrationButton.dataset.tracking === '1') {
+                    console.log('Tracking already in progress - skipping duplicate call');
+                    return false;
+                }
 
-            var buttonText = registrationButton ? registrationButton.innerText.trim() : 'THÔNG TIN CHI PHÍ VÀ ĐĂNG KÝ';
-            var buttonFeatures = registrationButton ? JSON.stringify({
-                id: registrationButton.id || null,
-                classes: registrationButton.className || null,
-                tag: registrationButton.tagName || 'BUTTON',
-                type: registrationButton.getAttribute('type') || 'button'
-            }) : null;
+                if (registrationButton) {
+                    registrationButton.dataset.tracking = '1';
+                    registrationButton.disabled = true;
+                    // Re-enable sau 3s để tránh vô tình khóa nút vĩnh viễn
+                    setTimeout(function() {
+                        registrationButton.dataset.tracking = '0';
+                        registrationButton.disabled = false;
+                    }, 3000);
+                }
 
-            // Vì form là Google Form mở tab mới, ta ghi rõ mô tả form để không bị [] như trước
-            var formFeatures = JSON.stringify({
-                type: 'external_google_form',
-                provider: 'google_forms',
-                url: 'https://forms.gle/Gbswj3BCrGHm1iSQA'
-            });
+                // Chuẩn hoá dữ liệu động cho tour, trang, nút & form
+                var pageUrl = window.location.href;
+                var pageTitle = document.title;
+                var tourTitleElement = document.querySelector('.tour-hero h1');
+                var tourName = tourTitleElement ? tourTitleElement.innerText.trim() : 'Tour Nha Trang Đà Lạt 4N3Đ';
 
-            var canonicalLink = document.querySelector('link[rel="canonical"]');
-            var canonicalUrl = canonicalLink ? canonicalLink.href : pageUrl;
+                var buttonText = registrationButton ? registrationButton.innerText.trim() : 'THÔNG TIN CHI PHÍ VÀ ĐĂNG KÝ';
+                var buttonFeatures = registrationButton ? {
+                    id: registrationButton.id || null,
+                    classes: registrationButton.className || null,
+                    tag: registrationButton.tagName || 'BUTTON',
+                    type: registrationButton.getAttribute('type') || 'button'
+                } : null;
 
-            var pageFeatures = JSON.stringify({
-                template: 'tour_detail',
-                canonical: canonicalUrl
-            });
+                // Vì form là Google Form mở tab mới, ta cung cấp object (không stringify)
+                var formFeatures = {
+                    type: 'external_google_form',
+                    provider: 'google_forms',
+                    url: 'https://forms.gle/Gbswj3BCrGHm1iSQA'
+                };
 
-            // 1. FACEBOOK PIXEL - Track chuyển đổi "Lead" với dữ liệu đầy đủ
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
+                var canonicalLink = document.querySelector('link[rel="canonical"]');
+                var canonicalUrl = canonicalLink ? canonicalLink.href : pageUrl;
+
+                var pageFeatures = {
+                    template: 'tour_detail',
+                    canonical: canonicalUrl
+                };
+
+                // Tạo event_id để dedupe với server-side CAPI
+                var eventId = generateEventId();
+
+                // Build custom data (loại bỏ key rỗng)
+                var customData = safeOmitEmpty({
                     content_name: pageTitle,                     // Dữ liệu tour / tiêu đề trang
                     content_category: 'Tour Du Lịch',
                     page_url: pageUrl,                          // URL trang thực tế
                     page_title: pageTitle,                      // Thông tin trang
                     button_type: 'Cost Registration',
                     buttonText: buttonText,                     // Nội dung nút / Text hiển thị nút
-                    buttonFeatures: buttonFeatures,             // Thông tin chi tiết về nút
-                    formFeatures: formFeatures,                 // Dữ liệu form (Google Form)
-                    pageFeatures: pageFeatures,                 // Thông tin trang chi tiết
+                    buttonFeatures: buttonFeatures,             // Thông tin chi tiết về nút (object)
+                    formFeatures: formFeatures,                 // Dữ liệu form (object)
+                    pageFeatures: pageFeatures,                 // Thông tin trang chi tiết (object)
                     tour_name: tourName                         // Tên tour lấy từ H1
                 });
-                console.log('✅ Facebook Pixel: Tracked registration click', {
-                    content_name: pageTitle,
-                    tour_name: tourName,
-                    page_url: pageUrl,
-                    buttonText: buttonText
-                });
-            } else {
-                console.warn('⚠️ Facebook Pixel chưa được tải');
-            }
-            
-            // 2. GOOGLE ANALYTICS - Track sự kiện với dữ liệu tour & trang động
-            if (typeof gtag !== 'undefined') {
-                // GA4 Event
-                gtag('event', 'registration_click', {
-                    'event_category': 'conversion',
-                    'event_label': tourName + ' - Cost Registration',
-                    'value': 1,
-                    'tour_name': tourName,
-                    'page_title': pageTitle,
-                    'page_location': pageUrl
-                });
-                
-                // GA4 Generate Lead Event
-                gtag('event', 'generate_lead', {
-                    'event_category': 'engagement',
-                    'event_label': tourName + ' Registration',
-                    'page_title': pageTitle,
-                    'page_location': pageUrl
-                });
-                
-                console.log('✅ Google Analytics: Tracked registration event', {
-                    tour_name: tourName,
-                    page_url: pageUrl
-                });
-            } else {
-                console.warn('⚠️ Google Analytics chưa được tải');
-            }
-            
-            console.log('🎯 Tracking completed - Opening registration form');
-            
-            // 3. MỞ FORM ĐĂNG KÝ
-            setTimeout(function() {
+
+                // 1. FACEBOOK PIXEL - Track chuyển đổi "Lead" với event_id để Meta có thể dedupe
+                if (typeof fbq !== 'undefined') {
+                    try {
+                        // Gọi fbq với eventID (options object)
+                        fbq('track', 'Lead', customData, { eventID: eventId });
+                        console.log('✅ Facebook Pixel: Tracked registration click', { event_id: eventId, ...customData });
+                    } catch (e) {
+                        console.warn('fbq track error', e);
+                    }
+                } else {
+                    console.warn('⚠️ Facebook Pixel chưa được tải');
+                }
+
+                // 2. Gửi payload đến server để server có thể gọi Conversions API (CAPI) và dedupe bằng event_id
+                // Gửi minimal user_data nếu có (không gửi PII thô nếu chưa hash trên client)
+                const serverPayload = {
+                    event_name: 'Lead',
+                    event_id: eventId,
+                    event_time: Math.floor(Date.now() / 1000),
+                    custom_data: customData,
+                    // user_data: { ... } // server nên bổ sung user_data (hashed) nếu có
+                };
+
+                try {
+                    const blob = new Blob([JSON.stringify(serverPayload)], { type: 'application/json' });
+                    // ưu tiên navigator.sendBeacon (non-blocking, tốt cho redirect/close)
+                    if (navigator.sendBeacon) {
+                        navigator.sendBeacon(CAPI_ENDPOINT, blob);
+                        console.log('✅ Beacon sent to CAPI endpoint (sendBeacon)');
+                    } else {
+                        // fallback: fetch keepalive (works in many modern browsers)
+                        fetch(CAPI_ENDPOINT, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(serverPayload),
+                            keepalive: true
+                        }).then(() => {
+                            console.log('✅ Fallback fetch keepalive to CAPI endpoint');
+                        }).catch(() => {
+                            console.warn('❌ Fallback fetch to CAPI endpoint failed');
+                        });
+                    }
+                } catch (e) {
+                    console.warn('Error sending to CAPI endpoint', e);
+                }
+
+                // 3. GOOGLE ANALYTICS - Track sự kiện với dữ liệu tour & trang động (giữ nguyên)
+                if (typeof gtag !== 'undefined') {
+                    try {
+                        // GA4 Event
+                        gtag('event', 'registration_click', {
+                            'event_category': 'conversion',
+                            'event_label': tourName + ' - Cost Registration',
+                            'value': 1,
+                            'tour_name': tourName,
+                            'page_title': pageTitle,
+                            'page_location': pageUrl
+                        });
+                        
+                        // GA4 Generate Lead Event
+                        gtag('event', 'generate_lead', {
+                            'event_category': 'engagement',
+                            'event_label': tourName + ' Registration',
+                            'page_title': pageTitle,
+                            'page_location': pageUrl
+                        });
+                        
+                        console.log('✅ Google Analytics: Tracked registration event', {
+                            tour_name: tourName,
+                            page_url: pageUrl
+                        });
+                    } catch (e) {
+                        console.warn('gtag track error', e);
+                    }
+                } else {
+                    console.warn('⚠️ Google Analytics chưa được tải');
+                }
+
+                console.log('🎯 Tracking completed - Opening registration form');
+
+                // 4. MỞ FORM ĐĂNG KÝ
+                // Mở ngay trong tab mới; sendBeacon đã gửi event (non-blocking) nên an toàn cho redirect/close.
+                setTimeout(function() {
+                    window.open('https://forms.gle/Gbswj3BCrGHm1iSQA', '_blank');
+                }, 100); // nhỏ để UX nhanh, nhưng beacon/fetch đã được gọi non-blocking
+
+            } catch (err) {
+                console.error('handleRegistration error', err);
+                // Fallback: mở form dù tracking lỗi
                 window.open('https://forms.gle/Gbswj3BCrGHm1iSQA', '_blank');
-            }, 200);
-            
+            }
+
             return false;
         }
 
