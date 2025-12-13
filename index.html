@@ -50,7 +50,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rubywings.vn/">
     <meta property="og:title" content="Ruby Wings - Hành Trình Trải nghiệm">
-    <meta property="og:description" content="Trải nghiệm du lịch cảm xúc khám phá di sản Quảng Trị, Huế, Hội An với thiền chánh niệm, khí công và hành trình xanh bền vững">
+    <meta property="og:description" content="Hành trình Trải nghiệm khám phá di sản Quảng Trị, Huế, Hội An với thiền chánh niệm, khí công chữa lành và hành trình xanh bền vững">
     <meta property="og:image" content="https://rubywings.vn/images/index.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -2394,7 +2394,342 @@
         </section>
 
         <hr style="border: 3px solid var(--color-secondary); margin: 30px 0;">
+<style>
+    /* CSS cho nút chương trình du lịch nhà trường - Phiên bản cải tiến */
+    .school-program-container {
+        text-align: center;
+        margin: 25px auto;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .school-program-btn {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(135deg, #1e7c4a 0%, #2bb559 100%);
+        color: white;
+        padding: 22px 30px;
+        border-radius: 18px;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.15rem;
+        box-shadow: 0 8px 25px rgba(30, 124, 74, 0.4);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: visible;
+        border: 3px solid rgba(255, 255, 255, 0.25);
+        max-width: 480px;
+        width: 100%;
+    }
 
+    .school-program-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        transition: 0.6s;
+    }
+
+    .school-program-btn:hover::before {
+        left: 100%;
+    }
+
+    .school-program-btn:hover {
+        transform: translateY(-7px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(30, 124, 74, 0.6);
+        background: linear-gradient(135deg, #2bb559 0%, #1e7c4a 100%);
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .school-program-btn:active {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 10px 25px rgba(30, 124, 74, 0.5);
+    }
+
+    .school-program-icon {
+        width: 70px;
+        height: 70px;
+        margin-right: 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s ease;
+        flex-shrink: 0;
+        border: 3px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .school-program-btn:hover .school-program-icon {
+        transform: rotate(8deg) scale(1.12);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+        border-color: white;
+    }
+
+    .school-program-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: brightness(0.9) sepia(0.25) hue-rotate(130deg) saturate(1.2);
+        transition: all 0.4s ease;
+    }
+
+    .school-program-btn:hover .school-program-icon img {
+        filter: brightness(1.05) sepia(0.15) hue-rotate(120deg) saturate(1.3);
+        animation: bookPulse 1.8s infinite;
+    }
+
+    @keyframes bookPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+        100% { transform: scale(1); }
+    }
+
+    .school-program-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        flex: 1;
+        gap: 5px;
+    }
+
+    .school-program-main-text {
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+        line-height: 1.2;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: block;
+        white-space: nowrap;
+    }
+
+    .school-program-subtext {
+        font-size: 0.95rem;
+        font-weight: 600;
+        opacity: 0.95;
+        line-height: 1.2;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 12px;
+        display: block;
+        white-space: nowrap;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .school-program-arrow {
+        margin-left: 15px;
+        font-size: 1.5rem;
+        opacity: 0.85;
+        transition: all 0.4s ease;
+        background: rgba(255, 255, 255, 0.15);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .school-program-btn:hover .school-program-arrow {
+        opacity: 1;
+        transform: translateX(8px);
+        background: rgba(255, 255, 255, 0.25);
+        animation: arrowBounce 1.2s infinite;
+    }
+
+    @keyframes arrowBounce {
+        0%, 100% { transform: translateX(8px); }
+        50% { transform: translateX(12px); }
+    }
+
+    /* Hiệu ứng badge "MỚI" cải tiến */
+    .new-badge {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 800;
+        padding: 6px 14px;
+        border-radius: 20px;
+        transform: rotate(5deg);
+        box-shadow: 0 6px 18px rgba(255, 87, 34, 0.4);
+        z-index: 10;
+        animation: badgePulse 2.5s infinite;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        min-width: 55px;
+        text-align: center;
+    }
+
+    @keyframes badgePulse {
+        0% { 
+            transform: rotate(5deg) scale(1);
+            box-shadow: 0 6px 18px rgba(255, 87, 34, 0.4);
+        }
+        50% { 
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 8px 22px rgba(255, 87, 34, 0.6);
+        }
+        100% { 
+            transform: rotate(5deg) scale(1);
+            box-shadow: 0 6px 18px rgba(255, 87, 34, 0.4);
+        }
+    }
+
+    .new-badge::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+        border-radius: 20px;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+
+    /* Hiệu ứng ánh sáng góc */
+    .corner-light {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+        border-radius: 0 18px 0 0;
+        pointer-events: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .school-program-container {
+            margin: 20px auto;
+            padding: 10px;
+        }
+        
+        .school-program-btn {
+            padding: 18px 22px;
+            max-width: 420px;
+        }
+        
+        .school-program-main-text {
+            font-size: 1.2rem;
+        }
+        
+        .school-program-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            padding: 10px;
+        }
+        
+        .school-program-subtext {
+            font-size: 0.85rem;
+            padding: 5px 12px;
+        }
+        
+        .new-badge {
+            top: -12px;
+            right: -12px;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+        }
+        
+        .school-program-arrow {
+            width: 40px;
+            height: 40px;
+            margin-left: 12px;
+            font-size: 1.3rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .school-program-btn {
+            padding: 15px 18px;
+            border-radius: 15px;
+            max-width: 360px;
+            flex-direction: column;
+            text-align: center;
+            gap: 12px;
+        }
+        
+        .school-program-icon {
+            width: 65px;
+            height: 65px;
+            margin-right: 0;
+            margin-bottom: 5px;
+        }
+        
+        .school-program-text {
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+        
+        .school-program-main-text {
+            font-size: 1.15rem;
+            white-space: normal;
+            line-height: 1.3;
+        }
+        
+        .school-program-subtext {
+            font-size: 0.8rem;
+            white-space: normal;
+            line-height: 1.3;
+            text-align: center;
+            max-width: 280px;
+        }
+        
+        .school-program-arrow {
+            margin-left: 0;
+            margin-top: 5px;
+            width: 45px;
+            height: 45px;
+        }
+        
+        .new-badge {
+            top: -10px;
+            right: -10px;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+        }
+        
+        /* Trên mobile, ẩn hiệu ứng ánh sáng góc để tiết kiệm hiệu suất */
+        .corner-light {
+            display: none;
+        }
+    }
+</style>
+
+<div class="school-program-container">
+    <a href="tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong.html" class="school-program-btn" target="_self">
+        <div class="corner-light"></div>
+        <div class="new-badge">MỚI</div>
+        <div class="school-program-icon">
+            <img src="images/bieu-tuong-giao-duc.jpg" alt="Biểu tượng giáo dục">
+        </div>
+        <div class="school-program-text">
+            <span class="school-program-main-text">CHƯƠNG TRÌNH DU LỊCH</span>
+            <span class="school-program-subtext">(mẫu tham khảo dành cho các Nhà trường)</span>
+        </div>
+        <div class="school-program-arrow">→</div>
+    </a>
+</div>
                       
             <div class="container">
                 <div class="about-content">
@@ -2481,7 +2816,6 @@
                     </div>
                 </div>
             </div>
-
 
 <div class="container trio-wrapper">
     <!-- QR BOX TRÁI -->
