@@ -3,7 +3,6 @@
     "overview": "Ruby Wings tổ chức du lịch trải nghiệm, retreat, thiền, hành trình chữa lành với lịch trình linh hoạt theo nhu cầu; đồng thời thiết kế các hành trình tham quan trải nghiệm tùy biến theo yêu cầu của quý khách. Ngoàn ra chúng tôi còn cung cấp hành trình tham quan trải nghiệmm linh hoạt theo nhu cầu quý khách",
     "mission": "Ruby Wings mang sứ mệnh lan tỏa giá trị sống chuẩn mực – chân thành – có chiều sâu thông qua các hoạt động du lịch, bồi dưỡng và truyền thông tích cực. Mỗi thành viên, mỗi sản phẩm và mỗi hành trình đều hướng đến việc tạo ra giá trị thật cho con người, cộng đồng và thiên nhiên, để du lịch không chỉ là sự di chuyển mà là hành trình chữa lành và trưởng thành nội tâm. Giá trị cốt lõi: 1. Chuẩn mực (kỷ luật – minh bạch – làm thật), 2. Chân thành (tử tế – trung thực – lắng nghe), 3. Có chiều sâu (hiểu bản chất – làm việc bằng nhận thức – sáng tạo giá trị thật)."
   },
-<<<<<<< HEAD
 
   "tours": [
     {
@@ -71,7 +70,6 @@
     "Bảo hiểm du lịch – nước uống – nón/mũ du lịch (quà tặng xác định sau).",
     "Gói nâng cao (tùy chọn): thêm bữa sáng nhẹ; xe riêng; bộ ảnh máy chuyên dụng; thiền sâu hơn; tư vấn cá nhân hóa.",
     "Gói cao cấp retreat riêng (tùy chọn): xe đời mới riêng tư, thực đơn dưỡng sinh, quà cao cấp, thực hành nội tâm chuyên sâu."
-=======
   "transport": ["Xe 16 chỗ", "Xe 35 chỗ", "Xe 45 chỗ"]
 },
 {
@@ -88,7 +86,6 @@
     "Hoạt động tri ân và phát triển bền vững",
     "Thực hành thiền – khí công cơ bản",
     "Khơi dậy tinh thần sống đẹp và biết ơn"
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
   ],
   "notes": "Hành trình thiên về retreat – thiên nhiên – chánh niệm. Không phù hợp cho trẻ dưới 9 tuổi. Hạn chế thiết bị công nghệ để trải nghiệm sâu. Mang giày thể thao/leo núi, áo khoác nhẹ, quần áo dài. Không xả rác, không bẻ cây, giữ gìn nguyên sơ của Bạch Mã. Cung cấp đầy đủ thông tin khách trước 5 ngày để chuẩn bị hồ sơ. Trường hợp cần tặng quà tinh thần: cung cấp ngày sinh dương lịch (và giờ sinh nếu có). Quy định huỷ: 5–6 ngày: 30%; 3–4 ngày: 50%; 1–2 ngày: 90%; đúng ngày: 100%.",
   "style": "Retreat nhẹ nhàng – lãng mạn – xanh – nhịp đi chậm – chú trọng cảm nhận thiên nhiên và kết nối nội tâm. Không ồn ào – không chạy số lượng – hướng đến chất lượng trải nghiệm.",
@@ -394,7 +391,6 @@
     "meals": "ăn 2 bữa chính tiêu chuẩn 150.000 VNĐ/khách (trong đó có 01 bữa tăng cường tiêu chuẩn 200.000VNĐ/khách), ăn theo thực đơn thống nhất ưu tiên các món đặc sản địa phương, nước uống suốt hành trình",
    "event_support": "Hỗ trợ đoàn trong suốt hành trình: theo sát lịch trình – điều phối giờ giấc – hỗ trợ chụp ảnh – ghi nhận nhu cầu cá nhân; kiểm soát an toàn điểm đến; nhắc nhở sức khỏe – trang phục – di chuyển; hỗ trợ xử lý tình huống phát sinh; đồng hành kết nối tập thể; tối ưu trải nghiệm khách hàng theo chuẩn Ruby Wings."
   },
-<<<<<<< HEAD
   {
     "tour_name": "Hành trình Phong Hương – Bình yên giữa núi rừng Trường Sơn (2 ngày 1 đêm)",
     "summary": "Hành trình 2 ngày 1 đêm kết hợp tri ân lịch sử, trải nghiệm rừng phong hương, văn hóa Vân Kiều – Pa Kô và các hoạt động thiền – khí công giữa thiên nhiên nguyên sơ.",
@@ -491,7 +487,6 @@
     "Thăm Nghĩa trang Liệt sĩ Trường Sơn – tri ân và cầu nguyện bình an",
     "Không gian linh thiêng tại Thánh địa La Vang",
     "Tham quan Thành cổ Quảng Trị – Hiền Lương – Bến Hải – Khe Sanh – Dốc Miếu",
-=======
   "transport": ["Xe 16 chỗ", "Xe 29 chỗ", "Xe 35 chỗ", "Xe 45 chỗ"],
   "included_services": [
     "Xe du lịch đời mới – điều hòa – lái xe chuyên nghiệp",
@@ -553,7 +548,6 @@
     "Thăm Nghĩa trang Liệt sĩ Trường Sơn – tri ân và gửi gắm ước nguyện bình an",
     "Trải nghiệm không gian linh thiêng tại Thánh địa La Vang",
     "Tham quan Cổ thành Quảng Trị, Hiền Lương – Bến Hải, Khe Sanh, Dốc Miếu",
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     "Nghỉ dưỡng tại Khu du lịch biển Cửa Việt",
     "Khám phá đảo Cồn Cỏ bằng tàu du lịch và xe điện",
     "Tìm hiểu đời sống cư dân đảo và hệ sinh thái biển",
@@ -603,15 +597,13 @@
   "summary": "Hành trình 2 ngày 1 đêm khám phá Khe Sanh mát lạnh, trải nghiệm bản làng Pa Cô – Vân Kiều, đồi cà phê – hồ tiêu, đèo Sa Mù và nét chuyển mình của vùng đất lửa.",
   "location": "Đông Hà – Khe Sanh – Sa Mù – Cửa Việt",
   "duration": "2 ngày 1 đêm",
-<<<<<<< HEAD
   "price": "1.285.000 – 1.485.000 VNĐ/người (phụ thuộc số lượng khách và loại xe)",
   "includes": [
-=======
+
   "type": "Tour tham quan trải nghiệm linh hoạt - Khám phá – văn hóa bản địa – thiên nhiên – lịch sử",
   "style": "Hành trình khám phá thiên nhiên mát lạnh của Khe Sanh, tìm hiểu đời sống Pa Cô – Vân Kiều, trải nghiệm khí hậu đại ngàn và văn hóa miền núi đặc sắc.",
   "description": "Khe Sanh – vùng đất từng là tâm điểm lịch sử, nay mang vẻ đẹp của một 'tiểu Đà Lạt' giữa đại ngàn Trường Sơn. Khí hậu mát mẻ quanh năm, những đồi cà phê – hồ tiêu bạt ngàn, bản làng Pa Cô – Vân Kiều trầm mặc và những dự án điện gió tạo nên một bức tranh vừa hùng vĩ vừa thơ mộng. Hành trình đưa du khách từ dấu ấn chiến trường xưa đến nhịp sống mới tràn đầy năng lượng của miền Tây Quảng Trị.",
   "highlights": [
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     "Khí hậu mát mẻ quanh năm – 'tiểu Đà Lạt' của Quảng Trị",
     "Khám phá đồi cà phê – hồ tiêu – bản làng Pa Cô – Vân Kiều",
     "Check-in Đèo Sa Mù huyền ảo",
@@ -632,13 +624,13 @@
   "summary": "Hành trình 6 ngày 5 đêm khám phá Thành phố Hồ Chí Minh, Bình Dương, miền Tây sông nước và mũi Cà Mau – kết hợp văn hoá, sinh thái, ẩm thực và trải nghiệm đặc sắc.",
   "location": "TP.HCM – Bình Dương – Cần Thơ – Sóc Trăng – Cà Mau – Đồng Tháp",
   "duration": "6 ngày 5 đêm",
-<<<<<<< HEAD
+
   "price": "Giá sẽ được cập nhật sau và phụ thuộc vào nhiều yếu tố: số lượng khách, thời điểm khởi hành, cấp độ dịch vụ lựa chọn (cơ bản – nâng cao – cao cấp), hạng phương tiện, tiêu chuẩn lưu trú – ăn uống, vé tham quan và các yêu cầu tùy chỉnh theo nhóm. Khi chốt đủ thông tin, Ruby Wings sẽ gửi báo giá chi tiết",
   "includes": [
     "Tham quan Đại Nam (Bình Dương)",
     "Khám phá Dinh Độc Lập – TP.HCM",
     "Du thuyền sông rạch Cần Thơ – chợ nổi – vườn trái",
-=======
+
   "type": "Tour tham quan trải nghiệm linh hoạt - – văn hóa – sinh thái – ẩm thực",
   "style": "Hành trình kết hợp khám phá đô thị năng động, văn hóa sông nước Miền Tây và sinh thái mũi Cà Mau — trải nghiệm đa chiều, nhịp độ vừa phải phù hợp đa dạng khách.",
   "description": "Từ TP. Hồ Chí Minh năng động đến miền sông nước Miền Tây và mũi Cà Mau tận cùng Tổ quốc, tour đưa bạn trải nghiệm ẩm thực, văn hóa, lịch sử và hệ sinh thái độc đáo. Ghé Bình Dương (Đại Nam), Dinh Độc Lập, du thuyền trên kênh rạch Cần Thơ, khám phá rừng ngập mặn Cà Mau và thưởng ngoạn cánh đồng sen Đồng Tháp.",
@@ -646,7 +638,6 @@
     "Tham quan quần thể du lịch Đại Nam (Bình Dương)",
     "Khám phá Dinh Độc Lập – TP. Hồ Chí Minh",
     "Du thuyền sông rạch Cần Thơ, chợ nổi, vườn trái",
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     "Khám phá rừng ngập mặn Cà Mau – Đất Mũi",
     "Tham quan Đồng Tháp – xứ sở sen",
     "Ngày 1: Đông Hà – Huế – TP.HCM (sáng/trưa/tối)",
@@ -664,14 +655,14 @@
   "event_support": "Hỗ trợ đoàn trong suốt hành trình: theo sát lịch trình – điều phối giờ giấc – hỗ trợ chụp ảnh – ghi nhận nhu cầu cá nhân; kiểm soát an toàn điểm đến; nhắc nhở sức khỏe – trang phục – di chuyển; hỗ trợ xử lý tình huống phát sinh; đồng hành kết nối tập thể; tối ưu trải nghiệm khách hàng theo chuẩn Ruby Wings."
 },
 {
-<<<<<<< HEAD
+
   "tour_name": "Tour trải nghiệm linh hoạt – Đông Hà – Ninh Bình – Hạ Long – Đông Hà (4 ngày)",
   "summary": "Hành trình liên vùng 4 ngày 3 đêm kết hợp văn hóa Ninh Bình, di sản Hạ Long, vui chơi Sun World và trải nghiệm xe giường nằm + xe du lịch cao cấp.",
   "location": "Đông Hà – Ninh Bình – Hạ Long – Hà Nội",
   "duration": "4 ngày 3 đêm",
   "price": "4.995.000 VNĐ/khách (tham khảo đoàn 35 khách, phụ thuộc mùa và yêu cầu nâng cấp dịch vụ)",
   "includes": [
-=======
+
   "id": "tour_dong_ha_ninh_binh_ha_long",
   "name": "Tour trải nghiệm linh hoạt - Đông Hà – Ninh Bình – Hạ Long – Đông Hà (4 ngày)",
   "duration": "4 ngày 3 đêm",
@@ -679,7 +670,6 @@
   "style": "Hành trình kết hợp di sản văn hóa (Ninh Bình), du lịch biển Hạ Long, vui chơi Sun World và trải nghiệm tiện nghi xe giường nằm + xe du lịch cao cấp.",
   "description": "Khởi hành từ Đông Hà, chuyến đi đưa đoàn thăm Chùa Bái Đính, Tràng An, Tam Cốc (Ninh Bình), tiếp tục đến Hạ Long trải nghiệm bãi biển Bãi Cháy và Sun World, rồi về Hà Nội và trở lại Đông Hà bằng xe giường nằm. Kết hợp di tích lịch sử, sinh thái và vui chơi giải trí hiện đại.",
   "highlights": [
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
     "Chùa Bái Đính – quần thể chùa lớn nhất Đông Nam Á",
     "Tràng An – di sản thiên nhiên & văn hoá thế giới",
     "Tam Cốc – thuyền sông Ngô Đồng",
@@ -703,7 +693,7 @@
   "summary": "Hành trình 4 ngày 3 đêm đón Tết Nguyên Đán với biển Nha Trang và cao nguyên Đà Lạt; kết hợp tham quan Vinpearl Land, Tháp Bà Ponagar, Thiền viện Trúc Lâm, thác – chùa – dinh – vườn hoa và trải nghiệm văn hóa đặc sắc.",
   "location": "Đông Hà – Nha Trang – Đà Lạt",
   "duration": "4 ngày 3 đêm",
-<<<<<<< HEAD
+
   "price": "Giá sẽ được cập nhật sau và phụ thuộc vào nhiều yếu tố: số lượng khách, thời điểm khởi hành, cấp độ dịch vụ lựa chọn (cơ bản – nâng cao – cao cấp), hạng phương tiện, tiêu chuẩn lưu trú – ăn uống, vé tham quan và các yêu cầu tùy chỉnh theo nhóm. Khi chốt đủ thông tin, Ruby Wings sẽ gửi báo giá chi tiết)",
   "includes": [
     "Cáp treo Vinpearl Land – vui chơi hiện đại",
@@ -716,7 +706,6 @@
     "Ngày 2: Nha Trang → Vinpearl Land → Đà Lạt (Ăn sáng, trưa, tối)",
     "Ngày 3: Tham quan Đà Lạt (Ăn sáng, trưa, tối)",
     "Ngày 4: Đà Lạt → Đông Hà (Ăn sáng, trưa, tối)"
-=======
   "type": "Tour tham quan trải nghiệm linh hoạt - Du lịch biển – nghỉ dưỡng – văn hóa – tâm linh – trải nghiệm thành phố",
   "style": "Kết hợp biển Nha Trang, khu vui chơi Vinpearl Land, văn hóa Champa, cao nguyên Đà Lạt, tâm linh – khám phá – trải nghiệm thiên nhiên.",
   "description": "Hành trình Tết Nguyên Đán 4N3Đ đưa du khách từ Đông Hà đến Nha Trang – thiên đường biển nổi tiếng, tiếp tục đến Đà Lạt – thành phố ngàn hoa với khí hậu trong lành và cảnh quan thơ mộng. Du khách được trải nghiệm Vinpearl Land, khám phá Tháp Bà Ponagar, đi qua đèo, thác, chùa, dinh thự và thưởng thức ẩm thực đặc sản của từng địa phương.",
@@ -730,7 +719,6 @@
     "Vườn hoa Thành phố Đà Lạt",
     "Chùa Linh Phước – kiến trúc khảm sành sứ độc đáo",
     "Dinh Bảo Đại (Dinh III) – dấu ấn hoàng triều cuối cùng"
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
   ],
   "notes": "Mang trang phục phù hợp biển – núi – chùa; Tết đông khách nên đặt tour sớm.",
   "style": "Biển – núi – văn hóa – tâm linh – trải nghiệm thành phố.",
@@ -740,7 +728,7 @@
   "event_support": "Hỗ trợ đoàn trong suốt hành trình: theo sát lịch trình – điều phối giờ giấc – hỗ trợ chụp ảnh – ghi nhận nhu cầu cá nhân; kiểm soát an toàn điểm đến; nhắc nhở sức khỏe – trang phục – di chuyển; hỗ trợ xử lý tình huống phát sinh; đồng hành kết nối tập thể; tối ưu trải nghiệm khách hàng theo chuẩn Ruby Wings."
 },
 {
-<<<<<<< HEAD
+
   "tour_name": "Khám phá Đà Nẵng – Hội An (2 ngày 1 đêm)",
   "summary": "Hành trình 2 ngày 1 đêm khám phá những điểm đến tiêu biểu của Đà Nẵng – Hội An: Chùa Linh Ứng, Công viên Kỳ Quan Thế Giới, VinWonders Nam Hội An, Ngũ Hành Sơn, Bảo tàng Quân khu 5… Kết hợp giải trí – văn hóa – thiên nhiên – ẩm thực, phù hợp cho học sinh – gia đình – nhóm bạn.",
   "location": "Đà Nẵng – Hội An – Quảng Trị (khởi hành từ Quảng Trị)",
@@ -763,7 +751,6 @@
   ],
   "notes": "Chương trình có thể thay đổi thứ tự điểm tham quan nhưng đảm bảo đầy đủ nội dung. Không bao gồm: phòng đơn, chi phí cá nhân, VAT, tip HDV & lái xe, dịch vụ tự chọn. Trẻ em: 11 tuổi+ tính như người lớn; 8–10 tuổi: 75%; 4–7 tuổi: 50%; dưới 4 tuổi miễn phí (gia đình tự lo). Chính sách hủy: 14 ngày: 0%; 7–13 ngày: 30%; 5–6 ngày: 50%; 3–4 ngày: 75%; 1–2 ngày: 90%; ngày khởi hành: 100%. Ưu đãi học sinh áp dụng đến 01/06/2026. Danh sách đoàn phải có dấu nhà trường.",
   "style": "Trải nghiệm văn hóa – giải trí – giáo dục – thiên nhiên. Nhịp đi phù hợp học sinh, gia đình, nhóm bạn; kết hợp vui chơi giải trí – khám phá – học hỏi qua các không gian lịch sử và văn hóa đặc sắc.",
-=======
   "id": "tour_tet_dong_ha_nha_trang_da_lat_4n3d",
   "name": "Tour trải nghiệm linh hoạt - Đông Hà – Nha Trang – Đà Lạt – Huế (Tết Nguyên Đán)",
   "duration": "4 ngày 3 đêm",
@@ -915,7 +902,7 @@
   },
   "price_range": {
     "amount": "Theo yêu cầu đoàn (giá biến động theo số lượng & dịch vụ)",
-    "unit": "VNĐ/người",
+    "unit": "4.500.000 VNĐ/người",
     "note": "Giá chưa bao gồm vé Vinpearl Land và chi phí cá nhân."
   }
 },
@@ -1039,7 +1026,6 @@
       "22_23": 7070000
     }
   },
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
   "transport": [
     "Xe 16 chỗ",
     "Xe 35 chỗ",
@@ -1100,7 +1086,7 @@
   "event_support": "Hỗ trợ đoàn trong suốt hành trình: theo sát lịch trình – điều phối giờ giấc – hỗ trợ chụp ảnh – ghi nhận nhu cầu cá nhân; kiểm soát an toàn điểm đến; nhắc nhở sức khỏe – trang phục – di chuyển; hỗ trợ xử lý tình huống phát sinh; đồng hành kết nối tập thể; tối ưu trải nghiệm khách hàng theo chuẩn Ruby Wings."
 },
 {
-<<<<<<< HEAD
+
   "tour_name": "Phú Quốc 4N3Đ – Khám phá Nam đảo & Bắc đảo",
   "summary": "Hành trình 4N3Đ khám phá Nam đảo – Bắc đảo: Safari, Grand World, Cầu Hôn, Chùa Hộ Quốc, show Tinh Hoa Việt Nam, Nhà tù Phú Quốc, rừng nguyên sinh và Bãi Kem.",
   "location": "Đông Hà – Đà Nẵng – Phú Quốc",
@@ -1117,7 +1103,6 @@
     "Ngày 2: Safari/Cáp treo – Grand World (sáng, trưa, tối)",
     "Ngày 3: Rừng nguyên sinh – Bãi Kem – Nhà tù Phú Quốc (sáng, trưa, tối)",
     "Ngày 4: Tự do – Cafe Grand World – bay về Đà Nẵng (sáng, trưa)"
-=======
   "id": "tour_hue_dam_chuon_1n",
   "name": "Di sản Huế & Đầm Chuồn – Hoàng hôn phá Tam Giang",
   "duration": "1 ngày",
@@ -1166,7 +1151,6 @@
       "activity": "Trở về Huế",
       "note": "Kết thúc hành trình – đầy xúc cảm và bình yên"
     }
->>>>>>> 1df69407ab1b72fc53d1fe2e4cb140d0c995a1c9
   ],
   "notes": "Khuyến nghị đặt vé máy bay sớm để giữ giá tốt; chuẩn bị đồ đi biển.",
   "style": "Biển – giải trí – thiên nhiên – tâm linh – show nghệ thuật.",

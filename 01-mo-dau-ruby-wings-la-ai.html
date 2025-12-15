@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<!-- End Meta Pixel Code -->
+
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '862531473384426');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
 
   
    <!-- Google tag (gtag.js) -->
@@ -1851,5 +1866,165 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     }
 })();
 </script>
+
+<!-- ================= RUBY WINGS META PIXEL SYSTEM ================= -->
+
+<!-- FLOATING CONSULT BUTTON -->
+<div id="rw-consult-btn">
+  <a href="https://forms.gle/XCWf6zgFRp4Vhbw39"
+     target="_blank"
+     rel="noopener"
+     id="rw-consult-link">
+    NƠI NHẬN TƯ VẤN →
+  </a>
+</div>
+
+<style>
+#rw-consult-btn{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:9999;
+}
+#rw-consult-link{
+  display:inline-block;
+  padding:12px 18px;
+  background:linear-gradient(135deg,#0ce008,#234c05);
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  border-radius:30px;
+  text-decoration:none;
+  box-shadow:0 6px 16px rgba(0,0,0,.25);
+}
+#rw-consult-link:hover{opacity:.9}
+</style>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= META PIXEL ID ================= */
+var PIXEL_ID = '862531473384426';
+
+/* ================= CONTENT ID MAP (GIỮ NGUYÊN) ================= */
+var CONTENT_ID_MAP = {
+  '': 'RW_HOME',
+  'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
+  'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
+  'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
+  'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
+  'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
+  'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
+  'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
+  'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
+  'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
+  'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
+  'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
+  'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
+  'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
+  '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
+  '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
+  '03-triet-ly-gia-tri': 'RW_ABOUT_03',
+  '04-logo-y-nghia': 'RW_ABOUT_04',
+  '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
+  'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
+  'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
+  'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
+  'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
+  'lien-he': 'RW_CONTACT',
+  'gioi-thieu': 'RW_ABOUT'
+};
+
+/* ================= LEAD KEYWORDS (ĐẦY ĐỦ) ================= */
+var LEAD_KEYWORDS = [
+  'đăng ký',
+  'đăng ký thông tin tư vấn',
+  'gọi để chúng tôi tư vấn',
+  'liên hệ đặt hành trình',
+  'nơi nhận tư vấn',
+  'nơi nhận tư vấn →',
+  'đăng ký tư vấn',
+  'liên hệ',
+  'tư vấn',
+  'báo giá',
+  'chi tiết',
+  'tham gia',
+  '033.251.0486'
+];
+
+/* ================= UTIL ================= */
+function getPathKey(){
+  var p = location.pathname.split('/').filter(Boolean).pop() || '';
+  return p.replace('.html','');
+}
+var CONTENT_ID = CONTENT_ID_MAP[getPathKey()] || 'RW_AUTO_PAGE';
+
+/* ================= VIEW CONTENT ================= */
+setTimeout(function(){
+  if(!window.fbq) return;
+  fbq('track','ViewContent',{
+    content_name:document.title,
+    content_category:'page',
+    content_ids:[CONTENT_ID],
+    content_type:'website',
+    value:10000,
+    currency:'VND',
+    predicted_ltv:1000000
+  });
+},1000);
+
+/* ================= DEEP SCROLL ================= */
+var deepScrollSent=false;
+addEventListener('scroll',function(){
+  if(deepScrollSent) return;
+  var percent=(scrollY+innerHeight)/document.documentElement.scrollHeight*100;
+  if(percent>=80){
+    deepScrollSent=true;
+    if(window.fbq){
+      fbq('trackCustom','DeepScroll',{
+        scroll_depth:80,
+        content_id:CONTENT_ID
+      });
+    }
+  }
+},{passive:true});
+
+/* ================= ENGAGED VIEW ================= */
+setTimeout(function(){
+  if(!window.fbq) return;
+  fbq('trackCustom','EngagedView',{
+    time_on_page:30,
+    content_id:CONTENT_ID
+  });
+},30000);
+
+/* ================= LEAD CLICK ================= */
+addEventListener('click',function(e){
+  var el=e.target.closest('a,button');
+  if(!el || !window.fbq) return;
+
+  var text=(el.innerText||'').toLowerCase();
+  var isLead=LEAD_KEYWORDS.some(function(k){
+    return text.includes(k.toLowerCase());
+  });
+  if(!isLead) return;
+
+  fbq('track','Lead',{
+    content_name:text.substring(0,80),
+    content_category:'travel_consultation',
+    content_ids:[CONTENT_ID],
+    value:150000,
+    currency:'VND',
+    source:'website',
+    status:'success'
+  });
+});
+})();
+</script>
+
+<!-- ================= END RUBY WINGS META SYSTEM ================= -->
+
+
 </body>
 </html>

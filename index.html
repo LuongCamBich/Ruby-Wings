@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+ 
+    <!-- End Meta Pixel Code -->
+
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '862531473384426');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
+ 
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17558768270"></script>
     <script>
@@ -2920,239 +2938,310 @@
 }
 </style>
 
-<!-- NÚT TƯ VẤN TRANG CHỦ -->
-<div id="rubyWingsBtnContainer">
-    <a href="https://forms.gle/XCWf6zgFRp4Vhbw39" 
-       id="rubyWingsMainBtn"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Nhận tư vấn từ Ruby Wings - Mở form trong tab mới">
-        <span class="ruby-btn-text">NƠI NHẬN TƯ VẤN</span>
-        <span class="ruby-btn-arrow">→</span>
-    </a>
-</div>
-
 <!-- MESSENGER CHAT PLUGIN - ĐÃ VÔ HIỆU HÓA -->
 <!-- 
 <div id="fb-root"></div>
 <div id="fb-customer-chat" class="fb-customerchat"></div>
 -->
 
-
-
 <script>
-// === RUBY WINGS - OPTIMIZED SCRIPT ===
+// === RUBY WINGS - META PIXEL TRACKING PRO ===
 (function() {
     'use strict';
-    
-    // Cache DOM elements
-    let rubyElements = {
-        btn: null,
-        container: null,
-        messengerLoaded: false
-    };
-    
-    // Configuration
+
+    // ==================== CẤU HÌNH LÕI ====================
     const CONFIG = {
-        FACEBOOK_PIXEL_ID: '862531473384426',
-        FANPAGE_ID: '393607737167958',
-        CATALOG_ID: '1145041937161910',
-        FORM_URL: 'https://forms.gle/XCWf6zgFRp4Vhbw39',
-        TRACKING_DELAY: 300
+        PIXEL_ID: '862531473384426',
+        // Hành vi người dùng
+        ENGAGED_TIME_MS: 30000,     // 30s -> EngagedView
+        SCROLL_DEPTH_PERCENT: 75,   // 75% -> DeepScroll
+        // Giá trị mặc định theo loại trang (VND)
+        PAGE_VALUE: {
+            'home': 0,
+            'landing': 15000,
+            'tour_detail': 50000,
+            'about': 5000,
+            'service': 25000,
+            'profile': 30000,
+            'contact': 10000,
+            'other': 0
+        }
     };
-    
-    // Debounce function for performance
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
+
+    // ==================== CONTENT_ID_MAP & PHÂN LOẠI ====================
+    // Sử dụng chính xác MAP bạn cung cấp
+    const CONTENT_ID_MAP = {
+        '': 'RW_HOME',
+        'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
+        'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
+        'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
+        'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
+        'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
+        'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
+        'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
+        'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
+        'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
+        'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
+        'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
+        'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
+        'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
+        '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
+        '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
+        '03-triet-ly-gia-tri': 'RW_ABOUT_03',
+        '04-logo-y-nghia': 'RW_ABOUT_04',
+        '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
+        'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
+        'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
+        'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
+        'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
+        'lien-he': 'RW_CONTACT',
+        'gioi-thieu': 'RW_ABOUT'
+    };
+
+    // ==================== TỪ KHOÁ LEAD PHÂN CẤP ====================
+    // Phát triển từ list bạn cung cấp, phân loại theo INTENT
+    const LEAD_KEYWORDS = {
+        HIGH_INTENT: ['đặt tour', 'book', 'booking', 'đăng ký ngay', 'sign up', 'apply'],
+        MED_INTENT: ['báo giá', 'get quote', 'yêu cầu', 'request', 'tư vấn', 'consult'],
+        LOW_INTENT: ['liên hệ', 'contact', 'gửi thông tin', 'inquiry', 'nhận tư vấn', 'đặt lịch']
+    };
+
+    // ==================== LỚP TRACKER CHÍNH ====================
+    class RubyWingsTracker {
+        constructor() {
+            this.pageData = this._analyzePage();
+            this.sentEvents = new Set();
+            this.engagedFired = false;
+            this.scrollFired = false;
+            this._init();
+        }
+
+        // PHÂN TÍCH TRANG THÔNG MINH - CỐT LÕI CỦA SỰ CẢI THIỆN
+        _analyzePage() {
+            const url = new URL(window.location.href);
+            const path = url.pathname;
+            // Chuẩn hóa path: bỏ đuôi .html, lấy slug cuối cùng
+            let pathKey = path.replace(/^\//, '').replace(/\.(html|php)$/, '').replace(/\/$/, '');
+            // Trường hợp trang chủ
+            if (pathKey === '' || path === '/' || path.includes('index')) pathKey = '';
+
+            const contentId = CONTENT_ID_MAP[pathKey];
+            let pageType = 'other';
+            let contentType = 'website';
+            let category = 'general';
+
+            // PHÂN LOẠI TỰ ĐỘNG DỰA TRÊN PATH KEY
+            if (pathKey === '') {
+                pageType = 'home';
+                category = 'homepage';
+            } else if (pathKey.includes('nhung-hanh-trinh')) {
+                pageType = 'landing';
+                category = 'tour_listing';
+                contentType = 'product_group';
+            } else if (CONTENT_ID_MAP[pathKey] && CONTENT_ID_MAP[pathKey].startsWith('RW_TOUR_') || CONTENT_ID_MAP[pathKey] && CONTENT_ID_MAP[pathKey].startsWith('RW_FLEX_')) {
+                pageType = 'tour_detail'; // <- QUAN TRỌNG: Phân biệt Tour
+                category = 'travel_package';
+                contentType = 'product';
+            } else if (pathKey.includes('tom_tat')) {
+                pageType = 'profile';
+                category = 'school_proposal';
+                contentType = 'product';
+            } else if (pathKey.includes('cau-chuyen') || pathKey.includes('mo-dau')) {
+                pageType = 'about';
+                category = 'company_info';
+                contentType = 'article';
+            } else if (pathKey.includes('dich-vu')) {
+                pageType = 'service';
+                category = 'service_listing';
+                contentType = 'product_group';
+            } else if (pathKey.includes('lien-he')) {
+                pageType = 'contact';
+                category = 'contact_page';
+            }
+
+            return {
+                url: url.href,
+                pathKey: pathKey,
+                contentId: contentId,
+                contentName: document.title,
+                pageType: pageType,
+                contentCategory: category,
+                contentType: contentType,
+                isMapped: !!contentId // Cờ để cảnh báo trang mới
             };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-    
-    // Get page type - simplified for homepage
-    function getCurrentPageType() {
-        const path = window.location.pathname.toLowerCase();
-        if (path === '/' || path.includes('home') || path.includes('index')) {
-            return 'homepage';
         }
-        return 'other_page';
-    }
-    
-    // Enhanced tracking with error handling
-    function trackEvent(eventName, parameters = {}) {
-        try {
-            // Facebook Pixel
-            if (typeof fbq !== 'undefined') {
-                fbq('track', eventName, {
-                    ...parameters,
-                    page_type: getCurrentPageType(),
-                    timestamp: Date.now(),
-                    url: window.location.href
-                });
+
+        _init() {
+            // 1. Track PageView ngay
+            this._trackPageView();
+            // 2. Track ViewContent cho trang đã biết (có trong MAP)
+            if (this.pageData.isMapped && this.pageData.pageType !== 'home') {
+                setTimeout(() => this._trackViewContent(), 800);
+            } else if (!this.pageData.isMapped) {
+                console.warn(`[RubyWings] URL chưa được mapping: ${this.pageData.pathKey}. Hãy bổ sung vào CONTENT_ID_MAP.`);
             }
-            
-            // Google Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', eventName, parameters);
-            }
-            
-            console.log(`🎯 Ruby Wings - Tracked: ${eventName}`, parameters);
-        } catch (error) {
-            console.warn('❌ Ruby Wings - Tracking error:', error);
+            // 3. Thiết lập tracking hành vi & click
+            this._setupBehaviorTracking();
+            this._setupClickTracking();
         }
-    }
-    
-    // Optimized click tracking with debouncing
-    const trackClick = debounce(function() {
-        const pageType = getCurrentPageType();
-        
-        // Batch Facebook events
-        if (typeof fbq !== 'undefined') {
-            // Single combined event with all data
-            fbq('track', 'Lead', {
-                content_name: `${pageType} - Ruby Wings`,
-                content_category: 'travel_consultation',
-                content_ids: [CONFIG.CATALOG_ID],
-                value: 150000,
+
+        _trackPageView() {
+            this._sendEvent('PageView', {
+                page_type: this.pageData.pageType,
+                content_category: this.pageData.contentCategory
+            });
+        }
+
+        // VIEWCONTENT CHUẨN CHỈ - Cung cấp dữ liệu PHONG PHÚ cho Meta
+        _trackViewContent() {
+            const eventId = this._generateEventId('viewcontent');
+            this._sendEvent('ViewContent', {
+                content_name: this.pageData.contentName,
+                content_ids: [this.pageData.contentId],
+                content_category: this.pageData.contentCategory,
+                content_type: this.pageData.contentType,
                 currency: 'VND',
-                page_type: pageType,
-                fanpage_connected: true,
-                fanpage_id: CONFIG.FANPAGE_ID,
-                catalog_id: CONFIG.CATALOG_ID,
-                status: 'success',
-                predicted_ltv: 5000000,
-                source: 'homepage'
+                value: CONFIG.PAGE_VALUE[this.pageData.pageType] || 0,
+                predicted_ltv: (CONFIG.PAGE_VALUE[this.pageData.pageType] || 0) * 10,
+                page_type: this.pageData.pageType
+            }, eventId);
+        }
+
+        _setupBehaviorTracking() {
+            // Scroll Tracking
+            const scrollHandler = () => {
+                if (this.scrollFired) return;
+                const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+                if (scrolled >= CONFIG.SCROLL_DEPTH_PERCENT) {
+                    this.scrollFired = true;
+                    this._sendEvent('Custom', 'DeepScroll', {
+                        scroll_depth: CONFIG.SCROLL_DEPTH_PERCENT,
+                        page_type: this.pageData.pageType,
+                        content_id: this.pageData.contentId
+                    });
+                    window.removeEventListener('scroll', scrollHandler);
+                }
+            };
+            window.addEventListener('scroll', scrollHandler, { passive: true });
+
+            // Engaged Time Tracking
+            setTimeout(() => {
+                if (!this.engagedFired) {
+                    this.engagedFired = true;
+                    this._sendEvent('Custom', 'EngagedView', {
+                        time_on_page: CONFIG.ENGAGED_TIME_MS / 1000,
+                        page_type: this.pageData.pageType,
+                        content_id: this.pageData.contentId
+                    });
+                }
+            }, CONFIG.ENGAGED_TIME_MS);
+        }
+
+        _setupClickTracking() {
+            // Sử dụng Event Delegation cho hiệu suất tối đa
+            document.addEventListener('click', (e) => {
+                const target = e.target.closest('a, button, [role="button"]');
+                if (!target) return;
+
+                const text = (target.textContent || '').toLowerCase().trim();
+                const href = target.getAttribute('href') || '';
+
+                // PHÁT HIỆN LEAD VỚI PHÂN CẤP INTENT
+                let intentLevel = null;
+                let leadValue = 120000; // Mặc định
+
+                if (LEAD_KEYWORDS.HIGH_INTENT.some(kw => text.includes(kw))) {
+                    intentLevel = 'high';
+                    leadValue = 250000;
+                } else if (LEAD_KEYWORDS.MED_INTENT.some(kw => text.includes(kw))) {
+                    intentLevel = 'medium';
+                    leadValue = 180000;
+                } else if (LEAD_KEYWORDS.LOW_INTENT.some(kw => text.includes(kw))) {
+                    intentLevel = 'low';
+                    leadValue = 120000;
+                }
+
+                // GỬI SỰ KIỆN LEAD NẾU PHÁT HIỆN
+                if (intentLevel) {
+                    const eventId = this._generateEventId('lead');
+                    this._sendEvent('Lead', {
+                        content_name: `Lead Click: ${text.substring(0, 40)}`,
+                        content_category: 'consultation',
+                        content_ids: [this.pageData.contentId],
+                        value: leadValue,
+                        currency: 'VND',
+                        intent_level: intentLevel,
+                        button_text: text.substring(0, 80),
+                        page_type: this.pageData.pageType
+                    }, eventId);
+                }
+
+                // Xử lý click điện thoại (cũng là Lead)
+                if (href.startsWith('tel:')) {
+                    this._sendEvent('Lead', {
+                        content_name: 'Phone Call Click',
+                        content_category: 'contact',
+                        value: 200000,
+                        currency: 'VND',
+                        conversion_type: 'phone_call'
+                    });
+                }
             });
         }
-        
-        // Google Analytics
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'consultation_click', {
-                'event_category': pageType,
-                'event_label': 'Consultation Button - ' + pageType,
-                'value': 150000
-            });
+
+        // PHƯƠNG THỨC GỬI EVENT CHUẨN HÓA
+        _sendEvent(eventName, eventData, customEventId = null) {
+            const eventId = customEventId || this._generateEventId(eventName.toLowerCase());
+            if (this.sentEvents.has(eventId)) return; // Chống trùng
+            this.sentEvents.add(eventId);
+
+            const payload = {
+                ...eventData,
+                event_source_url: this.pageData.url,
+                event_time: Math.floor(Date.now() / 1000),
+                event_id: eventId,
+                action_source: 'website'
+            };
+
+            if (typeof fbq !== 'undefined') {
+                try {
+                    if (eventName === 'Custom') {
+                        fbq('trackCustom', eventData.event_name || 'CustomEvent', payload);
+                    } else {
+                        fbq('track', eventName, payload);
+                    }
+                    // Log cho môi trường dev
+                    if (window.location.hostname === 'localhost') {
+                        console.log(`[RW] Sent: ${eventName}`, { ...payload, contentId: this.pageData.contentId });
+                    }
+                } catch (err) {
+                    console.error('[RubyWings] Event Error:', err);
+                }
+            }
         }
-        
-        console.log('🎯 Ruby Wings - Click tracked from:', pageType);
-    }, CONFIG.TRACKING_DELAY);
-    
-    // Enhanced click handler
-    function handleConsultationClick(event) {
-        // Prevent multiple clicks
-        if (rubyElements.btn.classList.contains('loading')) {
-            event.preventDefault();
+
+        _generateEventId(prefix) {
+            return `rw_${prefix}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        }
+    }
+
+    // ==================== KHỞI ĐỘNG ====================
+    // Đảm bảo Pixel đã sẵn sàng trước khi khởi tạo
+    function init() {
+        if (typeof fbq === 'undefined') {
+            setTimeout(init, 100);
             return;
         }
-        
-        // Add loading state
-        rubyElements.btn.classList.add('loading');
-        
-        // Track the click
-        trackClick();
-        
-        // Remove loading state after delay
-        setTimeout(() => {
-            if (rubyElements.btn) {
-                rubyElements.btn.classList.remove('loading');
-            }
-        }, 1000);
-        
-        // Open in new tab (already handled by target="_blank")
-        console.log('✅ Ruby Wings - Opening consultation form');
+        new RubyWingsTracker();
+        console.log('[RubyWings] Pro Tracking Active.');
     }
-    
- 
-    
-    
-    // Fallback system
-    function createFallbackButton() {
-        if (document.getElementById('rubyWingsBtnContainer')) return;
-        
-        const fallbackHTML = `
-            <div id="rubyWingsBtnContainer" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
-                <a href="${CONFIG.FORM_URL}" 
-                   id="rubyWingsMainBtn"
-                   style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:600;font-size:14px;font-family:'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);cursor:pointer;"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   aria-label="Nhận tư vấn từ Ruby Wings">
-                    <span style="margin-right:5px;font-size:13px;">NƠI NHẬN TƯ VẤN</span>
-                    <span style="font-weight:bold;font-size:16px;">→</span>
-                </a>
-            </div>
-        `;
-        
-        document.body.insertAdjacentHTML('beforeend', fallbackHTML);
-        initializeElements();
-        console.log('🔄 Ruby Wings - Fallback button created');
-    }
-    
-    // Initialize DOM elements
-    function initializeElements() {
-        rubyElements.btn = document.getElementById('rubyWingsMainBtn');
-        rubyElements.container = document.getElementById('rubyWingsBtnContainer');
-        
-        if (rubyElements.btn) {
-            // Remove existing listeners to avoid duplicates
-            rubyElements.btn.replaceWith(rubyElements.btn.cloneNode(true));
-            rubyElements.btn = document.getElementById('rubyWingsMainBtn');
-            
-            // Add click listener
-            rubyElements.btn.addEventListener('click', handleConsultationClick, {
-                passive: true
-            });
-        }
-    }
-    
-    // Cleanup function
-    function cleanup() {
-        if (rubyElements.btn) {
-            rubyElements.btn.removeEventListener('click', handleConsultationClick);
-        }
-    }
-    
-    // Initialize everything
-    function initRubyWings() {
-        try {
-            initializeElements();
-            
-            if (!rubyElements.container) {
-                createFallbackButton();
-            }
-            
-            // Track page view after a short delay
-            setTimeout(trackPageView, 100);
-            
-            // Initialize lazy messenger
-            initMessengerLazy();
-            
-            // Add cleanup on page unload
-            window.addEventListener('beforeunload', cleanup);
-            
-            console.log('✅ Ruby Wings - Optimized version initialized successfully');
-        } catch (error) {
-            console.error('❌ Ruby Wings - Initialization error:', error);
-            // Ensure fallback button is created even if other parts fail
-            createFallbackButton();
-        }
-    }
-    
-    // Start when DOM is ready
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initRubyWings);
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        initRubyWings();
+        init();
     }
-    
-    // Global function for external access
-    window.rubyWingsTrackClick = trackClick;
-    
+
 })();
 </script>
 
@@ -4954,6 +5043,181 @@
     h.parentNode.insertBefore(c,h);
   })(window, document, "script");
 </script>
+
+
+
+
+
+<!-- RUBY WINGS – META PIXEL LOGIC + CONSULT BUTTON (FINAL, FIX MAP, FIX DEEPSCROLL, NO FALLBACK) -->
+<script>
+(function(){
+'use strict';
+
+/* =========================================================
+   CONFIG
+========================================================= */
+const SCROLL_DEPTH = 80;
+const ENGAGED_TIME = 30000;
+
+/* =========================================================
+   CONTENT ID MAP (ÉP MAP – KHÔNG AUTO)
+========================================================= */
+const CONTENT_ID_MAP = {
+  '': 'RW_HOME',
+  'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
+  'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
+  'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
+  'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
+  'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
+  'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
+  'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
+  'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
+  'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
+  'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
+  'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
+  'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
+  'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
+  '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
+  '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
+  '03-triet-ly-gia-tri': 'RW_ABOUT_03',
+  '04-logo-y-nghia': 'RW_ABOUT_04',
+  '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
+  'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
+  'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
+  'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
+  'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
+  'lien-he': 'RW_CONTACT',
+  'gioi-thieu': 'RW_ABOUT'
+};
+
+/* =========================================================
+   LEAD KEYWORDS
+========================================================= */
+const LEAD_KEYWORDS = [
+  'đăng ký',
+  'đăng ký thông tin tư vấn',
+  'gọi để chúng tôi tư vấn',
+  'liên hệ đặt hành trình',
+  'nơi nhận tư vấn',
+  'nơi nhận tư vấn →',
+  'liên hệ',
+  'tư vấn',
+  '033.251.0486'
+];
+
+/* =========================================================
+   PATH KEY – FIX CHUẨN HTML TĨNH
+========================================================= */
+let pathKey = location.pathname
+  .replace(/^\/|\/$/g,'')
+  .replace('index.html','')
+  .replace('.html','');
+
+if(pathKey === '') pathKey = '';
+
+const CONTENT_ID = CONTENT_ID_MAP[pathKey] || null;
+const PAGE_TYPE = pathKey === '' ? 'home' : (CONTENT_ID ? 'page' : 'unmapped');
+
+/* =========================================================
+   VIEW CONTENT
+========================================================= */
+setTimeout(function(){
+  if(!window.fbq || !CONTENT_ID) return;
+  fbq('track','ViewContent',{
+    content_name: document.title,
+    content_category: PAGE_TYPE,
+    content_ids: [CONTENT_ID],
+    content_type: 'website',
+    currency: 'VND',
+    value: PAGE_TYPE==='home'?0:10000,
+    predicted_ltv: PAGE_TYPE==='home'?0:1000000
+  });
+},1000);
+
+/* =========================================================
+   DEEP SCROLL (KHÔNG LỖI CHUỖI)
+========================================================= */
+let deepScrollSent=false;
+window.addEventListener('scroll',function(){
+  if(deepScrollSent || !window.fbq || !CONTENT_ID) return;
+  const percent=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;
+  if(percent>=SCROLL_DEPTH){
+    deepScrollSent=true;
+    fbq('trackCustom','DeepScroll',{
+      content_id: CONTENT_ID,
+      page_type: PAGE_TYPE,
+      scroll_depth: SCROLL_DEPTH
+    });
+  }
+},{passive:true});
+
+/* =========================================================
+   ENGAGED VIEW
+========================================================= */
+setTimeout(function(){
+  if(!window.fbq || !CONTENT_ID) return;
+  fbq('trackCustom','EngagedView',{
+    content_id: CONTENT_ID,
+    page_type: PAGE_TYPE,
+    time_on_page: ENGAGED_TIME/1000
+  });
+},ENGAGED_TIME);
+
+/* =========================================================
+   LEAD CLICK (CHẶN AUTO-DETECT)
+========================================================= */
+document.addEventListener('click',function(e){
+  if(!window.fbq || !CONTENT_ID) return;
+  const el=e.target.closest('a,button');
+  if(!el) return;
+  const text=(el.innerText||'').toLowerCase();
+  const isLead=LEAD_KEYWORDS.some(k=>text.includes(k.toLowerCase()));
+  if(!isLead) return;
+  fbq('track','Lead',{
+    _disable_auto_detect:true,
+    content_name:text.substring(0,80),
+    content_category:'consultation',
+    content_ids:[CONTENT_ID],
+    page_type:PAGE_TYPE,
+    intent_level:'medium',
+    value:180000,
+    currency:'VND'
+  });
+});
+
+/* =========================================================
+   CONSULT BUTTON (GÓC PHẢI)
+========================================================= */
+const btn=document.createElement('div');
+btn.innerHTML=`
+ <a href="https://forms.gle/XCWf6zgFRp4Vhbw39"
+   target="_blank"
+   id="rw-consult-btn"
+   style="
+     position:fixed;
+     right:20px;
+     bottom:20px;
+     z-index:9999;
+     padding:12px 18px;
+     background:linear-gradient(135deg,#16a34a,#22c55e);
+     color:#ffffff;
+     font-weight:700;
+     font-size:14px;
+     border-radius:30px;
+     text-decoration:none;
+     box-shadow:0 6px 16px rgba(0,0,0,.25);
+   ">
+   NƠI NHẬN TƯ VẤN →
+</a>
+`;
+document.body.appendChild(btn);
+
+})();
+</script>
+
+
+
+
 
 
 
