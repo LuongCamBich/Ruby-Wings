@@ -2,10 +2,6 @@
 <html lang="vi">
 <head>
 
-    <!-- RUBY WINGS META -->
-    <script src="./js/meta-rubywings.js" defer></script>
-
-    <!-- Google Ads / GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17558768270"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,7 +10,6 @@
         gtag('config', 'AW-17558768270');
         gtag('config', 'G-BD5GXRQFQZ');
     </script>
-
 
     
     <meta name="theme-color" content="#ffffff">
@@ -2944,6 +2939,222 @@
 -->
 
 
+
+<script>
+// === RUBY WINGS - OPTIMIZED SCRIPT ===
+(function() {
+    'use strict';
+    
+    // Cache DOM elements
+    let rubyElements = {
+        btn: null,
+        container: null,
+        messengerLoaded: false
+    };
+    
+    // Configuration
+    const CONFIG = {
+        FACEBOOK_PIXEL_ID: '862531473384426',
+        FANPAGE_ID: '393607737167958',
+        CATALOG_ID: '1145041937161910',
+        FORM_URL: 'https://forms.gle/XCWf6zgFRp4Vhbw39',
+        TRACKING_DELAY: 300
+    };
+    
+    // Debounce function for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Get page type - simplified for homepage
+    function getCurrentPageType() {
+        const path = window.location.pathname.toLowerCase();
+        if (path === '/' || path.includes('home') || path.includes('index')) {
+            return 'homepage';
+        }
+        return 'other_page';
+    }
+    
+    // Enhanced tracking with error handling
+    function trackEvent(eventName, parameters = {}) {
+        try {
+            // Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', eventName, {
+                    ...parameters,
+                    page_type: getCurrentPageType(),
+                    timestamp: Date.now(),
+                    url: window.location.href
+                });
+            }
+            
+            // Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, parameters);
+            }
+            
+            console.log(`🎯 Ruby Wings - Tracked: ${eventName}`, parameters);
+        } catch (error) {
+            console.warn('❌ Ruby Wings - Tracking error:', error);
+        }
+    }
+    
+    // Optimized click tracking with debouncing
+    const trackClick = debounce(function() {
+        const pageType = getCurrentPageType();
+        
+        // Batch Facebook events
+        if (typeof fbq !== 'undefined') {
+            // Single combined event with all data
+            fbq('track', 'Lead', {
+                content_name: `${pageType} - Ruby Wings`,
+                content_category: 'travel_consultation',
+                content_ids: [CONFIG.CATALOG_ID],
+                value: 150000,
+                currency: 'VND',
+                page_type: pageType,
+                fanpage_connected: true,
+                fanpage_id: CONFIG.FANPAGE_ID,
+                catalog_id: CONFIG.CATALOG_ID,
+                status: 'success',
+                predicted_ltv: 5000000,
+                source: 'homepage'
+            });
+        }
+        
+        // Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'consultation_click', {
+                'event_category': pageType,
+                'event_label': 'Consultation Button - ' + pageType,
+                'value': 150000
+            });
+        }
+        
+        console.log('🎯 Ruby Wings - Click tracked from:', pageType);
+    }, CONFIG.TRACKING_DELAY);
+    
+    // Enhanced click handler
+    function handleConsultationClick(event) {
+        // Prevent multiple clicks
+        if (rubyElements.btn.classList.contains('loading')) {
+            event.preventDefault();
+            return;
+        }
+        
+        // Add loading state
+        rubyElements.btn.classList.add('loading');
+        
+        // Track the click
+        trackClick();
+        
+        // Remove loading state after delay
+        setTimeout(() => {
+            if (rubyElements.btn) {
+                rubyElements.btn.classList.remove('loading');
+            }
+        }, 1000);
+        
+        // Open in new tab (already handled by target="_blank")
+        console.log('✅ Ruby Wings - Opening consultation form');
+    }
+    
+ 
+    
+    
+    // Fallback system
+    function createFallbackButton() {
+        if (document.getElementById('rubyWingsBtnContainer')) return;
+        
+        const fallbackHTML = `
+            <div id="rubyWingsBtnContainer" style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+                <a href="${CONFIG.FORM_URL}" 
+                   id="rubyWingsMainBtn"
+                   style="display:inline-flex;align-items:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:10px 20px;border-radius:20px;text-decoration:none;font-weight:600;font-size:14px;font-family:'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.2);cursor:pointer;"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Nhận tư vấn từ Ruby Wings">
+                    <span style="margin-right:5px;font-size:13px;">NƠI NHẬN TƯ VẤN</span>
+                    <span style="font-weight:bold;font-size:16px;">→</span>
+                </a>
+            </div>
+        `;
+        
+        document.body.insertAdjacentHTML('beforeend', fallbackHTML);
+        initializeElements();
+        console.log('🔄 Ruby Wings - Fallback button created');
+    }
+    
+    // Initialize DOM elements
+    function initializeElements() {
+        rubyElements.btn = document.getElementById('rubyWingsMainBtn');
+        rubyElements.container = document.getElementById('rubyWingsBtnContainer');
+        
+        if (rubyElements.btn) {
+            // Remove existing listeners to avoid duplicates
+            rubyElements.btn.replaceWith(rubyElements.btn.cloneNode(true));
+            rubyElements.btn = document.getElementById('rubyWingsMainBtn');
+            
+            // Add click listener
+            rubyElements.btn.addEventListener('click', handleConsultationClick, {
+                passive: true
+            });
+        }
+    }
+    
+    // Cleanup function
+    function cleanup() {
+        if (rubyElements.btn) {
+            rubyElements.btn.removeEventListener('click', handleConsultationClick);
+        }
+    }
+    
+    // Initialize everything
+    function initRubyWings() {
+        try {
+            initializeElements();
+            
+            if (!rubyElements.container) {
+                createFallbackButton();
+            }
+            
+            // Track page view after a short delay
+            setTimeout(trackPageView, 100);
+            
+            // Initialize lazy messenger
+            initMessengerLazy();
+            
+            // Add cleanup on page unload
+            window.addEventListener('beforeunload', cleanup);
+            
+            console.log('✅ Ruby Wings - Optimized version initialized successfully');
+        } catch (error) {
+            console.error('❌ Ruby Wings - Initialization error:', error);
+            // Ensure fallback button is created even if other parts fail
+            createFallbackButton();
+        }
+    }
+    
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initRubyWings);
+    } else {
+        initRubyWings();
+    }
+    
+    // Global function for external access
+    window.rubyWingsTrackClick = trackClick;
+    
+})();
+</script>
 
 <style>
 /* CSS cho thiết kế mới */
