@@ -40,25 +40,25 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     
     <!-- Title & Description Tối ưu -->
-    <title>Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô | Ruby Wings</title>
-    <meta name="description" content="Hành trình trải nghiệm 'Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô': Hội An, Rừng dừa Bảy Mẫu, Ngũ Hành Sơn, Chùa Linh Ứng, Huế, Làng hương Thủy Xuân, Chùa Thiên Mụ, Đại Nội.">
-    <meta name="keywords" content="tour miền Trung, Hội An, Huế, Đà Nẵng, di sản miền Trung, Ngũ Hành Sơn, Chùa Thiên Mụ, Đại Nội Huế, Ruby Wings Travel">
+    <title>Hành Trình Cho Học Sinh: Khám Phá Đà Nẵng - Hội An 2N1Đ | Ruby Wings</title>
+    <meta name="description" content="Hành trình 2 ngày 1 đêm cho học sinh khám phá VinWonders Nam Hội An, Chùa Linh Ứng, Cầu Rồng, Ngũ Hành Sơn và Bảo tàng Quân khu 5.">
+    <meta name="keywords" content="tour học sinh Đà Nẵng Hội An, hành trình giáo dục trải nghiệm, VinWonders Nam Hội An, Chùa Linh Ứng, Cầu Rồng, Ngũ Hành Sơn, Ruby Wings Travel">
     
     <!-- Canonical & Alternate URLs -->
-    <link rel="canonical" href="https://rubywings.vn/theo_dong_di_san_mien_trung_tu_pho_co_den_co_do.html">
+    <link rel="canonical" href="https://rubywings.vn/kham_pha_da_nang_hoi_an.html">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://rubywings.vn/theo_dong_di_san_mien_trung_tu_pho_co_den_co_do.html">
-    <meta property="og:title" content="Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô - Ruby Wings">
-    <meta property="og:description" content="Hành trình 3 ngày khám phá di sản miền Trung: Hội An, Rừng dừa Bảy Mẫu, Ngũ Hành Sơn, Chùa Linh Ứng Đà Nẵng, Huế, Làng hương Thủy Xuân, Chùa Thiên Mụ, Đại Nội.">
-    <meta property="og:image" content="https://rubywings.vn/images/pho-co-hoi-an.jpg">
+    <meta property="og:url" content="https://rubywings.vn/kham_pha_da_nang_hoi_an.html">
+    <meta property="og:title" content="Hành Trình Cho Học Sinh: Khám Phá Đà Nẵng - Hội An 2N1Đ - Ruby Wings">
+    <meta property="og:description" content="Tour 2 ngày 1 đêm: VinWonders Nam Hội An, Chùa Linh Ứng, Cầu Rồng, Ngũ Hành Sơn, Bảo tàng Quân khu 5 - Hành trình giáo dục trải nghiệm.">
+    <meta property="og:image" content="https://rubywings.vn/images/vinwonders.jpg">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô - Ruby Wings">
-    <meta name="twitter:description" content="Tour di sản miền Trung 3 ngày: Hội An, Ngũ Hành Sơn, Đà Nẵng, Huế, Đại Nội, Chùa Thiên Mụ, Làng hương Thủy Xuân.">
-    <meta name="twitter:image" content="https://rubywings.vn/images/pho-co-hoi-an.jpg">
+    <meta name="twitter:title" content="Hành Trình Cho Học Sinh: Khám Phá Đà Nẵng - Hội An 2N1Đ - Ruby Wings">
+    <meta name="twitter:description" content="Hành trình 2N1Đ cho học sinh: Đà Nẵng - Hội An, VinWonders, Chùa Linh Ứng, Cầu Rồng, Ngũ Hành Sơn, Bảo tàng Quân khu 5.">
+    <meta name="twitter:image" content="https://rubywings.vn/images/vinwonders.jpg">
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -344,19 +344,12 @@
             line-height: 1.2;
             text-align: left;
             position: relative;
-            padding-left: 10px;
+            padding-left: 0;
         }
 
+        /* Xoá gạch đứng màu hồng bên trái */
         .logo-tagline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 70%;
-            background: var(--gradient-secondary);
-            border-radius: 2px;
+            content: none;
         }
        
         .nav-links {
@@ -533,7 +526,7 @@
         
         /* Hero Section */
         .tour-hero {
-            background: linear-gradient(rgba(11, 86, 42, 0.85), rgba(43, 181, 89, 0.75)), url('images/pho-co-hoi-an.jpg');
+            background: linear-gradient(rgba(11, 86, 42, 0.85), rgba(43, 181, 89, 0.75)), url('images/vinwonders.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -688,6 +681,67 @@
         
         .intro-image:hover::after {
             opacity: 1;
+        }
+        
+        /* Gallery Section */
+        .tour-gallery {
+            background: white;
+            position: relative;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--box-shadow-card);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .gallery-caption h4 {
+            margin-bottom: 5px;
+            text-align: left;
+            font-size: 1.2rem;
         }
         
         /* Điểm nổi bật */
@@ -845,6 +899,11 @@
             line-height: 1.7;
         }
         
+        .timeline-content strong {
+            color: #ff1493;
+            font-weight: 700;
+        }
+        
         /* Thông tin giá */
         .tour-pricing {
             background: var(--gradient-primary);
@@ -932,6 +991,22 @@
         .policies li strong {
             color: #ffe08a;
             font-weight: 700;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        
+        .pricing-table td {
+            padding: 12px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-align: center;
+        }
+        
+        .pricing-table tr:nth-child(even) {
+            background: rgba(255,255,255,0.1);
         }
         
         .pricing-cta {
@@ -1478,9 +1553,9 @@
                 </div>
             </a>
             <!-- Desktop Navigation -->
-            	<nav class="nav-links">
-                 <a href="index.html">Trang chủ</a>
-                 <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
+            <nav class="nav-links">
+                <a href="index.html">Trang chủ</a>
+                <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
                 <a href="ve-dep-quang-tri.html">khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
                 <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">hành trình linh hoạt</a>
@@ -1497,7 +1572,7 @@
             <!-- Mobile Navigation -->
             <nav class="nav-mobile" id="mobileNav">
                 <a href="index.html">Trang chủ</a>
-                 <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
+                <a href="trai-nghiem-cam-xuc.html">Thiên Nhiên Việt Nam</a>
                 <a href="ve-dep-quang-tri.html">khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
                 <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">hành trình linh hoạt</a>
@@ -1511,10 +1586,10 @@
         <!-- Hero Section -->
         <section class="tour-hero">
             <div class="container tour-hero-content">
-                <div class="tour-tag">HÀNH TRÌNH 3 NGÀY 2 ĐÊM</div>
-                <h1>Theo dòng di sản miền Trung – Từ Phố cổ đến Cố Đô</h1>
-                <p>Một hành trình để Quý thầy cô thư giãn, kết nối và đồng thời mở rộng góc nhìn về những giá trị văn hóa – lịch sử đặc trưng của miền Trung.</p>
-                <p>Ruby Wings Travel hân hạnh đồng hành cùng Quý thầy cô khám phá Hội An, Rừng dừa Bảy Mẫu, Ngũ Hành Sơn, Chùa Linh Ứng Đà Nẵng, Huế, Làng hương Thủy Xuân, Chùa Thiên Mụ và Đại Nội.</p>
+                <div class="tour-tag">HÀNH TRÌNH 2 NGÀY 1 ĐÊM CHO HỌC SINH</div>
+                <h1>Khám Phá Đà Nẵng – Hội An</h1>
+                <p>"Mỗi chuyến đi một bài học – Mỗi vùng đất một câu chuyện."</p>
+                <p><span style="color: #ff1493; font-weight: bold;">Ruby Wings Travel</span> xin trân trọng giới thiệu chương trình "Hành Trình Cho Học Sinh - Khám Phá Đà Nẵng - Hội An" 2 ngày 1 đêm với những trải nghiệm giáo dục và giải trí đặc sắc nhất.</p>
             </div>
         </section>
 
@@ -1522,19 +1597,52 @@
         <section class="tour-section tour-intro">
             <div class="container">
                 <div class="section-title">
-                    <h2>🌹🌹🌹🌹🌹🌹🌹🌹🌹</h2>
+                    <h2>Lời giới thiệu </h2>
                 </div>
                 <div class="intro-content">
                     <div class="intro-text">
-                       
-                        <p><strong>Ruby Wings Travel</strong> trân trọng giới thiệu hành trình trải nghiệm <strong>"Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô"</strong>, một chuyến đi thư giãn, kết nối và đồng thời mở rộng góc nhìn về những giá trị văn hóa – lịch sử đặc trưng của miền Trung.</p>
-                        <p>Hành trình sẽ đưa Quý thầy cô dừng chân tại <strong>Hội An</strong>, nơi lưu giữ dấu ấn giao thương cổ xưa; thưởng ngoạn cảnh quan thanh bình của <strong>Rừng dừa Bảy Mẫu</strong>; khám phá vẻ đẹp tâm linh của <strong>Ngũ Hành Sơn</strong> và <strong>Chùa Linh Ứng</strong> giữa lòng Đà Nẵng. Tiếp nối là <strong>Cố đô Huế</strong>, với <strong>Làng hương Thủy Xuân</strong>, <strong>Chùa Thiên Mụ</strong>, <strong>Đại Nội</strong> – những biểu tượng gắn liền với chiều sâu lịch sử dân tộc.</p>
-                        <p>Sự kết hợp hài hòa giữa thiên nhiên, văn hóa và dấu ấn triều đại xưa, chương trình hứa hẹn mang đến cho Quý thầy cô những trải nghiệm phong phú, nhẹ nhàng nhưng giàu giá trị. Đây không chỉ là một chuyến đi, mà còn là hành trình kết nối – học hỏi – và cảm nhận trọn vẹn vẻ đẹp của miền di sản.</p>
-                        <p><strong>Ruby Wings - Hân hạnh đồng hành cùng Quý thầy cô!</strong></p>
+                        <p>Hành trình 2 ngày 1 đêm sẽ đưa các cháu đến với những điểm đến tiêu biểu của miền Trung, nơi vẻ đẹp thiên nhiên, văn hóa và lịch sử hài hòa trong từng trải nghiệm.</p>
+                        <p>Đoàn sẽ ghé thăm Chùa Linh Ứng – công trình tâm linh nổi bật giữa biển trời Sơn Trà, tiếp nối là Công viên Kỳ Quan Thế Giới, nơi tái hiện những biểu tượng văn minh nhân loại đầy sáng tạo.</p>
+                        <p>Tại VinWonders Nam Hội An, các cháu được khám phá không gian văn hóa giao thoa độc đáo, trải nghiệm River Safari, xem biểu diễn nghệ thuật và tận hưởng những khoảnh khắc vui tươi tại công viên nước.</p>
+                        <p>Hành trình cũng đưa đoàn đến Bảo tàng Quân khu 5 và Ngũ Hành Sơn, những điểm đến mang chiều sâu lịch sử – văn hóa, giúp các cháu hiểu biết và cảm nhận rõ nét bản sắc miền Trung.</p>
+                        <p>Chuyến đi kết thúc bằng những phút giây thư giãn, mua sắm, thưởng thức ẩm thực Đà Nẵng – để các cháu không chỉ mang về quà tặng, mà còn mang theo những câu chuyện đẹp và những cảm xúc đáng trân trọng.</p>
+                        <p><span style="color: #ff1493; font-weight: bold;">Ruby Wings Travel</span> - Hân hạnh đồng hành cùng các Nhà trường!</p>
                     </div>
                     <div class="intro-image">
-                        <img src="images/ngu-hanh-son.jpg" alt="Ngũ Hành Sơn - Di sản thiên nhiên Đà Nẵng" class="lazy-image">
+                        <img src="images/chua-linh-ung.jpg" alt="Chùa Linh Ứng Đà Nẵng - Công trình tâm linh nổi bật giữa biển trời Sơn Trà" class="lazy-image">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="tour-section tour-gallery">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Một số hình ảnh đẹp</h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in">
+                        <img src="images/cau-rong.jpg" alt="Cầu Rồng Đà Nẵng - Biểu tượng nổi tiếng của thành phố" class="lazy-image">
+                        <div class="gallery-caption">
+                            <h4>Cầu Rồng Đà Nẵng</h4>
+                            <p>Biểu tượng nổi tiếng với màn phun lửa và phun nước ấn tượng</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="images/ngu-hanh-son.jpg" alt="Ngũ Hành Sơn Đà Nẵng - Quần thể danh thắng nổi tiếng" class="lazy-image">
+                        <div class="gallery-caption">
+                            <h4>Ngũ Hành Sơn Đà Nẵng</h4>
+                            <p>Quần thể năm ngọn núi với hệ thống hang động huyền bí</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item fade-in">
+                        <img src="images/chua-linh-ung.jpg" alt="Chùa Linh Ứng - Một trong ba ngôi chùa tạo nên tam giác linh thiêng Đà Nẵng" class="lazy-image">
+                        <div class="gallery-caption">
+                            <h4>Chùa Linh Ứng</h4>
+                            <p>Công trình tâm linh nổi bật giữa biển trời Sơn Trà</p>
+                        </div>
+                  
                 </div>
             </div>
         </section>
@@ -1548,24 +1656,24 @@
                 <div class="highlights-grid">
                     <div class="highlight-card fade-in">
                         <div class="highlight-icon">
-                            <i class="fas fa-university"></i>
+                            <i class="fas fa-theater-masks"></i>
                         </div>
-                        <h3>Hội An - Phố Cổ Di Sản</h3>
-                        <p>Khám phá Phố cổ Hội An với kiến trúc cổ kính, đèn lồng rực rỡ về đêm và trải nghiệm Rừng dừa Bảy Mẫu - nét đẹp thiên nhiên thanh bình của vùng sông nước miền Trung.</p>
-                    </div>
-                    <div class="highlight-card fade-in">
-                        <div class="highlight-icon">
-                            <i class="fas fa-mountain"></i>
-                        </div>
-                        <h3>Ngũ Hành Sơn & Chùa Linh Ứng</h3>
-                        <p>Chinh phục Thủy Sơn - ngọn núi đẹp nhất Ngũ Hành Sơn, khám phá động Huyền Không, động Âm Phủ và viếng Chùa Linh Ứng - biểu tượng tâm linh của Đà Nẵng.</p>
+                        <h3>VinWonders Nam Hội An</h3>
+                        <p>Trải nghiệm khu vui chơi giải trí hàng đầu với Bến Cảng Giao Thoa, Đại Lộ Giấc Mơ, River Safari, múa rối nước, dân ca quan họ, hơn 95 trò chơi trong nhà, công viên nước và Show Văn hóa Việt 5D hoành tráng.</p>
                     </div>
                     <div class="highlight-card fade-in">
                         <div class="highlight-icon">
                             <i class="fas fa-landmark"></i>
                         </div>
-                        <h3>Cố Đô Huế - Di Sản Văn Hóa</h3>
-                        <p>Trải nghiệm Huế với Làng hương Thủy Xuân rực rỡ sắc màu, Chùa Thiên Mụ cổ kính bên dòng sông Hương và Đại Nội - quần thể di tích uy nghi của triều Nguyễn.</p>
+                        <h3>Chùa Linh Ứng & Bảo Tàng Quân Khu 5</h3>
+                        <p>Khám phá công trình tâm linh nổi bật giữa biển trời Sơn Trà và tìm hiểu lịch sử tại Bảo tàng Quân khu 5 với bộ sưu tập vũ khí, xe tăng, máy bay thật và mô hình diorama tái hiện các trận đánh lịch sử.</p>
+                    </div>
+                    <div class="highlight-card fade-in">
+                        <div class="highlight-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h3>Ngũ Hành Sơn & Cầu Rồng</h3>
+                        <p>Tham quan quần thể danh thắng Ngũ Hành Sơn với hệ thống hang động huyền bí và chiêm ngưỡng Cầu Rồng - biểu tượng Đà Nẵng với màn phun lửa, phun nước ấn tượng vào buổi tối.</p>
                     </div>
                 </div>
             </div>
@@ -1575,85 +1683,40 @@
         <section class="tour-section tour-itinerary">
             <div class="container">
                 <div class="section-title">
-                    <h2>Lịch Trình Chi Tiết</h2>
+                    <h2>Chương Trình Chi Tiết</h2>
                 </div>
                 <div class="timeline">
                     <!-- Ngày 1 -->
                     <div class="timeline-item fade-in">
-                        <div class="timeline-time">Ngày 1<br>07:00 - 11:00</div>
+                        <div class="timeline-time">Ngày 1<br><strong>06:00 - 20:00</strong></div>
                         <div class="timeline-content">
-                            <h3>Quảng Trị - Hội An (Quảng Nam) (Ăn: …/trưa/tối)</h3>
-                            <p>07:00 – Đoàn khởi hành từ Quảng Trị, bắt đầu chuyến đi trong không khí trang trọng và thư thái, tạo điều kiện thuận lợi để Quý thầy cô bước vào hành trình trải nghiệm ý nghĩa.</p>
-                            <p>11:00 – Đoàn dùng bữa trưa tại Lăng Cô, thưởng thức hải sản địa phương, sau đó tiếp tục di chuyển vào Hội An để tiếp tục hành trình tham quan.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">14:00 - 18:00</div>
-                        <div class="timeline-content">
-                            <h3> Tham quan trải nghiệm Rừng Dừa Bảy Mẫu </h3>
-                            <p>14:00 – Đoàn nhận phòng tại Hội An và nghỉ ngơi ngắn tại khách sạn trước khi tiếp tục chương trình.</p>
-                            <p>14:30 – Đoàn tham quan và trải nghiệm Rừng dừa Bảy Mẫu (Cẩm Thanh), nơi Quý thầy cô có thể lên thuyền thúng, xem biểu diễn múa thúng và quan sát các hoạt động đánh bắt truyền thống như quăng lưới, mang lại những phút giây thư giãn.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">18:00 - 22:00</div>
-                        <div class="timeline-content">
-                            <h3>Tối tại Phố Cổ Hội An</h3>
-                            <p>18:00 – Đoàn dùng cơm tối tại nhà hàng địa phương, thưởng thức những món đặc sản đậm hương vị Hội An.</p>
-                            <p>Từ 19:30 – Quý thầy cô tự do tham quan Phố cổ Hội An, dạo ngắm phố đèn lồng và tận hưởng không khí cổ kính về đêm. Đoàn nghỉ đêm tại Hội An.</p>
+                            <h3>Quảng Trị - Đà Nẵng – VinWonders Nam Hội An 243km (Ăn: ---/Trưa/Tối)</h3>
+                            <p><strong>06.00</strong> - Xe và HDV đón đoàn tại điểm hẹn khởi hành đi Đà Nẵng.</p>
+                            <p><strong>09.30</strong> - Các cháu tham quan Chùa Linh Ứng, một trong ba ngôi chùa tạo nên "tam giác linh thiêng" của Đà Nẵng, nổi bật với vị trí đắc địa và vẻ đẹp thanh tịnh. Đoàn tiếp tục khám phá Công viên Kỳ Quan Thế Giới, nơi tái hiện sống động nhiều biểu tượng kiến trúc nổi tiếng ngay giữa lòng thành phố.</p>
+                            <p><strong>11.00</strong> - Quý khách dùng cơm trưa tại nhà hàng, sau đó khởi hành đến VinWonders Nam Hội An – khu tổ hợp vui chơi, giải trí và khám phá văn hóa đặc sắc hàng đầu miền Trung.</p>
+                            <p><strong>13.00</strong> - Các cháu đến VinWonders Nam Hội An, hướng dẫn viên nhận vé và hỗ trợ làm thủ tục vào cổng. Hành trình bắt đầu tại Bến Cảng Giao Thoa, nơi tái hiện kiến trúc Hội An xưa; tiếp tục đến Đại Lộ Giấc Mơ mang phong cách phương Tây hiện đại và mô hình Thành Cổ Loa – biểu tượng lịch sử gắn với truyền thống dựng nước và giữ nước.</p>
+                            <p>Đoàn khám phá River Safari với hàng trăm loài động vật sinh sống giữa thiên nhiên trong lành. Các cháu cũng được thưởng thức múa rối nước tại sân khấu Thủy Đình, dân ca quan họ tại Đình Làng Việt – những nét văn hóa dân gian đặc sắc của người Việt.</p>
+                            <p>Tiếp đó, Các cháu tự do trải nghiệm khu trò chơi trong nhà với hơn 95 trò chơi hấp dẫn như phim 5D, tranh 3D, khu vườn cổ tích… hoặc thư giãn tại Công viên nước với sông lười, đường trượt phao gia đình và khu vui chơi trẻ em, mang đến những khoảnh khắc vui tươi và đáng nhớ.</p>
+                            <p><strong>18.00</strong> - Các cháu dùng bữa tối với thực đơn cơm gà hoặc cơm sườn, sau đó, thưởng thức Show Văn hóa Việt 5D lúc 18h45 – chương trình trình chiếu sống động tái hiện lịch sử và bản sắc dân tộc. Đến 19h30, Các cháu chiêm ngưỡng nhạc nước, một trong những màn trình diễn hoành tráng bậc nhất châu Á, kết hợp ánh sáng – âm thanh – nghệ thuật đầy ấn tượng, khép lại một ngày trải nghiệm trọn vẹn.</p>
+                            <p><strong>20.00</strong> - Đoàn rời VinWonders Nam Hội An, khởi hành về Đà Nẵng, nhận phòng khách sạn và nghỉ ngơi. Buổi tối, Các cháu tham quan và chụp hình tại Cầu Rồng – biểu tượng nổi tiếng của thành phố (cầu phun lửa và phun nước lúc 21h00 vào tối thứ Bảy và Chủ nhật). Tiếp đó, đoàn check-in Tượng Cá Chép Hóa Rồng và Cầu Tình Yêu, khu vực được ví như "Singapore thu nhỏ" giữa lòng Đà Nẵng. Các cháu tiếp tục tự do dạo chợ đêm, thưởng thức ẩm thực đường phố và khám phá vẻ đẹp lung linh của thành phố về đêm.</p>
                         </div>
                     </div>
 
                     <!-- Ngày 2 -->
                     <div class="timeline-item fade-in">
-                        <div class="timeline-time">Ngày 2<br>06:30 - 08:15</div>
+                        <div class="timeline-time">Ngày 2<br><strong>06:30 - 18:00</strong></div>
                         <div class="timeline-content">
-                            <h3>Hội An - Đà Nẵng (Ăn: Sáng/Trưa/Tối)</h3>
-                            <p>06:30 – Đoàn dùng bữa sáng và làm thủ tục trả phòng.</p>
-                            <p>07:30 – Đoàn di chuyển về thành phố Đà Nẵng, một đô thị sầm uất, khang trang và hiện đại bậc nhất miền Trung, nơi mang đến không khí năng động nhưng vẫn giữ được nét thân thiện, thanh bình đặc trưng.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">08:15 - 13:00</div>
-                        <div class="timeline-content">
-                            <h3>Ngũ Hành Sơn & Chùa Linh Ứng</h3>
-                            <p>08:15 – Đoàn tham quan Ngũ Hành Sơn, chinh phục Thủy Sơn – ngọn núi đẹp nhất trong quần thể, khám phá động Huyền Không, chùa Linh Ứng cổ và động Âm Phủ với nhiều câu chuyện tâm linh đặc sắc.</p>
-                            <p>11:30 – Đoàn dùng cơm trưa tại Đà Nẵng, thưởng thức các món đặc sản đặc trưng của miền Trung.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">13:00 - 21:00</div>
-                        <div class="timeline-content">
-                            <h3>Huế - Làng Hương Thủy Xuân & Giao Lưu</h3>
-                            <p>13:00 – Đoàn di chuyển về thành phố Huế, vùng đất giàu giá trị văn hóa và lịch sử, nơi lưu giữ dấu ấn của triều Nguyễn cùng nhiều di sản được UNESCO công nhận.</p>
-                            <p>15:30 – Đoàn đến Huế và tham quan Làng hương Thủy Xuân, nơi nổi tiếng với nghề làm hương truyền thống và những sắc màu rực rỡ đặc trưng của làng nghề xứ Huế.</p>
-                            <p>16:30 – Đoàn nhận phòng khách sạn tại Huế và nghỉ ngơi.</p>
-                            <p>18:00 – Đoàn dùng cơm tối và tham gia chương trình giao lưu tạo không khí gắn kết và vui tươi giữa các thành viên.</p>
-                            <p>21:00 – Đoàn nghỉ đêm tại Huế; Quý thầy cô tự do tham quan các điểm như Phố đi bộ, Cầu gỗ Lim và tận hưởng không khí yên bình của cố đô về đêm. Có thể thưởng thức Ca Huế du thuyền sông Hương (thêm chi phí).</p>
-                        </div>
-                    </div>
-
-                    <!-- Ngày 3 -->
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">Ngày 3<br>07:00 - 10:00</div>
-                        <div class="timeline-content">
-                            <h3>Đại Nội - Chùa Thiên Mụ (Ăn: Sáng/Trưa)</h3>
-                            <p>07:00 – Đoàn dùng bữa sáng và làm thủ tục trả phòng.</p>
-                            <p>07:45 – Đoàn tham quan và tìm hiểu Đại Nội – Kinh thành Huế, quần thể di tích uy nghi của triều Nguyễn, nơi lưu giữ nhiều giá trị lịch sử, kiến trúc và văn hóa đặc sắc của cố đô.</p>
-                            <p>10:00 – Đoàn tham quan Chùa Thiên Mụ, điểm đến tiêu biểu của văn hóa tâm linh xứ Huế, nổi bật với kiến trúc cổ kính và không gian thanh tịnh bên dòng sông Hương.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-time">12:00 - 14:00</div>
-                        <div class="timeline-content">
-                            <h3>Bữa Trưa & trở về</h3>
-                            <p>12:00 – Đoàn dùng cơm trưa tại nhà vườn hoặc nhà hàng địa phương, thưởng thức ẩm thực đặc trưng xứ Huế.</p>
-                            <p>14:00 – Đoàn khởi hành trở về Quảng Trị, kết thúc hành trình trong không khí ấm áp và nhiều trải nghiệm ý nghĩa.</p>
+                            <h3>Đà Nẵng - Quảng Trị 190km (Ăn: Sáng/Trưa/---)</h3>
+                            <p><strong>06.30</strong> - Quý khách dùng bữa sáng buffet tại khách sạn, thưởng thức các món ăn đặc trưng địa phương và quốc tế, sau đó làm thủ tục trả phòng, chuẩn bị tiếp tục hành trình khám phá và trải nghiệm trong ngày.</p>
+                            <p><strong>08.00</strong> - Các cháu tham quan Bảo tàng Quân khu 5, nơi trưng bày bộ sưu tập vũ khí, xe tăng, máy bay và nhiều phương tiện quân sự thật, cùng các mô hình diorama tái hiện sinh động những trận đánh lịch sử, giúp hiểu rõ hơn về truyền thống chiến đấu của Quân khu 5. Tiếp đó, đoàn tham quan danh thắng Ngũ Hành Sơn – Non Nước, quần thể năm ngọn núi Kim – Mộc – Thủy – Hỏa – Thổ nổi tiếng với hệ thống hang động huyền bí, chùa chiền cổ kính và làng đá mỹ nghệ truyền thống. Các cháu có thể chiêm ngưỡng vẻ đẹp thiên nhiên và ngắm toàn cảnh Đà Nẵng từ đỉnh Thủy Sơn.</p>
+                            <p><strong>11.30</strong> - Quý khách dùng cơm trưa tại nhà hàng, sau đó tự do tham quan, mua sắm tại các trung tâm thương mại lớn ở Đà Nẵng như GO!, Vincom hoặc Đặc sản Miền Trung.</p>
+                            <p><strong>14.30</strong> - Quý khách lên xe trở về Quảng Trị.</p>
+                            <p><strong>18.00</strong> - Đoàn về đến Quảng Trị, kết thúc chương trình tham quan.</p>
                         </div>
                     </div>
                 </div>
                 <p class="text-justify pricing-note" style="margin-top: 40px;">
-                    <strong>Lưu ý:</strong> Chương trình tour có thể hoán đổi thứ tự điểm tham quan theo sự sắp xếp của Cty hoặc HDV địa phương nhưng vẫn đảm bảo điểm tham quan có trong chương trình.
+                    <strong>Lưu ý:</strong> Chương trình hành trình có thể hoán đổi thứ tự điểm tham quan theo sự sắp xếp của Cty hoặc HDV địa phương nhưng vẫn đảm bảo điểm tham quan có trong chương trình. Các cháu vui lòng tuân thủ các quy định của đoàn trong suốt chuyến đi.
                 </p>
             </div>
         </section>
@@ -1662,70 +1725,72 @@
         <section class="tour-section tour-pricing" id="booking">
             <div class="container">
                 <div class="section-title">
-                    <h2>Th. tin chi phí & Dịch vụ</h2>
+                    <h2>Thông Tin Chi Phí & Dịch Vụ</h2>
                 </div>
                 <div class="pricing-content">
                     <div class="included">
-                        <h3>Chi phí bao gồm</h3>
+                        <h3>Chi Phí Hành Trình Bao Gồm</h3>
                         <ul>
-                            <li><strong>Vận chuyển:</strong> Xe chất lượng cao đưa đón đoàn theo chương trình.</li>
-                            <li><strong>Ăn uống:</strong> 5 bữa chính 150.000đ/bạn; trong đó có 01 bữa tăng cường 200.000đ/suất; 1 bữa ăn đặc sản bánh ướt thịt heo quay nổi tiếng vùng Lăng Cô 75.000đ/bạn.</li>
-                            <li><strong>Âm thanh ánh sáng:</strong> Bảo đảm âm thanh ánh sáng sân khấu cho đêm giao lưu tối ngày thứ 2.</li>
-                            <li><strong>Lưu trú:</strong> Khách sạn (hoặc resort) 3* trở lên (2 người/phòng; lẻ nam/nữ ngủ phòng 3).</li>
-                            <li><strong>Hướng dẫn viên:</strong> HDV chuyên nghiệp theo đoàn suốt hành trình.</li>
-                            <li><strong>Dịch vụ kèm theo:</strong> Nước uống, nón Du lịch, Bảo hiểm.</li>
-                            <li><strong>Vé tham quan:</strong> Vé tham quan vào cửa đầu tiên theo chương trình.</li>
+                            <li><strong>Khách sạn:</strong> 3*/ nâng cấp lên 4* +300.000VND/khách/đêm; (4 học sinh/phòng). Tiện nghi: máy lạnh, tivi, nước nóng, vệ sinh…</li>
+                            <li><strong>Xe chất lượng cao:</strong> Xe chất lượng cao đưa đón đoàn theo chương trình.</li>
+                            <li><strong>Ăn uống:</strong> Chi phí ăn (03 bữa chính theo chương trình 100.000 vnđ/suất - nhà hàng địa phương tiêu chuẩn, hợp vệ sinh - menu thay đổi theo khu vực, theo đặc sản địa phương, ăn sáng tại khách sạn).</li>
+                            <li><strong>Hướng dẫn viên:</strong> Hướng dẫn viên giỏi, có kinh nghiệm, vui vẻ, am hiểu, nhiệt tình.</li>
+                            <li><strong>Vé tham quan:</strong> Vé tham quan vào cửa 01 lần; Khăn lạnh và nước uống phục vụ đoàn.</li>
+                            <li><strong>Quà tặng & Bảo hiểm:</strong> Quà tặng: Nón du lịch; Bảo hiểm du lịch theo quy định TCDL Việt Nam.</li>
                         </ul>
                     </div>
                     <div class="excluded">
-                        <h3>Chi phí không bao gồm</h3>
+                        <h3>Chi Phí Không Bao Gồm</h3>
                         <ul>
-                            <li><strong>VAT & chi phí cá nhân:</strong> VAT, điện thoại, giặt ủi, mua sắm, Bia, nước ngọt... trong các bữa ăn.</li>
-                            <li><strong>Khách VIP:</strong> Các bữa ăn cần up thêm 50.000 – 80.000đ/pax/bữa để chất lượng món ăn tốt.</li>
-                            <li><strong>Dịch vụ tự chọn:</strong> Tự do trải nghiệm các dịch vụ bên trong tại các điểm tham quan.</li>
-                            <li><strong>Hoá đơn tài chính:</strong> Hoá đơn giá trị gia tăng VAT.</li>
-                            <li><strong>Tiền tip:</strong> Bồi dưỡng cho HDV & Lái xe (thông lệ khoảng 30.000đ/ngày/khách).</li>
-                            <li><strong>Phụ thu Lễ/Tết & cuối tuần:</strong> Giá áp dụng cho ngày cụ thể nêu trên, nếu chuyển thời gian tham quan rơi vào Lễ, Tết, cuối tuần – Chi phí tour vào Thứ 6, Bảy hoặc lễ tết sẽ cao hơn từ 10 – 25% tuỳ từng dịch vụ.</li>
-                            <li><strong>Phòng đơn:</strong> Ngủ phòng đơn thu thêm 350.000 VNĐ.</li>
-                            <li><strong>VinWonders Nam Hội An:</strong> Nếu tham quan VinWonders Nam Hội An (đã bao gồm vé show diễn) thì thêm 600.000đ/bạn.</li>
+                            <li><strong>VAT & chi phí cá nhân:</strong> VAT, chi phí cá nhân khác như: Điện thoại, giặt ủi, mua sắm, Bia, nước ngọt trong các bữa ăn.</li>
+                            <li><strong>Khách VIP:</strong> Khách VIP các bữa ăn cần up thêm 50.000 – 80.000/pax/bữa để chất lượng món ăn tốt.</li>
+                            <li><strong>Dịch vụ tự chọn:</strong> Tự do trải nghiệm các dịch vụ bên trong tại các vị điểm tham quan.</li>
+                            <li><strong>Hoá đơn tài chính:</strong> Hoá đơn tài chính VAT.</li>
+                            <li><strong>Tiền tip:</strong> Tiền Tip bồi dưỡng cho HDV & Lái xe (thông lệ khoảng 30.000/ngày/khách).</li>
+                            <li><strong>Phụ thu Lễ/Tết & cuối tuần:</strong> Giá áp dụng cho ngày cụ thể nêu trên, nếu chuyển thời gian tham quan rơi vào Lễ, Tết, cuối tuần - Chi phí hành trình vào Thứ 6, Bảy hoặc lễ tết sẽ cao hơn từ 10 - 25% tuỳ từng dịch vụ.</li>
                         </ul>
                     </div>
                     <div class="policies">
                         <h3>Bảng Giá & Chính Sách</h3>
                         <ul>
                             <li>
-                                <strong>Chi phí áp dụng cho mỗi thành viên theo nhóm khách (15+1):</strong><br>
-                                <table style="width:100%; margin-top:10px; border-collapse:collapse;">
+                                <strong>Chi phí áp dụng cho mỗi học sinh:</strong><br>
+                                <table class="pricing-table">
                                     <tr>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">17 – 19 khách</td>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">2.790.000đ</td>
+                                        <td><strong>Số lượng học sinh</strong></td>
+                                        <td><strong>Giá tour (VND)</strong></td>
                                     </tr>
                                     <tr>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">20 – 22 khách</td>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">2.720.000đ</td>
+                                        <td>33 – 35 học sinh</td>
+                                        <td><strong>1.780.000đ</strong></td>
                                     </tr>
                                     <tr>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">23 – 25 khách</td>
-                                        <td style="padding:5px; border:1px solid rgba(255,255,255,0.3); text-align:center;">2.670.000đ</td>
+                                        <td>36 – 38 học sinh</td>
+                                        <td><strong>1.750.000đ</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>39 – 42 học sinh</td>
+                                        <td><strong>1.700.000đ</strong></td>
                                     </tr>
                                 </table>
-                                <p style="margin-top:10px;">Nếu tham quan VinWonders Nam Hội An (đã bao gồm vé show diễn) thì thêm 600.000đ/bạn – (tương đương giá khoảng 3.200.000 - 3.300.000đ/bạn).</p>
+                                <p style="margin-top:10px;"><strong>Xe 45 chỗ</strong></p>
+                                <p style="margin-top:10px;"><em>Lưu ý: Chi phí dịch vụ có thể thay đổi tùy theo mùa vụ và các yếu tố liên quan. Bảng giá trên chỉ mang tính tham khảo; chi phí chính thức sẽ được xác nhận sau khi thống nhất hạng mục dịch vụ. (Giá có xu hướng tăng dần khi gần đến ngày khởi hành.)</em></p>
                             </li>
                             <li>
                                 <strong>Chính sách giá tour trẻ em:</strong><br>
                                 - Từ 11 tuổi trở lên: mua 01 vé;<br>
                                 - Từ 8 đến dưới 11 tuổi: mua 75% vé (suất ăn người lớn, ngủ cùng bố mẹ);<br>
-                                - Từ 4 đến dưới 7 tuổi: mua 50% vé (suất ăn trẻ em, ngủ cùng bố mẹ) – Nếu ngủ giường riêng phụ thu như giá phòng người lớn;<br>
+                                - Từ 4 đến dưới 7 tuổi: mua 50% vé (suất ăn trẻ em, ngủ cùng bố mẹ) - Nếu ngủ giường riêng phụ thu như giá phòng người lớn;<br>
                                 - Dưới 4 tuổi: không tính vé, gia đình tự lo. 02 người lớn chỉ được kèm 01 trẻ em, nếu trẻ em đi kèm nhiều hơn thì từ em thứ 02 trở lên phải mua ½ vé; Tiêu chuẩn ½ vé được 01 suất ăn + 01 ghế ngồi và ngủ chung với gia đình.
                             </li>
                             <li>
-                                <strong>Chính sách huỷ tour (do khách huỷ):</strong><br>
+                                <strong>Chính sách huỷ hành trình (do khách huỷ):</strong><br>
                                 - Trước 14 ngày: không thu phí;<br>
-                                - Từ 07 – 13 ngày: 30% giá tour;<br>
-                                - Từ 05 - 06 ngày: 50% giá tour;<br>
-                                - Từ 03 - 04 ngày: 75% giá tour;<br>
-                                - Từ 01 - 02 ngày: 90% giá tour;<br>
-                                - Ngày khởi hành: 100% giá tour.
+                                - Từ 07 – 13 ngày: 30% giá hành trình;<br>
+                                - Từ 05 - 06 ngày: 50% giá hành trình;<br>
+                                - Từ 03 - 04 ngày: 75% giá hành trình;<br>
+                                - Từ 01 - 02 ngày: 90% giá hành trình;<br>
+                                - Ngày khởi hành: 100% giá hành trình.
                             </li>
                         </ul>
                     </div>
@@ -1734,7 +1799,7 @@
                     <button onclick="handleRegistration()" id="registrationCostButton" class="btn" style="font-size: 1.3rem; padding: 18px 50px; font-weight: 700;">
                         <i class="fas fa-calendar-check"></i> THÔNG TIN CHI PHÍ VÀ ĐĂNG KÝ
                     </button>
-                    <p class="pricing-note">Lưu ý: Chi phí dịch vụ có thể thay đổi tùy theo mùa vụ và các yếu tố liên quan. Bảng giá trên đây chỉ mang tính tham khảo; chi phí chính thức sẽ được xác nhận sau khi thống nhất hạng mục dịch vụ. (Giá có xu hướng tăng dần khi gần đến ngày khởi hành.)</p>
+                    <p class="pricing-note">Hành trình 2 ngày 1 đêm khám phá Đà Nẵng - Hội An dành cho học sinh, kết hợp giáo dục và giải trí.</p>
                 </div>
             </div>
         </section>
@@ -1748,31 +1813,39 @@
                 <div class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Hành trình này có phù hợp với đoàn giáo viên, cán bộ nhà trường không?</span>
+                            <span>Hành trình này có phù hợp với học sinh không?</span>
                             <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="faq-answer">
-                            <p>Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt dành cho Quý thầy cô giáo và cán bộ nhà trường, với lịch trình cân bằng giữa tham quan di sản, trải nghiệm văn hóa và thời gian nghỉ ngơi, giao lưu. Các điểm đến mang tính giáo dục cao, giúp mở rộng kiến thức về lịch sử, văn hóa Việt Nam. Buổi giao lưu tối ngày thứ 2 tạo không khí gắn kết, thư giãn sau những giờ làm việc căng thẳng.</p>
+                            <p>Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt cho học sinh, kết hợp giữa giáo dục và giải trí. Các điểm tham quan như Bảo tàng Quân khu 5 giúp học sinh hiểu về lịch sử, Chùa Linh Ứng và Ngũ Hành Sơn mang lại kiến thức về văn hóa, tâm linh, trong khi VinWonders Nam Hội An cung cấp trải nghiệm vui chơi, giải trí lành mạnh và sáng tạo. Hành trình tuân thủ nguyên tắc "Mỗi chuyến đi một bài học – Mỗi vùng đất một câu chuyện".</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Tôi cần chuẩn bị những gì cho chuyến đi?</span>
+                            <span>Học sinh cần chuẩn bị những gì cho chuyến đi?</span>
                             <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="faq-answer">
-                            <p><strong>Giấy tờ tùy thân:</strong> Quý thầy cô mang theo CMND/CCCD để thuận tiện cho việc kiểm tra, xác nhận thông tin và hỗ trợ tại các điểm tham quan.</p>
-                            <p><strong>Trang phục phù hợp:</strong> Hành trình có nhiều điểm tâm linh (Chùa Linh Ứng, Chùa Thiên Mụ), đề nghị mặc trang phục lịch sự, kín đáo; mang giày đế mềm để di chuyển thuận tiện tại Ngũ Hành Sơn và Phố cổ.</p>
-                            <p><strong>Chuẩn bị cho thời tiết:</strong> Miền Trung nắng nóng vào ban ngày và dễ mưa rào bất chợt. Nên chuẩn bị mũ/nón, áo khoác nhẹ, ô/áo mưa mỏng và nước uống cá nhân.</p>
+                            <p><strong>Trang phục:</strong> Học sinh cần mang giày đế mềm để thuận tiện di chuyển cả ngày. Khuyến khích mang theo mũ/nón, áo khoác nhẹ, kem chống nắng, nước uống.</p>
+                            <p><strong>Thuốc men:</strong> Giáo viên nên nhắc các em chuẩn bị thuốc cá nhân nếu có tiền sử say xe hoặc dị ứng.</p>
+                            <p><strong>Đồ dùng cá nhân:</strong> Mang theo điện thoại (nếu cần), tiền tiêu vặt vừa đủ, khăn mặt, bàn chải đánh răng, và các vật dụng vệ sinh cá nhân cần thiết.</p>
+                            <p><strong>Quản lý nhóm:</strong> Giáo viên cần phân chia nhóm học sinh, chỉ định giáo viên phụ trách từng nhóm để dễ quản lý trong suốt hành trình.</p>
                         </div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Chi phí tour đã bao gồm những gì? Có phát sinh thêm không?</span>
+                            <span>Trải nghiệm tại VinWonders Nam Hội An như thế nào?</span>
                             <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="faq-answer">
-                            <p>Chi phí tour đã bao gồm đầy đủ các dịch vụ: xe đưa đón, 5 bữa chính theo tiêu chuẩn, khách sạn 3*, HDV chuyên nghiệp, bảo hiểm, nước uống, nón du lịch và vé tham quan các điểm trong chương trình. Chi phí <strong>không bao gồm</strong>: VAT, chi phí cá nhân (điện thoại, giặt ủi, mua sắm, đồ uống trong bữa ăn), tip cho HDV và lái xe (khoảng 30.000đ/ngày/khách), phụ thu phòng đơn (350.000đ), và các dịch vụ tự chọn như Ca Huế du thuyền sông Hương hoặc VinWonders Nam Hội An.</p>
+                            <p>Tại VinWonders Nam Hội An, học sinh sẽ được:</p>
+                            <p>1. <strong>Khám phá các khu vực đặc sắc:</strong> Bến Cảng Giao Thoa (kiến trúc Hội An xưa), Đại Lộ Giấc Mơ (phong cách phương Tây hiện đại), mô hình Thành Cổ Loa (biểu tượng lịch sử).</p>
+                            <p>2. <strong>River Safari:</strong> Khám phá hàng trăm loài động vật sinh sống giữa thiên nhiên trong lành.</p>
+                            <p>3. <strong>Văn hóa dân gian:</strong> Thưởng thức múa rối nước tại sân khấu Thủy Đình, dân ca quan họ tại Đình Làng Việt.</p>
+                            <p>4. <strong>Khu trò chơi:</strong> Hơn 95 trò chơi hấp dẫn như phim 5D, tranh 3D, khu vườn cổ tích.</p>
+                            <p>5. <strong>Công viên nước:</strong> Sông lười, đường trượt phao gia đình, khu vui chơi trẻ em.</p>
+                            <p>6. <strong>Show diễn:</strong> Show Văn hóa Việt 5D lúc 18h45 và nhạc nước hoành tráng lúc 19h30.</p>
+                            <p><em>Lưu ý: Với các hoạt động tại VinWonders (công viên nước, khu trò chơi cảm giác mạnh…), giáo viên cần lưu ý tình trạng sức khỏe của học sinh và chỉ cho tham gia những trò phù hợp độ tuổi.</em></p>
                         </div>
                     </div>
                     <div class="faq-item">
@@ -1781,23 +1854,41 @@
                             <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
                         </div>
                         <div class="faq-answer">
-                            <p><strong>Chính sách huỷ tour:</strong> Huỷ trước 14 ngày: không thu phí; 7–13 ngày: 30% giá tour; 5–6 ngày: 50%; 3–4 ngày: 75%; 1–2 ngày: 90%; huỷ ngày khởi hành: 100% giá tour.</p>
-                            <p><strong>Lưu ý an toàn:</strong></p>
-                            <ul style="margin-left:20px; margin-top:10px;">
-                                <li>Khi trải nghiệm Rừng Dừa Bảy Mẫu: Tuân thủ hướng dẫn, giữ trật tự, không đứng lên thuyền hoặc đùa giỡn.</li>
-                                <li>Bảo quản tư trang: Tại Phố Cổ Hội An, chợ đêm và các điểm đông người, cần tự bảo quản điện thoại, ví và đồ cá nhân.</li>
-                                <li>Ứng xử văn minh: Giữ trật tự, không xả rác, không chạm vào hiện vật tại di tích; tôn trọng văn hóa bản địa và tuân thủ hướng dẫn của Ban Quản lý điểm tham quan.</li>
-                            </ul>
+                            <p><strong>Chính sách huỷ hành trình (do khách huỷ):</strong><br>
+                            - Trước 14 ngày: không thu phí<br>
+                            - Từ 07 – 13 ngày: 30% giá hành trình<br>
+                            - Từ 05 - 06 ngày: 50% giá hành trình<br>
+                            - Từ 03 - 04 ngày: 75% giá hành trình<br>
+                            - Từ 01 - 02 ngày: 90% giá hành trình<br>
+                            - Ngày khởi hành: 100% giá hành trình</p>
                             
-                           
+                            <p><strong>Lưu ý an toàn & quản lý học sinh:</strong><br>
+                            - Giáo viên cần phân chia nhóm học sinh, chỉ định giáo viên phụ trách từng nhóm để dễ quản lý trong suốt hành trình.<br>
+                            - Phổ biến quy định di chuyển: không tách đoàn, không tự ý đi theo lối khác, luôn đi theo sự hướng dẫn của giáo viên và hướng dẫn viên.<br>
+                            - Kiểm tra sĩ số trước khi rời điểm đón – điểm tham quan – lên/xuống xe – rời khu vui chơi.<br>
+                            - Nhắc học sinh ăn uống đúng khu vực quy định, không xả rác và giữ gìn vệ sinh chung.<br>
+                            - Với các hoạt động tại VinWonders (công viên nước, khu trò chơi cảm giác mạnh…), giáo viên cần lưu ý tình trạng sức khỏe của học sinh và chỉ cho tham gia những trò phù hợp độ tuổi.<br>
+                            - Khuyến khích mang theo mũ/nón, áo khoác nhẹ, kem chống nắng, nước uống.<br>
+                            - Học sinh cần mang giày đế mềm để thuận tiện di chuyển cả ngày.<br>
+                            - Giáo viên nên nhắc các em chuẩn bị thuốc cá nhân nếu có tiền sử say xe hoặc dị ứng.</p>
+                            
+                            <!-- NÚT "XEM CÁC HÀNH TRÌNH KHÁC" HIỂN THỊ TRONG FAQ -->
+                            <div style="text-align: center; margin-top: 30px;">
+                                <a href="tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong.html" class="other-tours-btn">
+                                    <i class="fas fa-route"></i> XEM CÁC HÀNH TRÌNH KHÁC
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Nút "XEM CÁC HÀNH TRÌNH KHÁC" HIỂN THỊ TRÊN TRANG, KHÔNG CHÌM TRONG MỤC -->
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong.html" class="other-tours-btn">
+                        <i class="fas fa-route"></i> XEM CÁC HÀNH TRÌNH KHÁC
+                    </a>
+                </div>
             </div>
-             <!-- Nút "Xem các hành trình khác" được thêm vào đây -->
-                            <a href="tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong.html" class="other-tours-btn">
-                                <i class="fas fa-route"></i> XEM CÁC HÀNH TRÌNH KHÁC
-                            </a>
         </section>
     </main>
 
@@ -1807,7 +1898,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3><a href="tuyen-ngon-sang-lap-ruby-wings.html" class="footer-title-link">Về chúng tôi</a></h3>
-                    <p>Ruby Wings Travel - Nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
+                    <p><span style="color: #ff1493; font-weight: bold;">Ruby Wings Travel</span> - Nơi bạn không chỉ đến một nơi, mà còn có thể được trở về với chính mình".</p>
                     <p> MST: 3301743759</p>
                     <div class="social-links-grid">
                         <div class="social-row">
@@ -2029,7 +2120,7 @@
             var pageUrl = window.location.href;
             var pageTitle = document.title;
             var tourTitleElement = document.querySelector('.tour-hero h1');
-            var tourName = tourTitleElement ? tourTitleElement.innerText.trim() : 'Theo Dòng Di Sản Miền Trung – Từ Phố Cổ Đến Cố Đô';
+            var tourName = tourTitleElement ? tourTitleElement.innerText.trim() : 'Hành Trình Cho Học Sinh: Khám Phá Đà Nẵng - Hội An';
             var registrationButton = document.getElementById('registrationCostButton');
 
             var buttonText = registrationButton ? registrationButton.innerText.trim() : 'THÔNG TIN CHI PHÍ VÀ ĐĂNG KÝ';
@@ -2160,538 +2251,541 @@
             };
         }
     </script>
+    
+    <!-- CẬP NHẬT CONTENT_ID_MAP -->
     <script>
-// Ruby Wings Chat Widget - Complete Isolation
-const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
+        // Ruby Wings Chat Widget - Complete Isolation
+        const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 
-(function() {
-    'use strict';
-    
-    // Kiểm tra trùng lặp
-    if (window.RW_CHAT_LOADED) return;
-    window.RW_CHAT_LOADED = true;
-    
-    // Tạo container tách biệt hoàn toàn
-    const createIsolatedWidget = function() {
-        // Xóa widget cũ nếu có
-        const oldWidgets = document.querySelectorAll('#rw-chat-isolated, .rw-chat-isolated');
-        oldWidgets.forEach(w => w.remove());
-        
-        // Tạo container mới
-        const container = document.createElement('div');
-        container.id = 'rw-chat-isolated';
-        container.className = 'rw-chat-isolated';
-        
-        // CSS hoàn toàn tách biệt
-        const styles = `
-            .rw-chat-isolated {
-                position: fixed !important;
-                left: 0 !important;
-                bottom: 0 !important;
-                width: auto !important;
-                height: auto !important;
-                z-index: 10000 !important;
-                pointer-events: none !important;
-                isolation: isolate !important;
-                all: initial !important;
-                font-family: Arial, sans-serif !important;
-            }
+        (function() {
+            'use strict';
             
-            .rw-chat-isolated * {
-                pointer-events: auto !important;
-                box-sizing: border-box !important;
-            }
+            // Kiểm tra trùng lặp
+            if (window.RW_CHAT_LOADED) return;
+            window.RW_CHAT_LOADED = true;
             
-            .rw-chat-btn-isolated {
-                position: fixed !important;
-                left: 15px !important;
-                bottom: 15px !important;
-                width: 60px !important;
-                height: 60px !important;
-                border-radius: 50% !important;
-                background: linear-gradient(135deg, #00d97e, #00b368) !important;
-                border: none !important;
-                color: white !important;
-                font-size: 24px !important;
-                cursor: pointer !important;
-                z-index: 10001 !important;
-                box-shadow: 0 4px 20px rgba(0,217,126,0.4) !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                -webkit-tap-highlight-color: transparent !important;
-                touch-action: manipulation !important;
-                overflow: hidden !important;
-            }
-            
-            .rw-chat-btn-isolated::after {
-                content: "AI" !important;
-                position: absolute !important;
-                bottom: 5px !important;
-                font-size: 11px !important;
-                font-weight: bold !important;
-                color: white !important;
-                left: 0 !important;
-                right: 0 !important;
-                text-align: center !important;
-            }
-            
-            .rw-chat-widget-isolated {
-                position: fixed !important;
-                left: 15px !important;
-                bottom: 85px !important;
-                width: calc(100vw - 30px) !important;
-                max-width: 400px !important;
-                height: 500px !important;
-                background: white !important;
-                border-radius: 12px !important;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
-                z-index: 10002 !important;
-                display: none !important;
-                flex-direction: column !important;
-                overflow: hidden !important;
-                border: 1px solid #e2e8f0 !important;
-                pointer-events: auto !important;
-            }
-            
-            .rw-chat-widget-isolated.open {
-                display: flex !important;
-            }
-            
-            .rw-chat-header-isolated {
-                background: linear-gradient(90deg, #00d97e, #00b368) !important;
-                color: white !important;
-                padding: 15px !important;
-                display: flex !important;
-                align-items: center !important;
-                gap: 10px !important;
-            }
-            
-            .rw-chat-avatar-isolated {
-                width: 32px !important;
-                height: 32px !important;
-                border-radius: 8px !important;
-                background: rgba(255,255,255,0.2) !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                font-weight: bold !important;
-                font-size: 14px !important;
-            }
-            
-            .rw-chat-title-isolated {
-                font-weight: bold !important;
-                font-size: 16px !important;
-                flex: 1 !important;
-            }
-            
-            .rw-chat-close-isolated {
-                background: none !important;
-                border: none !important;
-                color: white !important;
-                font-size: 18px !important;
-                cursor: pointer !important;
-                width: 30px !important;
-                height: 30px !important;
-                border-radius: 50% !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-            }
-            
-            .rw-chat-body-isolated {
-                flex: 1 !important;
-                padding: 15px !important;
-                overflow-y: auto !important;
-                background: #f8fafc !important;
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 12px !important;
-            }
-            
-            .rw-chat-message-isolated {
-                max-width: 85% !important;
-                padding: 12px 16px !important;
-                border-radius: 12px !important;
-                font-size: 14px !important;
-                line-height: 1.4 !important;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-            }
-            
-            .rw-chat-message-bot-isolated {
-                background: white !important;
-                color: #1e293b !important;
-                border-bottom-left-radius: 4px !important;
-                align-self: flex-start !important;
-            }
-            
-            .rw-chat-message-user-isolated {
-                background: linear-gradient(90deg, #00d97e, #00b368) !important;
-                color: white !important;
-                border-bottom-right-radius: 4px !important;
-                align-self: flex-end !important;
-            }
-            
-            .rw-chat-input-container-isolated {
-                padding: 15px !important;
-                background: white !important;
-                border-top: 1px solid #e2e8f0 !important;
-                display: flex !important;
-                gap: 8px !important;
-            }
-            
-            .rw-chat-input-isolated {
-                flex: 1 !important;
-                padding: 12px !important;
-                border: 1px solid #cbd5e1 !important;
-                border-radius: 8px !important;
-                font-size: 14px !important;
-                outline: none !important;
-            }
-            
-            .rw-chat-send-isolated {
-                background: linear-gradient(90deg, #00d97e, #00b368) !important;
-                color: white !important;
-                border: none !important;
-                padding: 12px 16px !important;
-                border-radius: 8px !important;
-                cursor: pointer !important;
-                font-weight: bold !important;
-                font-size: 14px !important;
-            }
-            
-            @media (min-width: 769px) {
-                .rw-chat-btn-isolated {
-                    left: 20px !important;
-                    bottom: 20px !important;
-                    width: 70px !important;
-                    height: 70px !important;
-                }
-                .rw-chat-btn-isolated::after {
-                    font-size: 12px !important;
-                    bottom: 8px !important;
-                }
-                .rw-chat-widget-isolated {
-                    left: 20px !important;
-                    bottom: 100px !important;
-                    width: 400px !important;
-                }
-            }
-        `;
-        
-        // Thêm styles
-        const styleEl = document.createElement('style');
-        styleEl.textContent = styles;
-        document.head.appendChild(styleEl);
-        
-        // Tạo HTML
-        container.innerHTML = `
-            <button class="rw-chat-btn-isolated" aria-label="Mở chat trợ lý Ruby Wings AI">💬</button>
-            <div class="rw-chat-widget-isolated">
-                <div class="rw-chat-header-isolated">
-                    <div class="rw-chat-avatar-isolated">AI</div>
-                    <div class="rw-chat-title-isolated">Trợ lý Ruby Wings AI</div>
-                    <button class="rw-chat-close-isolated" aria-label="Đóng chat">✕</button>
-                </div>
-                <div class="rw-chat-body-isolated">
-                    <div class="rw-chat-message-isolated rw-chat-message-bot-isolated">
-                        Xin chào! Tôi là trợ lý ảo Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn?
-                        <div style="font-size:11px; color:#94a3b8; margin-top:4px; text-align:right;">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                    </div>
-                </div>
-                <div class="rw-chat-input-container-isolated">
-                    <input type="text" class="rw-chat-input-isolated" placeholder="Nhập câu hỏi về du lịch...">
-                    <button class="rw-chat-send-isolated">Gửi</button>
-                </div>
-            </div>
-        `;
-        
-        document.body.appendChild(container);
-        
-        // Lấy elements
-        const chatBtn = container.querySelector('.rw-chat-btn-isolated');
-        const chatWidget = container.querySelector('.rw-chat-widget-isolated');
-        const closeBtn = container.querySelector('.rw-chat-close-isolated');
-        const sendBtn = container.querySelector('.rw-chat-send-isolated');
-        const chatInput = container.querySelector('.rw-chat-input-isolated');
-        const chatBody = container.querySelector('.rw-chat-body-isolated');
-        
-        let isOpen = false;
-        
-        // Event handlers đơn giản
-        function toggleChat() {
-            isOpen = !isOpen;
-            chatWidget.classList.toggle('open', isOpen);
-            if (isOpen) {
-                setTimeout(() => chatInput.focus(), 100);
-            }
-        }
-        
-        function closeChat() {
-            isOpen = false;
-            chatWidget.classList.remove('open');
-        }
-        
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-            
-            // Thêm tin nhắn user
-            addMessage(message, 'user');
-            chatInput.value = '';
-            
-            // Hiển thị typing
-            const typingMsg = addMessage('...', 'bot', true);
-            
-            // Gửi đến backend
-            fetch(BACKEND_URL + '/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ message: message })
-            })
-            .then(response => response.json())
-            .then(data => {
-                typingMsg.remove();
-                const reply = data.reply || data.message || 'Không có phản hồi từ server.';
-                addMessage(reply, 'bot');
-            })
-            .catch(error => {
-                typingMsg.remove();
-                addMessage('Xin lỗi, dịch vụ tạm thời gián đoạn. Vui lòng thử lại.', 'bot');
-            });
-        }
-        
-        function addMessage(text, sender, isTyping = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `rw-chat-message-isolated rw-chat-message-${sender}-isolated`;
-            
-            if (isTyping) {
-                messageDiv.innerHTML = `
-                    <div style="display:flex; gap:4px; align-items:center;">
-                        <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite"></div>
-                        <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.1s"></div>
-                        <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.2s"></div>
-                    </div>
-                    <style>
-                        @keyframes bounce {
-                            0%, 100% { transform: translateY(0); }
-                            50% { transform: translateY(-5px); }
+            // Tạo container tách biệt hoàn toàn
+            const createIsolatedWidget = function() {
+                // Xóa widget cũ nếu có
+                const oldWidgets = document.querySelectorAll('#rw-chat-isolated, .rw-chat-isolated');
+                oldWidgets.forEach(w => w.remove());
+                
+                // Tạo container mới
+                const container = document.createElement('div');
+                container.id = 'rw-chat-isolated';
+                container.className = 'rw-chat-isolated';
+                
+                // CSS hoàn toàn tách biệt
+                const styles = `
+                    .rw-chat-isolated {
+                        position: fixed !important;
+                        left: 0 !important;
+                        bottom: 0 !important;
+                        width: auto !important;
+                        height: auto !important;
+                        z-index: 10000 !important;
+                        pointer-events: none !important;
+                        isolation: isolate !important;
+                        all: initial !important;
+                        font-family: Arial, sans-serif !important;
+                    }
+                    
+                    .rw-chat-isolated * {
+                        pointer-events: auto !important;
+                        box-sizing: border-box !important;
+                    }
+                    
+                    .rw-chat-btn-isolated {
+                        position: fixed !important;
+                        left: 15px !important;
+                        bottom: 15px !important;
+                        width: 60px !important;
+                        height: 60px !important;
+                        border-radius: 50% !important;
+                        background: linear-gradient(135deg, #00d97e, #00b368) !important;
+                        border: none !important;
+                        color: white !important;
+                        font-size: 24px !important;
+                        cursor: pointer !important;
+                        z-index: 10001 !important;
+                        box-shadow: 0 4px 20px rgba(0,217,126,0.4) !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        padding: 0 !important;
+                        margin: 0 !important;
+                        -webkit-tap-highlight-color: transparent !important;
+                        touch-action: manipulation !important;
+                        overflow: hidden !important;
+                    }
+                    
+                    .rw-chat-btn-isolated::after {
+                        content: "AI" !important;
+                        position: absolute !important;
+                        bottom: 5px !important;
+                        font-size: 11px !important;
+                        font-weight: bold !important;
+                        color: white !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        text-align: center !important;
+                    }
+                    
+                    .rw-chat-widget-isolated {
+                        position: fixed !important;
+                        left: 15px !important;
+                        bottom: 85px !important;
+                        width: calc(100vw - 30px) !important;
+                        max-width: 400px !important;
+                        height: 500px !important;
+                        background: white !important;
+                        border-radius: 12px !important;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
+                        z-index: 10002 !important;
+                        display: none !important;
+                        flex-direction: column !important;
+                        overflow: hidden !important;
+                        border: 1px solid #e2e8f0 !important;
+                        pointer-events: auto !important;
+                    }
+                    
+                    .rw-chat-widget-isolated.open {
+                        display: flex !important;
+                    }
+                    
+                    .rw-chat-header-isolated {
+                        background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                        color: white !important;
+                        padding: 15px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 10px !important;
+                    }
+                    
+                    .rw-chat-avatar-isolated {
+                        width: 32px !important;
+                        height: 32px !important;
+                        border-radius: 8px !important;
+                        background: rgba(255,255,255,0.2) !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-weight: bold !important;
+                        font-size: 14px !important;
+                    }
+                    
+                    .rw-chat-title-isolated {
+                        font-weight: bold !important;
+                        font-size: 16px !important;
+                        flex: 1 !important;
+                    }
+                    
+                    .rw-chat-close-isolated {
+                        background: none !important;
+                        border: none !important;
+                        color: white !important;
+                        font-size: 18px !important;
+                        cursor: pointer !important;
+                        width: 30px !important;
+                        height: 30px !important;
+                        border-radius: 50% !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                    
+                    .rw-chat-body-isolated {
+                        flex: 1 !important;
+                        padding: 15px !important;
+                        overflow-y: auto !important;
+                        background: #f8fafc !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                        gap: 12px !important;
+                    }
+                    
+                    .rw-chat-message-isolated {
+                        max-width: 85% !important;
+                        padding: 12px 16px !important;
+                        border-radius: 12px !important;
+                        font-size: 14px !important;
+                        line-height: 1.4 !important;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+                    }
+                    
+                    .rw-chat-message-bot-isolated {
+                        background: white !important;
+                        color: #1e293b !important;
+                        border-bottom-left-radius: 4px !important;
+                        align-self: flex-start !important;
+                    }
+                    
+                    .rw-chat-message-user-isolated {
+                        background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                        color: white !important;
+                        border-bottom-right-radius: 4px !important;
+                        align-self: flex-end !important;
+                    }
+                    
+                    .rw-chat-input-container-isolated {
+                        padding: 15px !important;
+                        background: white !important;
+                        border-top: 1px solid #e2e8f0 !important;
+                        display: flex !important;
+                        gap: 8px !important;
+                    }
+                    
+                    .rw-chat-input-isolated {
+                        flex: 1 !important;
+                        padding: 12px !important;
+                        border: 1px solid #cbd5e1 !important;
+                        border-radius: 8px !important;
+                        font-size: 14px !important;
+                        outline: none !important;
+                    }
+                    
+                    .rw-chat-send-isolated {
+                        background: linear-gradient(90deg, #00d97e, #00b368) !important;
+                        color: white !important;
+                        border: none !important;
+                        padding: 12px 16px !important;
+                        border-radius: 8px !important;
+                        cursor: pointer !important;
+                        font-weight: bold !important;
+                        font-size: 14px !important;
+                    }
+                    
+                    @media (min-width: 769px) {
+                        .rw-chat-btn-isolated {
+                            left: 20px !important;
+                            bottom: 20px !important;
+                            width: 70px !important;
+                            height: 70px !important;
                         }
-                    </style>
+                        .rw-chat-btn-isolated::after {
+                            font-size: 12px !important;
+                            bottom: 8px !important;
+                        }
+                        .rw-chat-widget-isolated {
+                            left: 20px !important;
+                            bottom: 100px !important;
+                            width: 400px !important;
+                        }
+                    }
                 `;
-            } else {
-                messageDiv.innerHTML = `
-                    <div>${text}</div>
-                    <div style="font-size:11px; opacity:0.7; margin-top:4px; text-align:${sender === 'user' ? 'left' : 'right'};">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                
+                // Thêm styles
+                const styleEl = document.createElement('style');
+                styleEl.textContent = styles;
+                document.head.appendChild(styleEl);
+                
+                // Tạo HTML
+                container.innerHTML = `
+                    <button class="rw-chat-btn-isolated" aria-label="Mở chat trợ lý Ruby Wings AI">💬</button>
+                    <div class="rw-chat-widget-isolated">
+                        <div class="rw-chat-header-isolated">
+                            <div class="rw-chat-avatar-isolated">AI</div>
+                            <div class="rw-chat-title-isolated">Trợ lý Ruby Wings AI</div>
+                            <button class="rw-chat-close-isolated" aria-label="Đóng chat">✕</button>
+                        </div>
+                        <div class="rw-chat-body-isolated">
+                            <div class="rw-chat-message-isolated rw-chat-message-bot-isolated">
+                                Xin chào! Tôi là trợ lý ảo Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn?
+                                <div style="font-size:11px; color:#94a3b8; margin-top:4px; text-align:right;">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                            </div>
+                        </div>
+                        <div class="rw-chat-input-container-isolated">
+                            <input type="text" class="rw-chat-input-isolated" placeholder="Nhập câu hỏi về du lịch...">
+                            <button class="rw-chat-send-isolated">Gửi</button>
+                        </div>
+                    </div>
                 `;
-            }
+                
+                document.body.appendChild(container);
+                
+                // Lấy elements
+                const chatBtn = container.querySelector('.rw-chat-btn-isolated');
+                const chatWidget = container.querySelector('.rw-chat-widget-isolated');
+                const closeBtn = container.querySelector('.rw-chat-close-isolated');
+                const sendBtn = container.querySelector('.rw-chat-send-isolated');
+                const chatInput = container.querySelector('.rw-chat-input-isolated');
+                const chatBody = container.querySelector('.rw-chat-body-isolated');
+                
+                let isOpen = false;
+                
+                // Event handlers đơn giản
+                function toggleChat() {
+                    isOpen = !isOpen;
+                    chatWidget.classList.toggle('open', isOpen);
+                    if (isOpen) {
+                        setTimeout(() => chatInput.focus(), 100);
+                    }
+                }
+                
+                function closeChat() {
+                    isOpen = false;
+                    chatWidget.classList.remove('open');
+                }
+                
+                function sendMessage() {
+                    const message = chatInput.value.trim();
+                    if (!message) return;
+                    
+                    // Thêm tin nhắn user
+                    addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Hiển thị typing
+                    const typingMsg = addMessage('...', 'bot', true);
+                    
+                    // Gửi đến backend
+                    fetch(BACKEND_URL + '/chat', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ message: message })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        typingMsg.remove();
+                        const reply = data.reply || data.message || 'Không có phản hồi từ server.';
+                        addMessage(reply, 'bot');
+                    })
+                    .catch(error => {
+                        typingMsg.remove();
+                        addMessage('Xin lỗi, dịch vụ tạm thời gián đoạn. Vui lòng thử lại.', 'bot');
+                    });
+                }
+                
+                function addMessage(text, sender, isTyping = false) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `rw-chat-message-isolated rw-chat-message-${sender}-isolated`;
+                    
+                    if (isTyping) {
+                        messageDiv.innerHTML = `
+                            <div style="display:flex; gap:4px; align-items:center;">
+                                <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite"></div>
+                                <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.1s"></div>
+                                <div style="width:6px; height:6px; border-radius:50%; background:#00d97e; animation: bounce 1s infinite 0.2s"></div>
+                            </div>
+                            <style>
+                                @keyframes bounce {
+                                    0%, 100% { transform: translateY(0); }
+                                    50% { transform: translateY(-5px); }
+                                }
+                            </style>
+                        `;
+                    } else {
+                        messageDiv.innerHTML = `
+                            <div>${text}</div>
+                            <div style="font-size:11px; opacity:0.7; margin-top:4px; text-align:${sender === 'user' ? 'left' : 'right'};">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                        `;
+                    }
+                    
+                    chatBody.appendChild(messageDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                    return messageDiv;
+                }
+                
+                // Gắn event listeners
+                chatBtn.addEventListener('click', toggleChat);
+                closeBtn.addEventListener('click', closeChat);
+                sendBtn.addEventListener('click', sendMessage);
+                
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+                
+                // Đóng khi click bên ngoài
+                document.addEventListener('click', (e) => {
+                    if (isOpen && !chatWidget.contains(e.target) && !chatBtn.contains(e.target)) {
+                        closeChat();
+                    }
+                });
+            };
             
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return messageDiv;
-        }
-        
-        // Gắn event listeners
-        chatBtn.addEventListener('click', toggleChat);
-        closeBtn.addEventListener('click', closeChat);
-        sendBtn.addEventListener('click', sendMessage);
-        
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-        
-        // Đóng khi click bên ngoài
-        document.addEventListener('click', (e) => {
-            if (isOpen && !chatWidget.contains(e.target) && !chatBtn.contains(e.target)) {
-                closeChat();
+            // Khởi tạo khi trang load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', createIsolatedWidget);
+            } else {
+                createIsolatedWidget();
             }
-        });
-    };
+        })();
+    </script>
     
-    // Khởi tạo khi trang load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', createIsolatedWidget);
-    } else {
-        createIsolatedWidget();
-    }
-})();
-</script>
-<!-- RUBY WINGS – META PIXEL LOGIC + CONSULT BUTTON (FINAL, FIX MAP, FIX DEEPSCROLL, NO FALLBACK) -->
-<script>
-(function(){
-'use strict';
+    <!-- RUBY WINGS – META PIXEL LOGIC + CONSULT BUTTON -->
+    <script>
+    (function(){
+    'use strict';
 
-/* =========================================================
-   CONFIG
-========================================================= */
-const SCROLL_DEPTH = 80;
-const ENGAGED_TIME = 30000;
+    /* =========================================================
+       CONFIG
+    ========================================================= */
+    const SCROLL_DEPTH = 80;
+    const ENGAGED_TIME = 30000;
 
-/* =========================================================
-   CONTENT ID MAP (CẬP NHẬT THÊM TRANG MỚI)
-========================================================= */
-const CONTENT_ID_MAP = {
-  '': 'RW_HOME',
-  'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
-  'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
-  'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
-  'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
-  'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
-  'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
-  'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
-  'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
-  'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
-  'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
-  'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
-  'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
-  'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
-  '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
-  '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
-  '03-triet-ly-gia-tri': 'RW_ABOUT_03',
-  '04-logo-y-nghia': 'RW_ABOUT_04',
-  '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
-  'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
-  'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
-  'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
-  'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
-  'lien-he': 'RW_CONTACT',
-  'gioi-thieu': 'RW_ABOUT',
-  'theo_dong_di_san_mien_trung_tu_pho_co_den_co_do': 'RW_TOUR_DISANMIENTRUNG_3N2D',
-  'ky_uc_va_dai_ngan_tinh_lang_gv': 'RW_TOUR_KYUC_DAINGAN_2N1D',
-  'mien_trung_di_san_kham_pha_quy_nhon_phu_yen': 'RW_TOUR_QUYNHON_PHUYEN_4N3D',
-  'kham_pha_dat_viet_van_hoa_ky_quan_thien_nhien_khe_sanh_tam_dao_moc_chau': 'RW_TOUR_TAMDAO_MOCCHAU_4N3D',
-  'mien_bac_di_san_tam_linh_thien_nhien': 'RW_TOUR_HALONG_NINHBINH_TAMCHUC_3N2D',
-  'trai_nghiem_tinh_hoa_bac_bo_ha_noi_sa_pa_phu_tho': 'RW_TOUR_HANOI_SAPA_PHUTHO_5N4D',
-  'di_san_kham_pha_ninh_binh_tam_dao_ha_long': 'RW_TOUR_NINHBINH_TAMDAO_HALONG_6N5D',
-  'kham_pha_da_nang_hoi_an': 'RW_TOUR_DANANG_HOIAN_2N1D'
-};
+    /* =========================================================
+       CONTENT ID MAP (CẬP NHẬT THÊM TRANG MỚI)
+    ========================================================= */
+    const CONTENT_ID_MAP = {
+      '': 'RW_HOME',
+      'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
+      'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
+      'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
+      'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
+      'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
+      'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
+      'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
+      'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
+      'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
+      'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
+      'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
+      'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
+      'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
+      '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
+      '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
+      '03-triet-ly-gia-tri': 'RW_ABOUT_03',
+      '04-logo-y-nghia': 'RW_ABOUT_04',
+      '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
+      'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
+      'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
+      'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
+      'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
+      'lien-he': 'RW_CONTACT',
+      'gioi-thieu': 'RW_ABOUT',
+      'theo_dong_di_san_mien_trung_tu_pho_co_den_co_do': 'RW_TOUR_DISANMIENTRUNG_3N2D',
+      'ky_uc_va_dai_ngan_tinh_lang_gv': 'RW_TOUR_KYUC_DAINGAN_2N1D',
+      'mien_trung_di_san_kham_pha_quy_nhon_phu_yen': 'RW_TOUR_QUYNHON_PHUYEN_4N3D',
+      'kham_pha_dat_viet_van_hoa_ky_quan_thien_nhien_khe_sanh_tam_dao_moc_chau': 'RW_TOUR_TAMDAO_MOCCHAU_4N3D',
+      'mien_bac_di_san_tam_linh_thien_nhien': 'RW_TOUR_HALONG_NINHBINH_TAMCHUC_3N2D',
+      'trai_nghiem_tinh_hoa_bac_bo_ha_noi_sa_pa_phu_tho': 'RW_TOUR_HANOI_SAPA_PHUTHO_5N4D',
+      'di_san_kham_pha_ninh_binh_tam_dao_ha_long': 'RW_TOUR_NINHBINH_TAMDAO_HALONG_6N5D',
+      'kham_pha_da_nang_hoi_an': 'RW_TOUR_DANANG_HOIAN_2N1D'
+    };
 
-/* =========================================================
-   LEAD KEYWORDS
-========================================================= */
-const LEAD_KEYWORDS = [
-  'đăng ký',
-  'đăng ký thông tin tư vấn',
-  'gọi để chúng tôi tư vấn',
-  'liên hệ đặt hành trình',
-  'nơi nhận tư vấn',
-  'nơi nhận tư vấn →',
-  'liên hệ',
-  'tư vấn',
-  '033.251.0486'
-];
+    /* =========================================================
+       LEAD KEYWORDS
+    ========================================================= */
+    const LEAD_KEYWORDS = [
+      'đăng ký',
+      'đăng ký thông tin tư vấn',
+      'gọi để chúng tôi tư vấn',
+      'liên hệ đặt hành trình',
+      'nơi nhận tư vấn',
+      'nơi nhận tư vấn →',
+      'liên hệ',
+      'tư vấn',
+      '033.251.0486'
+    ];
 
-/* =========================================================
-   PATH KEY – FIX CHUẨN HTML TĨNH
-========================================================= */
-let pathKey = location.pathname
-  .replace(/^\/|\/$/g,'')
-  .replace('index.html','')
-  .replace('.html','');
+    /* =========================================================
+       PATH KEY – FIX CHUẨN HTML TĨNH
+    ========================================================= */
+    let pathKey = location.pathname
+      .replace(/^\/|\/$/g,'')
+      .replace('index.html','')
+      .replace('.html','');
 
-if(pathKey === '') pathKey = '';
+    if(pathKey === '') pathKey = '';
 
-const CONTENT_ID = CONTENT_ID_MAP[pathKey] || null;
-const PAGE_TYPE = pathKey === '' ? 'home' : (CONTENT_ID ? 'page' : 'unmapped');
+    const CONTENT_ID = CONTENT_ID_MAP[pathKey] || null;
+    const PAGE_TYPE = pathKey === '' ? 'home' : (CONTENT_ID ? 'page' : 'unmapped');
 
-/* =========================================================
-   VIEW CONTENT
-========================================================= */
-setTimeout(function(){
-  if(!window.fbq || !CONTENT_ID) return;
-  fbq('track','ViewContent',{
-    content_name: document.title,
-    content_category: PAGE_TYPE,
-    content_ids: [CONTENT_ID],
-    content_type: 'website',
-    currency: 'VND',
-    value: PAGE_TYPE==='home'?0:10000,
-    predicted_ltv: PAGE_TYPE==='home'?0:1000000
-  });
-},1000);
+    /* =========================================================
+       VIEW CONTENT
+    ========================================================= */
+    setTimeout(function(){
+      if(!window.fbq || !CONTENT_ID) return;
+      fbq('track','ViewContent',{
+        content_name: document.title,
+        content_category: PAGE_TYPE,
+        content_ids: [CONTENT_ID],
+        content_type: 'website',
+        currency: 'VND',
+        value: PAGE_TYPE==='home'?0:10000,
+        predicted_ltv: PAGE_TYPE==='home'?0:1000000
+      });
+    },1000);
 
-/* =========================================================
-   DEEP SCROLL (KHÔNG LỖI CHUỖI)
-========================================================= */
-let deepScrollSent=false;
-window.addEventListener('scroll',function(){
-  if(deepScrollSent || !window.fbq || !CONTENT_ID) return;
-  const percent=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;
-  if(percent>=SCROLL_DEPTH){
-    deepScrollSent=true;
-    fbq('trackCustom','DeepScroll',{
-      content_id: CONTENT_ID,
-      page_type: PAGE_TYPE,
-      scroll_depth: SCROLL_DEPTH
+    /* =========================================================
+       DEEP SCROLL (KHÔNG LỖI CHUỖI)
+    ========================================================= */
+    let deepScrollSent=false;
+    window.addEventListener('scroll',function(){
+      if(deepScrollSent || !window.fbq || !CONTENT_ID) return;
+      const percent=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100;
+      if(percent>=SCROLL_DEPTH){
+        deepScrollSent=true;
+        fbq('trackCustom','DeepScroll',{
+          content_id: CONTENT_ID,
+          page_type: PAGE_TYPE,
+          scroll_depth: SCROLL_DEPTH
+        });
+      }
+    },{passive:true});
+
+    /* =========================================================
+       ENGAGED VIEW
+    ========================================================= */
+    setTimeout(function(){
+      if(!window.fbq || !CONTENT_ID) return;
+      fbq('trackCustom','EngagedView',{
+        content_id: CONTENT_ID,
+        page_type: PAGE_TYPE,
+        time_on_page: ENGAGED_TIME/1000
+      });
+    },ENGAGED_TIME);
+
+    /* =========================================================
+       LEAD CLICK (CHẶN AUTO-DETECT)
+    ========================================================= */
+    document.addEventListener('click',function(e){
+      if(!window.fbq || !CONTENT_ID) return;
+      const el=e.target.closest('a,button');
+      if(!el) return;
+      const text=(el.innerText||'').toLowerCase();
+      const isLead=LEAD_KEYWORDS.some(k=>text.includes(k.toLowerCase()));
+      if(!isLead) return;
+      fbq('track','Lead',{
+        _disable_auto_detect:true,
+        content_name:text.substring(0,80),
+        content_category:'consultation',
+        content_ids:[CONTENT_ID],
+        page_type:PAGE_TYPE,
+        intent_level:'medium',
+        value:180000,
+        currency:'VND'
+      });
     });
-  }
-},{passive:true});
 
-/* =========================================================
-   ENGAGED VIEW
-========================================================= */
-setTimeout(function(){
-  if(!window.fbq || !CONTENT_ID) return;
-  fbq('trackCustom','EngagedView',{
-    content_id: CONTENT_ID,
-    page_type: PAGE_TYPE,
-    time_on_page: ENGAGED_TIME/1000
-  });
-},ENGAGED_TIME);
+    /* =========================================================
+       CONSULT BUTTON (GÓC PHẢI)
+    ========================================================= */
+    const btn=document.createElement('div');
+    btn.innerHTML=`
+     <a href="https://forms.gle/XCWf6zgFRp4Vhbw39"
+       target="_blank"
+       id="rw-consult-btn"
+       style="
+         position:fixed;
+         right:20px;
+         bottom:20px;
+         z-index:9999;
+         padding:12px 18px;
+         background:linear-gradient(135deg,#16a34a,#22c55e);
+         color:#ffffff;
+         font-weight:700;
+         font-size:14px;
+         border-radius:30px;
+         text-decoration:none;
+         box-shadow:0 6px 16px rgba(0,0,0,.25);
+       ">
+       NƠI NHẬN TƯ VẤN →
+    </a>
+    `;
+    document.body.appendChild(btn);
 
-/* =========================================================
-   LEAD CLICK (CHẶN AUTO-DETECT)
-========================================================= */
-document.addEventListener('click',function(e){
-  if(!window.fbq || !CONTENT_ID) return;
-  const el=e.target.closest('a,button');
-  if(!el) return;
-  const text=(el.innerText||'').toLowerCase();
-  const isLead=LEAD_KEYWORDS.some(k=>text.includes(k.toLowerCase()));
-  if(!isLead) return;
-  fbq('track','Lead',{
-    _disable_auto_detect:true,
-    content_name:text.substring(0,80),
-    content_category:'consultation',
-    content_ids:[CONTENT_ID],
-    page_type:PAGE_TYPE,
-    intent_level:'medium',
-    value:180000,
-    currency:'VND'
-  });
-});
-
-/* =========================================================
-   CONSULT BUTTON (GÓC PHẢI)
-========================================================= */
-const btn=document.createElement('div');
-btn.innerHTML=`
- <a href="https://forms.gle/XCWf6zgFRp4Vhbw39"
-   target="_blank"
-   id="rw-consult-btn"
-   style="
-     position:fixed;
-     right:20px;
-     bottom:20px;
-     z-index:9999;
-     padding:12px 18px;
-     background:linear-gradient(135deg,#16a34a,#22c55e);
-     color:#ffffff;
-     font-weight:700;
-     font-size:14px;
-     border-radius:30px;
-     text-decoration:none;
-     box-shadow:0 6px 16px rgba(0,0,0,.25);
-   ">
-   NƠI NHẬN TƯ VẤN →
-</a>
-`;
-document.body.appendChild(btn);
-
-})();
-</script>
+    })();
+    </script>
 
 </body>
 </html>
