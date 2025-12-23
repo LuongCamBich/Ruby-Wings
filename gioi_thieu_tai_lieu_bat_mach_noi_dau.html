@@ -64,6 +64,12 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         /* === Biến CSS Nâng Cao === */
         :root {
@@ -333,6 +339,7 @@
             border-radius: 30px;
             transition: all 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            white-space: nowrap;
         }
 
         .logo-tagline {
@@ -343,19 +350,12 @@
             line-height: 1.2;
             text-align: left;
             position: relative;
-            padding-left: 10px;
+            padding-left: 0;
         }
 
+        /* Xoá gạch đứng màu hồng bên trái */
         .logo-tagline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 70%;
-            background: var(--gradient-secondary);
-            border-radius: 2px;
+            content: none;
         }
        
         .nav-links {
@@ -1277,7 +1277,7 @@
             }
 
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 display: flex;
             }
 
@@ -1363,6 +1363,27 @@
                 gap: 5px;
                 text-align: center;
             }
+            
+            /* Mobile header adjustments */
+            .logo-main {
+                font-size: 1.8rem;
+                padding: 4px 12px;
+                white-space: nowrap;
+            }
+            
+            .logo-image-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .logo img {
+                height: 70px;
+                width: 70px;
+            }
+            
+            .logo-tagline {
+                font-size: 0.95rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1392,6 +1413,21 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1.3rem;
+            }
+            
+            .logo-main {
+                font-size: 1.6rem;
+                padding: 3px 10px;
+            }
+            
+            .logo-image-container {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .logo img {
+                height: 60px;
+                width: 60px;
             }
         }
     </style>
@@ -1427,7 +1463,7 @@
                 <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
                 <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình linh hoạt</a>
-                <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
+                <a href="thien-va-suc-khoe.html" class="active">Retreat- Chữa lành</a>
             </nav>
 
             <!-- Mobile Menu Toggle -->
@@ -1444,7 +1480,7 @@
                 <a href="ve-dep-quang-tri.html">Khám phá Miền Trung</a>
                 <a href="nhung-hanh-trinh-tieu-bieu.html">Hành trình tiêu biểu</a>
                 <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình linh hoạt</a>
-                <a href="thien-va-suc-khoe.html">Retreat- Chữa lành</a>
+                <a href="thien-va-suc-khoe.html" class="active">Retreat- Chữa lành</a>
             </nav>
         </div>
     </header>
@@ -1472,7 +1508,7 @@
                 </div>
                 <div class="intro-content">
                     <div class="intro-text">
-                        <p>Có một sự thật ít khi được nói thẳng: <strong>y học ngày càng giỏi chữa bệnh nhưng con người lại ngày càng 'đau' nhiều hơn</strong>.</p>
+                        <p>Có một sự thật ít khi được nói thẳng: <strong>Y học ngày càng giỏi chữa bệnh nhưng con người lại ngày càng 'đau' nhiều hơn</strong>.</p>
                         <p>Đau không chỉ là những tổn thương hữu hình của thân thể, mà còn là tinh thần, là cảm giác mệt mỏi kéo dài, lo âu không rõ nguyên nhân, mất ngủ, trống rỗng... âm thầm tích tụ qua năm tháng (có thể dẫn đến tổn thương sinh học).</p>
                         <p>Những nỗi đau ấy không hiện lên trên phim chụp, không đo được bằng chỉ số, nhưng lại ảnh hưởng sâu sắc đến cách con người sống, yêu, làm việc và tồn tại...</p>
                         <p class="emphasis">Cá nhân tôi nghĩ: "Bắt mạch nỗi đau" có thể ra đời từ chính khoảng trống đó.</p>
@@ -1488,7 +1524,7 @@
         <section class="book-section book-highlights">
             <div class="container">
                 <div class="section-title">
-                    <h2>Điểm đặc biệt của cuốn sách</h2>
+                    <h2>Điểm đặc biệt cuốn sách</h2>
                 </div>
                 <div class="highlights-grid">
                     <div class="highlight-card fade-in">
@@ -1509,7 +1545,7 @@
                         <div class="highlight-icon">
                             <i class="fas fa-balance-scale"></i>
                         </div>
-                        <h3>Văn Học = Y Học</h3>
+                        <h3>Văn Học "=" Y Học</h3>
                         <p>Văn học không được dùng để minh họa cho y học mà được đặt ngang hàng với y học như một diễn ngôn bổ sung. Y học chữa thân thể, văn học đi vào những vùng không thể đo lường: ký ức, cảm xúc, chấn thương, vô thức...</p>
                     </div>
                 </div>
@@ -1523,7 +1559,7 @@
                     <h2>Thông Điệp & Triết Lý</h2>
                 </div>
                 <div class="content-text">
-                    <p>Y học giúp con người sống lâu hơn. Văn học giúp con người hiểu vì sao mình muốn sống tiếp.</p>
+                    <p>Y học giúp con người sống lâu hơn - Văn học giúp con người hiểu vì sao mình muốn sống tiếp.</p>
                     
                     <p>Ở đây, văn học được xem như một dạng <strong>"liệu pháp mềm"</strong>, không kê đơn, không hứa hẹn chữa khỏi, nhưng giúp con người nhìn thẳng vào nỗi đau, gọi tên nó. Tác giả gọi đó là một dạng <strong>"vaccine yêu thương"</strong>, không ngăn đau khổ, nhưng giúp con người không gục ngã trước đau khổ (rất gần với một phương pháp chữa lành 'kinh điển' - 'thiền chánh niệm').</p>
                     
@@ -1534,7 +1570,7 @@
                         </div>
                         <div class="gallery-item">
                             <img src="images/bat_mach_noi_dau_3.jpg" alt="Sách Bắt Mạch Nỗi Đau" class="lazy-image">
-                            <div class="gallery-caption">Trang 2 của Cuốn sách Văn học và Y học Bắt Mạch Nỗi Đau</div>
+                            <div class="gallery-caption"> 2 trong 379 trang của Cuốn sách Văn học và Y học "Bắt Mạch Nỗi Đau"</div>
                         </div>
                     </div>
                     
@@ -1555,7 +1591,7 @@
         <section class="book-section book-purchase">
             <div class="container">
                 <div class="section-title">
-                    <h2>Link mua sách</h2>
+                    <h2>Link về sách</h2>
                 </div>
                 <div class="purchase-links">
                     <a href="https://shopee.vn/V%C4%83n-h%E1%BB%8Dc-v%C3%A0-Y-h%E1%BB%8Dc-B%E1%BA%AFt-m%E1%BA%A1ch-n%E1%BB%97i-%C4%91au-i.282883235.27886174675" 
@@ -1606,25 +1642,11 @@
                         </div>
                     </a>
                     
-                    <a href="https://www.facebook.com/share/1CAR8hacRH/?mibextid=wwXIfr" 
-                       target="_blank" 
-                       class="purchase-btn facebook"
-                       onclick="trackPurchase('facebook')">
-                        <div class="purchase-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
-                        <div class="purchase-content">
-                            <h3>Facebook</h3>
-                            <p>Chia sẻ & Thảo luận</p>
-                        </div>
-                        <div class="purchase-arrow">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </a>
+        
                 </div>
                 
                 <div class="purchase-note">
-                    <p><i class="fas fa-info-circle"></i> Bấm vào bất kỳ link nào để mua sách hoặc tham gia thảo luận về cuốn sách</p>
+                    <p><i class="fas fa-info-circle"></i> “Giữa những áp lực khiến con người dễ tổn thương, cuốn sách này không hứa chữa lành tức thì, nhưng như một vắc-xin tinh thần giúp bạn hiểu nỗi đau và đứng vững hơn trong đời sống hôm nay.” (LTS)</p>
                 </div>
             </div>
         </section>
