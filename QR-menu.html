@@ -1010,7 +1010,7 @@ ensurePixelTracking();
       qrImg.style.maxHeight = '200px';
       
       // Using a free QR code API
-     qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+     qrImg.src = `https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=200&margin=1`;
       
       qrImg.onload = function() {
         qrDisplay.appendChild(qrImg);
