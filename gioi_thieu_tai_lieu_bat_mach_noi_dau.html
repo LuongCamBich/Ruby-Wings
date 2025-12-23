@@ -16,13 +16,25 @@
     </script>
     <!-- End Meta Pixel Code -->
 
+    <!-- ================== GOOGLE ADS + GA4 TAGGING ================== -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD5GXRQFQZ"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17558768270"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
+        
+        // Configure Google Analytics 4
         gtag('config', 'G-BD5GXRQFQZ');
+        
+        // Configure Google Ads with Enhanced Parameters
+        gtag('config', 'AW-17558768270', {
+            'allow_enhanced_conversions': true,
+            'conversion_linker': true,
+            'transport_type': 'beacon'
+        });
     </script>
+    <!-- ================== END GOOGLE ADS TAGGING ================== -->
 
     <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
@@ -1436,12 +1448,11 @@
 <body>
     <!-- Meta Pixel Noscript -->
     <noscript>
-        <img 
-            height="1" 
-            width="1" 
-            style="display:none"
-            src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"
-        />
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=862531473384426&ev=PageView&noscript=1"/>
+        <!-- Google Ads Conversion Noscript -->
+        <img height="1" width="1" style="display:none"
+            src="https://www.googleadservices.com/pagead/conversion/17558768270/?label=GT-NGSCPMMF&guid=ON&script=0"/>
     </noscript>
 
     <!-- Header -->
@@ -1594,8 +1605,6 @@
                     <h2>Link sách "Văn học và Y học BẮT MẠCH NỖI ĐAU"</h2>
                 </div>
                 <div class="purchase-links">
-                    
-                    
                     <a href="https://tiki.vn/product-p278861746.html?spid=278861747" 
                        target="_blank" 
                        class="purchase-btn tiki"
@@ -1627,12 +1636,10 @@
                             <i class="fas fa-arrow-right"></i>
                         </div>
                     </a>
-                    
-        
                 </div>
                 
                 <div class="purchase-note">
-                    <p><i class="fas fa-info-circle"></i> “Giữa những áp lực khiến con người dễ tổn thương, cuốn sách này không hứa chữa lành tức thì, nhưng như một vắc-xin tinh thần giúp bạn hiểu nỗi đau và đứng vững hơn trong đời sống hôm nay.” (LTS)</p>
+                    <p><i class="fas fa-info-circle"></i> "Giữa những áp lực khiến con người dễ tổn thương, cuốn sách này không hứa chữa lành tức thì, nhưng như một vắc-xin tinh thần giúp bạn hiểu nỗi đau và đứng vững hơn trong đời sống hôm nay." (LTS)</p>
                 </div>
             </div>
         </section>
@@ -1750,7 +1757,6 @@
                     </a>
                 </div>
             </div>
-           
         </div>
     </footer>
 
@@ -1906,8 +1912,9 @@
             return out;
         }
 
-        // Hàm tracking cho việc click mua sách
+        // Hàm tracking cho việc click mua sách - ĐÃ CẬP NHẬT VỚI GOOGLE ADS
         function trackPurchase(platform) {
+            // Facebook Pixel Tracking
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Purchase', {
                     content_name: 'Bắt Mạch Nỗi Đau',
@@ -1919,6 +1926,7 @@
                 });
             }
             
+            // Google Analytics 4 Event
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'purchase_click', {
                     'event_category': 'conversion',
@@ -1927,14 +1935,45 @@
                     'currency': 'VND',
                     'platform': platform
                 });
+                
+                // GOOGLE ADS CONVERSION TRACKING - ĐÃ THÊM VÀO
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-17558768270/GT-NGSCPMMF',
+                    'value': 150000,
+                    'currency': 'VND',
+                    'transaction_id': generateTransactionId(),
+                    // Enhanced Conversion Data
+                    'page_location': window.location.href,
+                    'page_referrer': document.referrer || 'direct',
+                    'user_agent': navigator.userAgent
+                });
+                
+                // GOOGLE ADS REMARKETING EVENT
+                gtag('event', 'begin_checkout', {
+                    'send_to': 'AW-17558768270',
+                    'items': [{
+                        'id': 'BOOK_BAT_MACH_NOI_DAU',
+                        'name': 'Bắt Mạch Nỗi Đau',
+                        'category': 'book',
+                        'price': 150000,
+                        'quantity': 1
+                    }]
+                });
             }
             
-            console.log('📚 Tracking purchase click on:', platform);
+            console.log('🎯 Google Ads Conversion Fired - Platform:', platform);
+        }
+
+        // Helper function để tạo Transaction ID cho Google Ads
+        function generateTransactionId() {
+            const timestamp = Date.now();
+            const random = Math.random().toString(36).substring(2, 15);
+            return `RUBYWINGS_BOOK_${timestamp}_${random}`;
         }
 
         // === ĐẢM BẢO TRACKING HOẠT ĐỘNG ===
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📊 Page loaded - FB Pixel & GA4 ready');
+            console.log('📊 Page loaded - FB Pixel & GA4 & Google Ads ready');
             
             // Kiểm tra tracking scripts
             const checkTracking = setInterval(function() {
@@ -1951,7 +1990,7 @@
                     console.warn('❌ Facebook Pixel not loaded after 5 seconds');
                 }
                 if (typeof gtag === 'undefined') {
-                    console.warn('❌ Google Analytics not loaded after 5 seconds');
+                    console.warn('❌ Google Analytics/Ads not loaded after 5 seconds');
                 }
             }, 5000);
         });
@@ -2201,7 +2240,7 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
                 </div>
                 <div class="rw-chat-body-isolated">
                     <div class="rw-chat-message-isolated rw-chat-message-bot-isolated">
-                        Xin chào! Tôi là trợ lý ảo Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn?
+                        Xin chào! Tôi là trợ lý Ruby Wings AI chuyên về du lịch trải nghiệm. Tôi có thể giúp gì cho bạn?
                         <div style="font-size:11px; color:#94a3b8; margin-top:4px; text-align:right;">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
                     </div>
                 </div>
