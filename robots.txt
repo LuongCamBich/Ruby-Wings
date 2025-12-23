@@ -1,82 +1,48 @@
 # ============================================================
-# 🚀 RubyWings.vn | Robots.txt - Tối ưu SEO & AI 2024
+# RubyWings.vn | robots.txt (2025)
+# Du lịch trải nghiệm – Giáo dục – Chữa lành
+# Đồng bộ sitemap.xml
 # ============================================================
 
 User-agent: *
 Allow: /
+
+# Chặn thư mục nhạy cảm / không cần index
 Disallow: /admin/
 Disallow: /private/
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /wp-admin/
 Disallow: /search/
-Crawl-delay: 1
 
 # ============================================================
-# 🤖 AI & SEARCH ENGINE BOTS
+# Search Engines
 # ============================================================
 
-# Google
 User-agent: Googlebot
 Allow: /
-User-agent: Google-Image
-Allow: /
-User-agent: Googlebot-News
-Allow: /
-User-agent: Google-Extended
-Allow: /
 
-# Bing/Microsoft
 User-agent: Bingbot
 Allow: /
-User-agent: BingPreview
-Allow: /
 
-# OpenAI
-User-agent: GPTBot
-Allow: /
-User-agent: ChatGPT-User
-Allow: /
-
-# Apple
 User-agent: Applebot
 Allow: /
 
-# Anthropic Claude
-User-agent: ClaudeBot
-Allow: /
-
-# Social Media
-User-agent: FacebookExternalHit
-Allow: /
-User-agent: Twitterbot
-Allow: /
-User-agent: LinkedInBot
-Allow: /
-
 # ============================================================
-# 🚫 BLOCK UNWANTED BOTS
+# Block aggressive / SEO scraping bots
 # ============================================================
 
 User-agent: MJ12bot
 Disallow: /
-User-agent: AhrefsBot
-Crawl-delay: 10
-User-agent: SemrushBot
-Crawl-delay: 10
+
 User-agent: DotBot
 Disallow: /
+
 User-agent: spbot
 Disallow: /
 
 # ============================================================
-# 📊 SITEMAPS
+# SITEMAP
 # ============================================================
 
 Sitemap: https://www.rubywings.vn/sitemap.xml
-Sitemap: https://www.rubywings.vn/sitemap-images.xml
-Sitemap: https://www.rubywings.vn/sitemap-videos.xml
-
-# ============================================================
-# ✅ RubyWings.vn - Du lịch trải nghiệm cảm xúc
-# ============================================================
