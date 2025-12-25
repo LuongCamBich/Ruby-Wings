@@ -184,138 +184,163 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Schema JSON-LD -->
-  <script type="application/ld+json">
-  {
+ <script type="application/ld+json">
+{
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://rubywings.vn/#organization",
-        "name": "Ruby Wings Travel",
-        "url": "https://rubywings.vn/",
-        "logo": "https://rubywings.vn/images/logo.png",
-        "description": "Hành trình chữa lành từ bên trong bằng thiền chánh niệm, khí công và kết nối thiên nhiên",
-        "telephone": "+84-33-251-0486",
-        "email": "rubywingslsa@gmail.com",
-        "sameAs": [
-          "https://www.facebook.com/profile.php?id=61563772112138",
-          "https://www.facebook.com/tien.sy.5011/",
-          "https://x.com/TienSy379",
-          "https://www.instagram.com/tiensyrubywings",
-          "https://www.tiktok.com/@syluong379",
-          "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-        ],
-        "founder": {
-          "@type": "Person",
-          "name": "Lương Tiến Sỹ",
-          "jobTitle": "Founder & CEO",
-          "url": "https://www.facebook.com/tien.sy.5011/"
+        {
+            "@type": "Organization",
+            "@id": "https://rubywings.vn/#organization",
+            "name": "Ruby Wings Travel",
+            "url": "https://rubywings.vn/",
+            "logo": "https://rubywings.vn/images/logofxf.png",
+            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
+            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+            "sameAs": [
+                "https://www.facebook.com/profile.php?id=61563772112138",
+                "https://www.facebook.com/tien.sy.5011/",
+                "https://www.instagram.com/tiensyrubywings",
+                "https://www.tiktok.com/@syluong379",
+                "https://www.youtube.com/@rubywing-slsa",
+                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B7-l%C6%B0%C6%A1ng-9a0292387"
+            ],
+            "telephone": "+84-332-510-486",
+            "email": "rubywingslsa@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+                "addressLocality": "Thành phố Huế",
+                "addressRegion": "Thừa Thiên Huế",
+                "postalCode": "530000",
+                "addressCountry": "VN"
+            },
+            "founder": {
+                "@type": "Person",
+                "name": "Lương Tiến Sỹ",
+                "jobTitle": "Founder & CEO",
+                "url": "https://www.facebook.com/tien.sy.5011/"
+            },
+            "knowsAbout": [
+                "Du lịch chữa lành",
+                "Thiền chánh niệm khoa học",
+                "Khí công trị liệu",
+                "Phát triển con người toàn diện",
+                "Du lịch cảm xúc",
+                "Retreat và trải nghiệm nội tâm"
+            ]
         },
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "148 Trương Gia Mô, Vĩ Dạ",
-          "addressLocality": "Thành phố Huế",
-          "addressRegion": "Thừa Thiên Huế",
-          "postalCode": "530000",
-          "addressCountry": "VN"
-        }
-      },
-      {
-        "@type": "TouristTrip",
-        "name": "Hành Trình Tri Ân Phụ Nữ 20/10",
-        "description": "Chương trình du lịch tri ân phụ nữ ngày 20/10 với khám phá di sản Huế, giao lưu và trải nghiệm văn hóa",
-        "url": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html",
-        "provider": {
-          "@id": "https://rubywings.vn/#organization"
-        },
-        "itinerary": {
-          "@type": "ItemList",
-          "numberOfItems": 5,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Thăm làng hương rực rỡ"
+        {
+            "@type": "Service",
+            "serviceType": "Special Women's Day Experience Tour",
+            "name": "Hành Trình 2N1Đ - Dòng Chảy Yêu Thương: Tri Ân Phụ Nữ Ngày 20/10",
+            "description": "Hành trình đặc biệt tri ân phụ nữ Việt Nam ngày 20/10 tại Cố đô Huế. Trải nghiệm khám phá làng hương rực rỡ, chùa Thiên Mụ thanh tịnh, lăng Gia Long uy nghi với không gian yêu thương, giao lưu và tiệc tối ấm áp. Một món quà tinh thần ý nghĩa dành tặng các bà, các mẹ, các chị em phụ nữ.",
+            "provider": {
+                "@id": "https://rubywings.vn/#organization"
             },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Tham quan chùa Thiên Mụ"
+            "areaServed": {
+                "@type": "Country",
+                "name": "Việt Nam"
             },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Khám phá lăng Gia Long"
+            "audience": {
+                "@type": "PeopleAudience",
+                "suggestedMinAge": 18,
+                "suggestedMaxAge": 70,
+                "audienceType": "Phụ nữ Việt Nam, gia đình, nhóm bạn, cá nhân muốn tri ân và tôn vinh phụ nữ nhân ngày 20/10"
             },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Giao lưu và tiệc tối 20/10"
-            },
-            {
-              "@type": "ListItem",
-              "position": 5,
-              "name": "Thưởng thức đặc sản Huế"
+            "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "category": "Special Event Tour"
             }
-          ]
         },
-        "offers": {
-          "@type": "Offer",
-          "description": "Hành trình ý nghĩa tri ân phụ nữ với chi phí hợp lý"
-        }
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html#webpage",
-        "url": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html",
-        "name": "Hành Trình 2N1Đ - Dòng Chảy Yêu Thương: Tri Ân Phụ Nữ Ngày 20/10",
-        "description": "Trang giới thiệu chương trình hành trình tri ân phụ nữ ngày 20/10 của Ruby Wings Travel",
-        "isPartOf": {
-          "@id": "https://rubywings.vn/#website"
-        },
-        "about": "Du lịch tri ân phụ nữ, khám phá Huế, giao lưu văn hóa, ngày 20/10",
-        "datePublished": "2024-01-01",
-        "dateModified": "2024-01-01",
-        "primaryImageOfPage": "https://rubywings.vn/images/phu-nu-nha-may-nuoc.jpg",
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://rubywings.vn/"
+        {
+            "@type": "WebPage",
+            "@id": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html#webpage",
+            "url": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html",
+            "name": "Hành Trình 2N1Đ - Dòng Chảy Yêu Thương: Tri Ân Phụ Nữ Ngày 20/10 | Ruby Wings",
+            "description": "Hành trình tri ân phụ nữ ngày 20/10 tại Cố đô Huế - Khám phá làng hương, chùa Thiên Mụ, lăng Gia Long với không gian yêu thương, giao lưu và trải nghiệm văn hóa.",
+            "isPartOf": {
+                "@id": "https://rubywings.vn/#website"
             },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Chương trình",
-              "item": "https://rubywings.vn/chuong-trinh.html"
+            "mainEntity": {
+                "@type": "Service",
+                "name": "Hành Trình 2N1Đ - Dòng Chảy Yêu Thương: Tri Ân Phụ Nữ Ngày 20/10"
             },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Hành Trình Tri Ân Phụ Nữ"
+            "primaryImageOfPage": "https://rubywings.vn/images/phu-nu-nha-may-nuoc.jpg",
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Trang chủ",
+                        "item": "https://rubywings.vn/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Hành trình tri ân phụ nữ 20/10",
+                        "item": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html"
+                    }
+                ]
             }
-          ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://rubywings.vn/#website",
+            "url": "https://rubywings.vn/",
+            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
+            "publisher": {
+                "@id": "https://rubywings.vn/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://rubywings.vn/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://rubywings.vn/hanh-trinh-tri-an-phu-nu-20-10.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Hành trình Tri Ân Phụ Nữ 20/10 có những hoạt động gì đặc biệt?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Hành trình bao gồm: Tham quan làng hương rực rỡ, chùa Thiên Mụ thanh tịnh, lăng Gia Long uy nghi; Tiệc giao lưu chào mừng 20/10 với hoa tươi và lời chúc ý nghĩa; Trải nghiệm ẩm thực Huế đặc sắc; Nghỉ đêm tại Huế Ecolodge với không gian xanh mát; Mua sắm đặc sản địa phương."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Ai nên tham gia hành trình tri ân phụ nữ này?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Hành trình dành cho: Phụ nữ Việt Nam muốn có trải nghiệm ý nghĩa ngày 20/10; Gia đình, người thân muốn tặng quà tinh thần cho mẹ, vợ, chị em; Nhóm bạn nữ muốn có kỷ niệm đẹp cùng nhau; Cá nhân muốn khám phá Huế với góc nhìn văn hóa và tri ân."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Lịch trình cụ thể 2 ngày 1 đêm như thế nào?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ngày 1: Đón đoàn tại Đông Hà → Di chuyển đến Huế → Tham quan Làng Hương → Nhận phòng Huế Ecolodge → Tiệc tối giao lưu 20/10. Ngày 2: Điểm tâm sáng → Tham quan chùa Thiên Mụ → Mua sắm đặc sản → Dùng cơm trưa → Tham quan lăng Gia Long → Trở về Đông Hà."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Chi phí hành trình bao gồm những gì?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Bao gồm: Xe du lịch đời mới điều hòa; 01 đêm nghỉ tại Huế Ecolodge; Các bữa ăn theo chương trình (sáng, trưa, tối); Vé tham quan các điểm du lịch; Hướng dẫn viên chuyên nghiệp; Bảo hiểm du lịch; Chi phí tổ chức giao lưu 20/10; Mũ/nón du lịch Ruby Wings. Không bao gồm đồ uống cá nhân, chi phí mua sắm cá nhân, tip cho lái xe và HDV."
+                    }
+                }
+            ]
         }
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://rubywings.vn/#website",
-        "url": "https://rubywings.vn/",
-        "name": "Ruby Wings Travel",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        }
-      }
     ]
-  }
-  </script>
+}
+</script>
 
   <style>
     :root {

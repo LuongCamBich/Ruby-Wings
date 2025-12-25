@@ -90,167 +90,194 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Schema JSON-LD Tối ưu - ĐÃ SỬA: CHỈ DÙNG HTTPS -->
-    <script type="application/ld+json">
+   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Organization",
-                "@id": "https://rubywings.vn/#organization",
-                "name": "Ruby Wings Travel",
-                "url": "https://rubywings.vn/",
-                "logo": "https://rubywings.vn/images/logofxf.png",
-                "description": "Hành trình chữa lành từ bên trong bằng thiền chánh niệm, khí công và kết nối thiên nhiên",
-                "sameAs": [
-                    "https://www.facebook.com/profile.php?id=61563772112138",
-                    "https://www.facebook.com/tien.sy.5011/",
-                    "https://x.com/TienSy379",
-                    "https://www.instagram.com/tiensyrubywings",
-                    "https://www.tiktok.com/@syluong379",
-                    "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-                ],
-                "telephone": "+84-33-251-0486",
-                "email": "rubywingslsa@gmail.com",
-                "founder": {
-                    "@type": "Person",
-                    "name": "Lương Tiến Sỹ",
-                    "jobTitle": "Founder & CEO",
-                    "url": "https://www.facebook.com/tien.sy.5011/"
-                }
-            },
-            {
-                "@type": "TravelAgency",
-                "@id": "https://rubywings.vn/#localbusiness",
-                "name": "Ruby Wings Travel - Du lịch trải nghiệm chữa lành",
-                "description": "Du lịch cảm xúc khám phá di sản Quảng Trị, Huế, Hội An với hành trình xanh bền vững và giáo dục kỹ năng",
-                "image": "https://rubywings.vn/images/index.jpg",
-                "url": "https://rubywings.vn/",
-                "telephone": "+84-33-251-0486",
-                "email": "rubywingslsa@gmail.com",
-                "priceRange": "$$",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "148 Trương Gia Mô, Vĩ Dạ",
-                    "addressLocality": "Thành phố Huế",
-                    "addressRegion": "Thừa Thiên Huế",
-                    "postalCode": "530000",
-                    "addressCountry": "VN"
-                },
-                "geo": {
-                    "@type": "GeoCoordinates",
-                    "latitude": 16.4637,
-                    "longitude": 107.5909
-                },
-                "areaServed": ["Quảng Trị", "Thừa Thiên Huế", "Đà Nẵng", "Hội An", "Việt Nam"],
-                "makesOffer": [
-                    {
-                        "@type": "Offer",
-                        "name": "Retreat Thiền & Khí Công",
-                        "description": "Hành trình chữa lành với thiền chánh niệm và khí công trong thiên nhiên"
-                    },
-                    {
-                        "@type": "Offer", 
-                        "name": "Du lịch Di sản Lịch sử",
-                        "description": "Khám phá di sản Quảng Trị, Huế với văn hóa lịch sử"
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "Hành trình Xanh Bền vững",
-                        "description": "Trải nghiệm net zero và giáo dục kỹ năng cho thanh thiếu niên"
-                    },
-                    {
-                        "@type": "Offer",
-                        "name": "Forest Bathing & Healing",
-                        "description": "Trị liệu thiên nhiên với hiệu ứng tắm rừng"
-                    }
-                ],
-                "keywords": "thiền chánh niệm, khí công, chữa lành, du lịch cảm xúc, di sản Quảng Trị, hành trình xanh"
-            },
-            {
-                "@type": "WebSite",
-                "@id": "https://rubywings.vn/#website",
-                "url": "https://rubywings.vn/",
-                "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-                "description": "Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên",
-                "publisher": { 
-                    "@id": "https://rubywings.vn/#organization" 
-                },
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://rubywings.vn/?s={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                }
-            },
-            {
-                "@type": "WebPage",
-                "@id": "https://rubywings.vn/#webpage",
-                "url": "https://rubywings.vn/",
-                "name": "Ruby Wings - Hành trình chữa lành từ bên trong",
-                "description": "Trang chủ Ruby Wings Travel - Du lịch trải nghiệm chữa lành và phát triển nội tâm",
-                "isPartOf": {
-                    "@id": "https://rubywings.vn/#website"
-                },
-                "primaryImageOfPage": "https://rubywings.vn/images/index.jpg",
-                "about": {
-                    "@id": "https://rubywings.vn/#localbusiness"
-                },
-                "breadcrumb": {
-                    "@type": "BreadcrumbList",
-                    "itemListElement": [
-                        {
-                            "@type": "ListItem",
-                            "position": 1,
-                            "name": "Trang chủ",
-                            "item": "https://rubywings.vn/"
-                        }
-                    ]
-                },
-                "speakable": {
-                    "@type": "SpeakableSpecification",
-                    "cssSelector": [".section-title h2", ".about-card h3", ".nature-card-header", ".tour-info h3"]
-                }
-            },
-            {
-                "@type": "FAQPage",
-                "@id": "https://rubywings.vn/#faq",
-                "mainEntity": [
-                    {
-                        "@type": "Question",
-                        "name": "Ruby Wings là gì?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Ruby Wings là công ty du lịch trải nghiệm chuyên về hành trình chữa lành từ bên trong thông qua thiền chánh niệm, khí công và kết nối với thiên nhiên."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Ruby Wings có những loại hình du lịch nào?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Chúng tôi cung cấp các hành trình: Du lịch di sản lịch sử, Retreat thiền và khí công, Hành trình xanh bền vững, Forest bathing và các chương trình giáo dục kỹ năng cho thanh thiếu niên. Ngoài ra chúng tôi cũng cung cấp những hành trình linh hoạt thông thường theo nhu cầu quý khách"
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Ruby Wings có phù hợp cho thanh thiếu niên không?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Hoàn toàn phù hợp! Chúng tôi có các chương trình giáo dục kỹ năng đặc biệt dành cho thanh thiếu niên, giúp các em phát triển toàn diện thông qua các hành trình trải nghiệm thực tế."
-                        }
-                    },
-                    {
-                        "@type": "Question",
-                        "name": "Thiền và khí công có lợi ích gì cho sức khỏe?",
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": "Thiền và khí công giúp cân bằng tâm trí, giảm căng thẳng, cải thiện sức khỏe thể chất và tinh thần, tăng cường năng lượng sống và khả năng tập trung."
-                        }
-                    }
-                ]
-            }
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": "https://rubywings.vn/images/logofxf.png",
+      "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 16.4637,
+        "longitude": 107.5909
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Quảng Trị"
+        },
+        {
+          "@type": "City",
+          "name": "Thừa Thiên Huế"
+        },
+        {
+          "@type": "City",
+          "name": "Đà Nẵng"
+        },
+        {
+          "@type": "City",
+          "name": "Hội An"
+        },
+        {
+          "@type": "Country",
+          "name": "Việt Nam"
+        }
+      ],
+      "priceRange": "$$",
+      "makesOffer": [
+        "Retreat Thiền & Khí Công",
+        "Du lịch Di sản Lịch sử",
+        "Hành trình Xanh Bền vững",
+        "Forest Bathing & Healing",
+        "Giáo dục kỹ năng sống"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch chữa lành",
+        "Thiền chánh niệm khoa học",
+        "Khí công trị liệu",
+        "Phát triển con người toàn diện",
+        "Du lịch cảm xúc",
+        "Retreat và trải nghiệm nội tâm"
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Comprehensive Travel & Healing Experiences",
+      "name": "Ruby Wings Travel - Hệ sinh thái du lịch trải nghiệm & chữa lành",
+      "description": "Ruby Wings mang đến các hành trình du lịch trải nghiệm có chiều sâu, kết nối thiên nhiên, con người và văn hóa - lịch sử Việt Nam, đồng thời nuôi dưỡng sự chữa lành nội tâm thông qua thiền chánh niệm, khí công và những trải nghiệm sống chậm, bền vững. Chúng tôi cung cấp đa dạng dịch vụ từ retreat chữa lành, du lịch di sản, đến giáo dục kỹ năng sống.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 12,
+        "suggestedMaxAge": 75,
+        "audienceType": "Mọi đối tượng quan tâm đến du lịch trải nghiệm, chữa lành, phát triển bản thân và kết nối thiên nhiên"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "category": "Travel & Healing Services"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/#webpage",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings - Hành trình Trải nghiệm & Chữa lành",
+      "description": "Ruby Wings mang đến các hành trình du lịch trải nghiệm có chiều sâu, kết nối thiên nhiên, con người và văn hóa – lịch sử Việt Nam, đồng thời nuôi dưỡng sự chữa lành nội tâm thông qua thiền chánh niệm, khí công và những trải nghiệm sống chậm, bền vững.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@type": "Service",
+        "name": "Ruby Wings Travel - Hệ sinh thái du lịch trải nghiệm & chữa lành"
+      },
+      "primaryImageOfPage": "https://rubywings.vn/images/index.jpg",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          }
         ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hành trình của Ruby Wings có gì khác biệt so với du lịch truyền thống?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khác với du lịch thông thường, Ruby Wings tạo ra các hành trình trải nghiệm có chiều sâu. Chúng tôi kết hợp khám phá di sản văn hóa - lịch sử với các hoạt động chữa lành nội tâm như thiền chánh niệm, khí công và kết nối sâu với thiên nhiên (tắm rừng). Mục tiêu là giúp bạn không chỉ đến một nơi mới, mà còn được \"trở về với chính mình\", tìm thấy sự bình an, cân bằng và năng lượng tích cực."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ruby Wings có thiết kế hành trình riêng theo nhu cầu của tôi/nhóm tôi không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Có, hoàn toàn có thể. Bên cạnh các hành trình tiêu biểu, chúng tôi chuyên thiết kế các chương trình linh hoạt theo yêu cầu riêng cho từng đối tượng như: đoàn gia đình, nhóm bạn, công ty (team building), trường học (giáo dục kỹ năng), hoặc các đoàn cựu chiến binh. Chúng tôi sẽ lắng nghe mong muốn của bạn để xây dựng lịch trình, điểm đến và hoạt động phù hợp nhất."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Thiền và khí công trong hành trình mang lại lợi ích gì cho người mới bắt đầu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các hoạt động thiền và khí công trong hành trình đều được dẫn dắt khoa học, phù hợp cho người mới. Lợi ích trực tiếp bạn có thể cảm nhận bao gồm: giảm căng thẳng, cải thiện giấc ngủ, cân bằng cảm xúc, gia tăng năng lượng và sự tập trung. Đây là cơ hội để bạn trải nghiệm và học các phương pháp đơn giản có thể áp dụng vào cuộc sống hàng ngày sau chuyến đi."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ruby Wings thể hiện tinh thần 'du lịch bền vững' và 'kết nối cộng đồng' như thế nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chúng tôi thực hiện du lịch bền vững bằng cách: 1) Tôn trọng và bảo vệ thiên nhiên (hạn chế rác thải, khuyến khích trải nghiệm xanh), 2) Tôn vinh và gìn giữ bản sắc văn hóa địa phương thông qua các hoạt động giao lưu và ẩm thực, và 3) Đồng hành cùng cộng đồng địa phương. Mỗi hành trình đều hướng đến việc lan tỏa giá trị tốt đẹp và có trách nhiệm."
+          }
+        }
+      ]
     }
-    </script>
+  ]
+}
+</script>
+
+
 
     <!-- === CSS TỐI ƯU HIỆU SUẤT === -->
     <style>
@@ -2284,6 +2311,257 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+/* === FAQ SECTION - TỐI ƯU HÓA === */
+.faq-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.faq-title {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.faq-title h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    display: inline-block;
+    padding: 0 20px;
+    background: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.faq-title h2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-secondary));
+    z-index: -1;
+}
+
+.faq-title h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-secondary), transparent);
+    z-index: -1;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-item {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.faq-question {
+    padding: 25px 30px;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-healing-green);
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.faq-item.active .faq-question {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+    color: white;
+    border-bottom-color: var(--color-secondary);
+}
+
+.faq-question:hover {
+    background: var(--color-nature-light);
+}
+
+.faq-question-text {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.faq-icon {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    transition: var(--transition);
+    min-width: 30px;
+    text-align: center;
+}
+
+.faq-item.active .faq-icon {
+    color: white;
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    background: white;
+}
+
+.faq-item.active .faq-answer {
+    padding: 30px;
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.faq-answer-content {
+    color: var(--color-text-dark);
+    line-height: 1.8;
+    text-align: justify;
+    font-size: 1.05rem;
+}
+
+.faq-answer-content p {
+    margin-bottom: 15px;
+}
+
+.faq-answer-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive cho FAQ */
+@media (max-width: 992px) {
+    .faq-section {
+        padding: 60px 0;
+    }
+    
+    .faq-title h2 {
+        font-size: 2.2rem;
+    }
+    
+    .faq-question {
+        padding: 20px 25px;
+        font-size: 1.2rem;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 50px 0;
+        background: #ffffff;
+    }
+    
+    .faq-title h2 {
+        font-size: 1.8rem;
+        padding: 0 15px;
+    }
+    
+    .faq-title {
+        margin-bottom: 30px;
+    }
+    
+    .faq-question {
+        padding: 18px 20px;
+        font-size: 1.1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .faq-question-text {
+        padding-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .faq-icon {
+        align-self: flex-end;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 20px;
+    }
+    
+    .faq-answer-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-title h2 {
+        font-size: 1.6rem;
+    }
+    
+    .faq-question {
+        padding: 16px 18px;
+        font-size: 1.05rem;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 18px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -4304,7 +4582,92 @@
             </div>
         </section>
     </main>
+
+
+
+
+
+
+
+<!-- === FAQ SECTION - CÂU HỎI THƯỜNG GẶP === -->
+<section class="faq-section" id="faq-section">
+    <div class="container faq-container">
+        <div class="faq-title">
+            <h2>Câu Hỏi Thường Gặp</h2>
+        </div>
+        
+        <div class="faq-list">
+            <!-- FAQ 1 -->
+            <div class="faq-item" data-faq="1">
+                <div class="faq-question">
+                    <div class="faq-question-text">
+                        Hành trình của Ruby Wings có gì khác biệt so với du lịch truyền thống?
+                    </div>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Khác với du lịch thông thường, Ruby Wings tạo ra các hành trình trải nghiệm có chiều sâu. Chúng tôi kết hợp khám phá di sản văn hóa - lịch sử với các hoạt động chữa lành nội tâm như thiền chánh niệm, khí công và kết nối sâu với thiên nhiên (tắm rừng). Mục tiêu là giúp bạn không chỉ đến một nơi mới, mà còn được "trở về với chính mình", tìm thấy sự bình an, cân bằng và năng lượng tích cực.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 2 -->
+            <div class="faq-item" data-faq="2">
+                <div class="faq-question">
+                    <div class="faq-question-text">
+                        Ruby Wings có thiết kế hành trình riêng theo nhu cầu của tôi/nhóm tôi không?
+                    </div>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Có, hoàn toàn có thể. Bên cạnh các hành trình tiêu biểu, chúng tôi chuyên thiết kế các chương trình linh hoạt theo yêu cầu riêng cho từng đối tượng như: đoàn gia đình, nhóm bạn, công ty (team building), trường học (giáo dục kỹ năng), hoặc các đoàn cựu chiến binh. Chúng tôi sẽ lắng nghe mong muốn của bạn để xây dựng lịch trình, điểm đến và hoạt động phù hợp nhất.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 3 -->
+            <div class="faq-item" data-faq="3">
+                <div class="faq-question">
+                    <div class="faq-question-text">
+                        Thiền và khí công trong hành trình mang lại lợi ích gì cho người mới bắt đầu?
+                    </div>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Các hoạt động thiền và khí công trong hành trình đều được dẫn dắt khoa học, phù hợp cho người mới. Lợi ích trực tiếp bạn có thể cảm nhận bao gồm: giảm căng thẳng, cải thiện giấc ngủ, cân bằng cảm xúc, gia tăng năng lượng và sự tập trung. Đây là cơ hội để bạn trải nghiệm và học các phương pháp đơn giản có thể áp dụng vào cuộc sống hàng ngày sau chuyến đi.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 4 -->
+            <div class="faq-item" data-faq="4">
+                <div class="faq-question">
+                    <div class="faq-question-text">
+                        Ruby Wings thể hiện tinh thần 'du lịch bền vững' và 'kết nối cộng đồng' như thế nào?
+                    </div>
+                    <div class="faq-icon">+</div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        <p>Chúng tôi thực hiện du lịch bền vững bằng cách: 1) Tôn trọng và bảo vệ thiên nhiên (hạn chế rác thải, khuyến khích trải nghiệm xanh), 2) Tôn vinh và gìn giữ bản sắc văn hóa địa phương thông qua các hoạt động giao lưu và ẩm thực, và 3) Đồng hành cùng cộng đồng địa phương. Mỗi hành trình đều hướng đến việc lan tỏa giá trị tốt đẹp và có trách nhiệm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
 <style>
+
+
 /* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
 .rw-consult-btn-container {
     display: block !important;
@@ -5252,6 +5615,43 @@ btn.innerHTML=`
 </a>
 `;
 document.body.appendChild(btn);
+
+
+
+/* =========================================================
+   FAQ FUNCTIONALITY
+========================================================= */
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Đóng tất cả các FAQ khác
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle FAQ hiện tại
+            item.classList.toggle('active');
+        });
+    });
+    
+    // Tự động mở FAQ đầu tiên trên desktop
+    if (window.innerWidth > 768) {
+        const firstFaq = document.querySelector('.faq-item');
+        if (firstFaq) {
+            firstFaq.classList.add('active');
+        }
+    }
+});
+
+
+
+
 
 })();
 </script>

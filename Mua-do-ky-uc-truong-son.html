@@ -181,128 +181,165 @@ gtag('config', 'G-BD5GXRQFQZ');
 <!-- Schema JSON-LD -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://rubywings.vn/#organization",
-      "name": "Ruby Wings Travel",
-      "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Hành trình chữa lành từ bên trong bằng thiền chánh niệm, khí công và kết nối thiên nhiên",
-      "sameAs": [
-        "https://www.facebook.com/profile.php?id=61563772112138",
-        "https://www.facebook.com/tien.sy.5011/",
-        "https://x.com/TienSy379",
-        "https://www.instagram.com/tiensyrubywings",
-        "https://www.tiktok.com/@syluong379",
-        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-      ],
-      "telephone": "+84-33-251-0486",
-      "email": "rubywingslsa@gmail.com",
-      "founder": {
-        "@type": "Person",
-        "name": "Lương Tiến Sỹ",
-        "jobTitle": "Founder & CEO",
-        "url": "https://www.facebook.com/tien.sy.5011/"
-      }
-    },
-    {
-      "@type": "TouristTrip",
-      "@id": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html#tour",
-      "name": "Tour Mưa Đỏ Ký ức Trường Sơn 2N1Đ",
-      "description": "Hành trình trải nghiệm lịch sử kết hợp chữa lành nội tâm tại Quảng Trị với thiền chánh niệm, khí công và giao lưu văn hóa Vân Kiều",
-      "url": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html",
-      "image": "https://rubywings.vn/images/Mua-do-ky-uc-truong-son.jpg",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "VND",
-        "price": "2500000",
-        "availability": "https://schema.org/InStock",
-        "validFrom": "2024-01-01"
-      },
-      "itinerary": {
-        "@type": "ItemList",
-        "numberOfItems": 2,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "item": {
-              "@type": "TouristAttraction",
-              "name": "Ngày 1: Huế - Thành cổ QT - Nghĩa trang Trường Sơn - Hướng Hóa",
-              "description": "Thiền chánh niệm tại Thành cổ Quảng Trị, hành trình cảm xúc tại Nghĩa trang Liệt sĩ Trường Sơn, giao lưu văn hóa và đêm lửa trại Vân Kiều"
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "item": {
-              "@type": "TouristAttraction",
-              "name": "Ngày 2: Hướng Hóa - Khe Sanh - Cầu Hiền Lương - Huế",
-              "description": "Forest bathing tại Tây Trường Sơn, trải nghiệm khí công tại Khe Sanh, thiền tại Cầu Hiền Lương và Địa đạo Vịnh Mốc"
-            }
-          }
-        ]
-      },
-      "touristType": ["Lịch sử", "Chữa lành", "Văn hóa", "Thiền", "Cộng đồng"],
-      "includes": ["Hướng dẫn viên chữa lành", "Thiền và khí công", "Giao lưu văn hóa", "Forest bathing", "Ẩm thực địa phương"],
-      "provider": {
-        "@id": "https://rubywings.vn/#organization"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html#webpage",
-      "url": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html",
-      "name": "Tour Mưa Đỏ Ký ức Trường Sơn 2N1Đ | Trải Nghiệm Chữa Lành & Lịch Sử",
-      "description": "Trang đăng ký và thông tin chi tiết tour Mưa Đỏ Ký ức Trường Sơn - Hành trình kết nối lịch sử với chữa lành nội tâm",
-      "isPartOf": {
-        "@id": "https://rubywings.vn/#website"
-      },
-      "about": {
-        "@id": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html#tour"
-      },
-      "datePublished": "2024-01-01",
-      "dateModified": "2024-01-01",
-      "primaryImageOfPage": "https://rubywings.vn/images/Mua-do-ky-uc-truong-son.jpg",
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Trang chủ",
-          "item": "https://rubywings.vn/"
+            "@type": "Organization",
+            "@id": "https://rubywings.vn/#organization",
+            "name": "Ruby Wings Travel",
+            "url": "https://rubywings.vn/",
+            "logo": "https://rubywings.vn/images/logofxf.png",
+            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
+            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+            "sameAs": [
+                "https://www.facebook.com/profile.php?id=61563772112138",
+                "https://www.facebook.com/tien.sy.5011/",
+                "https://www.instagram.com/tiensyrubywings",
+                "https://www.tiktok.com/@syluong379",
+                "https://www.youtube.com/@rubywing-slsa",
+                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+            ],
+            "telephone": "+84-332-510-486",
+            "email": "rubywingslsa@gmail.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+                "addressLocality": "Thành phố Huế",
+                "addressRegion": "Thừa Thiên Huế",
+                "postalCode": "530000",
+                "addressCountry": "VN"
+            },
+            "founder": {
+                "@type": "Person",
+                "name": "Lương Tiến Sỹ",
+                "jobTitle": "Founder & CEO",
+                "url": "https://www.facebook.com/tien.sy.5011/"
+            },
+            "knowsAbout": [
+                "Du lịch chữa lành",
+                "Thiền chánh niệm khoa học",
+                "Khí công trị liệu",
+                "Phát triển con người toàn diện",
+                "Du lịch cảm xúc",
+                "Retreat và trải nghiệm nội tâm"
+            ]
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Tour & Trải nghiệm",
-          "item": "https://rubywings.vn/tour-trai-nghiem.html"
+            "@type": "Service",
+            "serviceType": "Historical Healing Tour",
+            "name": "Tour Mưa Đỏ Ký ức Trường Sơn 2N1Đ",
+            "description": "Hành trình trải nghiệm lịch sử kết hợp chữa lành nội tâm tại Quảng Trị: Thành cổ Quảng Trị, Nghĩa trang Trường Sơn, giao lưu văn hóa Vân Kiều, thiền chánh niệm tại di tích, khí công trị liệu và trải nghiệm forest bathing tại Tây Trường Sơn. Hành trình đặc biệt kết nối quá khứ với hiện tại, biến bài học lịch sử thành động lực hành động và chữa lành nội tâm.",
+            "provider": {
+                "@id": "https://rubywings.vn/#organization"
+            },
+            "areaServed": {
+                "@type": "Country",
+                "name": "Việt Nam"
+            },
+            "audience": {
+                "@type": "PeopleAudience",
+                "suggestedMinAge": 16,
+                "suggestedMaxAge": 70,
+                "audienceType": "Mọi người quan tâm đến lịch sử, văn hóa, trải nghiệm chữa lành nội tâm, thiền và khí công; các gia đình muốn kết nối thế hệ; nhóm bạn muốn trải nghiệm ý nghĩa; cá nhân tìm kiếm sự chữa lành từ bên trong"
+            },
+            "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "category": "Historical Healing Experience"
+            }
         },
         {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Mưa Đỏ Ký ức Trường Sơn"
+            "@type": "WebPage",
+            "@id": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html#webpage",
+            "url": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html",
+            "name": "Tour Mưa Đỏ Ký ức Trường Sơn 2N1Đ | Trải Nghiệm Chữa Lành & Lịch Sử | Ruby Wings",
+            "description": "Hành trình Mưa Đỏ Ký ức Trường Sơn 2 ngày 1 đêm: Kết nối lịch sử Quảng Trị, thiền chánh niệm tại di tích, giao lưu văn hóa Vân Kiều, trải nghiệm chữa lành từ bên trong cùng Ruby Wings.",
+            "isPartOf": {
+                "@id": "https://rubywings.vn/#website"
+            },
+            "mainEntity": {
+                "@type": "Service",
+                "name": "Tour Mưa Đỏ Ký ức Trường Sơn 2N1Đ"
+            },
+            "primaryImageOfPage": "https://rubywings.vn/images/Mua-do-ky-uc-truong-son.jpg",
+            "breadcrumb": {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Trang chủ",
+                        "item": "https://rubywings.vn/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Tour & Trải nghiệm",
+                        "item": "https://rubywings.vn/tour-trai-nghiem.html"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "Mưa Đỏ Ký ức Trường Sơn",
+                        "item": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html"
+                    }
+                ]
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://rubywings.vn/#website",
+            "url": "https://rubywings.vn/",
+            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
+            "publisher": {
+                "@id": "https://rubywings.vn/#organization"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://rubywings.vn/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "https://rubywings.vn/Mua-do-ky-uc-truong-son.html#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Hành trình Mưa Đỏ Ký ức Trường Sơn bao gồm những điểm tham quan chính nào?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Hành trình bao gồm các điểm chính: Thành cổ Quảng Trị (nơi diễn ra trận chiến 81 ngày đêm), Nghĩa trang Liệt sĩ Quốc gia Trường Sơn, Khe Sanh (sân bay Tà Cơn, Bảo tàng Khe Sanh), Cầu Hiền Lương - Sông Bến Hải, Địa đạo Vịnh Mốc, giao lưu văn hóa Vân Kiều tại Hướng Hóa, và trải nghiệm forest bathing tại Tây Trường Sơn."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Ai nên tham gia hành trình Mưa Đỏ Ký ức Trường Sơn?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Hành trình được thiết kế để tất cả mọi người từ 16-70 tuổi đều có thể tham gia. Đặc biệt phù hợp với: những người quan tâm đến lịch sử dân tộc, cá nhân tìm kiếm trải nghiệm chữa lành nội tâm, các gia đình muốn kết nối thế hệ qua bài học lịch sử, nhóm bạn muốn trải nghiệm ý nghĩa cùng nhau, người muốn thực hành thiền và khí công trong không gian di tích lịch sử."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Hoạt động chữa lành và trải nghiệm tâm linh nào được tích hợp trong tour?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Tour tích hợp nhiều hoạt động chữa lành: Thiền chánh niệm tại Thành cổ Quảng Trị và Nghĩa trang Trường Sơn, khí công trị liệu tại Khe Sanh và Tây Trường Sơn, forest bathing (tắm rừng) tại Trường Sơn, thực hành chánh niệm tại quán cà phê Homi với view panorama, giao lưu văn hóa trị liệu với cộng đồng Vân Kiều (cồng chiêng, đàn Ta lư, rượu cần), và đêm lửa trại 'Ngọn lửa Trường Sơn'."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Chi phí tour bao gồm những dịch vụ gì và không bao gồm gì?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Bao gồm: Xe du lịch đời mới, 01 đêm homestay/khách sạn 3*, 02 bữa sáng + 02 bữa trưa + 01 bữa tối, vé tham quan tất cả điểm, HDV chuyên nghiệp, nhân chứng lịch sử, bảo hiểm du lịch, hoạt động giao lưu văn hóa, chuyên viên y tế đi cùng, quà tặng Ruby Wings. Không bao gồm: Đồ uống cá nhân, chi phí mua sắm, tiền tip (tùy tâm), dịch vụ quay phim/chụp ảnh chuyên nghiệp, thuế VAT (nếu xuất hóa đơn)."
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://rubywings.vn/#website",
-      "url": "https://rubywings.vn/",
-      "name": "Ruby Wings Travel",
-      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      }
-    }
-  ]
+    ]
 }
 </script>
     
