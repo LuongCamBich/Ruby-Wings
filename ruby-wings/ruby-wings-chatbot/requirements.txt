@@ -9,3 +9,4 @@ openai>=1.0.0
 rapidfuzz>=2.0.0
 faiss-cpu==1.13.0
 redis>=4.5.5
+python-dotenv>=1.0.0

@@ -1,6 +1,7 @@
 # app.py — "HOÀN HẢO NHẤT" phiên bản tối ưu cho openai>=1.0.0, FAISS fallback, ưu tiên lấy FIELD trong cùng TOUR
 # Mục tiêu: luôn trả lời bằng trường (field) đúng của tour khi user nhắc đến tên tour hoặc hỏi keyword liên quan.
 
+from meta_capi import send_meta_pageview
 import os
 import json
 import threading
@@ -54,6 +55,11 @@ FAISS_ENABLED = os.environ.get("FAISS_ENABLED", "true").lower() in ("1", "true",
 # ---------- Flask ----------
 app = Flask(__name__)
 CORS(app)
+
+# ---------- Meta CAPI ----------
+@app.before_request
+def track_meta_pageview():
+    send_meta_pageview(request)
 
 # ---------- Global state ----------
 KNOW: Dict = {}
