@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
- 
-    <!-- End Meta Pixel Code -->
-
+    <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -18,8 +16,6 @@
     </script>
     <!-- End Meta Pixel Code -->
 
- 
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17558768270"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -29,7 +25,6 @@
         gtag('config', 'G-BD5GXRQFQZ');
     </script>
 
-    
     <meta name="theme-color" content="#ffffff">
     <meta name="facebook-domain-verification" content="9tvsczh90ochfhg9byyr544ixf080p" />
     <link type="text/plain" rel="author" href="/humans.txt" />
@@ -276,8 +271,6 @@
   ]
 }
 </script>
-
-
 
     <!-- === CSS TỐI ƯU HIỆU SUẤT === -->
     <style>
@@ -556,17 +549,8 @@
             padding-left: 10px;
         }
 
-        .logo-tagline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 70%;
-            background: var(--gradient-secondary);
-            border-radius: 2px;
-        }
+        /* FIX LOGIC: Xóa gạch hồng bên trái dòng "Hành trình trải nghiệm" */
+        /* .logo-tagline::before đã bị xóa */
        
         .nav-links {
             display: flex;
@@ -1258,12 +1242,17 @@
             position: relative;
         }
 
+        .tour-objective-title a {
+            text-decoration: none;
+            display: inline-block;
+        }
+
         .tour-objective-title h3 {
             font-size: 1.8rem;
-            color: var(--color-secondary);
+            color: white;
             display: inline-block;
             padding: 10px 25px;
-            background: rgba(144, 238, 144, 0.3);
+            background: var(--gradient-primary);
             border-radius: 30px;
             animation: pulse 2s infinite;
         }
@@ -1324,10 +1313,16 @@
        
         .tour-meta {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
             margin-bottom: 12px;
             font-size: 0.9rem;
             color: #666;
+        }
+       
+        .tour-meta span {
+            white-space: nowrap;
         }
        
         .tour-price {
@@ -1342,6 +1337,27 @@
             text-decoration: none;
         }
        
+        /* === Flexible Tours Section === */
+        .flexible-tours {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #f0f7f4 0%, #ffffff 100%);
+        }
+
+        .flexible-tours .section-title {
+            margin-bottom: 20px;
+        }
+
+        .flexible-tours .section-title p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .flexible-tours .btn {
+            margin-bottom: 40px;
+        }
+
         /* === Featured Tours === */
         .featured-tours {
             padding: 50px 0;
@@ -1393,6 +1409,7 @@
             justify-content: space-between;
             align-items: center;
             transition: var(--transition);
+            color: white;
         }
        
         .tour-list li:hover {
@@ -1559,335 +1576,6 @@
             border-top: 1px solid rgba(255,255,255,0.2);
             font-size: 0.95rem;
         }
-       
-        /* === About Panel New === */
-        .about-panel-new {
-            background: var(--color-primary);
-            border-radius: var(--border-radius-lg);
-            padding: 30px;
-            box-shadow: var(--box-shadow-card);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-panel-new::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-        }
-
-        .logo-center {
-            margin-bottom: 30px;
-        }
-
-        .logo-link {
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .logo-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 50%;
-            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
-            border: 3px solid var(--color-primary);
-            transition: var(--transition);
-            display: inline-block;
-            position: relative;
-            width: 180px;
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-container:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(46, 125, 50, 0.4);
-        }
-
-        .main-logo {
-            width: 100%;
-            height: auto;
-            max-width: 140px;
-            max-height: 140px;
-            object-fit: contain;
-        }
-
-        .pulse {
-            position: relative;
-        }
-
-        .pulse::after {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            background: rgba(46, 125, 50, 0.2);
-            animation: pulseAnim 2.4s infinite;
-            z-index: -1;
-        }
-
-        @keyframes pulseAnim {
-            0% { transform: scale(1); opacity: 0.6; }
-            70% { transform: scale(1.3); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
-
-        .content-bottom {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: stretch;
-        }
-
-        .intro-section, .menu-section {
-            flex: 1;
-            max-width: 400px;
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        .intro-section:hover, .menu-section:hover {
-            transform: translateY(-5px);
-        }
-
-        .intro-section {
-            background: var(--color-healing-green);
-            border-radius: var(--border-radius-lg);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .intro-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .intro-section:hover {
-            border-color: var(--color-primary);
-            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.15);
-        }
-
-        .intro-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .intro-title {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #f72e7b;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .intro-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: #257b0a;
-            margin-bottom: 15px;
-        }
-
-        .intro-icon {
-            font-size: 2rem;
-            color: #fa24a1;
-            margin-top: 10px;
-        }
-
-        .menu-section {
-            background: var(--color-healing-green);
-            border-radius: var(--border-radius-lg);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .menu-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-secondary);
-        }
-
-        .menu-section:hover {
-            border-color: var(--color-secondary);
-            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.15);
-        }
-
-        .menu-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .menu-icon-large {
-            margin-bottom: 15px;
-            color: #fc188a;
-        }
-
-        .menu-text-content {
-            text-align: center;
-        }
-
-        .menu-title {
-            display: block;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #dd6006;
-            margin-bottom: 5px;
-        }
-
-        .menu-subtitle {
-            display: block;
-            font-size: 1rem;
-            color: #f66b08;
-            font-style: italic;
-        }
-
-        /* Trio wrapper styles */
-        .trio-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 25px;
-            flex-wrap: wrap;
-            background: var(--color-nature-light);
-            padding: 25px;
-            border-radius: var(--border-radius-lg);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .qr-box {
-            flex: 0 0 240px;
-            background: #fff;
-            border: 2px solid var(--color-secondary);
-            border-radius: var(--border-radius-lg);
-            text-align: center;
-            padding: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .qr-box:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-            background: var(--gradient-secondary);
-        }
-        .qr-img {
-            width: 100%;
-            border-radius: 10px;
-            border: 2px solid var(--color-primary);
-            margin-bottom: 10px;
-            transition: var(--transition);
-        }
-        .qr-box:hover .qr-img {
-            transform: rotate(2deg) scale(1.05);
-        }
-        .qr-text {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: var(--color-secondary);
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-        .qr-box:hover .qr-text {
-            color: #fff;
-        }
-
-        /* KHỐI CHỮ GIỮA */
-        .center-text {
-            flex: 1;
-            text-align: center;
-            cursor: pointer;
-            background: var(--color-nature-light);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.12);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-            color: var(--color-primary);
-            position: relative;
-            overflow: hidden;
-        }
-        .center-text:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-            background: linear-gradient(135deg, var(--color-nature-light), #a0d8b0);
-            animation: pulse-blue 2s infinite;
-        }
-        .center-title {
-            color: inherit;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-        .center-sub {
-            color: var(--color-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            transition: color 0.3s ease;
-        }
-        .center-desc {
-            color: inherit;
-            font-size: 0.9rem;
-            font-style: italic;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: color 0.3s ease;
-        }
-
-        @keyframes pulse-blue {
-            0% { box-shadow: 0 0 0 0 rgba(100, 229, 30, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(30, 136, 229, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(30, 136, 229, 0); }
-        }
-
-        .right-img-box {
-            flex: 0 0 240px;
-            text-align: center;
-        }
-        .right-img {
-            width: 100%;
-            height: auto;
-            border-radius: var(--border-radius-lg);
-            border: 2px solid var(--color-secondary);
-            transition: var(--transition);
-        }
-        .right-img-box:hover .right-img {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        }
 
         .footer-title-link {
             color: inherit;
@@ -1920,38 +1608,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        /* International Connection Section */
-        .international-section {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-        }
-
-        .international-section a h2 {
-            display: inline-block;
-            background: var(--color-healing-green);
-            color: var(--color-secondary);
-            padding: 10px 30px;
-            border-radius: 30px;
-            font-size: 2.2rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 0;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .international-section a:hover h2 {
-            background: var(--color-secondary);
-            color: var(--color-healing-green);
-        }
-
-        .international-section img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-        }
-
         /* === KHẮC PHỤC LỖI CRITICAL === */
 
         /* 1. SỬA LỖI MÀU NỀN ĐIỆN THOẠI - CRITICAL FIX */
@@ -1962,7 +1618,7 @@
             }
             
             /* Đảm bảo các section chính cũng có màu nền xanh */
-            .search-section, .about, .nature-section, .tours, .featured-tours {
+            .search-section, .about, .nature-section, .tours, .flexible-tours, .featured-tours {
                 background: #1e6b47 !important;
                 color: white;
             }
@@ -2099,26 +1755,6 @@
             .logo img {
                 height: 80px;
             }
-
-            .content-bottom {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .intro-section, .menu-section {
-                max-width: 100%;
-                width: 100%;
-            }
-            
-            .logo-container {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .main-logo {
-                max-width: 120px;
-                max-height: 120px;
-            }
         }
        
         @media (max-width: 768px) {
@@ -2171,54 +1807,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .about-panel-new {
-                padding: 20px;
-                border-radius: 20px;
-            }
-            
-            .logo-container {
-                width: 130px;
-                height: 130px;
-                padding: 15px;
-            }
-            
-            .main-logo {
-                max-width: 100px;
-                max-height: 100px;
-            }
-            
-            .intro-title, .menu-title {
-                font-size: 1.5rem;
-            }
-            
-            .intro-text {
-                font-size: 1rem;
-            }
-            
-            .intro-section, .menu-section {
-                padding: 20px;
-            }
-
-            .international-section a h2 {
-                white-space: normal;
-                font-size: 1.8rem;
-                padding: 8px 20px;
-            }
-
-            .trio-wrapper {
-                flex-direction: column;
-                text-align: center;
-            }
-            .qr-box, .right-img-box {
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            .center-text {
-                order: -1;
-                margin-bottom: 15px;
-            }
-
             .search-section {
                 padding: 15px 0;
             }
@@ -2249,6 +1837,18 @@
             .result-card {
                 padding: 15px;
             }
+
+            /* FIX LOGIC: Điều chỉnh logo trên mobile */
+            .logo-image-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .logo img {
+                height: 70px;
+                /* Điều chỉnh để 2 đầu cánh chim vừa chạm vòng tròn ngoài */
+                padding: 2px;
+            }
         }
        
         @media (max-width: 480px) {
@@ -2268,31 +1868,15 @@
                 grid-template-columns: 1fr;
             }
 
-            .about-panel-new {
-                padding: 15px;
+            /* FIX LOGIC: Giảm đường kính vùng trắng logo trên mobile nhỏ */
+            .logo-image-container {
+                width: 70px;
+                height: 70px;
             }
-            
-            .logo-container {
-                width: 110px;
-                height: 110px;
-                padding: 12px;
-            }
-            
-            .main-logo {
-                max-width: 85px;
-                max-height: 85px;
-            }
-            
-            .intro-title, .menu-title {
-                font-size: 1.3rem;
-            }
-            
-            .intro-text {
-                font-size: 0.9rem;
-            }
-            
-            .intro-section, .menu-section {
-                padding: 15px;
+
+            .logo img {
+                height: 60px;
+                padding: 1px;
             }
         }
 
@@ -2312,20 +1896,11 @@
             }
         }
 
-
-
-
-
-
-
-
-
-
-
 /* === FAQ SECTION - TỐI ƯU HÓA === */
 .faq-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: white;
     position: relative;
     overflow: hidden;
 }
@@ -2355,10 +1930,10 @@
 
 .faq-title h2 {
     font-size: 2.5rem;
-    color: var(--color-primary);
+    color: white;
     display: inline-block;
     padding: 0 20px;
-    background: #ffffff;
+    background: var(--color-primary);
     position: relative;
     z-index: 1;
 }
@@ -2392,10 +1967,10 @@
 }
 
 .faq-item {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
     transition: var(--transition);
 }
@@ -2410,12 +1985,12 @@
     font-family: var(--font-heading);
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--color-primary);
+    color: white;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--color-healing-green);
+    background: rgba(255, 255, 255, 0.15);
     border-bottom: 2px solid transparent;
     transition: var(--transition);
 }
@@ -2427,7 +2002,7 @@
 }
 
 .faq-question:hover {
-    background: var(--color-nature-light);
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .faq-question-text {
@@ -2437,7 +2012,7 @@
 
 .faq-icon {
     font-size: 1.5rem;
-    color: var(--color-secondary);
+    color: var(--color-accent);
     transition: var(--transition);
     min-width: 30px;
     text-align: center;
@@ -2454,7 +2029,7 @@
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .faq-item.active .faq-answer {
@@ -2464,7 +2039,7 @@
 }
 
 .faq-answer-content {
-    color: var(--color-text-dark);
+    color: white;
     line-height: 1.8;
     text-align: justify;
     font-size: 1.05rem;
@@ -2472,6 +2047,7 @@
 
 .faq-answer-content p {
     margin-bottom: 15px;
+    color: white;
 }
 
 .faq-answer-content p:last-child {
@@ -2501,7 +2077,6 @@
 @media (max-width: 768px) {
     .faq-section {
         padding: 50px 0;
-        background: #ffffff;
     }
     
     .faq-title h2 {
@@ -2553,14 +2128,61 @@
     }
 }
 
+        /* === FLEXIBLE TOURS LIST - DANH SÁCH LINK (CẤU TRÚC MỚI) === */
+        .flexible-tours-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
+        .flexible-tours-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
 
+        .flexible-tours-list li:last-child {
+            border-bottom: none;
+        }
 
+        .flexible-tours-list li a {
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            flex: 1;
+            min-width: 300px;
+        }
 
+        .flexible-tours-list li a:hover {
+            color: var(--color-secondary);
+            text-decoration: underline;
+        }
 
+        .tour-note {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            background: rgba(139, 195, 74, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
 
-
-
+        @media (max-width: 768px) {
+            .flexible-tours-list li a {
+                min-width: auto;
+                color: white;
+            }
+            
+            .tour-note {
+                color: rgba(255,255,255,0.8);
+                background: rgba(255,255,255,0.1);
+            }
+        }
 
     </style>
 </head>
@@ -2632,8 +2254,8 @@
         </section>
 
         <hr style="border: 3px solid var(--color-secondary); margin: 30px 0;">
-<style>
 
+<style>
     /* CSS cho nút chương trình du lịch nhà trường - Phiên bản hoàn chỉnh */
     .school-program-container {
         text-align: center;
@@ -3004,7 +2626,7 @@
                         <a href="tri-an.html" class="about-card-link">
                             <i class="fas fa-hand-holding-heart"></i>
                             <h3>Tri Ân</h3>
-                            <p>Đó là hành trình trở về với những di tích lịch sử thiêng liêng – nơi lưu giữ dấu ấn oai hùng của dân tộc, tưởng nhớ đến thế hệ cha anh đã ngã xuống vì độc lập, tự do. Hành trình là dịp để chúng ta bày tỏ lòng biết ơn, niềm tự hào và trách nhiệm tiếp nối, gìn giữ những giá trị tốt đẹp cho thế hệ mai sau.</p>
+                            <p>Hành trình trở về với di tích lịch sử thiêng liêng, tưởng nhớ thế hệ cha anh đã ngã xuống vì độc lập, tự do. Bày tỏ lòng biết ơn, niềm tự hào và trách nhiệm tiếp nối, gìn giữ giá trị tốt đẹp cho thế hệ mai sau.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3014,7 +2636,7 @@
                         <a href="ket_noi_trong_nuoc.html" class="about-card-link">
                             <i class="fas fa-link"></i>
                             <h3>Kết Nối</h3>
-                            <p>Tạo nên những nhịp cầu gắn kết giữa các thế hệ, giữa bè bạn gần xa, giữa quá khứ và hiện tại; những người lính năm xưa với thế hệ trẻ hôm nay, kết nối con người với thiên nhiên, và kết nối với chính bản thân mình để tìm thấy sự đồng điệu và sức mạnh nội tại.</p>
+                            <p>Tạo nhịp cầu gắn kết giữa các thế hệ, bè bạn gần xa, quá khứ và hiện tại; người lính năm xưa với thế hệ trẻ hôm nay, kết nối con người với thiên nhiên và với chính bản thân để tìm thấy sự đồng điệu và sức mạnh nội tại.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3024,7 +2646,7 @@
                         <a href="thien-va-suc-khoe.html" class="about-card-link">
                             <i class="fas fa-spa"></i>
                             <h3>Thiền - Khí công dưỡng sinh & Sức Khỏe</h3>
-                            <p>Khám phá và trải nghiệm sức mạnh chữa lành kỳ diệu từ Thiền, Khí công dưỡng sinh, sự kết nối sâu sắc với Thiên nhiên và niềm tin nội tại; qua đó giúp cân bằng tâm trí, phục hồi năng lượng, nâng cao sức khỏe tinh thần lẫn thể chất, đồng thời mở ra hành trình chữa lành bền vững trong từng bước đi của mỗi con người.</p>
+                            <p>Khám phá sức mạnh chữa lành từ Thiền, Khí công dưỡng sinh, kết nối sâu với Thiên nhiên và niềm tin nội tại; giúp cân bằng tâm trí, phục hồi năng lượng, nâng cao sức khỏe tinh thần lẫn thể chất, mở ra hành trình chữa lành bền vững.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3034,7 +2656,7 @@
                         <a href="lan_toa_trong_nuoc.html" class="about-card-link">
                             <i class="fas fa-seedling"></i>
                             <h3>Lan Tỏa</h3>
-                            <p>Gieo mầm và nuôi dưỡng những giá trị sống tốt đẹp, khơi dậy tinh thần yêu quê hương, đất nước, con người, đồng thời lan tỏa cảm hứng yêu thương và trân trọng chính bản thân; từ đó xây dựng ý thức trách nhiệm đối với cộng đồng, thiên nhiên, cùng chung tay lan tỏa mạnh mẽ thông điệp Du lịch Xanh – Bền vững</p>
+                            <p>Gieo mầm và nuôi dưỡng giá trị sống tốt đẹp, khơi dậy tinh thần yêu quê hương, đất nước, con người, lan tỏa cảm hứng yêu thương và trân trọng chính bản thân; xây dựng ý thức trách nhiệm với cộng đồng, thiên nhiên, lan tỏa mạnh mẽ thông điệp Du lịch Xanh – Bền vững.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3044,7 +2666,7 @@
                         <a href="cong_dong_ban_sac_trong_nuoc.html" class="about-card-link">
                             <i class="fas fa-users"></i>
                             <h3>Cộng Đồng - Bản Sắc</h3>
-                            <p>Gìn giữ, bảo tồn và phát huy bản sắc văn hóa độc đáo của từng địa phương, đồng thời xây dựng, nuôi dưỡng và phát triển một cộng đồng du lịch bền vững, có trách nhiệm với thiên nhiên, xã hội và các giá trị truyền thống.</p>
+                            <p>Gìn giữ, bảo tồn và phát huy bản sắc văn hóa độc đáo của từng địa phương, đồng thời xây dựng, nuôi dưỡng và phát triển một cộng đồng du lịch bền vững, có trách nhiệm với thiên nhiên, xã hội và giá trị truyền thống.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3054,7 +2676,7 @@
                         <a href="giao_duc_ky_nang_trong_nuoc.html" class="about-card-link">
                             <i class="fas fa-graduation-cap"></i>
                             <h3>Giáo dục kỹ năng</h3>
-                            <p>Rèn luyện, phát triển toàn diện kỹ năng sống - sinh tồn - mềm và khả năng ứng xử xã hội cho thanh thiếu niên, đoàn viên thanh niên thông qua các hành trình trải nghiệm, chương trình huấn luyện và hoạt động thực tế giàu ý nghĩa..</p>
+                            <p>Rèn luyện, phát triển toàn diện kỹ năng sống - sinh tồn - mềm và khả năng ứng xử xã hội cho thanh thiếu niên, đoàn viên thanh niên thông qua các hành trình trải nghiệm, chương trình huấn luyện và hoạt động thực tế giàu ý nghĩa.</p>
                             <span class="read-more">Xem bài viết <i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
@@ -3063,912 +2685,6 @@
         </section>
 
         <hr style="border: 3px solid var(--color-secondary); margin: 20px 0;">
-  <!-- Phần menu -->
-                        <a href="QR-menu.html" class="menu-section">
-                            <div class="menu-content">
-                                <div class="menu-icon-large">
-                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
-                                        <rect x="3" y="5" width="18" height="2" rx="1"></rect>
-                                        <rect x="3" y="11" width="18" height="2" rx="1"></rect>
-                                        <rect x="3" y="17" width="18" height="2" rx="1"></rect>
-                                    </svg>
-                                </div>
-                                <div class="menu-text-content">
-                                    <span class="menu-title"><strong>MENU 4TEA</strong></span>
-                                    <span class="menu-subtitle"><strong>Lối vào Menu</strong></span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-<div class="container trio-wrapper">
-    <!-- QR BOX TRÁI -->
-    <div class="qr-box" onclick="window.location.href='QR-menu.html'">
-        <div class="qr-box-inner">
-            <div class="qr-glow"></div>
-            <img src="images/QR-tu-thien.jpg" alt="QR Code tạo mã miễn phí cho các nền tảng Ruby Wings" class="qr-img" width="200" height="200">
-            <p class="qr-text">TẠO MÃ QR 🍃🍃MIỄN PHÍ🍃🍃</p>
-            <div class="qr-overlay">
-                <span class="qr-icon">📱</span>
-                <span class="qr-hover-text">Nhấn để tạo mã QR</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- KHỐI CHỮ GIỮA - ĐÃ THÊM HIỆU ỨNG PULSE -->
-    <div class="center-content">
-        <div class="center-text" onclick="window.location.href='nhung-hanh-trinh-tieu-bieu.html'">
-            <div class="center-glow"></div>
-            <h1 class="center-title"><strong>HÀNH TRÌNH TIÊU BIỂU</strong></h1>
-            <p class="center-sub"><strong>🍃 Những trải nghiệm ý nghĩa có chất retreat🍃</strong></p>
-            <div class="center-overlay">
-                <span class="center-icon">🌟</span>
-                <span class="center-hover-text">Khám phá ngay</span>
-            </div>
-        </div>
-        
-        <!-- NÚT MỚI THÊM VÀO -->
-        <div class="new-button" onclick="window.location.href='nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html'">
-            <div class="button-glow"></div>
-            <span class="button-icon"></span>
-            <span class="button-text">HÀNH TRÌNH LINH HOẠT</span>
-            <div class="button-overlay">
-                <span class="button-hover-text">Khám phá thêm</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ẢNH PHẢI -->
-    <div class="right-img-box">
-        <div class="img-box-inner">
-            <div class="img-glow"></div>
-            <img src="images/hanh-trinh-tieu-bieu.jpg" alt="Hình ảnh hành trình tiêu biểu Ruby Wings - Trải nghiệm du lịch cảm xúc" class="right-img" width="240" height="160">
-            <div class="img-overlay">
-                <span class="img-icon">📸</span>
-                <span class="img-hover-text">Xem hình ảnh</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<style>
-/* === RUBY WINGS - OPTIMIZED VERSION === */
-#rubyWingsBtnContainer {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    z-index: 9999 !important;
-}
-
-#rubyWingsMainBtn {
-    display: inline-flex !important;
-    align-items: center !important;
-    background: linear-gradient(135deg, #95db63 0%, #179a0b 100%) !important;
-    color: white !important;
-    padding: 10px 20px !important;
-    border-radius: 20px !important;
-    text-decoration: none !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
-    border: 1px solid rgba(255,255,255,0.2) !important;
-    transition: all 0.3s ease !important;
-    max-width: 180px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
-}
-
-#rubyWingsMainBtn:hover {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
-}
-
-#rubyWingsMainBtn:active {
-    transform: translateY(0) !important;
-}
-
-.ruby-btn-text {
-    margin-right: 5px !important;
-    white-space: nowrap !important;
-    font-size: 13px !important;
-}
-
-.ruby-btn-arrow {
-    font-weight: bold !important;
-    font-size: 16px !important;
-    transition: transform 0.2s ease !important;
-}
-
-#rubyWingsMainBtn:hover .ruby-btn-arrow {
-    transform: translateX(2px) !important;
-}
-
-/* Loading State */
-#rubyWingsMainBtn.loading {
-    opacity: 0.7 !important;
-    pointer-events: none !important;
-}
-
-#rubyWingsMainBtn.loading .ruby-btn-arrow::after {
-    content: '...' !important;
-}
-
-/* Mobile Optimization */
-@media (max-width: 768px) {
-    #rubyWingsBtnContainer {
-        bottom: 15px !important;
-        right: 15px !important;
-        left: 15px !important;
-        text-align: center !important;
-    }
-    
-    #rubyWingsMainBtn {
-        padding: 12px 24px !important;
-        font-size: 14px !important;
-        max-width: none !important;
-        width: auto !important;
-        display: inline-flex !important;
-        border-radius: 25px !important;
-    }
-    
-    .ruby-btn-text {
-        font-size: 14px !important;
-    }
-    
-    .ruby-btn-arrow {
-        font-size: 18px !important;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    #rubyWingsMainBtn {
-        border: 2px solid white !important;
-        background: #000 !important;
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    #rubyWingsMainBtn,
-    #rubyWingsMainBtn:hover,
-    .ruby-btn-arrow {
-        transition: none !important;
-        transform: none !important;
-    }
-}
-</style>
-
-<!-- MESSENGER CHAT PLUGIN - ĐÃ VÔ HIỆU HÓA -->
-<!-- 
-<div id="fb-root"></div>
-<div id="fb-customer-chat" class="fb-customerchat"></div>
--->
-
-<script>
-// === RUBY WINGS - META PIXEL TRACKING PRO ===
-(function() {
-    'use strict';
-
-    // ==================== CẤU HÌNH LÕI ====================
-    const CONFIG = {
-        PIXEL_ID: '862531473384426',
-        // Hành vi người dùng
-        ENGAGED_TIME_MS: 30000,     // 30s -> EngagedView
-        SCROLL_DEPTH_PERCENT: 75,   // 75% -> DeepScroll
-        // Giá trị mặc định theo loại trang (VND)
-        PAGE_VALUE: {
-            'home': 0,
-            'landing': 15000,
-            'tour_detail': 50000,
-            'about': 5000,
-            'service': 25000,
-            'profile': 30000,
-            'contact': 10000,
-            'other': 0
-        }
-    };
-
-    // ==================== CONTENT_ID_MAP & PHÂN LOẠI ====================
-    // Sử dụng chính xác MAP bạn cung cấp
-    const CONTENT_ID_MAP = {
-        '': 'RW_HOME',
-        'nhung-hanh-trinh-tieu-bieu': 'RW_LANDING_FEATURED',
-        'nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat': 'RW_LANDING_FLEX',
-        'ngon-lua-truong-son-2n1d': 'RW_TOUR_NLTSON_2N1D',
-        'mua-do-va-tay-truong-son-2n1d': 'RW_TOUR_MUADO_TSON_2N1D',
-        'hanh-trinh-lanh-dao-3n2d': 'RW_TOUR_LANHDAO_3N2D',
-        'di-san-quoc-gia-2n1d': 'RW_TOUR_DISANQG_2N1D',
-        'huyen-thoai-nguoi-phu-nu-viet-nam-3n2d': 'RW_TOUR_PHUNUVN_3N2D',
-        'dmz-hoa-giai-ban-sac-4n3d': 'RW_TOUR_DMZ_4N3D',
-        'hanh-trinh-trai-nghiem-linh-hoat': 'RW_FLEX_GENERAL',
-        'hanh-trinh-giao-duc-ky-nang-song': 'RW_FLEX_EDU_SKILL',
-        'hanh-trinh-trai-nghiem-thien-nhien': 'RW_FLEX_NATURE',
-        'hanh-trinh-van-hoa-di-san': 'RW_FLEX_HERITAGE',
-        'tom_tat_ho_so_hanh_trinh_mau_cho_nha_truong': 'RW_PROFILE_SCHOOL',
-        '01-mo-dau-ruby-wings-la-ai': 'RW_ABOUT_01',
-        '02-cau-chuyen-khoi-nguon': 'RW_ABOUT_02',
-        '03-triet-ly-gia-tri': 'RW_ABOUT_03',
-        '04-logo-y-nghia': 'RW_ABOUT_04',
-        '05-he-sinh-thai-ruby-wings': 'RW_ABOUT_05',
-        'dich-vu-du-lich-trai-nghiem': 'RW_SERVICE_EXPERIENCE',
-        'dich-vu-retreat-chua-lanh': 'RW_SERVICE_RETREAT',
-        'dich-vu-team-building': 'RW_SERVICE_TEAMBUILDING',
-        'dich-vu-giao-duc-ky-nang': 'RW_SERVICE_EDUCATION',
-        'lien-he': 'RW_CONTACT',
-        'gioi-thieu': 'RW_ABOUT'
-    };
-
-    // ==================== TỪ KHOÁ LEAD PHÂN CẤP ====================
-    // Phát triển từ list bạn cung cấp, phân loại theo INTENT
-    const LEAD_KEYWORDS = {
-        HIGH_INTENT: ['đặt tour', 'book', 'booking', 'đăng ký ngay', 'sign up', 'apply'],
-        MED_INTENT: ['báo giá', 'get quote', 'yêu cầu', 'request', 'tư vấn', 'consult'],
-        LOW_INTENT: ['liên hệ', 'contact', 'gửi thông tin', 'inquiry', 'nhận tư vấn', 'đặt lịch']
-    };
-
-    // ==================== LỚP TRACKER CHÍNH ====================
-    class RubyWingsTracker {
-        constructor() {
-            this.pageData = this._analyzePage();
-            this.sentEvents = new Set();
-            this.engagedFired = false;
-            this.scrollFired = false;
-            this._init();
-        }
-
-        // PHÂN TÍCH TRANG THÔNG MINH - CỐT LÕI CỦA SỰ CẢI THIỆN
-        _analyzePage() {
-            const url = new URL(window.location.href);
-            const path = url.pathname;
-            // Chuẩn hóa path: bỏ đuôi .html, lấy slug cuối cùng
-            let pathKey = path.replace(/^\//, '').replace(/\.(html|php)$/, '').replace(/\/$/, '');
-            // Trường hợp trang chủ
-            if (pathKey === '' || path === '/' || path.includes('index')) pathKey = '';
-
-            const contentId = CONTENT_ID_MAP[pathKey];
-            let pageType = 'other';
-            let contentType = 'website';
-            let category = 'general';
-
-            // PHÂN LOẠI TỰ ĐỘNG DỰA TRÊN PATH KEY
-            if (pathKey === '') {
-                pageType = 'home';
-                category = 'homepage';
-            } else if (pathKey.includes('nhung-hanh-trinh')) {
-                pageType = 'landing';
-                category = 'tour_listing';
-                contentType = 'product_group';
-            } else if (CONTENT_ID_MAP[pathKey] && CONTENT_ID_MAP[pathKey].startsWith('RW_TOUR_') || CONTENT_ID_MAP[pathKey] && CONTENT_ID_MAP[pathKey].startsWith('RW_FLEX_')) {
-                pageType = 'tour_detail'; // <- QUAN TRỌNG: Phân biệt Tour
-                category = 'travel_package';
-                contentType = 'product';
-            } else if (pathKey.includes('tom_tat')) {
-                pageType = 'profile';
-                category = 'school_proposal';
-                contentType = 'product';
-            } else if (pathKey.includes('cau-chuyen') || pathKey.includes('mo-dau')) {
-                pageType = 'about';
-                category = 'company_info';
-                contentType = 'article';
-            } else if (pathKey.includes('dich-vu')) {
-                pageType = 'service';
-                category = 'service_listing';
-                contentType = 'product_group';
-            } else if (pathKey.includes('lien-he')) {
-                pageType = 'contact';
-                category = 'contact_page';
-            }
-
-            return {
-                url: url.href,
-                pathKey: pathKey,
-                contentId: contentId,
-                contentName: document.title,
-                pageType: pageType,
-                contentCategory: category,
-                contentType: contentType,
-                isMapped: !!contentId // Cờ để cảnh báo trang mới
-            };
-        }
-
-        _init() {
-            // 1. Track PageView ngay
-            this._trackPageView();
-            // 2. Track ViewContent cho trang đã biết (có trong MAP)
-            if (this.pageData.isMapped && this.pageData.pageType !== 'home') {
-                setTimeout(() => this._trackViewContent(), 800);
-            } else if (!this.pageData.isMapped) {
-                console.warn(`[RubyWings] URL chưa được mapping: ${this.pageData.pathKey}. Hãy bổ sung vào CONTENT_ID_MAP.`);
-            }
-            // 3. Thiết lập tracking hành vi & click
-            this._setupBehaviorTracking();
-            this._setupClickTracking();
-        }
-
-        _trackPageView() {
-            this._sendEvent('PageView', {
-                page_type: this.pageData.pageType,
-                content_category: this.pageData.contentCategory
-            });
-        }
-
-        // VIEWCONTENT CHUẨN CHỈ - Cung cấp dữ liệu PHONG PHÚ cho Meta
-        _trackViewContent() {
-            const eventId = this._generateEventId('viewcontent');
-            this._sendEvent('ViewContent', {
-                content_name: this.pageData.contentName,
-                content_ids: [this.pageData.contentId],
-                content_category: this.pageData.contentCategory,
-                content_type: this.pageData.contentType,
-                currency: 'VND',
-                value: CONFIG.PAGE_VALUE[this.pageData.pageType] || 0,
-                predicted_ltv: (CONFIG.PAGE_VALUE[this.pageData.pageType] || 0) * 10,
-                page_type: this.pageData.pageType
-            }, eventId);
-        }
-
-        _setupBehaviorTracking() {
-            // Scroll Tracking
-            const scrollHandler = () => {
-                if (this.scrollFired) return;
-                const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
-                if (scrolled >= CONFIG.SCROLL_DEPTH_PERCENT) {
-                    this.scrollFired = true;
-                    this._sendEvent('Custom', 'DeepScroll', {
-                        scroll_depth: CONFIG.SCROLL_DEPTH_PERCENT,
-                        page_type: this.pageData.pageType,
-                        content_id: this.pageData.contentId
-                    });
-                    window.removeEventListener('scroll', scrollHandler);
-                }
-            };
-            window.addEventListener('scroll', scrollHandler, { passive: true });
-
-            // Engaged Time Tracking
-            setTimeout(() => {
-                if (!this.engagedFired) {
-                    this.engagedFired = true;
-                    this._sendEvent('Custom', 'EngagedView', {
-                        time_on_page: CONFIG.ENGAGED_TIME_MS / 1000,
-                        page_type: this.pageData.pageType,
-                        content_id: this.pageData.contentId
-                    });
-                }
-            }, CONFIG.ENGAGED_TIME_MS);
-        }
-
-        _setupClickTracking() {
-            // Sử dụng Event Delegation cho hiệu suất tối đa
-            document.addEventListener('click', (e) => {
-                const target = e.target.closest('a, button, [role="button"]');
-                if (!target) return;
-
-                const text = (target.textContent || '').toLowerCase().trim();
-                const href = target.getAttribute('href') || '';
-
-                // PHÁT HIỆN LEAD VỚI PHÂN CẤP INTENT
-                let intentLevel = null;
-                let leadValue = 120000; // Mặc định
-
-                if (LEAD_KEYWORDS.HIGH_INTENT.some(kw => text.includes(kw))) {
-                    intentLevel = 'high';
-                    leadValue = 250000;
-                } else if (LEAD_KEYWORDS.MED_INTENT.some(kw => text.includes(kw))) {
-                    intentLevel = 'medium';
-                    leadValue = 180000;
-                } else if (LEAD_KEYWORDS.LOW_INTENT.some(kw => text.includes(kw))) {
-                    intentLevel = 'low';
-                    leadValue = 120000;
-                }
-
-                // GỬI SỰ KIỆN LEAD NẾU PHÁT HIỆN
-                if (intentLevel) {
-                    const eventId = this._generateEventId('lead');
-                    this._sendEvent('Lead', {
-                        content_name: `Lead Click: ${text.substring(0, 40)}`,
-                        content_category: 'consultation',
-                        content_ids: [this.pageData.contentId],
-                        value: leadValue,
-                        currency: 'VND',
-                        intent_level: intentLevel,
-                        button_text: text.substring(0, 80),
-                        page_type: this.pageData.pageType
-                    }, eventId);
-                }
-
-                // Xử lý click điện thoại (cũng là Lead)
-                if (href.startsWith('tel:')) {
-                    this._sendEvent('Lead', {
-                        content_name: 'Phone Call Click',
-                        content_category: 'contact',
-                        value: 200000,
-                        currency: 'VND',
-                        conversion_type: 'phone_call'
-                    });
-                }
-            });
-        }
-
-        // PHƯƠNG THỨC GỬI EVENT CHUẨN HÓA
-        _sendEvent(eventName, eventData, customEventId = null) {
-            const eventId = customEventId || this._generateEventId(eventName.toLowerCase());
-            if (this.sentEvents.has(eventId)) return; // Chống trùng
-            this.sentEvents.add(eventId);
-
-            const payload = {
-                ...eventData,
-                event_source_url: this.pageData.url,
-                event_time: Math.floor(Date.now() / 1000),
-                event_id: eventId,
-                action_source: 'website'
-            };
-
-            if (typeof fbq !== 'undefined') {
-                try {
-                    if (eventName === 'Custom') {
-                        fbq('trackCustom', eventData.event_name || 'CustomEvent', payload);
-                    } else {
-                        fbq('track', eventName, payload);
-                    }
-                    // Log cho môi trường dev
-                    if (window.location.hostname === 'localhost') {
-                        console.log(`[RW] Sent: ${eventName}`, { ...payload, contentId: this.pageData.contentId });
-                    }
-                } catch (err) {
-                    console.error('[RubyWings] Event Error:', err);
-                }
-            }
-        }
-
-        _generateEventId(prefix) {
-            return `rw_${prefix}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-        }
-    }
-
-    // ==================== KHỞI ĐỘNG ====================
-    // Đảm bảo Pixel đã sẵn sàng trước khi khởi tạo
-    function init() {
-        if (typeof fbq === 'undefined') {
-            setTimeout(init, 100);
-            return;
-        }
-        new RubyWingsTracker();
-        console.log('[RubyWings] Pro Tracking Active.');
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
-})();
-</script>
-
-<style>
-/* CSS cho thiết kế mới */
-.trio-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 20px;
-    padding: 20px;
-    background: linear-gradient(135deg, #e8f5e9 0%, #fce4ec 100%);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.trio-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #4caf50, #e91e63, #ff9800);
-    z-index: 1;
-}
-
-/* QR Box */
-.qr-box {
-    flex: 1;
-    min-width: 250px;
-    position: relative;
-    cursor: pointer;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.qr-box-inner {
-    position: relative;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
-
-.qr-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(76, 175, 80, 0.1) 50%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.qr-box:hover .qr-glow {
-    opacity: 1;
-}
-
-.qr-img {
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-}
-
-.qr-box:hover .qr-img {
-    transform: scale(1.05);
-}
-
-.qr-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    text-align: center;
-    color: #2e7d32;
-    margin: 0;
-    padding: 10px 0;
-    transition: color 0.3s ease;
-    font-size: 16px;
-}
-
-.qr-box:hover .qr-text {
-    color: #e91e63;
-}
-
-.qr-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(76, 175, 80, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 12px;
-}
-
-.qr-box:hover .qr-overlay {
-    opacity: 1;
-}
-
-.qr-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.qr-hover-text {
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* Center Content */
-.center-content {
-    flex: 1;
-    min-width: 250px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.center-text {
-    flex: 1;
-    position: relative;
-    cursor: pointer;
-    padding: 25px 20px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-.center-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.center-text:hover .center-glow {
-    opacity: 1;
-}
-
-.center-text:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #388e3c 0%, #66bb6a 100%);
-}
-
-.center-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    margin: 0 0 15px 0;
-    position: relative;
-    z-index: 2;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.center-sub {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    margin: 0;
-    position: relative;
-    z-index: 2;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.center-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(233, 30, 99, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 12px;
-}
-
-.center-text:hover .center-overlay {
-    opacity: 1;
-}
-
-.center-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.center-hover-text {
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* New Button */
-.new-button {
-    position: relative;
-    cursor: pointer;
-    padding: 18px 20px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ff9800 0%, #ffb74d 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 10px;
-}
-
-.button-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.new-button:hover .button-glow {
-    opacity: 1;
-}
-
-.new-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    background: linear-gradient(135deg, #f57c00 0%, #ffa726 100%);
-}
-
-.button-icon {
-    font-size: 24px;
-}
-
-.button-text {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    margin: 0;
-    flex: 1;
-}
-
-.button-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(156, 39, 176, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 12px;
-}
-
-.new-button:hover .button-overlay {
-    opacity: 1;
-}
-
-.button-hover-text {
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* Right Image Box */
-.right-img-box {
-    flex: 1;
-    min-width: 250px;
-    position: relative;
-    cursor: pointer;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s ease;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.img-box-inner {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.img-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 30%, rgba(33, 150, 243, 0.1) 50%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.right-img-box:hover .img-glow {
-    opacity: 1;
-}
-
-.right-img {
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 240px;
-    height: auto;
-}
-
-.right-img-box:hover .right-img {
-    transform: scale(1.05);
-}
-
-.img-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(33, 150, 243, 0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 12px;
-}
-
-.right-img-box:hover .img-overlay {
-    opacity: 1;
-}
-
-.img-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-.img-hover-text {
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .trio-wrapper {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
-    }
-    
-    .qr-box, .center-content, .right-img-box {
-        min-width: 100%;
-    }
-    
-    .center-title {
-        font-size: 20px;
-    }
-    
-    .center-sub, .qr-text, .button-text {
-        font-size: 14px;
-    }
-    
-    .qr-img, .right-img {
-        max-width: 180px;
-    }
-}
-
-/* Animation for pulse effect */
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-    }
-}
-
-.center-text {
-    animation: pulse 2s infinite;
-}
-</style>
-
-
 
         <!-- Nature & Sustainability Section -->
         <section class="nature-section" id="nature">
@@ -4122,420 +2838,149 @@
             <div class="container">
                 <!-- Dòng chữ "Hành trình tiêu biểu cho các đối tượng" -->
                 <div class="tour-objective-title">
-                    <h3>Hành trình tiêu biểu cho các đối tượng</h3>
+                    <a href="nhung-hanh-trinh-tieu-bieu.html">
+                        <h3>Hành trình tiêu biểu cho các đối tượng</h3>
+                    </a>
                 </div>
                 
                 <div class="tours-grid">
-                    <!-- Tiếng Gọi Vĩ Tuyến -->
+                    <!-- (1) Sống cùng Mưa Đỏ - Tây Trường Sơn -->
                     <div class="tour-card">
-                        <a href="Mua-do-ky-uc-truong-son.html" class="tour-card-link">
+                        <a href="mua-do-ky-uc-truong-son.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-ccb.jpg" alt="Hành trình Mưa đỏ và Tây Trường Sơn - Trải nghiệm lịch sử Quảng Trị" width="280" height="200">
+                                <img src="assets/images/thanh-co.jpg" alt="Hành trình Mưa đỏ và Tây Trường Sơn - Trải nghiệm lịch sử Quảng Trị" width="280" height="200">
                             </div>
                             <div class="tour-info">
-                                <h3>Mưa đỏ và Tây Trường Sơn</h3>
+                                <h3>Sống cùng Mưa Đỏ - Tây Trường Sơn</h3>
                                 <div class="tour-meta">
                                     <span>2 ngày 1 đêm</span>
-                                    <span>Cho mọi đối tượng</span>
+                                    <span>Khởi hành: Huế – Thứ Bảy hàng tuần</span>
                                 </div>
-                                <p>"Trở về Quảng Trị – nơi đất còn thấm máu đào, nơi ký ức và tự hào dân tộc chưa bao giờ ngủ yên…".</p>
+                                <p>Quảng Trị – vùng đất ký ức, nơi Mưa Đỏ bi tráng và sức sống hồi sinh chưa bao giờ ngủ yên.</p>
                                 <div class="tour-price">❤️</div>
                             </div>
                         </a>
                     </div>
                     
-                    <!-- Theo Dấu Chân Anh -->
+                    <!-- (2) Hoàng Hôn Phá Tam Giang & Di Sản -->
                     <div class="tour-card">
-                        <a href="xem-chi-tiet-hanh-trinh-ket-noi-the-he.html" class="tour-card-link">
+                        <a href="pha-tam-giang.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-youth.jpg" alt="Hành trình Ngọn Lửa Trường Sơn - Kết nối thế hệ thanh niên" width="280" height="200">
+                                <img src="assets/images/gallery-8.jpg" alt="Hoàng Hôn Phá Tam Giang & Di Sản" width="280" height="200">
                             </div>
                             <div class="tour-info">
-                                <h3>Ngọn Lửa Trường Sơn – Ký ức và khát vọng</h3>
+                                <h3>Hoàng Hôn Phá Tam Giang & Di Sản</h3>
+                                <div class="tour-meta">
+                                    <span>1 ngày</span>
+                                    <span>Khởi hành: Huế – Thứ Sáu hàng tuần</span>
+                                </div>
+                                <p>Chạm vào chiều sâu di sản cố đô và sự bình yên trên miền sông nước Tam Giang.</p>
+                                <div class="tour-price">❤️</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- (3) Ký Ức – Lịch Sử & Đại Ngàn – Tĩnh Lặng -->
+                    <div class="tour-card">
+                        <a href="lich-su-va-dai-ngan-huong-hoa-hue.html" class="tour-card-link">
+                            <div class="tour-img">
+                                <img src="images/images05/bach-ma.jpg" alt="Ký Ức – Lịch Sử & Đại Ngàn – Tĩnh Lặng" width="280" height="200">
+                            </div>
+                            <div class="tour-info">
+                                <h3>Ký Ức – Lịch Sử & Đại Ngàn – Tĩnh Lặng</h3>
                                 <div class="tour-meta">
                                     <span>2 ngày 1 đêm</span>
-                                    <span>Thanh niên</span>
+                                    <span>Khởi hành: Quảng Trị – Thứ Năm</span>
                                 </div>
-                                <p>Hành trình khám phá lịch sử, thắp sáng tinh thần yêu nước cho thế hệ trẻ.</p>
-                                <div class="tour-price">❤️Đ</div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <!-- Hành Trình Lãnh Đạo -->
-                    <div class="tour-card">
-                        <a href="hanh-trinh-lanh-dao.html" class="tour-card-link">
-                            <div class="tour-img">
-                                <img src="assets/images/tour-leaders.jpg" alt="Hành trình Lãnh Đạo - Phát triển tư duy chiến lược" width="280" height="200">
-                            </div>
-                            <div class="tour-info">
-                                <h3>Hành Trình Lãnh Đạo</h3>
-                                <div class="tour-meta">
-                                    <span>3 ngày 2 đêm</span>
-                                    <span>Doanh nhân</span>
-                                </div>
-                                <p>Vận dung nghiên cứu tư duy chiến lược và tính kiên trì từ những bài học lịch sử.</p>
+                                <p>Hành trình kết nối lịch sử và thiên nhiên đại ngàn, tìm lại sự tĩnh lặng bên trong.</p>
                                 <div class="tour-price">❤️</div>
                             </div>
                         </a>
                     </div>
                     
-                    <!-- Di Sản Quốc Gia -->
+                    <!-- (4) Bình yên giữa núi rừng Trường Sơn -->
                     <div class="tour-card">
-                        <a href="di-san-quoc-gia.html" class="tour-card-link">
+                        <a href="hanh_trinh_phong_huong_binh_yen_giua_truong_son.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-officials.jpg" alt="Hành trình Di Sản Quốc Gia - Giáo dục truyền thống" width="280" height="200">
+                                <img src="images/images02/lan_toa_tinh_yeu_que_huong_1.jpg" alt="Bình yên giữa núi rừng Trường Sơn" width="280" height="200">
                             </div>
                             <div class="tour-info">
-                                <h3>Di Sản Quốc Gia</h3>
+                                <h3>Bình yên giữa núi rừng Trường Sơn</h3>
                                 <div class="tour-meta">
                                     <span>2 ngày 1 đêm</span>
-                                    <span>Cán bộ nhà nước</span>
+                                    <span>Khởi hành: Huế – Thứ Bảy</span>
                                 </div>
-                                <p>Hành trình giáo dục truyền thống, nâng cao ý thức bảo tồn di sản lịch sử.</p>
+                                <p>Hành trình retreat giữa đại ngàn Trường Sơn, tìm lại sự bình yên và cân bằng nội tâm.</p>
                                 <div class="tour-price">❤️</div>
                             </div>
                         </a>
                     </div>
                     
-                    <!-- Huyền Thoại Người Phụ nữ Việt Nam -->
+                    <!-- (5) Non nước Bạch Mã -->
                     <div class="tour-card">
-                        <a href="huyen-thoai-phu-nu.html" class="tour-card-link">
+                        <a href="nhung-hanh-trinh-tieu-bieu.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-women.jpg" alt="Hành trình Huyền Thoại Người Phụ nữ Việt Nam" width="280" height="200">
+                                <img src="images/images05/ngu-ho-bach-ma.jpg" alt="Non nước Bạch Mã" width="280" height="200">
                             </div>
                             <div class="tour-info">
-                                <h3>Người Phụ nữ Việt Nam</h3>
+                                <h3>Non nước Bạch Mã</h3>
                                 <div class="tour-meta">
-                                    <span>3 ngày 2 đêm</span>
-                                    <span>Hội Phụ Nữ</span>
+                                    <span>1 ngày</span>
+                                    <span>Khởi hành: Tp Huế – Thứ 3 hàng tuần</span>
                                 </div>
-                                <p>Hành trình dành cho những người mẹ, người Phụ nữ Việt Nam.</p>
+                                <p>Chạm rừng nguyên sinh Bạch Mã, nơi mây núi giao hòa; Gọi về những tầng cảm xúc tưởng đã lãng quên…</p>
                                 <div class="tour-price">❤️</div>
                             </div>
                         </a>
                     </div>
                     
-                    <!-- DMZ - Hòa Giải - Bản Sắc - Thiên Nhiên -->
+                    <!-- (6) Hành Hương Tâm Linh Tín Ngưỡng - Thăm Chiến Trường Xưa & Đồng Đội -->
                     <div class="tour-card">
-                        <a href="dmz-hoa-giai.html" class="tour-card-link">
+                        <a href="dmz_tham_chien_truong_xua_va_dong_doi.html" class="tour-card-link">
                             <div class="tour-img">
-                                <img src="assets/images/tour-international.jpg" alt="Hành trình DMZ - Hòa Giải - Bản Sắc - Thiên Nhiên cho du khách quốc tế" width="280" height="200">
+                                <img src="images/dmz_khe_sanh_.jpg" alt="Hành Hương Tâm Linh Tín Ngưỡng - Thăm Chiến Trường Xưa & Đồng Đội" width="280" height="200">
                             </div>
                             <div class="tour-info">
-                                <h3>DMZ - Bản sắc - Thiên Nhiên</h3>
+                                <h3>Hành Hương Tâm Linh - Thăm Chiến Trường Xưa & Đồng Đội</h3>
                                 <div class="tour-meta">
                                     <span>3 ngày 2 đêm</span>
-                                    <span>Du khách quốc tế</span>
+                                    <span>Khởi hành: Theo yêu cầu</span>
                                 </div>
-                                <p>Hành trình kết nối du khách Quốc tế quan tâm đến quá khứ, vùng DMZ, người Mỹ + gia đình, nhà báo - học giả - nghệ sĩ mong muốn có trải nghiệm nơi đây</p>
+                                <p>Hành trình kết nối du khách quan tâm đến quá khứ, vùng DMZ, qua các địa danh như Cụm di tích đặc biệt Hiền lương – Bến hải (Vĩ tuyến 17), Thành Cổ Quảng Trị, Khe Sanh, Đảo Cồn cỏ anh hùng.</p>
                                 <div class="tour-price">❤️</div>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                 <!-- Bổ sung dòng KẾT NỐI KHÁCH QUỐC TẾ -->
-                <style>
-/* CSS Variables for Brand Colors */
-:root {
-  --primary-green: #2E8B57;
-  --light-green: #90EE90;
-  --accent-pink: #FF69B4;
-  --warm-brown: #D2691E;
-  --deep-blue: #1E6FB9;
-  --neutral-light: #F8F9FA;
-  --neutral-dark: #343A40;
-}
-
-/* International Section Styling */
-.international-section {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
-  border-radius: 16px;
-  padding: 30px;
-  margin: 30px 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.international-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-pink), var(--warm-brown), var(--deep-blue));
-  z-index: 1;
-}
-
-.international-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
-
-.international-content {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  position: relative;
-  z-index: 2;
-}
-
-.international-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.international-section:hover .international-glow {
-  opacity: 1;
-}
-
-.globe-container {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.globe-img {
-  display: block;
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.international-section:hover .globe-img {
-  transform: scale(1.1) rotate(5deg);
-}
-
-.globe-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 105, 180, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.international-section:hover .globe-overlay {
-  opacity: 1;
-}
-
-.globe-overlay-text {
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  padding: 0 10px;
-}
-
-.text-content {
-  flex: 1;
-}
-
-.international-link {
-  text-decoration: none;
-  display: block;
-  transition: all 0.3s ease;
-}
-
-.international-link:hover {
-  transform: translateX(10px);
-}
-
-.international-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  margin: 0 0 15px 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  position: relative;
-  display: inline-block;
-}
-
-.international-title::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: var(--accent-pink);
-  transition: width 0.3s ease;
-}
-
-.international-link:hover .international-title::after {
-  width: 100%;
-}
-
-.international-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--neutral-light);
-  margin: 15px 0;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  border-left: 4px solid var(--accent-pink);
-}
-
-.international-image {
-  flex-shrink: 0;
-  margin-left: 20px;
-}
-
-.quoc-te-img {
-  width: 180px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
-}
-
-.international-section:hover .quoc-te-img {
-  transform: scale(1.05);
-  border-color: var(--accent-pink);
-}
-
-/* Active State */
-.international-section.active {
-  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--primary-green) 100%);
-}
-
-.international-section.active .international-title {
-  color: var(--accent-pink);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .international-section {
-    padding: 20px;
-    margin: 20px 0;
-    background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
-  }
-  
-  .international-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-  
-  .international-title {
-    font-size: 22px;
-  }
-  
-  .international-description {
-    font-size: 14px;
-    margin: 10px 0;
-  }
-  
-  .globe-img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .quoc-te-img {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    margin-left: 0;
-  }
-  
-  .international-image {
-    margin-left: 0;
-    order: 3;
-  }
-}
-
-@media (max-width: 480px) {
-  .international-section {
-    padding: 15px;
-  }
-  
-  .international-title {
-    font-size: 20px;
-  }
-  
-  .international-description {
-    font-size: 13px;
-    padding: 10px;
-  }
-  
-  .globe-img {
-    width: 80px;
-    height: 80px;
-  }
-}
-
-/* Animation for Active State */
-@keyframes pulse-glow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 105, 180, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
-  }
-}
-
-.international-section.active {
-  animation: pulse-glow 2s infinite;
-}
-</style>
-
-<div class="international-section">
-  <div class="international-glow"></div>
-  <div class="international-content">
-    <div class="globe-container">
-      <img src="assets/images/globe-animation.gif" alt="Quả địa cầu kết nối quốc tế Ruby Wings" class="globe-img">
-      <div class="globe-overlay">
-        <span class="globe-overlay-text">Khám phá Việt Nam</span>
-      </div>
-    </div>
-    
-    <div class="text-content">
-      <a class="international-link" href="/ket-noi-quoc-te">
-        <h2 class="international-title">DÀNH CHO CÁC BẠN Ở NƯỚC NGOÀI</h2>
-      </a>
-      
-      <p class="international-description">
-        Ruby Wings is a leading travel company in Central Vietnam. We are passionate about showcasing the beauty of Vietnam to the world. While our international tour packages are in development, explore the magnificent landscapes and rich culture of Vietnam below (越南中部领先旅游公司 - Ruby Wings 是越南中部领先的旅游公司。我们热切渴望向世界展现越南之美。在国际旅游套餐完善期间，诚邀您在此先行探索越南雄奇壮丽的自然景观与丰富多彩的文化底蕴。
-
-采用意译优化版 -Ruby Wings 是越南中部知名的旅游企业，始终致力于向全球展示越南的独特魅力。在我们精心打造国际旅游线路的同时，您仍可在此领略越南震撼人心的自然奇观与多元交融的文化风采).
-      </p>
-    </div>
-    
-    <div class="international-image">
-      <img src="images/quoc-te.jpg" alt="Du lịch quốc tế Ruby Wings" class="quoc-te-img">
-    </div>
-  </div>
-</div>
             </div>
         </section>
 
         <hr style="border: 3px solid var(--color-secondary); margin: 20px 0;">
+
+        <!-- Flexible Tours Section -->
+        <section class="flexible-tours">
+            <div class="container">
+                <div class="section-title">
+                    <h2>HÀNH TRÌNH TRẢI NGHIỆM LINH HOẠT</h2>
+                    <p>Khám phá những hành trình được thiết kế linh hoạt theo yêu cầu, phù hợp với sở thích và thời gian của bạn. Từ biển đảo đến núi rừng, từ văn hóa đến thiên nhiên, trải nghiệm đa dạng và đáng nhớ.</p>
+                    <a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html" class="btn">Xem tất cả hành trình linh hoạt</a>
+                </div>
+                <div class="flexible-tours-list">
+                    <ul>
+                        <li><a href="kham_pha_van_hoa_thien_nhien_nha_trang_da_lat.html">Khám phá Văn Hóa & Thiên Nhiên – Nha Trang – Đà Lạt</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                        <li><a href="dao_ngoc_trai_nghiem_van_hoa_thien_nhien_phu_quoc.html">Trải Nghiệm Đảo Ngọc – Phú Quốc</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                        <li><a href="mien_dat_tru_phu_sac_mau_phuong_nam.html">Sắc Màu Phương Nam</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                        <li><a href="kham_pha_dat_viet_van_hoa_ky_quan_thien_nhien_khe_sanh_tam_dao_moc_chau.html">Khám Phá Đất Việt – Văn Hóa & Kỳ Quan Thiên Nhiên</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                        <li><a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình trải nghiệm linh hoạt - Khối 5</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                        <li><a href="nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html">Hành trình trải nghiệm linh hoạt - Khối 6</a> <span class="tour-note">(Thiết kế chất lượng – tối ưu – linh hoạt theo yêu cầu quý khách)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 3px solid var(--color-secondary); margin: 20px 0;">
+
         <!-- Featured Tours -->
         <section class="featured-tours">
             <div class="container">
@@ -4582,12 +3027,6 @@
             </div>
         </section>
     </main>
-
-
-
-
-
-
 
 <!-- === FAQ SECTION - CÂU HỎI THƯỜNG GẶP === -->
 <section class="faq-section" id="faq-section">
@@ -4659,184 +3098,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-<style>
-
-
-/* === RUBY WINGS CONSULTATION BUTTON - MOBILE GREEN VERSION === */
-.rw-consult-btn-container {
-    display: block !important;
-    margin: 25px 0 !important;
-    text-align: center !important;
-    width: 100% !important;
-}
-
-.rw-consult-btn-main {
-    /* Reset mọi style mặc định */
-    all: unset !important;
-    
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    
-    /* Kích thước và khoảng cách */
-    padding: 18px 35px !important;
-    margin: 10px auto !important;
-    
-    /* Kiểu dáng */
-    border-radius: 50px !important;
-    border: 3px solid #2cec2c !important;
-    font-weight: 800 !important;
-    font-size: 18px !important;
-    line-height: 1.3 !important;
-    text-align: center !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    
-    /* Màu sắc - XANH LÁ CÂY + CHỮ VÀNG */
-    background: linear-gradient(135deg, #2cec2c 0%, #22cc22 100%) !important;
-    color: #ffd700 !important;
-    cursor: pointer !important;
-    
-    /* Hiệu ứng */
-    transition: all 0.4s ease !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 6px 20px rgba(44, 236, 44, 0.3) !important;
-    
-    /* Font chữ rõ ràng */
-    font-family: 'Arial', 'Helvetica', sans-serif !important;
-}
-
-/* TEXT - CHỮ MÀU VÀNG NỔI BẬT */
-.rw-consult-btn-main .rw-btn-text {
-    color: #ffd700 !important;
-    font-weight: 800 !important;
-    font-size: 18px !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-    z-index: 2 !important;
-    position: relative !important;
-}
-
-/* === HIỆU ỨNG HOVER - CHUYỂN MÀU ĐẬM DẦN === */
-.rw-consult-btn-main:hover {
-    transform: translateY(-4px) scale(1.05) !important;
-    box-shadow: 0 12px 30px rgba(44, 236, 44, 0.5) !important;
-    background: linear-gradient(135deg, #32ff32 0%, #1a991a 100%) !important;
-    border-color: #32ff32 !important;
-}
-
-.rw-consult-btn-main:hover .rw-btn-text {
-    color: #fff3af !important;
-}
-
-/* Hiệu ứng ánh sáng trượt */
-.rw-consult-btn-main::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: -100% !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
-    transition: left 0.7s ease !important;
-    z-index: 1 !important;
-}
-
-.rw-consult-btn-main:hover::before {
-    left: 100% !important;
-}
-
-/* === MOBILE RESPONSIVE - 1 DÒNG & TỐI ƯU === */
-@media (max-width: 768px) {
-    .rw-consult-btn-main {
-        padding: 16px 25px !important;
-        font-size: 16px !important;
-        width: 95% !important;
-        max-width: 320px !important;
-        display: flex !important; /* Đảm bảo 1 dòng */
-        flex-wrap: nowrap !important;
-        white-space: nowrap !important;
-    }
-    
-    .rw-consult-btn-main .rw-btn-text {
-        font-size: 16px !important;
-        white-space: nowrap !important;
-    }
-    
-    /* Ẩn hoàn toàn mũi tên trên mobile */
-    .rw-consult-btn-main .rw-btn-arrow {
-        display: none !important;
-    }
-    
-    /* Màu mobile - xanh lá nhạt */
-    .rw-consult-btn-main {
-        background: linear-gradient(135deg, #2bdc2b 0%, #1a9f1a 100%) !important;
-        border-color: #2cec2c !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .rw-consult-btn-main {
-        padding: 14px 20px !important;
-        font-size: 15px !important;
-        margin: 8px auto !important;
-    }
-    
-    .rw-consult-btn-main .rw-btn-text {
-        font-size: 15px !important;
-        letter-spacing: 0.5px !important;
-    }
-}
-
-/* Desktop - vẫn giữ mũi tên */
-@media (min-width: 769px) {
-    .rw-consult-btn-main .rw-btn-arrow {
-        margin-left: 12px !important;
-        transition: transform 0.3s ease !important;
-        font-weight: bold !important;
-        font-size: 18px !important;
-        color: #fff3af !important;
-        z-index: 2 !important;
-        position: relative !important;
-    }
-    
-    .rw-consult-btn-main:hover .rw-btn-arrow {
-        transform: translateX(4px) !important;
-    }
-}
-
-/* LOADING STATE */
-.rw-consult-btn-main.loading {
-    opacity: 0.8 !important;
-    pointer-events: none !important;
-}
-
-.rw-consult-btn-main.loading .rw-btn-text::after {
-    content: '...' !important;
-    animation: loadingDots 1.5s infinite !important;
-}
-
-@keyframes loadingDots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
-}
-
-/* Đảm bảo không bị ảnh hưởng bởi CSS khác */
-.rw-consult-btn-container * {
-    box-sizing: border-box !important;
-}
-</style>
-
-
-
 
     <!-- Footer -->
     <footer id="contact">
@@ -4914,6 +3175,7 @@
         </div>
     </footer>
 
+    <!-- Chatbot và các script quan trọng được giữ nguyên -->
     <script>
         // Enhanced Header Functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -5122,6 +3384,7 @@
                         }
                     });
                     
+                  
                     // Search button click
                     this.searchButton.addEventListener('click', () => {
                         this.performSearch(this.searchInput.value);
