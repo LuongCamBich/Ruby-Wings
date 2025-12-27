@@ -3656,45 +3656,57 @@
                     }
                 }
                 
-                setupEventListeners() {
-                    // Search input events
-                    this.searchInput.addEventListener('input', (e) => {
-                        this.handleInput(e.target.value);
-                    });
-                    
-                    this.searchInput.addEventListener('focus', () => {
-                        if (this.searchInput.value.length >= 2) {
-                            this.showSuggestions(this.searchInput.value);
-                        }
-                    });
-                    
-                  
-                    // Search button click
-                    this.searchButton.addEventListener('click', () => {
-                        this.performSearch(this.searchInput.value);
-                    });
-                    
-                    // Enter key press
-                    this.searchInput.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter') {
-                            this.performSearch(this.searchInput.value);
-                        }
-                    });
-                    
-                    // Filter buttons
-                    this.filterButtons.forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            this.setFilter(e.target.dataset.filter);
-                        });
-                    });
-                    
-                    // Click outside to close suggestions
-                    document.addEventListener('click', (e) => {
-                        if (!this.searchInput.contains(e.target) && !this.searchSuggestions.contains(e.target)) {
-                            this.hideSuggestions();
-                        }
-                    });
-                }
+               setupEventListeners() {
+    // Search input events
+    if (this.searchInput) {
+        this.searchInput.addEventListener('input', (e) => {
+            this.handleInput(e.target.value);
+        });
+
+        this.searchInput.addEventListener('focus', () => {
+            if (this.searchInput.value.length >= 2) {
+                this.showSuggestions(this.searchInput.value);
+            }
+        });
+
+        this.searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.performSearch(this.searchInput.value);
+            }
+        });
+    }
+
+    // Search button click
+    if (this.searchButton) {
+        this.searchButton.addEventListener('click', () => {
+            if (this.searchInput) {
+                this.performSearch(this.searchInput.value);
+            }
+        });
+    }
+
+    // Filter buttons
+    if (this.filterButtons && this.filterButtons.length) {
+        this.filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.setFilter(e.target.dataset.filter);
+            });
+        });
+    }
+
+    // Click outside to close suggestions
+    if (this.searchInput && this.searchSuggestions) {
+        document.addEventListener('click', (e) => {
+            if (
+                !this.searchInput.contains(e.target) &&
+                !this.searchSuggestions.contains(e.target)
+            ) {
+                this.hideSuggestions();
+            }
+        });
+    }
+}
+
                 
                 handleInput(value) {
                     clearTimeout(this.debounceTimer);
