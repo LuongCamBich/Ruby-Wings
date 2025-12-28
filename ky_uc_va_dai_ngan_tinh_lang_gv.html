@@ -197,7 +197,7 @@
                     "name": "Hành trình này có phù hợp với đoàn giáo viên không?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt cho Quý thầy cô giáo, kết hợp giữa tham quan di tích lịch sử có giá trị giáo dục cao (Thành cổ Quảng Trị, Lăng Gia Long) và trải nghiệm thiên nhiên tĩnh lặng, chữa lành tại Bạch Mã. Đây là cơ hội để vừa học hỏi thêm về lịch sử dân tộc, vừa thư giãn, tái tạo năng lượng sau thời gian làm việc căng thẳng."
+                        "text": "Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt cho Quý thầy cô giáo, kết hợp giữa tham quan di tích lịch sử có giá trị giáo dục cao (Thành cổ Quảng Trị, Lăng Gia Long) và trải nghiệm thiên nhiên tĩnh lặng, chữa lành tại Bạch Mã. Đây là cơ hội để vừa học hỏi thêm về lị sử dân tộc, vừa thư giãn, tái tạo năng lượng sau thời gian làm việc căng thẳng."
                     }
                 },
                 {
@@ -825,12 +825,22 @@
             position: relative;
         }
         
-        .intro-image img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: var(--transition-slow);
-        }
+       .intro-image img {
+width: 100%;
+height: 500px;
+object-fit: cover;
+transition: var(--transition-slow);
+}
+
+@media (max-width: 768px) {
+.intro-image img {
+height: auto;
+aspect-ratio: 16/9;
+max-height: 300px;
+object-fit: cover;
+object-position: center;
+}
+}
         
         .intro-image:hover img {
             transform: scale(1.05);
@@ -932,10 +942,10 @@
         }
         
         .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+position: relative;
+max-width: 1200px;
+margin: 0 auto;
+}
         
         .timeline::before {
             content: '';
@@ -1022,13 +1032,14 @@
             background: linear-gradient(90deg, white, var(--color-accent));
         }
         
-        .pricing-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        @media (min-width: 769px) {
+    .pricing-content {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
         
         .included, .excluded, .policies {
             background: rgba(255,255,255,0.15);
@@ -1128,10 +1139,14 @@
             position: relative;
         }
         
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        @media (min-width: 769px) {
+    .faq-content {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
         
         .faq-item {
             margin-bottom: 25px;
@@ -1327,24 +1342,28 @@
         }
        
         .social-links-grid {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            overflow-x: visible;
-            padding: 5px 0;
-            width: 100%;
-        }
+display: flex;
+flex-direction: row;
+gap: 10px;
+justify-content: flex-start;
+flex-wrap: nowrap;
+margin-top: 20px;
+overflow-x: auto;
+overflow-y: hidden;
+padding: 5px 0 15px 0;
+width: 100%;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: thin;
+}
 
-        .social-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            width: 100%;
-        }
+.social-row {
+display: flex;
+gap: 10px;
+flex-wrap: nowrap;
+justify-content: flex-start;
+width: 100%;
+padding-right: 20px;
+}
 
         .social-icon {
             display: flex;
@@ -1371,9 +1390,9 @@
             background-color: #3b5998;
         }
 
-        .social-icon.facebook-personal {
-            background-color: #40f218;
-        }
+       .social-icon.facebook-personal {
+background-color: #3b5998;
+}
 
         .social-icon.twitter {
             background-color: #1da1f2;
@@ -1494,12 +1513,17 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .tour-hero {
-                margin-top: 100px;
-                padding: 120px 0 80px;
-                background-attachment: scroll;
-            }
+       @media (max-width: 768px) {
+.tour-hero {
+margin-top: 100px;
+padding: 80px 0 60px;
+background-attachment: scroll;
+aspect-ratio: 16/9;
+height: auto;
+min-height: 0;
+background-size: cover;
+background-position: center center;
+}
             
             .tour-hero h1 {
                 font-size: 2.3rem;
@@ -1518,21 +1542,41 @@
             }
             
             .timeline::before {
-                left: 20px;
+                display: none;
             }
             
             .timeline-item {
-                padding-left: 70px;
+                padding-left: 0;
+                margin-bottom: 30px;
             }
             
             .timeline-time {
-                min-width: 100px;
-                font-size: 0.9rem;
-                padding: 10px 15px;
+                position: relative;
+                left: 0;
+                top: 0;
+                margin-bottom: 15px;
+                min-width: 140px;
+                width: auto;
+                display: inline-block;
             }
             
             .timeline-content {
                 padding: 25px;
+                border-left: 4px solid var(--color-primary);
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                width: 100%;
+                margin-left: 0;
+                transform: none !important;
+            }
+            
+            .timeline-content::before {
+                display: none;
+            }
+            
+            .timeline-content:hover {
+                transform: none;
+                box-shadow: var(--box-shadow-hover);
             }
             
             .consultation-btn {
@@ -1542,10 +1586,6 @@
             
             .highlight-card, .included, .excluded, .policies {
                 padding: 24px 20px;
-            }
-            
-            .footer-content {
-                gap: 40px;
             }
             
             /* Mobile header adjustments */
@@ -1567,6 +1607,62 @@
             
             .logo-tagline {
                 font-size: 0.95rem;
+            }
+            
+            /* FOOTER MOBILE FIX */
+            footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-content {
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+            
+            .footer-column {
+                margin-bottom: 20px;
+            }
+            
+            .footer-column p {
+                margin-bottom: 12px;
+                line-height: 1.5;
+                font-size: 0.95rem;
+            }
+            
+            .contact-info {
+                margin-bottom: 12px;
+                gap: 10px;
+            }
+            
+            .social-links-grid {
+                margin-top: 15px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+                justify-content: flex-start;
+            }
+            
+            .social-row {
+                flex-wrap: nowrap;
+                gap: 8px;
+                padding-right: 20px;
+            }
+            
+            .social-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+            
+            .zalo-icon {
+                width: 22px;
+                height: 22px;
+            }
+            
+            .copyright {
+                padding-top: 20px;
+                font-size: 0.9rem;
             }
         }
         
@@ -1674,21 +1770,21 @@
         <section class="tour-hero">
             <div class="container tour-hero-content">
                 <div class="tour-tag">HÀNH TRÌNH 2 NGÀY 1 ĐÊM</div>
-                <h1>Ký ức và Đại Ngàn - Tĩnh Lặng</h1>
+                <h1>Ký ức và đại ngàn tĩnh lặng</h1>
                 <p>"Trở về ký ức xưa, lắng nghe sự tĩnh tại giữa thiên nhiên đại ngàn."</p>
                 <p>Ruby Wings trân trọng giới thiệu hành trình "Trở về ký ức xưa, lắng nghe sự tĩnh tại giữa thiên nhiên đại ngàn." - cuộc gặp gỡ của những tâm hồn muốn được tìm hiểu tri ân và lắng nghe. Trên mảnh đất Quảng Trị – nơi Thành cổ in hằn dấu tích bi tráng, và giữa đại ngàn Bạch Mã tĩnh lặng, hành trình đưa bạn trở về với văn hóa và với chính mình.</p>
             </div>
         </section>
 
-        <!-- Giới thiệu Tour -->
+       <!-- Giới thiệu Tour -->
         <section class="tour-section tour-intro">
             <div class="container">
                 <div class="section-title">
-                    <h2>Giới Thiệu Hành Trình</h2>
+                    <h2>Giới thiệu hành trình</h2>
                 </div>
                 <div class="intro-content">
                     <div class="intro-text">
-                        <p>Kính thưa Quý thầy cô!</p>
+                       
                         <p><strong>Ruby Wings Travel</strong> trân trọng giới thiệu hành trình <strong>"Ký ức và Đại Ngàn - Tĩnh Lặng"</strong> - một chuyến đi đặc biệt dành cho những tâm hồn muốn tìm về ký ức, lắng nghe sự tĩnh tại giữa thiên nhiên đại ngàn.</p>
                         <p>Đây không chỉ là một chuyến đi, mà là cuộc gặp gỡ của những tâm hồn muốn được tìm hiểu tri ân và lắng nghe. Trên mảnh đất Quảng Trị – nơi Thành cổ in hằn dấu tích bi tráng, và giữa đại ngàn Bạch Mã tĩnh lặng, hành trình đưa bạn trở về với văn hóa và với chính mình – để quá khứ không chỉ được tưởng nhớ, mà còn trở thành nguồn năng lượng sống và chữa lành hôm nay.</p>
                         <p><strong>Phong cách:</strong> Hành trình là sự hòa quyện giữa ký ức và trải nghiệm thiên nhiên thuần khiết. Mỗi bước chân là một lớp ký ức được đánh thức, mỗi khoảnh khắc là một phép màu của sự kết nối và chữa lành.</p>
@@ -1712,22 +1808,22 @@
                         <div class="highlight-icon">
                             <i class="fas fa-history"></i>
                         </div>
-                        <h3>Ký ức Lịch Sử Sống Động</h3>
-                        <p>Được nghe những câu chuyện chân thực, xúc động từ HDV chuyên sâu. Hành trình tri ân tại Thành cổ Quảng Trị với nghi lễ tưởng niệm trang nghiêm, gặp gỡ nhân chứng lịch sử và trồng cây lưu niệm lan tỏa thông điệp du lịch xanh bền vững.</p>
+                        <h3>Ký ức Lịch sử sống động</h3>
+                        <p>Được nghe những câu chuyện chân thực, xúc động từ HDV chuyên sâu. Hành trình tri ân tại <strong>Thành cổ Quảng Trị</strong> với nghi lễ tưởng niệm trang nghiêm, gặp gỡ nhân chứng lịch sử và trồng cây lưu niệm lan tỏa thông điệp du lịch xanh bền vững.</p>
                     </div>
                     <div class="highlight-card fade-in">
                         <div class="highlight-icon">
                             <i class="fas fa-spa"></i>
                         </div>
-                        <h3>Trải Nghiệm Sống Khỏe Từ Thiên Nhiên</h3>
-                        <p>Tham gia các bài tập thiền – khí công giữa thiên nhiên trong lành của Non nước Bạch Mã, giúp tịnh tâm, nạp năng lượng và chăm sóc sức khỏe toàn diện. Bữa picnic thuần chay dinh dưỡng giữa đại ngàn.</p>
+                        <h3>Trải Nghiệm sống khỏe từ thiên nhiên</h3>
+                        <p>Tham gia các bài tập <strong>thiền – khí công</strong> giữa thiên nhiên trong lành của Non nước Bạch Mã, giúp tịnh tâm, nạp năng lượng và chăm sóc sức khỏe toàn diện. Bữa picnic <strong>thuần chay</strong> dinh dưỡng giữa đại ngàn.</p>
                     </div>
                     <div class="highlight-card fade-in">
                         <div class="highlight-icon">
                             <i class="fas fa-mountain"></i>
                         </div>
-                        <h3>Khám Phá Đại Ngàn Bạch Mã</h3>
-                        <p>Chinh phục đỉnh Bạch Mã - "Mái nhà của Huế", khám phá Ngũ Hồ như năm bức tranh nước giữa rừng, chiêm ngưỡng Thác Đỗ Quyên hùng vĩ. Trải nghiệm sống chậm, tĩnh tại giữa thiên nhiên nguyên sơ.</p>
+                        <h3>Khám phá đại ngàn Bạch Mã</h3>
+                        <p>Chinh phục <strong>đỉnh Bạch Mã</strong> - <strong>"Mái nhà của Huế"</strong>, khám phá <strong>Ngũ Hồ</strong> như năm bức tranh nước giữa rừng, chiêm ngưỡng <strong>Thác Đỗ Quyên</strong> hùng vĩ. Trải nghiệm sống chậm, tĩnh tại giữa thiên nhiên nguyên sơ.</p>
                     </div>
                 </div>
             </div>
@@ -1737,7 +1833,7 @@
         <section class="tour-section tour-itinerary">
             <div class="container">
                 <div class="section-title">
-                    <h2>Lịch Trình Chi Tiết</h2>
+                    <h2>Lịch trình chi tiết</h2>
                 </div>
                 <div class="timeline">
                     <!-- Ngày 1 -->
@@ -1745,26 +1841,26 @@
                         <div class="timeline-time">Ngày 1<br>07:00 - 11:30</div>
                         <div class="timeline-content">
                             <h3>Khe Sanh – Thành cổ QT – Huế (Ăn: ------, Trưa, Tối)</h3>
-                            <p>07:00 – 08:00: Xe đón đoàn - Khởi hành tham quan, hướng vào thành phố Huế.</p>
-                            <p>08:00 – 09:00: Đoàn tham quan Thành Tân Sở.</p>
-                            <p>09:00 – 11:30: Viếng Thành Cổ Quảng Trị - nơi chứng kiến trận chiến 81 ngày đêm "Mưa Đỏ" lịch sử. Quý thầy cô có thể được gặp gỡ nhân chứng sống sót từ trận đánh 81 ngày đêm. Nếu muốn, đoàn cùng trồng - tặng cây lưu niệm (tuỳ chọn), lan toả thông điệp về lòng biết ơn và bảo vệ môi trường – Du lịch xanh – bền vững.</p>
+                            <p><strong>07:00 – 08:00: </strong> Xe đón đoàn - Khởi hành tham quan, hướng vào thành phố Huế.</p>
+                            <p><strong>08:00 – 09:00: </strong>Đoàn tham quan Thành Tân Sở.</p>
+                            <p><strong>09:00 – 11:30: </strong>Viếng Thành Cổ Quảng Trị - nơi chứng kiến trận chiến 81 ngày đêm <strong>"Mưa Đỏ"</strong> lịch sử. Quý thầy cô có thể được gặp gỡ nhân chứng sống sót từ trận đánh 81 ngày đêm. Nếu muốn, đoàn cùng trồng - tặng cây lưu niệm (tuỳ chọn), lan toả thông điệp về lòng biết ơn và bảo vệ môi trường – Du lịch xanh – bền vững.</p>
                         </div>
                     </div>
                     <div class="timeline-item fade-in">
                         <div class="timeline-time">11:30 - 15:00</div>
                         <div class="timeline-content">
                             <h3>Bữa Trưa & Thánh Địa La Vang</h3>
-                            <p>11:30 – 13:00: Đoàn dùng cơm trưa tại thị xã Quảng Trị, thưởng thức đặc sản vùng đất này.</p>
-                            <p>13:00 – 14:00: Đoàn tham quan Thánh địa La Vang - nơi được gọi là "Tiểu Vương cung thánh đường giữa lòng Quảng Trị", là không gian văn hóa – lịch sử lắng đọng, nơi mỗi bước chân đều mang theo niềm tin, sự bình an và hy vọng.</p>
-                            <p>14:00 – 15:00: Đoàn rời thị xã Quảng Trị, theo cung đường xuyên miền Trung đầy ký ức để tiến về thành phố Huế – cố đô trầm mặc.</p>
+                            <p><strong>11:30 – 13:00: </strong>Đoàn dùng cơm trưa tại thị xã Quảng Trị, thưởng thức đặc sản vùng đất này.</p>
+                            <p><strong>13:00 – 14:00:</strong> Đoàn tham quan <strong>Thánh địa La Vang</strong> - nơi được gọi là <strong>"Tiểu Vương cung thánh đường giữa lòng Quảng Trị"</strong>, là không gian văn hóa – lịch sử lắng đọng, nơi mỗi bước chân đều mang theo niềm tin, sự bình an và hy vọng.</p>
+                            <p><strong>14:00 – 15:00:</strong> Đoàn rời thị xã Quảng Trị, theo cung đường xuyên miền Trung đầy ký ức để tiến về thành phố Huế – cố đô trầm mặc.</p>
                         </div>
                     </div>
                     <div class="timeline-item fade-in">
                         <div class="timeline-time">15:00 - 19:00</div>
                         <div class="timeline-content">
                             <h3>Lăng Gia Long & Đêm Huế</h3>
-                            <p>15:00 – 17:30: Đoàn tham quan Lăng Hoàng đế Gia Long – quần thể lăng tẩm đầu tiên của triều Nguyễn, nằm giữa non nước hữu tình, vừa hùng vĩ vừa tĩnh lặng. Quý thầy cô cảm nhận sự hòa quyện giữa lịch sử, thiên nhiên và triết lý sống gửi gắm trong từng kiến trúc.</p>
-                            <p>17:30 – 19:00: Đoàn nhận phòng khách sạn, dùng bữa tối ấm cúng với đặc sản Huế, sau đó tự do dạo bước khám phá Huế về đêm – lung linh phố đèn, dịu dàng sông Hương, trầm mặc mà đầy sức sống. Nghỉ đêm tại thành phố Huế thơ mộng.</p>
+                            <p><strong>15:00 – 17:30:</strong> Đoàn tham quan <strong>Lăng Hoàng đế Gia Long</strong> – quần thể lăng tẩm đầu tiên của triều Nguyễn, nằm giữa non nước hữu tình, vừa hùng vĩ vừa tĩnh lặng. Quý thầy cô cảm nhận sự hòa quyện giữa lịch sử, thiên nhiên và triết lý sống gửi gắm trong từng kiến trúc.</p>
+                            <p><strong>17:30 – 19:00:</strong> Đoàn nhận phòng khách sạn, dùng bữa tối ấm cúng với đặc sản Huế, sau đó tự do dạo bước khám phá Huế về đêm – lung linh phố đèn, dịu dàng sông Hương, trầm mặc mà đầy sức sống. Nghỉ đêm tại thành phố Huế thơ mộng.</p>
                         </div>
                     </div>
 
@@ -1773,26 +1869,26 @@
                         <div class="timeline-time">Ngày 2<br>06:00 - 10:00</div>
                         <div class="timeline-content">
                             <h3>Huế - Bạch Mã - Đỉnh Bạch Mã (Sáng, Trưa, ….)</h3>
-                            <p>06:00 - 07:00: Khởi đầu ngày mới, đoàn thức dậy dùng điểm tâm sáng buffet tại khách sạn 3 sao với thực đơn đa dạng và không gian thoải mái.</p>
-                            <p>07:30 – 08:30: Đoàn tham quan Vườn quốc gia Bạch Mã. Tại đây, bạn lặng ngắm trời mây, núi rừng, cảm nhận hành trình trở về với thiên nhiên nguyên sơ và với chính mình.</p>
-                            <p>08:30 – 10:00: Đoàn tản bộ nhẹ lên đỉnh Bạch Mã – "Mái nhà của Huế". Trước hành trình, chúng ta được phát bánh mì và sữa hạt tiếp năng lượng. Lên tới đỉnh, mây núi giao hòa, không khí trong lành như liều "thuốc bổ vô hình". Trên đường đi, những dấu tích lịch sử như địa đạo, hầm trú ẩn, sân bay dã chiến gợi nhắc về một thời kháng chiến hào hùng.</p>
+                            <p><strong>06:00 - 07:00:</strong> Khởi đầu ngày mới, đoàn thức dậy dùng điểm tâm sáng buffet tại khách sạn 3 sao với thực đơn đa dạng và không gian thoải mái.</p>
+                            <p><strong>07:30 – 08:30:</strong> Đoàn tham quan <strong>Vườn quốc gia Bạch Mã</strong>. Tại đây, bạn lặng ngắm trời mây, núi rừng, cảm nhận hành trình trở về với thiên nhiên nguyên sơ và với chính mình.</p>
+                            <p><strong>08:30 – 10:00:</strong> Đoàn tản bộ nhẹ lên đỉnh Bạch Mã – <strong>"Mái nhà của Huế"</strong>. Trước hành trình, chúng ta được phát bánh mì và sữa hạt tiếp năng lượng. Lên tới đỉnh, mây núi giao hòa, không khí trong lành như liều "thuốc bổ vô hình". Trên đường đi, những dấu tích lịch sử như địa đạo, hầm trú ẩn, sân bay dã chiến gợi nhắc về một thời kháng chiến hào hùng.</p>
                         </div>
                     </div>
                     <div class="timeline-item fade-in">
                         <div class="timeline-time">10:00 - 13:00</div>
                         <div class="timeline-content">
-                            <h3>Ngũ Hồ & Picnic Thuần Chay</h3>
-                            <p>10:00 – 11:00: Đoàn di chuyển vào Ngũ Hồ, men theo lối mòn giữa rừng và dừng bên những con suối mát lành. Nơi đây hiện ra như "năm bức tranh nước giữa rừng", mỗi hồ một vẻ đẹp riêng. Chúng ta lắng nghe tiếng suối, cảm nhận hương rừng và lưu lại những khung hình nguyên sơ.</p>
-                            <p>11:00 – 13:00: Đoàn có thể thả mình trong làn nước mát và buông lỏng giữa đại ngàn. Bữa picnic thuần chay nhẹ nhàng, đủ năng lượng, như một phần của hành trình chữa lành. Trong tiếng suối róc rách và rừng sâu tĩnh tại, bạn có thể thiền hoặc chợp mắt ngắn – những trải nghiệm giúp tái tạo năng lượng và nuôi dưỡng sức khỏe tự nhiên.</p>
+                            <h3>Ngũ Hồ & Picnic thuần chay</h3>
+                            <p><strong>10:00 – 11:00:</strong> Đoàn di chuyển vào <strong>Ngũ Hồ</strong>, men theo lối mòn giữa rừng và dừng bên những con suối mát lành. Nơi đây hiện ra như "năm bức tranh nước giữa rừng", mỗi hồ một vẻ đẹp riêng. Chúng ta lắng nghe tiếng suối, cảm nhận hương rừng và lưu lại những khung hình nguyên sơ.</p>
+                            <p><strong>11:00 – 13:00:</strong> Đoàn có thể thả mình trong làn nước mát và buông lỏng giữa đại ngàn. Bữa picnic thuần chay nhẹ nhàng, đủ năng lượng, như một phần của hành trình chữa lành. Trong tiếng suối róc rách và rừng sâu tĩnh tại, bạn có thể thiền hoặc chợp mắt ngắn – những trải nghiệm giúp tái tạo năng lượng và nuôi dưỡng sức khỏe tự nhiên.</p>
                         </div>
                     </div>
                     <div class="timeline-item fade-in">
                         <div class="timeline-time">13:00 - 17:30</div>
                         <div class="timeline-content">
-                            <h3>Thác Đỗ Quyên & Kết Thúc Hành Trình</h3>
-                            <p>13:00 – 14:30: Đoàn băng qua những con đường rợp bóng cây để đến Thác Đỗ Quyên – nơi dòng nước tung trắng xóa giữa núi rừng Bạch Mã hùng vĩ. Đây là khoảnh khắc bạn có thể lặng nhìn thiên nhiên trọn vẹn, cảm nhận sự choáng ngợp của đất trời và kết nối với nguồn năng lượng mạnh mẽ từ đại ngàn.</p>
-                            <p>15:00 – 17:00: Đoàn khởi hành về thành phố Huế, hòa mình vào nhịp sống trẻ trung của cố đô. Bạn có thể đến tham quan Trung tâm thương mại Aeon – nơi hội tụ nhiều thương hiệu, ẩm thực và sản phẩm đa dạng, thoải mái mua sắm, trải nghiệm không gian hiện đại giữa lòng Huế mộng mơ (đoàn có thể tự do ăn tối tại đây).</p>
-                            <p>17:00 – 19:30: Đoàn trở về, kết thúc hành trình, hẹn gặp lại trong những hành trình tiếp theo.</p>
+                            <h3>Thác Đỗ Quyên & Kết thúc hành trình</h3>
+                            <p><strong>13:00 – 14:30:</strong> Đoàn băng qua những con đường rợp bóng cây để đến <strong>Thác Đỗ Quyên</strong> – nơi dòng nước tung trắng xóa giữa núi rừng Bạch Mã hùng vĩ. Đây là khoảnh khắc bạn có thể lặng nhìn thiên nhiên trọn vẹn, cảm nhận sự choáng ngợp của đất trời và kết nối với nguồn năng lượng mạnh mẽ từ đại ngàn.</p>
+                            <p><strong>15:00 – 17:00:</strong> Đoàn khởi hành về thành phố Huế, hòa mình vào nhịp sống trẻ trung của cố đô. Bạn có thể đến tham quan <strong>Trung tâm thương mại Aeon</strong> – nơi hội tụ nhiều thương hiệu, ẩm thực và sản phẩm đa dạng, thoải mái mua sắm, trải nghiệm không gian hiện đại giữa lòng Huế mộng mơ (đoàn có thể tự do ăn tối tại đây).</p>
+                            <p><strong>17:00 – 19:30:</strong> Đoàn trở về, kết thúc hành trình, hẹn gặp lại trong những hành trình tiếp theo.</p>
                         </div>
                     </div>
                 </div>
@@ -1806,11 +1902,11 @@
         <section class="tour-section tour-pricing" id="booking">
             <div class="container">
                 <div class="section-title">
-                    <h2>Thông Tin Chi Phí & Dịch Vụ</h2>
+                    <h2>Thông tin chi phí & Dịch vụ</h2>
                 </div>
                 <div class="pricing-content">
                     <div class="included">
-                        <h3>Chi Phí Hành Trình Bao Gồm</h3>
+                        <h3>Chi phí hành trình bao gồm</h3>
                         <ul>
                             <li><strong>Vận chuyển:</strong> Xe du lịch đời mới, tiện nghi, điều hòa, lái xe an toàn, chuyên nghiệp theo suốt hành trình.</li>
                             <li><strong>Lưu trú:</strong> 01 đêm khách sạn tiêu chuẩn 3* đầy đủ tiện nghi cơ bản, có buffet sáng. Tiêu chuẩn 2-3 bạn/phòng khách sạn. Ngủ phòng đơn phụ thu 350.000 VNĐ.</li>
@@ -1820,7 +1916,7 @@
                         </ul>
                     </div>
                     <div class="excluded">
-                        <h3>Chi Phí Không Bao Gồm</h3>
+                        <h3>Chi phí không bao gồm</h3>
                         <ul>
                             <li>Đồ uống cá nhân tự gọi thêm (bia, rượu, nước ngọt), Chi phí mua sắm cá nhân (ngoài quà tặng), giặt là, điện thoại, minibar trong khách sạn/homestay.</li>
                             <li>Tiền bồi dưỡng cho lái xe và hướng dẫn viên (Tip) (tùy tâm).</li>
@@ -1830,7 +1926,7 @@
                         </ul>
                     </div>
                     <div class="policies">
-                        <h3>Bảng Giá & Chính Sách</h3>
+                        <h3>Bảng giá & Chính sách</h3>
                         <ul>
                             <li>
                                 <strong>Chi phí áp dụng cho mỗi thành viên:</strong><br>
@@ -1848,7 +1944,7 @@
                                         <td style="padding:8px; border:1px solid rgba(255,255,255,0.3); text-align:center; font-weight:bold;">2.050.000đ</td>
                                     </tr>
                                 </table>
-                                <p style="margin-top:10px;"><strong>Xe 45 chỗ</strong></p>
+                                <p style="margin-top:10px;"><strong> Xe 45 chỗ (tuỳ theo số lượng khách hàng để Ruby Wings sử dụng loại xe phù hợp  và tính chi phí sát thực tế)</strong></p>
                             </li>
                             <li>
                                 <strong>Lưu ý khi tham gia Bạch Mã:</strong><br>
@@ -1914,11 +2010,11 @@
                         <div class="faq-answer">
                             <p><strong>Chính sách huỷ tour (do khách huỷ):</strong><br>
                             - Trước 14 ngày: không thu phí<br>
-                            - Từ 07 – 13 ngày: 30% giá tour<br>
-                            - Từ 05 - 06 ngày: 50% giá tour<br>
-                            - Từ 03 - 04 ngày: 75% giá tour<br>
-                            - Từ 01 - 02 ngày: 90% giá tour<br>
-                            - Ngày khởi hành: 100% giá tour</p>
+                            - Từ 07 – 13 ngày: 30% giá hành trình<br>
+                            - Từ 05 - 06 ngày: 50% giá hành trình<br>
+                            - Từ 03 - 04 ngày: 75% giá hành trình<br>
+                            - Từ 01 - 02 ngày: 90% giá hành trình<br>
+                            - Ngày khởi hành: 100% giá hành trình</p>
                             
                             <p><strong>Lưu ý an toàn:</strong><br>
                             - Khi tham quan Thành cổ Quảng Trị và các di tích lịch sử: Tôn trọng không gian tưởng niệm, giữ trật tự, lắng nghe hướng dẫn.<br>
@@ -1952,9 +2048,9 @@
                             <a href="https://www.facebook.com/profile.php?id=61563772112138" target="_blank" class="social-icon facebook" title="Facebook Fanpage Ruby Wings">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="https://www.facebook.com/tien.sy.5011/" target="_blank" class="social-icon facebook-personal" title="Facebook Cá nhân Ruby Wings">
-                                <i class="fas fa-user"></i>
-                            </a>
+                           <a href="https://www.facebook.com/tien.sy.5011/" target="_blank" class="social-icon facebook-personal" title="Facebook Cá nhân Ruby Wings">
+<i class="fab fa-facebook-f"></i>
+</a>
                             <a href="https://x.com/TienSy379/status/1971778015232421915?t=UsXdMD8FrwjF3OO3ZnoUGg&s=19" target="_blank" class="social-icon twitter" title="Twitter Ruby Wings">
                                 <i class="fab fa-twitter"></i>
                             </a>
@@ -1971,7 +2067,7 @@
                                 <i class="fab fa-whatsapp"></i>
                             </a>
                             <a href="https://zalo.me/84332510486" target="_blank" class="social-icon zalo" title="Zalo Nhắn tin Ruby Wings">
-                                <img src="https://rubywings.vn/images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon" width="20" height="20">
+                                <img src="images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon" width="20" height="20">
                             </a>
                             <a href="https://www.youtube.com/@rubywing-slsa" target="_blank" class="social-icon youtube" title="YouTube Ruby Wings">
                                 <i class="fab fa-youtube"></i>
