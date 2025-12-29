@@ -174,161 +174,162 @@
     <!-- Schema JSON-LD -->
     <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": "https://rubywings.vn/images/logofxf.png",
+      "description": "Ruby Wings là đơn vị tổ chức các chương trình du lịch, tham quan và trải nghiệm gắn với thiên nhiên, văn hóa và di sản tại Việt Nam.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B7-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch thiên nhiên",
+        "Du lịch di sản",
+        "Du lịch văn hóa",
+        "Tổ chức tour theo tuyến"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Website giới thiệu các chương trình tour và hành trình tham quan do Ruby Wings tổ chức.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#webpage",
+      "url": "https://rubywings.vn/trai-nghiem-cam-xuc.html",
+      "name": "Trải Nghiệm Vẻ Đẹp Thiên Nhiên Việt Nam - Kỳ Quan Từ Bắc Vào Nam | Ruby Wings",
+      "description": "Trang danh mục giới thiệu các chương trình tham quan và khám phá thiên nhiên Việt Nam từ Bắc vào Nam.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#service"
+      },
+      "primaryImageOfPage": "https://rubywings.vn/images/trai-nghiem-cam-xuc.jpg",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Trải nghiệm",
+            "item": "https://rubywings.vn/trai-nghiem-cam-xuc.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#service",
+      "serviceType": "Du lịch khám phá thiên nhiên",
+      "name": "Trải Nghiệm Vẻ Đẹp Thiên Nhiên Việt Nam - Kỳ Quan Từ Bắc Vào Nam",
+      "description": "Các chương trình tham quan và khám phá cảnh quan thiên nhiên Việt Nam, bao gồm các điểm đến tiêu biểu như Vịnh Hạ Long, Phong Nha – Kẻ Bàng, Fansipan, Tràng An, Đèo Hải Vân và hệ đầm phá Tam Giang.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 12,
+        "suggestedMaxAge": 70,
+        "audienceType": "Du khách, gia đình, nhóm bạn, học sinh, sinh viên và cá nhân quan tâm đến thiên nhiên và di sản thiên nhiên"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#webpage"
+      },
+      "mainEntity": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "Question",
+          "name": "Ruby Wings giới thiệu những điểm thiên nhiên nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các chương trình tập trung vào những điểm thiên nhiên tiêu biểu của Việt Nam như Vịnh Hạ Long, Phong Nha – Kẻ Bàng, Fansipan, Tràng An, Đèo Hải Vân và hệ đầm phá Tam Giang."
+          }
         },
         {
-            "@type": "Service",
-            "serviceType": "Nature Experience & Exploration",
-            "name": "Trải Nghiệm Vẻ Đẹp Thiên Nhiên Việt Nam - Kỳ Quan Từ Bắc Vào Nam",
-            "description": "Khám phá vẻ đẹp thiên nhiên Việt Nam với những kỳ quan thế giới được UNESCO công nhận: Vịnh Hạ Long, Phong Nha Kẻ Bàng, Fansipan, Tràng An, Đèo Hải Vân, Đầm phá Tam Giang. Ruby Wings mang đến hành trình trải nghiệm thiên nhiên đa dạng từ Bắc vào Nam, kết hợp thám hiểm, nghỉ dưỡng và giáo dục môi trường.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 12,
-                "suggestedMaxAge": 70,
-                "audienceType": "Người yêu thiên nhiên, thích khám phá, gia đình, nhóm bạn, học sinh/sinh viên, người quan tâm đến du lịch bền vững và di sản thiên nhiên"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Nature & Adventure Tourism"
-            }
+          "@type": "Question",
+          "name": "Thời điểm nào phù hợp để tham quan các tour thiên nhiên?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các hành trình được tổ chức linh hoạt theo mùa và khu vực để phù hợp với điều kiện thời tiết từng vùng."
+          }
         },
         {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#webpage",
-            "url": "https://rubywings.vn/trai-nghiem-cam-xuc.html",
-            "name": "Trải Nghiệm Vẻ Đẹp Thiên Nhiên Việt Nam - Kỳ Quan Từ Bắc Vào Nam | Ruby Wings",
-            "description": "Khám phá vẻ đẹp thiên nhiên Việt Nam với những kỳ quan thế giới: Vịnh Hạ Long, Phong Nha Kẻ Bàng, Fansipan, Tràng An, Đèo Hải Vân, Đầm phá Tam Giang. Trải nghiệm di sản thiên nhiên độc đáo cùng Ruby Wings với trải nghiệm linh hoạt",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Trải Nghiệm Vẻ Đẹp Thiên Nhiên Việt Nam - Kỳ Quan Từ Bắc Vào Nam"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/trai-nghiem-cam-xuc.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Trải nghiệm",
-                        "item": "https://rubywings.vn/trai-nghiem-cam-xuc.html"
-                    }
-                ]
-            }
+          "@type": "Question",
+          "name": "Tour thiên nhiên có phù hợp cho gia đình và người lớn tuổi không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các chương trình được thiết kế với nhiều mức độ khác nhau, phù hợp cho gia đình, người lớn tuổi và các nhóm du khách khác."
+          }
         },
         {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/trai-nghiem-cam-xuc.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Các kỳ quan thiên nhiên nổi bật nhất Việt Nam mà Ruby Wings khám phá là những đâu?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings tập trung vào 6 kỳ quan thiên nhiên chính: 1) Vịnh Hạ Long (Quảng Ninh) - Di sản thiên nhiên thế giới UNESCO, 2) Fansipan (Lào Cai) - Nóc nhà Đông Dương cao 3,147m, 3) Phong Nha Kẻ Bàng (Quảng Bình) - Vương quốc hang động với Sơn Đoòng, 4) Đồng bằng sông Cửu Long - Vựa lúa quốc gia, 5) Đèo Hải Vân - Thiên hạ đệ nhất hùng quan, 6) Đầm phá Tam Giang (Thừa Thiên Huế) - Hệ đầm phá lớn nhất Đông Nam Á."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Thời điểm nào tốt nhất để khám phá thiên nhiên Việt Nam với Ruby Wings?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Thời điểm lý tưởng: Miền Bắc (Hạ Long, Fansipan): tháng 9-11 & 3-5 (trời mát, ít mưa); Miền Trung (Phong Nha, Đèo Hải Vân, Tam Giang): tháng 1-8 (trời nắng, biển đẹp); Miền Nam (Đồng bằng sông Cửu Long): tháng 11-4 (mùa khô, thu hoạch trái cây). Ruby Wings thiết kế hành trình theo mùa để đảm bảo trải nghiệm tối ưu nhất."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Du lịch thiên nhiên Việt Nam có phù hợp cho trẻ em và người lớn tuổi không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hoàn toàn phù hợp! Ruby Wings thiết kế các cấp độ trải nghiệm: 1) Gia đình (trẻ em từ 12+): tour nhẹ nhàng như du thuyền Hạ Long, tham quan Tràng An, 2) Người lớn tuổi: hành trình tốc độ chậm, nghỉ dưỡng kết hợp, 3) Người trẻ/yêu thích mạo hiểm: leo Fansipan, khám phá hang động. Chúng tôi có hướng dẫn viên chuyên nghiệp và dịch vụ hỗ trợ đặc biệt cho từng nhóm đối tượng."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Ruby Wings có những hành trình cụ thể nào để khám phá thiên nhiên Việt Nam?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings cung cấp đa dạng hành trình: 1) Tour Bắc Bộ 5N4Đ: Hà Nội - Hạ Long - Fansipan, 2) Tour Miền Trung 4N3Đ: Huế - Đèo Hải Vân - Đà Nẵng - Phong Nha, 3) Tour Miền Tây 3N2Đ: Cần Thơ - Châu Đốc - Cà Mau, 4) Tour kết hợp: Thiên nhiên + Văn hóa (3-7 ngày). Mỗi tour được thiết kế linh hoạt theo nhu cầu, thời gian và ngân sách. Liên hệ hotline 0332510486 để được tư vấn cụ thể."
-                    }
-                }
-            ]
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
+          "@type": "Question",
+          "name": "Có những hành trình cụ thể nào để khám phá thiên nhiên Việt Nam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ruby Wings cung cấp nhiều tour theo vùng miền và thời lượng khác nhau; thông tin chi tiết từng chương trình được giới thiệu trên website hoặc qua tư vấn trực tiếp."
+          }
         }
-    ]
+      ]
+    }
+  ]
 }
 </script>
+
 
     <style>
         /* === Biến CSS === */

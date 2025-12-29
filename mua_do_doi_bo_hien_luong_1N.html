@@ -63,167 +63,188 @@
     
     <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch chữa lành",
+        "Thiền chánh niệm khoa học",
+        "Khí công trị liệu",
+        "Phát triển con người toàn diện",
+        "Du lịch cảm xúc",
+        "Retreat và trải nghiệm nội tâm"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#webpage",
+      "url": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html",
+      "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N | Ruby Wings - Hành Trình Cảm Xúc",
+      "description": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N - Hành trình khám phá lịch sử bi tráng Quảng Trị, gặp gỡ nhân chứng lịch sử, tham quan Thành Cổ, Nghĩa trang Trường Sơn, Cầu Hiền Lương và Địa đạo Vịnh Mốc. Tour đặc biệt dành cho đoàn viên thanh niên.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/thanh_nien_01.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hành trình tiêu biểu",
+            "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N",
+            "item": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#service",
+      "serviceType": "Tour Du Lịch Lịch Sử & Trải Nghiệm Thanh Niên",
+      "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1 Ngày",
+      "description": "Hành trình 1 ngày khám phá lịch sử bi tráng Quảng Trị: Thành Cổ Quảng Trị, Nghĩa trang Trường Sơn, Cầu Hiền Lương - Sông Bến Hải, Địa đạo Vịnh Mốc và Biển Cửa Tùng. Tour đặc biệt dành cho đoàn viên thanh niên, kết hợp trải nghiệm lịch sử với gặp gỡ nhân chứng và các hoạt động phát triển bản thân.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 16,
+        "suggestedMaxAge": 35,
+        "audienceType": "Đoàn viên thanh niên, học sinh, sinh viên, nhóm bạn trẻ yêu thích lịch sử và muốn trải nghiệm hành trình văn hóa - lịch sử ý nghĩa"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Tour Du Lịch Lịch Sử & Trải Nghiệm Thanh Niên",
-            "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1 Ngày",
-            "description": "Hành trình 1 ngày khám phá lịch sử bi tráng Quảng Trị: Thành Cổ Quảng Trị, Nghĩa trang Trường Sơn, Cầu Hiền Lương - Sông Bến Hải, Địa đạo Vịnh Mốc và Biển Cửa Tùng. Tour đặc biệt dành cho đoàn viên thanh niên, kết hợp trải nghiệm lịch sử với gặp gỡ nhân chứng và các hoạt động phát triển bản thân.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 16,
-                "suggestedMaxAge": 35,
-                "audienceType": "Đoàn viên thanh niên, học sinh, sinh viên, nhóm bạn trẻ yêu thích lịch sử và muốn trải nghiệm hành trình văn hóa - lịch sử ý nghĩa"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Tour Lịch Sử & Trải Nghiệm Thanh Niên"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#webpage",
-            "url": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html",
-            "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N | Ruby Wings - Hành Trình Cảm Xúc",
-            "description": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N - Hành trình khám phá lịch sử bi tráng Quảng Trị, gặp gỡ nhân chứng lịch sử, tham quan Thành Cổ, Nghĩa trang Trường Sơn, Cầu Hiền Lương và Địa đạo Vịnh Mốc. Tour đặc biệt dành cho đoàn viên thanh niên.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1 Ngày"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/thanh_nien_01.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Hành trình tiêu biểu",
-                        "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "Tour Mưa đỏ và Đôi bờ Hiền Lương 1N",
-                        "item": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Tour này phù hợp với đối tượng nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Tour được thiết kế chủ yếu cho các bạn Đoàn viên Thanh niên, nhưng cũng phù hợp với tất cả những ai quan tâm đến lịch sử, muốn tìm hiểu về quá khứ hào hùng của dân tộc và có mong muốn trải nghiệm hành trình văn hóa - lịch sử ý nghĩa."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Có đảm bảo sẽ gặp được nhân chứng lịch sử không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Nếu đoàn có nhu cầu, chúng tôi cố gắng hết sức để sắp xếp cho các bạn được gặp gỡ nhân chứng lịch sử, tuy nhiên việc này còn phụ thuộc vào sức khỏe và khả năng tham gia của các nhân chứng. Mặt khác, chúng tôi sẽ có hướng dẫn viên chuyên sâu chia sẻ những câu chuyện chân thực nhất dựa trên tư liệu lịch sử và kinh nghiệm làm việc với các nhân chứng."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Tôi cần chuẩn bị gì cho chuyến đi?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Bạn nên mang theo: trang phục thoải mái, kín đáo phù hợp với các địa điểm lịch sử và tâm linh; giày thể thao đi bộ thoải mái; kem chống nắng; ô/dù; thuốc cá nhân (nếu có); máy ảnh và quan trọng nhất là tinh thần cởi mở để trải nghiệm và cảm nhận sâu sắc."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Chương trình có thể thay đổi không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Chương trình có thể hoán đổi thứ tự điểm tham quan theo sự sắp xếp của công ty hoặc hướng dẫn viên địa phương nhưng vẫn đảm bảo tất cả các điểm tham quan có trong chương trình. Trong trường hợp bất khả kháng (thời tiết, sự kiện đặc biệt...), chúng tôi sẽ có phương án điều chỉnh phù hợp và thông báo kịp thời đến du khách."
-                    }
-                }
-            ]
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/mua_do_doi_bo_hien_luong_1N.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Tour này phù hợp với đối tượng nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tour được thiết kế chủ yếu cho các bạn Đoàn viên Thanh niên, nhưng cũng phù hợp với tất cả những ai quan tâm đến lịch sử, muốn tìm hiểu về quá khứ hào hùng của dân tộc và có mong muốn trải nghiệm hành trình văn hóa - lịch sử ý nghĩa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Có đảm bảo sẽ gặp được nhân chứng lịch sử không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nếu đoàn có nhu cầu, chúng tôi cố gắng hết sức để sắp xếp cho các bạn được gặp gỡ nhân chứng lịch sử, tuy nhiên việc này còn phụ thuộc vào sức khỏe và khả năng tham gia của các nhân chứng. Mặt khác, chúng tôi sẽ có hướng dẫn viên chuyên sâu chia sẻ những câu chuyện chân thực nhất dựa trên tư liệu lịch sử và kinh nghiệm làm việc với các nhân chứng."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tôi cần chuẩn bị gì cho chuyến đi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bạn nên mang theo: trang phục thoải mái, kín đáo phù hợp với các địa điểm lịch sử và tâm linh; giày thể thao đi bộ thoải mái; kem chống nắng; ô/dù; thuốc cá nhân (nếu có); máy ảnh và quan trọng nhất là tinh thần cởi mở để trải nghiệm và cảm nhận sâu sắc."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Chương trình có thể thay đổi không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chương trình có thể hoán đổi thứ tự điểm tham quan theo sự sắp xếp của công ty hoặc hướng dẫn viên địa phương nhưng vẫn đảm bảo tất cả các điểm tham quan có trong chương trình. Trong trường hợp bất khả kháng (thời tiết, sự kiện đặc biệt...), chúng tôi sẽ có phương án điều chỉnh phù hợp và thông báo kịp thời đến du khách."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

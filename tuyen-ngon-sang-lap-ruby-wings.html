@@ -165,8 +165,11 @@ gtag('config', 'G-BD5GXRQFQZ');
       "@id": "https://rubywings.vn/#organization",
       "name": "Ruby Wings Travel",
       "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
+      },
+      "description": "Ruby Wings Travel là đơn vị tổ chức các hành trình du lịch trải nghiệm chiều sâu tại Việt Nam, kết hợp thiền chánh niệm, khí công, chữa lành tự nhiên, văn hóa – lịch sử và hoạt động cộng đồng. Ruby Wings hướng đến việc xây dựng các chương trình du lịch có cấu trúc rõ ràng, an toàn, bền vững, phục vụ cá nhân, gia đình, tổ chức giáo dục và cộng đồng.",
       "telephone": "+84-33-251-0486",
       "email": "rubywingslsa@gmail.com",
       "sameAs": [
@@ -187,33 +190,11 @@ gtag('config', 'G-BD5GXRQFQZ');
       "slogan": "Du lịch có chiều sâu - Chữa lành - Kết nối nội tâm"
     },
     {
-      "@type": "Article",
-      "headline": "Tuyên Ngôn Sáng Lập Ruby Wings - Hành Trình Du Lịch Chữa Lành Từ Tâm",
-      "description": "Tài liệu chính thức về triết lý, tầm nhìn, sứ mệnh và giá trị cốt lõi của Ruby Wings Travel",
-      "datePublished": "2024-01-01",
-      "dateModified": "2024-01-01",
-      "author": {
-        "@type": "Organization",
-        "name": "Ruby Wings Travel",
-        "url": "https://rubywings.vn/"
-      },
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html"
-      },
-      "articleBody": "Ruby Wings ra đời từ trăn trở về nhu cầu không gian tĩnh để phục hồi năng lượng, kết nối với thiên nhiên, văn hóa bản địa và tâm hồn. Triết lý: Du lịch có chiều sâu - chữa lành - kết nối nội tâm.",
-      "keywords": "tuyên ngôn sáng lập, triết lý du lịch, tầm nhìn sứ mệnh, giá trị cốt lõi, ruby wings",
-      "image": "https://rubywings.vn/images/tuyen-ngon-sang-lap-ruby-wings.jpg"
-    },
-    {
       "@type": "AboutPage",
       "@id": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html#aboutpage",
       "url": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html",
       "name": "Tuyên Ngôn Sáng Lập Ruby Wings",
-      "description": "Trang giới thiệu tuyên ngôn sáng lập, triết lý và giá trị cốt lõi của Ruby Wings Travel",
+      "description": "Trang tuyên ngôn sáng lập, trình bày triết lý hình thành, tầm nhìn, sứ mệnh và giá trị cốt lõi của Ruby Wings Travel.",
       "isPartOf": {
         "@id": "https://rubywings.vn/#website"
       },
@@ -222,13 +203,20 @@ gtag('config', 'G-BD5GXRQFQZ');
       },
       "datePublished": "2024-01-01",
       "dateModified": "2024-01-01",
-      "primaryImageOfPage": "https://rubywings.vn/images/tuyen-ngon-sang-lap-ruby-wings.jpg",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/tuyen-ngon-sang-lap-ruby-wings.jpg"
+      },
+      "breadcrumb": {
+        "@id": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html#breadcrumb"
+      },
       "publisher": {
         "@id": "https://rubywings.vn/#organization"
       }
     },
     {
       "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -239,13 +227,14 @@ gtag('config', 'G-BD5GXRQFQZ');
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Về Chúng Tôi",
+          "name": "Về chúng tôi",
           "item": "https://rubywings.vn/ve-chung-toi.html"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Tuyên Ngôn Sáng Lập"
+          "name": "Tuyên ngôn sáng lập",
+          "item": "https://rubywings.vn/tuyen-ngon-sang-lap-ruby-wings.html"
         }
       ]
     },
@@ -262,7 +251,7 @@ gtag('config', 'G-BD5GXRQFQZ');
   ]
 }
 </script>
-    
+
     <style>
         /* === Biến CSS === */
         :root {

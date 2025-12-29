@@ -167,8 +167,11 @@
       "@id": "https://rubywings.vn/#organization",
       "name": "Ruby Wings Travel",
       "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Hành trình chữa lành từ bên trong bằng thiền chánh niệm, khí công và kết nối thiên nhiên",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
+      },
+      "description": "Ruby Wings Travel là đơn vị tổ chức các chương trình du lịch trải nghiệm và chữa lành tại Việt Nam, tập trung vào thiền chánh niệm, khí công và kết nối với thiên nhiên. Hoạt động của Ruby Wings hướng đến việc hỗ trợ cá nhân và cộng đồng xây dựng sự cân bằng tinh thần, phát triển nhận thức và nuôi dưỡng lối sống bền vững.",
       "telephone": "+84-33-251-0486",
       "email": "rubywingslsa@gmail.com",
       "sameAs": [
@@ -195,65 +198,47 @@
       }
     },
     {
-      "@type": "Article",
-      "headline": "Sứ Mệnh & Tầm Nhìn Ruby Wings - Du Lịch Chữa Lành & Hành Trình Sống Tử Tế",
-      "description": "Sứ mệnh và tầm nhìn của Ruby Wings - Hành trình du lịch chữa lành kết nối con người với thiên nhiên và tâm hồn",
-      "datePublished": "2024-01-01T00:00:00+07:00",
-      "dateModified": "2024-01-01T00:00:00+07:00",
-      "author": {
-        "@type": "Person",
-        "name": "Lương Tiến Sỹ",
-        "url": "https://www.facebook.com/tien.sy.5011/"
-      },
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/su-menh-tam-nhin.html"
-      },
-      "articleSection": "Sứ mệnh & Tầm nhìn",
-      "keywords": "sứ mệnh Ruby Wings, tầm nhìn Ruby Wings, du lịch chữa lành, hành trình sống tử tế, triết lý du lịch",
-      "thumbnailUrl": "https://rubywings.vn/images/su-menh-tam-nhin.jpg",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://rubywings.vn/images/su-menh-tam-nhin.jpg",
-        "width": "1200",
-        "height": "630"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://rubywings.vn/su-menh-tam-nhin.html#webpage",
+      "@type": "AboutPage",
+      "@id": "https://rubywings.vn/su-menh-tam-nhin.html#aboutpage",
       "url": "https://rubywings.vn/su-menh-tam-nhin.html",
-      "name": "Sứ Mệnh & Tầm Nhìn Ruby Wings - Du Lịch Chữa Lành & Hành Trình Sống Tử Tế",
-      "description": "Trang sứ mệnh và tầm nhìn của Ruby Wings - Hành trình du lịch chữa lành kết nối con người với thiên nhiên và tâm hồn",
+      "name": "Sứ Mệnh & Tầm Nhìn Ruby Wings",
+      "description": "Trang giới thiệu sứ mệnh và tầm nhìn của Ruby Wings Travel trong việc phát triển các chương trình du lịch trải nghiệm và chữa lành, kết nối con người với thiên nhiên, cộng đồng và các giá trị sống bền vững.",
       "isPartOf": {
         "@id": "https://rubywings.vn/#website"
       },
-      "about": "Sứ mệnh, tầm nhìn, Ruby Wings, du lịch chữa lành, hành trình sống tử tế",
-      "datePublished": "2024-01-01",
-      "dateModified": "2024-01-01",
-      "primaryImageOfPage": "https://rubywings.vn/images/su-menh-tam-nhin.jpg",
-      "publisher": {
+      "about": {
         "@id": "https://rubywings.vn/#organization"
       },
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-01-01",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/su-menh-tam-nhin.jpg"
+      },
       "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Sứ mệnh & Tầm nhìn"
-          }
-        ]
+        "@id": "https://rubywings.vn/su-menh-tam-nhin.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/su-menh-tam-nhin.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sứ mệnh & Tầm nhìn",
+          "item": "https://rubywings.vn/su-menh-tam-nhin.html"
+        }
+      ]
     },
     {
       "@type": "WebSite",
@@ -268,6 +253,7 @@
   ]
 }
 </script>
+
 
   <style>
     :root {

@@ -182,161 +182,181 @@ gtag('config', 'G-BD5GXRQFQZ');
 <!-- Schema JSON-LD -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings là đơn vị tổ chức các chương trình du lịch, tham quan và trải nghiệm gắn với lịch sử, văn hóa và thiên nhiên tại Việt Nam.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch lịch sử",
+        "Du lịch văn hóa",
+        "Du lịch thiên nhiên",
+        "Du lịch trải nghiệm",
+        "Tổ chức tour theo chủ đề"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Website giới thiệu các chương trình tour và hành trình trải nghiệm do Ruby Wings tổ chức.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/pha-tam-giang.html#webpage",
+      "url": "https://rubywings.vn/pha-tam-giang.html",
+      "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang 1N | Ruby Wings",
+      "description": "Chương trình tham quan 1 ngày kết hợp di sản văn hóa Huế và cảnh quan đầm phá Phá Tam Giang.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/pha-tam-giang.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/pha-tam-giang.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang",
+            "item": "https://rubywings.vn/pha-tam-giang.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/pha-tam-giang.html#service",
+      "serviceType": "Du lịch tham quan văn hóa và thiên nhiên Huế",
+      "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang 1N",
+      "description": "Tour 1 ngày tham quan các điểm di sản văn hóa tại Huế và khu vực đầm phá Phá Tam Giang, bao gồm Đại Nội Huế, chùa Từ Hiếu, nhà lưu niệm Bác Hồ, rừng ngập mặn Rú Chá và Đầm Chuồn.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 16,
+        "suggestedMaxAge": 70,
+        "audienceType": "Du khách, gia đình, nhóm bạn và cá nhân quan tâm đến di sản văn hóa và cảnh quan thiên nhiên Huế"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Du lịch trải nghiệm văn hóa và thiên nhiên Huế",
-            "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang 1N",
-            "description": "Tour 1 ngày khám phá di sản văn hóa Huế kết hợp trải nghiệm thiên nhiên đầm phá: Đại Nội Huế, chùa Từ Hiếu, nhà lưu niệm Bác Hồ, rừng ngập mặn Rú Chá, Đầm Chuồn và hoàng hôn Phá Tam Giang. Trải nghiệm thiền chánh niệm, thưởng thức ẩm thực Huế đặc sắc và hải sản tươi ngon trên thuyền.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 16,
-                "suggestedMaxAge": 70,
-                "audienceType": "Du khách yêu thích văn hóa Huế, thiên nhiên đầm phá, ẩm thực đặc sản, và trải nghiệm thiền chánh niệm"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Tour Du Lịch Huế 1 Ngày"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/pha-tam-giang.html#webpage",
-            "url": "https://rubywings.vn/pha-tam-giang.html",
-            "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang 1N | Trải Nghiệm Văn Hóa & Thiên Nhiên | Ruby Wings",
-            "description": "Tour 1 ngày 'Di sản Huế & Hoàng hôn Phá Tam Giang': Khám phá Đại Nội Huế, chùa Từ Hiếu, rừng ngập mặn Rú Chá, trải nghiệm thiền và thưởng thức ẩm thực đầm phá tại Đầm Chuồn.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang 1N"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/pha-tam-giang.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Di Sản Huế & Hoàng Hôn Phá Tam Giang",
-                        "item": "https://rubywings.vn/pha-tam-giang.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/pha-tam-giang.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Hành trình 1 ngày này có đủ thời gian trải nghiệm không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hoàn toàn đủ! Hành trình được thiết kế tối ưu với lộ trình hợp lý từ 7:30 sáng đến 18:30 tối, đảm bảo trải nghiệm trọn vẹn các điểm đến quan trọng: di sản văn hóa (Đại Nội, chùa Từ Hiếu), di tích lịch sử (nhà lưu niệm Bác Hồ), thiên nhiên (rừng Rú Chá) và đầm phá (Đầm Chuồn, Phá Tam Giang). Đây là hành trình 'chậm và sâu' với trải nghiệm thiền chánh niệm giúp bạn cảm nhận trọn vẹn từng khoảnh khắc."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Trải nghiệm thiền chánh niệm trong tour như thế nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Trong hành trình, bạn sẽ được thực hành thiền chánh niệm tại chùa Từ Hiếu (thiền ngắn hoặc thực tập chánh niệm trong hơi thở và bước chân), tại rừng Rú Chá (lắng nghe tiếng gió, hít thở không khí mặn mòi, cảm nhận sức sống thiên nhiên), và tại Đầm Chuồn (lắng nghe nội tâm, hòa mình cùng nhịp sống yên ả). Đây là trải nghiệm tự nguyện, nhẹ nhàng phù hợp với mọi đối tượng."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Chi phí tour bao gồm những gì?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Chi phí bao gồm: Vận chuyển bằng xe du lịch đời mới, 01 bữa trưa ẩm thực Huế và 01 bữa tối hải sản tại Đầm Chuồn, nước uống đầy đủ, hướng dẫn viên chuyên nghiệp, bảo hiểm du lịch, quà tặng mũ/nón du lịch Ruby Wings, dịch vụ chụp ảnh kỷ niệm và clip slideshow hành trình. Chi phí không bao gồm: đồ uống cá nhân, chi phí mua sắm, tiền tip, thuế VAT (nếu có nhu cầu hóa đơn)."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Tôi cần chuẩn bị gì cho hành trình khám phá Phá Tam Giang?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Trang phục: Ưu tiên trang phục thoải mái, thoáng mát, giày thể thao hoặc giày đi bộ êm ái. Mang theo dép khi về vùng đầm phá. Đồ dùng cá nhân: Kem chống nắng, thuốc cá nhân (nếu có), ô/dù, mũ nón. Tôn trọng di sản: Giữ gìn vệ sinh chung, không viết vẽ lên di tích, tuân thủ quy định tại các điểm văn hóa tâm linh. An toàn sông nước: Tuân theo hướng dẫn an toàn của người điều khiển thuyền khi tham quan Phá Tam Giang."
-                    }
-                }
-            ]
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/pha-tam-giang.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/pha-tam-giang.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hành trình 1 ngày này có đủ thời gian trải nghiệm không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chương trình được thiết kế trong một ngày với lịch trình tham quan các điểm chính tại Huế và khu vực Phá Tam Giang."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Trải nghiệm thiền chánh niệm trong tour như thế nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Một số hoạt động thiền chánh niệm được lồng ghép ngắn trong chương trình theo sắp xếp của đơn vị tổ chức."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Chi phí tour bao gồm những gì?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chi phí tour bao gồm các dịch vụ cơ bản theo chương trình; chi tiết được cung cấp trong thông tin đăng ký."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tôi cần chuẩn bị gì cho hành trình khám phá Phá Tam Giang?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nên chuẩn bị trang phục thoải mái, giày đi bộ phù hợp, đồ dùng cá nhân cần thiết và tuân thủ hướng dẫn tại các điểm tham quan."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
 
 
     <style>

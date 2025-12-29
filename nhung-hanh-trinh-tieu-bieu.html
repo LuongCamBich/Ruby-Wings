@@ -159,171 +159,183 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Schema JSON-LD -->
-    <script type="application/ld+json">
+   <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings là đơn vị tổ chức các chương trình du lịch, tham quan và trải nghiệm gắn với lịch sử, văn hóa và thiên nhiên tại Việt Nam.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch lịch sử",
+        "Du lịch văn hóa",
+        "Du lịch thiên nhiên",
+        "Tổ chức tour theo chủ đề",
+        "Du lịch trải nghiệm"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Website giới thiệu các chương trình tour và hành trình trải nghiệm do Ruby Wings tổ chức.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#webpage",
+      "url": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html",
+      "name": "Những Hành Trình Tiêu Biểu Ruby Wings",
+      "description": "Trang tổng hợp các chương trình tour và hành trình tiêu biểu do Ruby Wings Travel tổ chức.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/nhung-hanh-trinh-tieu-bieu.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hành trình tiêu biểu",
+            "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#service",
+      "serviceType": "Danh mục tour du lịch theo chủ đề",
+      "name": "Những Hành Trình Tiêu Biểu Ruby Wings",
+      "description": "Danh mục các chương trình tour tiêu biểu của Ruby Wings, tập trung vào tham quan lịch sử, văn hóa và thiên nhiên tại khu vực miền Trung Việt Nam.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 16,
+        "suggestedMaxAge": 70,
+        "audienceType": "Gia đình, nhóm bạn, cá nhân và các đối tượng quan tâm đến lịch sử, văn hóa và thiên nhiên"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Featured Healing Journeys",
-            "name": "Những Hành Trình Tiêu Biểu Ruby Wings - Trải Nghiệm Chữa Lành Từ Vĩ Tuyến 17",
-            "description": "Khám phá các hành trình trải nghiệm chữa lành tiêu biểu của Ruby Wings: Kết nối lịch sử Vĩ tuyến 17 và DMZ, kết hợp thiền chánh niệm, khí công chữa lành và trải nghiệm thiên nhiên núi rừng sông nước độc đáo tại Quảng Trị và Thừa Thiên Huế.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 16,
-                "suggestedMaxAge": 70,
-                "audienceType": "Người quan tâm đến du lịch trải nghiệm chữa lành, thiền chánh niệm, khí công, lịch sử Vĩ tuyến 17, DMZ, và kết nối với thiên nhiên núi rừng sông nước"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Healing & Experience Tourism"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#webpage",
-            "url": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html",
-            "name": "Những Hành Trình Tiêu Biểu Ruby Wings - Trải Nghiệm Chữa Lành Từ Vĩ Tuyến 17",
-            "description": "Trang giới thiệu các hành trình trải nghiệm chữa lành tiêu biểu của Ruby Wings Travel: Kết nối lịch sử Vĩ tuyến 17, DMZ, thiền chánh niệm, khí công và trải nghiệm thiên nhiên núi rừng sông nước.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Những Hành Trình Tiêu Biểu Ruby Wings - Trải Nghiệm Chữa Lành Từ Vĩ Tuyến 17"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/nhung-hanh-trinh-tieu-bieu.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Hành trình tiêu biểu",
-                        "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Những hành trình tiêu biểu nào đang có tại Ruby Wings?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings hiện có các hành trình tiêu biểu bao gồm: 1) Ngọn Lửa Trường Sơn - Ký ức - khát vọng, 2) Sống cùng Mưa Đỏ - Tây Trường Sơn, 3) Hoàng Hôn Phá Tam Giang & Di Sản, 4) Non nước Bạch Mã, 5) Ký Ức - Lịch Sử và Đại Ngàn - Tĩnh Lặng, 6) Bình yên giữa núi rừng Trường Sơn, 7) Mưa đỏ và Đôi bờ Hiền Lương, cùng các hành trình đang chuẩn bị ra mắt."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Hành trình nào phù hợp với người muốn trải nghiệm lịch sử Vĩ tuyến 17 và DMZ?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Các hành trình 01 (Ngọn Lửa Trường Sơn), 02 (Sống cùng Mưa Đỏ), 05 (Ký Ức - Lịch Sử và Đại Ngàn) và 07 (Mưa đỏ và Đôi bờ Hiền Lương) đặc biệt tập trung vào trải nghiệm lịch sử, kết nối với vùng đất Vĩ tuyến 17, DMZ, và những câu chuyện bi tráng thời chiến tranh tại Quảng Trị."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Hành trình nào kết hợp thiền chánh niệm và khí công chữa lành?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hành trình 04 (Non nước Bạch Mã) và 06 (Bình yên giữa núi rừng Trường Sơn) được thiết kế như các retreat chữa lành, kết hợp thiền chánh niệm, khí công trị liệu và trải nghiệm forest bathing trong không gian thiên nhiên nguyên sinh của rừng Bạch Mã và Trường Sơn."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Làm thế nào để đăng ký tham gia các hành trình tiêu biểu?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Bạn có thể đăng ký bằng các cách: 1) Nhấn vào nút ĐĂNG KÝ tương ứng với từng hành trình trên trang này để điền form Google, 2) Liên hệ hotline 0332510486 (Zalo/WhatsApp), 3) Quét QR code tại cuối trang để truy cập danh sách đăng ký, 4) Nhắn tin qua fanpage Facebook Ruby Wings Travel để được tư vấn chi tiết."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Thời gian khởi hành các hành trình tiêu biểu như thế nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Các hành trình có lịch khởi hành cố định hàng tuần/tháng: Hành trình 01 (Thứ Tư tuần 1 và 4), Hành trình 02 (Thứ Bảy), Hành trình 03 (Thứ Sáu), Hành trình 04 (Thứ Ba), Hành trình 05 (Thứ Năm), Hành trình 06 (Thứ Bảy). Hành trình 07 linh hoạt theo đăng ký. Các hành trình đều khởi hành từ Huế hoặc Quảng Trị."
-                    }
-                }
-            ]
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Những hành trình tiêu biểu nào đang có tại Ruby Wings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ruby Wings hiện tổ chức nhiều chương trình tour tiêu biểu tập trung vào tham quan lịch sử, văn hóa và thiên nhiên tại khu vực miền Trung Việt Nam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hành trình nào phù hợp với người quan tâm đến lịch sử Vĩ tuyến 17 và DMZ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Một số chương trình trong danh mục tập trung vào các điểm lịch sử tại Quảng Trị và khu vực Vĩ tuyến 17, phù hợp với khách quan tâm đến lịch sử chiến tranh Việt Nam."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Làm thế nào để đăng ký tham gia các hành trình tiêu biểu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khách hàng có thể đăng ký thông qua biểu mẫu trên website hoặc liên hệ trực tiếp với Ruby Wings qua các kênh liên lạc được cung cấp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Thời gian khởi hành các hành trình tiêu biểu như thế nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Thời gian khởi hành của từng chương trình được công bố cụ thể trong trang chi tiết của mỗi hành trình."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
     
     <style>
         /* === Biến CSS === */

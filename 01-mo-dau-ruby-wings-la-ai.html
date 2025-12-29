@@ -179,10 +179,14 @@
   "@graph": [
     {
       "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
       "name": "Ruby Wings Travel",
       "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
+      },
+      "description": "Ruby Wings Travel là đơn vị tổ chức các hành trình du lịch trải nghiệm tại Việt Nam, định hướng kết hợp thiền chánh niệm, khí công và kết nối với thiên nhiên. Hoạt động của Ruby Wings tập trung vào việc xây dựng các chương trình có chiều sâu, gắn với giá trị văn hóa, tinh thần và phát triển con người.",
       "telephone": "+84-33-251-0486",
       "email": "rubywingslsa@gmail.com",
       "sameAs": [
@@ -203,31 +207,54 @@
       }
     },
     {
-      "@type": "WebPage",
-      "name": "Ruby Wings là ai? - Hành trình trải nghiệm",
-      "description": "Giới thiệu về Ruby Wings Travel - Du lịch trải nghiệm chữa lành & phát triển nội tâm",
+      "@type": "AboutPage",
+      "@id": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html#aboutpage",
       "url": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html",
-      "primaryImageOfPage": "https://rubywings.vn/images/01-mo-dau-ruby-wings-la-ai.jpg",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Ruby Wings Travel"
+      "name": "Ruby Wings là ai?",
+      "description": "Trang giới thiệu tổng quan về Ruby Wings Travel, làm rõ định hướng hoạt động, triết lý du lịch trải nghiệm và vai trò của Ruby Wings trong lĩnh vực du lịch gắn với phát triển nội tâm.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "about": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/01-mo-dau-ruby-wings-la-ai.jpg"
       },
       "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Ruby Wings là ai?",
-            "item": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html"
-          }
-        ]
+        "@id": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Ruby Wings là ai?",
+          "item": "https://rubywings.vn/01-mo-dau-ruby-wings-la-ai.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel",
+      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
       }
     }
   ]

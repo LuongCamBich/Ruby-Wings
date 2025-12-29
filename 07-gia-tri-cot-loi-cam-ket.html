@@ -167,8 +167,11 @@
       "@id": "https://rubywings.vn/#organization",
       "name": "Ruby Wings Travel",
       "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Hành trình chữa lành từ bên trong bằng thiền chánh niệm, khí công và kết nối thiên nhiên",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
+      },
+      "description": "Ruby Wings Travel là đơn vị tổ chức các chương trình du lịch trải nghiệm và chữa lành tại Việt Nam, tập trung vào thiền chánh niệm, khí công và kết nối với thiên nhiên. Hoạt động của Ruby Wings được xây dựng dựa trên các giá trị cốt lõi và cam kết rõ ràng về chất lượng dịch vụ, tính minh bạch, trách nhiệm với cộng đồng và sự tôn trọng môi trường tự nhiên.",
       "telephone": "+84-33-251-0486",
       "email": "rubywingslsa@gmail.com",
       "sameAs": [
@@ -195,65 +198,47 @@
       }
     },
     {
-      "@type": "Article",
-      "headline": "Giá Trị Cốt Lõi & Cam Kết Ruby Wings - Du Lịch Chữa Lành & Hành Trình Sống Tử Tế",
-      "description": "Giá trị cốt lõi và cam kết của Ruby Wings - 5 trụ cột: Thành tín, Chính trực, Chất lượng, Thẩm mỹ, Tuân thủ. Lời hứa với khách hàng, cộng đồng và thiên nhiên",
-      "datePublished": "2024-01-01T00:00:00+07:00",
-      "dateModified": "2024-01-01T00:00:00+07:00",
-      "author": {
-        "@type": "Person",
-        "name": "Lương Tiến Sỹ",
-        "url": "https://www.facebook.com/tien.sy.5011/"
-      },
-      "publisher": {
-        "@id": "https://rubywings.vn/#organization"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html"
-      },
-      "articleSection": "Giá trị cốt lõi & Cam kết",
-      "keywords": "giá trị cốt lõi Ruby Wings, cam kết Ruby Wings, du lịch chữa lành, hành trình sống tử tế, thành tín, chính trực, chất lượng, thẩm mỹ, tuân thủ",
-      "thumbnailUrl": "https://rubywings.vn/images/gia-tri-cot-loi-cam-ket.jpg",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://rubywings.vn/images/gia-tri-cot-loi-cam-ket.jpg",
-        "width": "1200",
-        "height": "630"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html#webpage",
+      "@type": "AboutPage",
+      "@id": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html#aboutpage",
       "url": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html",
-      "name": "Giá Trị Cốt Lõi & Cam Kết Ruby Wings - Du Lịch Chữa Lành & Hành Trình Sống Tử Tế",
-      "description": "Trang giá trị cốt lõi và cam kết của Ruby Wings - 5 trụ cột: Thành tín, Chính trực, Chất lượng, Thẩm mỹ, Tuân thủ. Lời hứa với khách hàng, cộng đồng và thiên nhiên",
+      "name": "Giá Trị Cốt Lõi & Cam Kết Ruby Wings",
+      "description": "Trang giới thiệu các giá trị cốt lõi và cam kết hoạt động của Ruby Wings Travel, bao gồm các nguyên tắc về thành tín, chính trực, chất lượng, thẩm mỹ và tuân thủ trong quá trình tổ chức các chương trình du lịch trải nghiệm và chữa lành.",
       "isPartOf": {
         "@id": "https://rubywings.vn/#website"
       },
-      "about": "Giá trị cốt lõi, cam kết, Ruby Wings, du lịch chữa lành, hành trình sống tử tế, thành tín, chính trực, chất lượng, thẩm mỹ, tuân thủ",
-      "datePublished": "2024-01-01",
-      "dateModified": "2024-01-01",
-      "primaryImageOfPage": "https://rubywings.vn/images/gia-tri-cot-loi-cam-ket.jpg",
-      "publisher": {
+      "about": {
         "@id": "https://rubywings.vn/#organization"
       },
+      "datePublished": "2024-01-01",
+      "dateModified": "2024-01-01",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/gia-tri-cot-loi-cam-ket.jpg"
+      },
       "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Giá trị cốt lõi & Cam kết"
-          }
-        ]
+        "@id": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Giá trị cốt lõi & Cam kết",
+          "item": "https://rubywings.vn/gia-tri-cot-loi-cam-ket.html"
+        }
+      ]
     },
     {
       "@type": "WebSite",
@@ -268,6 +253,7 @@
   ]
 }
 </script>
+
 
   <style>
     :root {

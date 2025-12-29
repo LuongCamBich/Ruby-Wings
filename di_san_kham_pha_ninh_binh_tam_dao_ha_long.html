@@ -72,159 +72,181 @@
     <meta name="twitter:description" content="Hành trình 6N5Đ: Ninh Bình - Tam Đảo - Hạ Long, Tràng An, Bái Đính, Tây Thiên, Sun World Hạ Long, Thành Nhà Hồ.">
     <meta name="twitter:image" content="https://rubywings.vn/images/trang-an.jpg">
 
-    <script type="application/ld+json">
+   <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
+      "slogan": "Bay lên từ bên trong - Ruby Wings - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#webpage",
+      "url": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html",
+      "name": "Hành Trình Di Sản – Khám Phá Ninh Bình – Tam Đảo – Hạ Long 6N5Đ | Ruby Wings",
+      "description": "Hành trình 6 ngày 5 đêm khám phá Tràng An - Di sản thế giới, Tam Đảo - Đà Lạt của miền Bắc, và kỳ quan biển Hạ Long - Di sản thiên nhiên thế giới.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/trang-an.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hành Trình Tiêu Biểu",
+            "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Tour Ninh Bình - Tam Đảo - Hạ Long 6N5Đ",
+            "item": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html"
+          }
+        ]
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#service"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#service",
+      "name": "Hành Trình Di Sản – Khám Phá Ninh Bình – Tam Đảo – Hạ Long 6N5Đ",
+      "serviceType": "Heritage Tour Package",
+      "description": "Tour du lịch 6 ngày 5 đêm khám phá di sản miền Bắc Việt Nam: Tràng An - Di sản thiên nhiên & văn hóa thế giới, Tam Đảo - 'Đà Lạt của miền Bắc', Hạ Long - Kỳ quan thiên nhiên thế giới, Thành Nhà Hồ - Di sản văn hóa thế giới. Hành trình kết nối ba mảnh ghép đặc sắc với giá trị văn hóa - lịch sử sâu sắc.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "audienceType": "Đoàn giáo viên, học sinh, gia đình, du khách yêu thích văn hóa và di sản Việt Nam"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Ruby Wings - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            }
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Heritage Tour Package",
-            "name": "Hành Trình Di Sản – Khám Phá Ninh Bình – Tam Đảo – Hạ Long 6N5Đ",
-            "description": "Tour du lịch 6 ngày 5 đêm khám phá di sản miền Bắc Việt Nam: Tràng An - Di sản thiên nhiên & văn hóa thế giới, Tam Đảo - 'Đà Lạt của miền Bắc', Hạ Long - Kỳ quan thiên nhiên thế giới, Thành Nhà Hồ - Di sản văn hóa thế giới. Hành trình kết nối ba mảnh ghép đặc sắc với giá trị văn hóa - lịch sử sâu sắc.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "audienceType": "Đoàn giáo viên, học sinh, gia đình, du khách yêu thích văn hóa và di sản Việt Nam"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Heritage Tourism"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#webpage",
-            "url": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html",
-            "name": "Hành Trình Di Sản – Khám Phá Ninh Bình – Tam Đảo – Hạ Long 6N5Đ | Ruby Wings",
-            "description": "Hành trình 6 ngày 5 đêm khám phá Tràng An - Di sản thế giới, Tam Đảo - Đà Lạt của miền Bắc, và kỳ quan biển Hạ Long - Di sản thiên nhiên thế giới.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Hành Trình Di Sản – Khám Phá Ninh Bình – Tam Đảo – Hạ Long 6N5Đ"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/trang-an.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Hành Trình Tiêu Biểu",
-                        "item": "https://rubywings.vn/nhung-hanh-trinh-tieu-bieu.html"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "Tour Ninh Bình - Tam Đảo - Hạ Long 6N5Đ",
-                        "item": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Hành trình này có phù hợp với đoàn giáo viên không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt cho Quý thầy cô giáo, kết hợp giữa tham quan di sản văn hóa có giá trị giáo dục cao (Tràng An, Bái Đính, Thành Nhà Hồ), khám phá thiên nhiên kỳ vĩ (Tam Đảo, Hạ Long) và trải nghiệm văn hóa vùng miền độc đáo. Lịch trình có đêm giao lưu văn hóa văn nghệ tổng kết hành trình tại Thanh Hóa, tạo không khí gắn kết, thư giãn cho đoàn."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Tôi cần chuẩn bị những gì cho chuyến đi?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Giấy tờ tùy thân: Mang CMND/CCCD còn hạn để làm thủ tục lưu trú tại Ninh Bình, Tam Đảo và Hạ Long. Trang phục: Trang phục gọn nhẹ, giày đế mềm để thuận tiện di chuyển tại Tràng An, Bái Đính và các điểm có bậc thang, đường dốc như Tam Đảo. Tam Đảo thời tiết thay đổi nhanh; nên mang áo khoác mỏng, ô/dù. Thuốc men: Chuẩn bị thuốc theo nhu cầu cá nhân (nhất là người dễ say xe khi đi đường đèo). Đồ dùng cá nhân: Thời tiết miền Bắc dễ nắng nóng hoặc mưa bất chợt; nên chuẩn bị nước uống cá nhân, khăn giấy, áo mưa mỏng, kem chống nắng, mũ/nón."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Trải nghiệm tham quan Tràng An và Bái Đính như thế nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Tràng An - Di sản thiên nhiên & văn hóa thế giới: Quý thầy cô sẽ trải nghiệm ngồi thuyền khám phá hệ thống hang động tuyệt đẹp và cảnh quan non nước hữu tình được mệnh danh là 'Vịnh Hạ Long trên cạn'. Tại đây cần ngồi thuyền đúng vị trí, giữ thăng bằng, hạn chế thay đổi chỗ ngồi để đảm bảo an toàn. Chùa Bái Đính: Quần thể tâm linh với kiến trúc đồ sộ, không gian thanh tịnh, nơi lưu giữ nhiều kỷ lục Phật giáo Việt Nam. Quý thầy cô sẽ có dịp chiêm bái, tìm hiểu về văn hóa Phật giáo và chụp ảnh lưu niệm tại các công trình kiến trúc độc đáo."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Chính sách huỷ tour và lưu ý an toàn khi tham quan là gì?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Chính sách huỷ tour (do khách huỷ): - Trước 14 ngày: không thu phí - Từ 07 – 13 ngày: 30% hành trình - Từ 05 - 06 ngày: 50% hành trình - Từ 03 - 04 ngày: 75% hành trình - Từ 01 - 02 ngày: 90% hành trình - Ngày khởi hành: 100% hành trình. Lưu ý an toàn & ứng xử: - Tại Tràng An: ngồi thuyền đúng vị trí, giữ thăng bằng, hạn chế thay đổi chỗ ngồi để đảm bảo an toàn. - Tại Tam Đảo: thời tiết thay đổi nhanh; nên mang áo khoác mỏng, ô/dù. - Tại Bãi Cháy và các khu vui chơi Hạ Long: tự bảo quản tư trang; chú ý quy định an toàn khi tắm biển hoặc tham gia trò chơi. - Tuân thủ giờ tập trung để đảm bảo hành trình di chuyển đúng kế hoạch. - Giữ thái độ nghiêm túc và tôn trọng không gian tại các điểm tâm linh và di sản."
-                    }
-                }
-            ]
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/di_san_kham_pha_ninh_binh_tam_dao_ha_long.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hành trình này có phù hợp với đoàn giáo viên không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hoàn toàn phù hợp! Hành trình được thiết kế đặc biệt cho Quý thầy cô giáo, kết hợp giữa tham quan di sản văn hóa có giá trị giáo dục cao (Tràng An, Bái Đính, Thành Nhà Hồ), khám phá thiên nhiên kỳ vĩ (Tam Đảo, Hạ Long) và trải nghiệm văn hóa vùng miền độc đáo. Lịch trình có đêm giao lưu văn hóa văn nghệ tổng kết hành trình tại Thanh Hóa, tạo không khí gắn kết, thư giãn cho đoàn."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tôi cần chuẩn bị những gì cho chuyến đi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Giấy tờ tùy thân: Mang CMND/CCCD còn hạn để làm thủ tục lưu trú tại Ninh Bình, Tam Đảo và Hạ Long. Trang phục: Trang phục gọn nhẹ, giày đế mềm để thuận tiện di chuyển tại Tràng An, Bái Đính và các điểm có bậc thang, đường dốc như Tam Đảo. Tam Đảo thời tiết thay đổi nhanh; nên mang áo khoác mỏng, ô/dù. Thuốc men: Chuẩn bị thuốc theo nhu cầu cá nhân (nhất là người dễ say xe khi đi đường đèo). Đồ dùng cá nhân: Thời tiết miền Bắc dễ nắng nóng hoặc mưa bất chợt; nên chuẩn bị nước uống cá nhân, khăn giấy, áo mưa mỏng, kem chống nắng, mũ/nón."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Trải nghiệm tham quan Tràng An và Bái Đính như thế nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tràng An - Di sản thiên nhiên & văn hóa thế giới: Quý thầy cô sẽ trải nghiệm ngồi thuyền khám phá hệ thống hang động tuyệt đẹp và cảnh quan non nước hữu tình được mệnh danh là 'Vịnh Hạ Long trên cạn'. Tại đây cần ngồi thuyền đúng vị trí, giữ thăng bằng, hạn chế thay đổi chỗ ngồi để đảm bảo an toàn. Chùa Bái Đính: Quần thể tâm linh với kiến trúc đồ sộ, không gian thanh tịnh, nơi lưu giữ nhiều kỷ lục Phật giáo Việt Nam. Quý thầy cô sẽ có dịp chiêm bái, tìm hiểu về văn hóa Phật giáo và chụp ảnh lưu niệm tại các công trình kiến trúc độc đáo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Chính sách huỷ tour và lưu ý an toàn khi tham quan là gì?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chính sách huỷ tour (do khách huỷ): - Trước 14 ngày: không thu phí - Từ 07 – 13 ngày: 30% hành trình - Từ 05 - 06 ngày: 50% hành trình - Từ 03 - 04 ngày: 75% hành trình - Từ 01 - 02 ngày: 90% hành trình - Ngày khởi hành: 100% hành trình. Lưu ý an toàn & ứng xử: - Tại Tràng An: ngồi thuyền đúng vị trí, giữ thăng bằng, hạn chế thay đổi chỗ ngồi để đảm bảo an toàn. - Tại Tam Đảo: thời tiết thay đổi nhanh; nên mang áo khoác mỏng, ô/dù. - Tại Bãi Cháy và các khu vui chơi Hạ Long: tự bảo quản tư trang; chú ý quy định an toàn khi tắm biển hoặc tham gia trò chơi. - Tuân thủ giờ tập trung để đảm bảo hành trình di chuyển đúng kế hoạch. - Giữ thái độ nghiêm túc và tôn trọng không gian tại các điểm tâm linh và di sản."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
+
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

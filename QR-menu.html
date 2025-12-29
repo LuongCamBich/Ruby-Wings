@@ -54,125 +54,128 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 
   <!-- Schema.org JSON-LD Chi Tiết -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://rubywings.vn/#organization",
-        "name": "Ruby Wings Travel",
-        "url": "https://rubywings.vn/",
-        "logo": "https://rubywings.vn/images/logo.png",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-        "telephone": "+84-33-251-0486",
-        "email": "rubywingslsa@gmail.com",
-        "sameAs": [
-          "https://www.facebook.com/profile.php?id=61563772112138",
-          "https://www.facebook.com/tien.sy.5011/",
-          "https://x.com/TienSy379",
-          "https://www.instagram.com/tiensyrubywings",
-          "https://www.tiktok.com/@syluong379",
-          "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-        ],
-        "founder": {
-          "@type": "Person",
-          "name": "Lương Tiến Sỹ",
-          "jobTitle": "Founder & CEO",
-          "url": "https://www.facebook.com/tien.sy.5011/"
-        }
+ <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
       },
-      {
-        "@type": "WebApplication",
-        "name": "QR Menu Generator - Ruby Wings Travel",
-        "description": "Công cụ tạo mã QR miễn phí cho website, menu và từ thiện",
-        "url": "https://rubywings.vn/QR-menu.html",
-        "applicationCategory": "UtilityApplication",
-        "operatingSystem": "Any",
-        "browserRequirements": "Requires JavaScript",
-        "permissions": "browser",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "VND",
-          "description": "Miễn phí"
-        },
-        "creator": {
-          "@id": "https://rubywings.vn/#organization"
-        },
-        "featureList": [
-          "Tạo QR code cho website",
-          "Tạo QR code cho Fanpage Facebook", 
-          "Tạo QR code menu nhà hàng",
-          "Tạo QR code từ thiện",
-          "Tùy chỉnh màu sắc QR code",
-          "Download QR code chất lượng cao"
-        ]
-      },
-      {
-        "@type": "FoodEstablishment",
-        "name": "4Tea",
-        "description": "Quán trà 4Tea - Đặt món qua QR code",
-        "telephone": "+84-91-508-3357",
-        "servesCuisine": "Trà và đồ uống",
-        "hasMenu": "https://rubywings.vn/QR-menu.html",
-        "url": "https://rubywings.vn/QR-menu.html"
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/QR-menu.html#webpage",
-        "name": "QR Menu Generator | Ruby Wings Travel",
-        "description": "Trang tạo mã QR miễn phí cho menu 4Tea và mục đích từ thiện",
-        "url": "https://rubywings.vn/QR-menu.html",
-        "isPartOf": {
-          "@id": "https://rubywings.vn/#website"
-        },
-        "about": "Công cụ tạo QR code miễn phí",
-        "datePublished": "2024-01-01",
-        "dateModified": "2025-01-01",
-        "primaryImageOfPage": "https://rubywings.vn/images/QR-menu.jpg",
-        "mainEntity": {
-          "@type": "WebApplication"
-        },
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Công Cụ",
-            "item": "https://rubywings.vn/cong-cu.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "QR Generator"
-          }
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://rubywings.vn/#website",
-        "url": "https://rubywings.vn/",
-        "name": "Ruby Wings Travel",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        }
+      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "telephone": "+84-33-251-0486",
+      "email": "rubywingslsa@gmail.com",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://x.com/TienSy379",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://rubywings.vn/QR-menu.html#webapp",
+      "name": "QR Menu Generator - Ruby Wings Travel",
+      "description": "Công cụ tạo mã QR miễn phí cho website, menu và các mục đích cộng đồng.",
+      "url": "https://rubywings.vn/QR-menu.html",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "creator": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "Tạo QR code cho website",
+        "Tạo QR code cho Fanpage Facebook",
+        "Tạo QR code menu nhà hàng",
+        "Tạo QR code cho mục đích cộng đồng",
+        "Tùy chỉnh màu sắc QR code",
+        "Tải QR code chất lượng cao"
+      ]
+    },
+    {
+      "@type": "FoodEstablishment",
+      "name": "4Tea",
+      "description": "Quán trà 4Tea - Đặt món qua QR code",
+      "telephone": "+84-91-508-3357",
+      "servesCuisine": "Trà và đồ uống",
+      "hasMenu": "https://rubywings.vn/QR-menu.html",
+      "url": "https://rubywings.vn/QR-menu.html"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/QR-menu.html#webpage",
+      "url": "https://rubywings.vn/QR-menu.html",
+      "name": "QR Menu Generator | Ruby Wings Travel",
+      "description": "Trang tạo mã QR miễn phí cho menu và các mục đích cộng đồng.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/QR-menu.jpg"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/QR-menu.html#webapp"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Công cụ",
+          "item": "https://rubywings.vn/cong-cu.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "QR Menu Generator",
+          "item": "https://rubywings.vn/QR-menu.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel",
+      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    }
+  ]
+}
+</script>
+
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BD5GXRQFQZ"></script>

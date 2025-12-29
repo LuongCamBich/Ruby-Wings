@@ -164,10 +164,14 @@
   "@graph": [
     {
       "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
       "name": "Ruby Wings Travel",
       "url": "https://rubywings.vn/",
-      "logo": "https://rubywings.vn/images/logo.png",
-      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
+      },
+      "description": "Ruby Wings Travel là đơn vị tổ chức các chương trình du lịch trải nghiệm tại Việt Nam, tập trung vào thiền chánh niệm, khí công và kết nối với thiên nhiên. Hoạt động của Ruby Wings hướng đến việc xây dựng các hành trình có chiều sâu, kết hợp yếu tố văn hóa, tự nhiên và giá trị tinh thần.",
       "telephone": "+84-33-251-0486",
       "email": "rubywingslsa@gmail.com",
       "sameAs": [
@@ -188,41 +192,66 @@
       }
     },
     {
-      "@type": "WebPage",
-      "name": "Ý Nghĩa Logo Ruby Wings - Biểu Tượng Chữa Lành & Hồi Sinh",
-      "description": "Khám phá ý nghĩa sâu sắc đằng sau logo Ruby Wings - biểu tượng của sự hồi sinh, chữa lành nội tâm và kết nối với thiên nhiên thông qua thiền chánh niệm và khí công.",
+      "@type": "AboutPage",
+      "@id": "https://rubywings.vn/04-y-nghia-logo-bieu-tuong.html#aboutpage",
       "url": "https://rubywings.vn/04-y-nghia-logo-bieu-tuong.html",
-      "primaryImageOfPage": "https://rubywings.vn/images/04-y-nghia-logo-bieu-tuong.jpg",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Ruby Wings Travel"
+      "name": "Ý Nghĩa Logo Ruby Wings",
+      "description": "Trang giới thiệu ý nghĩa logo Ruby Wings, phản ánh định hướng thương hiệu, các giá trị cốt lõi và tinh thần mà Ruby Wings Travel theo đuổi trong các chương trình du lịch trải nghiệm.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "about": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/04-y-nghia-logo-bieu-tuong.jpg"
       },
       "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Trang chủ",
-            "item": "https://rubywings.vn/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Về Ruby Wings",
-            "item": "https://rubywings.vn/ve-ruby-wings.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Ý Nghĩa Logo"
-          }
-        ]
+        "@id": "https://rubywings.vn/04-y-nghia-logo-bieu-tuong.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/04-y-nghia-logo-bieu-tuong.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Về Ruby Wings",
+          "item": "https://rubywings.vn/ve-ruby-wings.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ý nghĩa Logo",
+          "item": "https://rubywings.vn/04-y-nghia-logo-bieu-tuong.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel",
+      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu cảm xúc",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
       }
     }
   ]
 }
 </script>
+
 
 
   <style>

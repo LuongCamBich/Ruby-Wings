@@ -263,163 +263,156 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Schema JSON-LD Tối ưu -->
-    <script type="application/ld+json">
+  <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings là đơn vị tổ chức các hành trình du lịch trải nghiệm tại Việt Nam, tập trung vào lịch sử, văn hóa, thiên nhiên và hoạt động cộng đồng.",
+      "slogan": "Bay lên từ bên trong – Hành trình trải nghiệm có chiều sâu",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B7-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Nhà sáng lập & Giám đốc điều hành",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#service",
+      "serviceType": "Du lịch trải nghiệm lịch sử và văn hóa",
+      "name": "Ngọn Lửa Trường Sơn – Ký ức và Khát vọng 2N1Đ",
+      "description": "Chương trình du lịch 2 ngày 1 đêm tham quan các điểm lịch sử tiêu biểu tại Quảng Trị và khu vực Trường Sơn, kết hợp tìm hiểu văn hóa địa phương và các hoạt động sinh hoạt tập thể.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 16,
+        "suggestedMaxAge": 75,
+        "audienceType": "Cựu chiến binh, thanh niên, học sinh sinh viên, gia đình và các tổ chức quan tâm đến lịch sử – văn hóa"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#webpage",
+      "url": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html",
+      "name": "Ngọn Lửa Trường Sơn – Ký ức và Khát vọng 2N1Đ | Ruby Wings Travel",
+      "description": "Trang giới thiệu chương trình du lịch 2 ngày 1 đêm Ngọn Lửa Trường Sơn với các điểm tham quan lịch sử và hoạt động tập thể.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/xem-chi-tiet-hanh-trinh-ket-noi-the-he.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hành trình kết nối thế hệ",
+            "item": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel",
+      "description": "Website chính thức của Ruby Wings Travel – đơn vị tổ chức các hành trình du lịch trải nghiệm tại Việt Nam.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#faq",
+      "mainEntity": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B7-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "Question",
+          "name": "Hành trình Ngọn Lửa Trường Sơn bao gồm những điểm tham quan nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chương trình tham quan các điểm lịch sử tiêu biểu như Nghĩa trang Liệt sĩ Quốc gia Trường Sơn, Thành Cổ Quảng Trị, khu vực Khe Sanh và một số địa điểm văn hóa – lịch sử liên quan."
+          }
         },
         {
-            "@type": "Service",
-            "serviceType": "Historical & Cultural Heritage Experience",
-            "name": "Ngọn Lửa Trường Sơn - Ký ức và Khát vọng 2N1Đ",
-            "description": "Hành trình 2 ngày 1 đêm khám phá lịch sử Trường Sơn huyền thoại: Tham quan Nghĩa trang Liệt sĩ Trường Sơn, Thành Cổ Quảng Trị, giao lưu văn hóa với đồng bào Vân Kiều - Pa Kô, trải nghiệm đêm lửa trại đặc sắc và thực hành thiền - khí công giữa núi rừng Trường Sơn. Hành trình kết nối đa thế hệ, tưởng nhớ lịch sử và lan tỏa khát vọng sống.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 16,
-                "suggestedMaxAge": 75,
-                "audienceType": "Cựu chiến binh, thanh niên, học sinh sinh viên, nhóm gia đình, các tổ chức đoàn thể, cá nhân quan tâm đến lịch sử, văn hóa và trải nghiệm đa thế hệ"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Historical & Cultural Tourism"
-            }
+          "@type": "Question",
+          "name": "Đối tượng nào phù hợp tham gia chương trình?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chương trình phù hợp với cựu chiến binh, thanh niên, học sinh sinh viên, gia đình và các tổ chức, đoàn thể quan tâm đến lịch sử và văn hóa."
+          }
         },
         {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#webpage",
-            "url": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html",
-            "name": "Ngọn Lửa Trường Sơn - Ký ức và Khát vọng 2N1Đ | Kết nối Đa Thế hệ | Ruby Wings Travel",
-            "description": "Tour 2 ngày 1 đêm 'Ngọn Lửa Trường Sơn': Trải nghiệm lịch sử Quảng Trị, giao lưu văn hóa Vân Kiều - Pa Kô, đêm lửa trại và kết nối đa thế hệ cùng Ruby Wings.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Ngọn Lửa Trường Sơn - Ký ức và Khát vọng 2N1Đ"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/xem-chi-tiet-hanh-trinh-ket-noi-the-he.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Hành trình kết nối thế hệ",
-                        "item": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html"
-                    }
-                ]
-            }
+          "@type": "Question",
+          "name": "Chương trình có hoạt động tập thể không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Có. Chương trình có các hoạt động sinh hoạt tập thể và giao lưu nhằm tăng cường sự gắn kết giữa các thành viên trong đoàn."
+          }
         },
         {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/xem-chi-tiet-hanh-trinh-ket-noi-the-he.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Hành trình 'Ngọn Lửa Trường Sơn' có những điểm tham quan chính nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hành trình bao gồm: Nghĩa trang Liệt sĩ Quốc gia Trường Sơn, Thành Cổ Quảng Trị, Nhà tù Lao Bảo, Làng Vây, sân bay Tà Cơn - Bảo tàng Khe Sanh, Cây Cô Đơn, Hồ Rào Quán, Thánh địa La Vang. Đặc biệt có đêm lửa trại giao lưu văn hóa với đồng bào Vân Kiều - Pa Kô."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Ai nên tham gia hành trình này?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hành trình phù hợp với: Cựu chiến binh muốn trở về chiến trường xưa; Thanh niên, học sinh sinh viên muốn tìm hiểu lịch sử; Các nhóm gia đình đa thế hệ; Tổ chức đoàn thể muốn có trải nghiệm kết nối; Cá nhân yêu thích lịch sử, văn hóa và muốn trải nghiệm thiền - khí công giữa thiên nhiên."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Điểm đặc biệt của hành trình 'Ngọn Lửa Trường Sơn' là gì?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Điểm đặc biệt: Trải nghiệm 'Đêm lửa trại Ngọn lửa Trường Sơn' với giao lưu văn hóa Vân Kiều - Pa Kô; Được nghe chia sẻ từ cựu chiến binh nhân chứng lịch sử; Thực hành thiền - khí công buổi sáng tại Trường Sơn; Kết nối đa thế hệ thông qua chia sẻ ký ức và khát vọng; Hỗ trợ cộng đồng dân tộc thiểu số địa phương."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Chi phí hành trình bao gồm những gì?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Bao gồm: Xe du lịch đời mới, 01 đêm lưu trú tại homestay/khách sạn, các bữa ăn theo chương trình, vé tham quan các điểm du lịch, hướng dẫn viên chuyên nghiệp, bảo hiểm du lịch, tổ chức đêm lửa trại giao lưu văn hóa, quà tặng Ruby Wings, hỗ trợ y tế. Không bao gồm đồ uống cá nhân, chi phí mua sắm, tip cho lái xe và HDV."
-                    }
-                }
-            ]
+          "@type": "Question",
+          "name": "Chi phí chương trình bao gồm những hạng mục cơ bản nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chi phí bao gồm vận chuyển, lưu trú theo chương trình, các bữa ăn, vé tham quan, hướng dẫn viên và bảo hiểm du lịch cơ bản."
+          }
         }
-    ]
+      ]
+    }
+  ]
 }
 </script>
+
 
     <style>
         /* === Biến CSS Nâng Cao === */

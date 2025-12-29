@@ -170,161 +170,181 @@
     <!-- Schema JSON-LD -->
    <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên tổ chức các chương trình du lịch, trải nghiệm và hoạt động gắn với thiên nhiên, văn hóa và giáo dục.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch trải nghiệm",
+        "Du lịch văn hóa",
+        "Du lịch giáo dục",
+        "Thiết kế tour theo yêu cầu",
+        "Phát triển con người toàn diện"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Đơn vị tổ chức các chương trình du lịch và trải nghiệm gắn với thiên nhiên, văn hóa và giáo dục tại Việt Nam.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#webpage",
+      "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
+      "name": "Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách",
+      "description": "Trang giới thiệu dịch vụ thiết kế các chương trình tour linh hoạt và tùy chỉnh theo nhu cầu của khách hàng.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Hành trình linh hoạt",
+            "item": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#service",
+      "serviceType": "Dịch vụ thiết kế tour du lịch theo yêu cầu",
+      "name": "Hành Trình Trải Nghiệm Linh Hoạt - Tùy Chỉnh Theo Ý Khách",
+      "description": "Dịch vụ thiết kế và tổ chức các chương trình tour linh hoạt, cho phép tùy chỉnh tuyến điểm, thời gian, số lượng khách và nội dung hoạt động theo nhu cầu cụ thể.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 16,
+        "suggestedMaxAge": 70,
+        "audienceType": "Cá nhân, gia đình, nhóm bạn, doanh nghiệp và các tổ chức có nhu cầu tổ chức tour theo yêu cầu"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B1-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Dịch Vụ Du Lịch Tùy Chỉnh & Hành Trình Linh Hoạt",
-            "name": "Hành Trình Trải Nghiệm Linh Hoạt - Tùy Chỉnh Theo Ý Khách",
-            "description": "Dịch vụ thiết kế tour du lịch trải nghiệm cá nhân hóa theo yêu cầu riêng của từng khách hàng. Ruby Wings tạo ra các hành trình linh hoạt với địa điểm, hoạt động, thời gian và nội dung tùy chỉnh theo mong muốn, có thể kết hợp thiền chánh niệm, khí công, forest bathing, du lịch văn hóa, và các trải nghiệm chữa lành khác.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 16,
-                "suggestedMaxAge": 70,
-                "audienceType": "Cá nhân, nhóm bạn, gia đình, doanh nghiệp, tổ chức muốn có hành trình du lịch trải nghiệm được thiết kế riêng theo ý tưởng và nhu cầu cụ thể của mình"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Dịch Vụ Tour Tùy Chỉnh & Linh Hoạt"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#webpage",
-            "url": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html",
-            "name": "Hành Trình Trải Nghiệm Linh Hoạt | Ruby Wings - Tùy Chỉnh Theo Ý Khách",
-            "description": "Ruby Wings thiết kế hành trình trải nghiệm linh hoạt theo mong muốn của bạn: có thể lồng vào thiền chánh niệm, khí công, forest bathing, du lịch. Địa điểm, hoạt động tùy chọn - chúng tôi đáp ứng mọi yêu cầu với dịch vụ tốt nhất.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Hành Trình Trải Nghiệm Linh Hoạt - Tùy Chỉnh Theo Ý Khách"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Hành trình linh hoạt",
-                        "item": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Hành trình trải nghiệm linh hoạt là gì?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hành trình trải nghiệm linh hoạt là dịch vụ thiết kế tour theo yêu cầu riêng của từng khách hàng, với địa điểm, hoạt động và thời gian linh hoạt. Ruby Wings tạo ra các chương trình du lịch tùy chỉnh, có thể kết hợp các yếu tố như thiền chánh niệm, khí công, forest bathing, du lịch văn hóa, và các trải nghiệm chữa lành theo mong muốn của bạn."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Tôi có thể tùy chỉnh những gì trong hành trình?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Bạn có thể tùy chỉnh nhiều yếu tố trong hành trình: địa điểm (trong nước, kết hợp nhiều tỉnh thành), hoạt động (thiền, khí công, forest bathing, tham quan di sản, trải nghiệm văn hóa địa phương), thời gian (từ 1 ngày đến nhiều ngày), số lượng người tham gia, loại hình lưu trú, ẩm thực, và ngân sách. Ruby Wings sẽ thiết kế chương trình phù hợp với ý tưởng và nhu cầu cụ thể của bạn."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Làm thế nào để đăng ký hành trình linh hoạt?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Bạn có thể đăng ký bằng cách: 1) Chọn một trong các hành trình mẫu trên trang này và nhấn nút 'ĐĂNG KÝ' tương ứng, 2) Liên hệ trực tiếp qua số điện thoại 0332510486 (WhatsApp/Zalo) để trao đổi ý tưởng, 3) Điền form đăng ký tư vấn tại trang để đội ngũ Ruby Wings liên hệ thiết kế hành trình riêng cho bạn."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Có những loại hành trình linh hoạt nào?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings cung cấp nhiều loại hành trình linh hoạt: Khám phá Văn Hóa & Thiên Nhiên (Nha Trang - Đà Lạt), Trải nghiệm Đảo Ngọc (Phú Quốc), Miền đất trù phú phương Nam (miền Tây sông nước), Hành trình tri ân phụ nữ (Huế), và các hành trình đặc biệt khác. Ngoài ra, chúng tôi có thể thiết kế hành trình hoàn toàn mới theo yêu cầu của bạn."
-                    }
-                }
-            ]
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/nhung-hanh-trinh-tham-quan-trai-nghiem-linh-hoat.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hành trình trải nghiệm linh hoạt là gì?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Đây là dịch vụ thiết kế tour theo yêu cầu, cho phép khách hàng lựa chọn và điều chỉnh tuyến điểm, thời gian và nội dung chương trình."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tôi có thể tùy chỉnh những gì trong hành trình?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khách hàng có thể tùy chỉnh tuyến điểm, thời gian tour, số lượng người tham gia và loại hình hoạt động trong chương trình."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Làm thế nào để đăng ký hành trình linh hoạt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Khách hàng có thể liên hệ trực tiếp với Ruby Wings qua điện thoại, biểu mẫu đăng ký hoặc các kênh liên lạc được cung cấp trên website."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Có những loại hành trình linh hoạt nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các hành trình linh hoạt bao gồm tour tham quan văn hóa, thiên nhiên, du lịch giáo dục và các chương trình được thiết kế theo yêu cầu riêng."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
+
 
     <style>
         /* === Biến CSS Nâng Cao cho header & layout chung === */

@@ -175,168 +175,186 @@
     <!-- Schema JSON-LD -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logofxf.png"
+      },
+      "description": "Ruby Wings là đơn vị tổ chức các chương trình du lịch, tham quan và trải nghiệm gắn với lịch sử, văn hóa và thiên nhiên tại Việt Nam.",
+      "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.youtube.com/@rubywing-slsa",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "telephone": "+84-332-510-486",
+      "email": "rubywingslsa@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/"
+      },
+      "knowsAbout": [
+        "Du lịch lịch sử",
+        "Du lịch văn hóa",
+        "Du lịch thiên nhiên",
+        "Du lịch trải nghiệm",
+        "Tổ chức tour theo chủ đề"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
+      "description": "Website giới thiệu các chương trình tour và hành trình tham quan do Ruby Wings tổ chức.",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rubywings.vn/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rubywings.vn/ve-dep-quang-tri.html#webpage",
+      "url": "https://rubywings.vn/ve-dep-quang-tri.html",
+      "name": "Vẻ Đẹp Miền Trung - Thiên Nhiên & Di Sản | Ruby Wings",
+      "description": "Trang danh mục giới thiệu các chương trình tham quan và khám phá thiên nhiên, văn hóa và di sản tại khu vực Miền Trung Việt Nam.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rubywings.vn/ve-dep-quang-tri.html#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/ve-dep-mien-trung.jpg"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "https://rubywings.vn/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Non nước Việt Nam",
+            "item": "https://rubywings.vn/ve-dep-thien-nhien-viet-nam.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Vẻ đẹp Miền Trung",
+            "item": "https://rubywings.vn/ve-dep-quang-tri.html"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://rubywings.vn/ve-dep-quang-tri.html#service",
+      "serviceType": "Du lịch tham quan văn hóa và thiên nhiên Miền Trung",
+      "name": "Khám Phá Vẻ Đẹp Miền Trung - Thiên Nhiên & Di Sản",
+      "description": "Các chương trình tham quan và khám phá khu vực Miền Trung Việt Nam, bao gồm các điểm đến tiêu biểu về thiên nhiên, di sản văn hóa và lịch sử như Quảng Trị, Quảng Bình và Thừa Thiên Huế.",
+      "provider": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Việt Nam"
+      },
+      "audience": {
+        "@type": "PeopleAudience",
+        "suggestedMinAge": 12,
+        "suggestedMaxAge": 70,
+        "audienceType": "Du khách, gia đình, nhóm bạn, học sinh, sinh viên và cá nhân quan tâm đến văn hóa, lịch sử và thiên nhiên Miền Trung"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": [
         {
-            "@type": "Organization",
-            "@id": "https://rubywings.vn/#organization",
-            "name": "Ruby Wings Travel",
-            "url": "https://rubywings.vn/",
-            "logo": "https://rubywings.vn/images/logofxf.png",
-            "description": "Ruby Wings - Hệ sinh thái phát triển con người toàn diện với giá trị cốt lõi: Chuẩn mực - Chân thành - Có chiều sâu. Chuyên về du lịch cảm xúc, trải nghiệm chữa lành nội tâm thông qua thiền, khí công và kết nối thiên nhiên, hướng đến phát triển con người toàn diện.",
-            "slogan": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình",
-            "sameAs": [
-                "https://www.facebook.com/profile.php?id=61563772112138",
-                "https://www.facebook.com/tien.sy.5011/",
-                "https://www.instagram.com/tiensyrubywings",
-                "https://www.tiktok.com/@syluong379",
-                "https://www.youtube.com/@rubywing-slsa",
-                "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-            ],
-            "telephone": "+84-332-510-486",
-            "email": "rubywingslsa@gmail.com",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "148 Trương Gia Mô, Vỹ Dạ",
-                "addressLocality": "Thành phố Huế",
-                "addressRegion": "Thừa Thiên Huế",
-                "postalCode": "530000",
-                "addressCountry": "VN"
-            },
-            "founder": {
-                "@type": "Person",
-                "name": "Lương Tiến Sỹ",
-                "jobTitle": "Founder & CEO",
-                "url": "https://www.facebook.com/tien.sy.5011/"
-            },
-            "knowsAbout": [
-                "Du lịch chữa lành",
-                "Thiền chánh niệm khoa học",
-                "Khí công trị liệu",
-                "Phát triển con người toàn diện",
-                "Du lịch cảm xúc",
-                "Retreat và trải nghiệm nội tâm"
-            ]
+          "@type": "PropertyValue",
+          "name": "itinerary",
+          "value": "Future data to be added"
         },
         {
-            "@type": "Service",
-            "serviceType": "Central Vietnam Exploration",
-            "name": "Khám Phá Vẻ Đẹp Miền Trung - Thiên Nhiên Hùng Vĩ & Di Sản Độc Đáo",
-            "description": "Hành trình khám phá vẻ đẹp Miền Trung: Biển Cửa Tùng, Rừng Rú Lịnh, Sông Thạch Hãn, Đảo Cồn Cỏ, Suối Ozo, Làng Lệ Sơn, Phong Nha - Kẻ Bàng, Hoàng Thành Huế, Chùa Thiên Mụ, Lăng Gia Long, Đèo Hải Vân, Phá Tam Giang. Ruby Wings mang đến trải nghiệm thiên nhiên, văn hóa và lịch sử đặc sắc của vùng đất Miền Trung Việt Nam.",
-            "provider": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "areaServed": {
-                "@type": "Country",
-                "name": "Việt Nam"
-            },
-            "audience": {
-                "@type": "PeopleAudience",
-                "suggestedMinAge": 12,
-                "suggestedMaxAge": 70,
-                "audienceType": "Người yêu thiên nhiên, thích khám phá văn hóa lịch sử, gia đình, nhóm bạn, học sinh/sinh viên, người quan tâm đến di sản và du lịch bền vững"
-            },
-            "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "category": "Cultural & Heritage Tourism"
-            }
-        },
-        {
-            "@type": "WebPage",
-            "@id": "https://rubywings.vn/ve-dep-quang-tri.html#webpage",
-            "url": "https://rubywings.vn/ve-dep-quang-tri.html",
-            "name": "Vẻ Đẹp Miền Trung - Thiên Nhiên Hùng Vĩ & Di Sản Độc Đáo | Ruby Wings",
-            "description": "Khám phá vẻ đẹp Miền Trung: Động Phong Nha, Thiên Đường, Suối Ozo, Biển Cửa Tùng, Địa đạo Vịnh Mốc, Thác Tà Puồng. Trải nghiệm forest bathing, thiền thiên nhiên và du lịch bền vững.",
-            "isPartOf": {
-                "@id": "https://rubywings.vn/#website"
-            },
-            "mainEntity": {
-                "@type": "Service",
-                "name": "Khám Phá Vẻ Đẹp Miền Trung - Thiên Nhiên Hùng Vĩ & Di Sản Độc Đáo"
-            },
-            "primaryImageOfPage": "https://rubywings.vn/images/ve-dep-mien-trung.jpg",
-            "breadcrumb": {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Trang chủ",
-                        "item": "https://rubywings.vn/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Non nước Việt Nam",
-                        "item": "https://rubywings.vn/ve-dep-thien-nhien-viet-nam.html"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "Vẻ đẹp Miền Trung",
-                        "item": "https://rubywings.vn/ve-dep-quang-tri.html"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "FAQPage",
-            "@id": "https://rubywings.vn/ve-dep-quang-tri.html#faq",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "Những điểm đến nổi bật nào ở Miền Trung mà Ruby Wings khám phá?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings tập trung vào 12 điểm đến đặc sắc: 1) Biển Cửa Tùng (Quảng Trị) - Nữ hoàng bãi tắm, 2) Rừng Rú Lịnh (Quảng Trị) - Hệ sinh thái nguyên sinh, 3) Sông Thạch Hãn (Quảng Trị) - Dòng sông lịch sử, 4) Đảo Cồn Cỏ (Quảng Trị) - Di sản biển đảo, 5) Suối Ozo (Quảng Bình) - Dòng suối trong xanh, 6) Làng Lệ Sơn (Quảng Bình) - Làng cổ ven sông Gianh, 7) Phong Nha - Kẻ Bàng (Quảng Bình) - Di sản thiên nhiên thế giới, 8) Hoàng Thành Huế - Di sản văn hóa thế giới, 9) Chùa Thiên Mụ (Huế) - Biểu tượng cố đô, 10) Lăng Gia Long (Huế) - Lăng tẩm uy nghi, 11) Đèo Hải Vân - Thiên hạ đệ nhất hùng quan, 12) Phá Tam Giang (Huế) - Hệ đầm phá lớn nhất Đông Nam Á."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Thời điểm nào tốt nhất để khám phá Miền Trung với Ruby Wings?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Thời điểm lý tưởng: Mùa khô từ tháng 1 đến tháng 8 (trời nắng, biển đẹp, thuận lợi tham quan). Đặc biệt: Tháng 4-8: biển Cửa Tùng đẹp nhất; Tháng 1-3: thời tiết mát mẻ ở Huế; Tháng 6-8: suối Ozo mát lạnh; Quanh năm: Phong Nha - Kẻ Bàng (trong nhà). Ruby Wings thiết kế hành trình theo mùa để có trải nghiệm tối ưu nhất."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Hành trình khám phá Miền Trung có phù hợp cho gia đình và người lớn tuổi không?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Hoàn toàn phù hợp! Ruby Wings thiết kế đa dạng cấp độ: 1) Gia đình (có trẻ em): tour nhẹ nhàng như biển Cửa Tùng, tham quan Hoàng Thành Huế, Chùa Thiên Mụ; 2) Người lớn tuổi: hành trình tốc độ chậm, nghỉ dưỡng kết hợp, xe đưa đón tận nơi; 3) Người trẻ/yêu thích mạo hiểm: khám phá hang động Phong Nha, trekking Rú Lịnh, chinh phục Đèo Hải Vân. Chúng tôi có hướng dẫn viên chuyên nghiệp và dịch vụ hỗ trợ đặc biệt cho từng nhóm đối tượng."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Ruby Wings có những hành trình cụ thể nào để khám phá Miền Trung?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ruby Wings cung cấp nhiều hành trình: 1) Tour Quảng Trị 2N1Đ: Cửa Tùng - Thạch Hãn - Rú Lịnh; 2) Tour Quảng Bình 3N2Đ: Phong Nha - Suối Ozo - Làng Lệ Sơn; 3) Tour Huế 2N1Đ: Hoàng Thành - Chùa Thiên Mụ - Lăng Gia Long - Phá Tam Giang; 4) Tour kết hợp Miền Trung 4N3Đ: Quảng Trị - Quảng Bình - Huế; 5) Tour chuyên sâu: Văn hóa - Lịch sử - Thiên nhiên (5-7 ngày). Mỗi tour được thiết kế linh hoạt theo nhu cầu. Liên hệ hotline 0332510486 để được tư vấn cụ thể."
-                    }
-                }
-            ]
-        },
-        {
-            "@type": "WebSite",
-            "@id": "https://rubywings.vn/#website",
-            "url": "https://rubywings.vn/",
-            "name": "Ruby Wings Travel - Hành trình trải nghiệm cảm xúc",
-            "description": "Bay lên từ bên trong - Hành trình trải nghiệm có chiều sâu, nơi không chỉ đến một nơi mà còn có thể trở về với chính mình. Du lịch chữa lành với thiền, khí công và kết nối thiên nhiên - Hệ sinh thái phát triển con người toàn diện",
-            "publisher": {
-                "@id": "https://rubywings.vn/#organization"
-            },
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://rubywings.vn/search?q={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
+          "@type": "PropertyValue",
+          "name": "duration",
+          "value": "Future data to be added"
         }
-    ]
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rubywings.vn/ve-dep-quang-tri.html#faq",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/ve-dep-quang-tri.html#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Những điểm đến nổi bật nào ở Miền Trung được giới thiệu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trang giới thiệu các điểm đến tiêu biểu tại Miền Trung như Quảng Trị, Quảng Bình và Thừa Thiên Huế, bao gồm các khu vực biển, rừng, hang động và di sản văn hóa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Thời điểm nào phù hợp để tham quan Miền Trung?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các chương trình được tổ chức linh hoạt theo mùa, phù hợp cho nhiều thời điểm trong năm tùy điều kiện thời tiết và khu vực tham quan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Các chương trình có phù hợp cho gia đình và người lớn tuổi không?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Các tour được thiết kế với nhiều cấp độ tham quan khác nhau, phù hợp cho gia đình, người lớn tuổi và các nhóm du khách khác."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ruby Wings có những hành trình cụ thể nào tại Miền Trung?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ruby Wings cung cấp các tour ngắn ngày và dài ngày tại Miền Trung; chi tiết từng chương trình được giới thiệu trên website hoặc qua tư vấn trực tiếp."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
-
 
     <style>
         /* === Biến CSS === */

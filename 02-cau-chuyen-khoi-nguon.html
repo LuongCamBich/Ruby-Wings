@@ -147,110 +147,106 @@
 
   <!-- Schema JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://rubywings.vn/#organization",
-        "name": "Ruby Wings Travel",
-        "url": "https://rubywings.vn/",
-        "logo": "https://rubywings.vn/images/logo.png",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-        "telephone": "+84-33-251-0486",
-        "email": "rubywingslsa@gmail.com",
-        "sameAs": [
-          "https://www.facebook.com/profile.php?id=61563772112138",
-          "https://www.facebook.com/tien.sy.5011/",
-          "https://x.com/TienSy379",
-          "https://www.instagram.com/tiensyrubywings",
-          "https://www.tiktok.com/@syluong379",
-          "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "148 Trương Gia Mô, Vĩ Dạ",
-          "addressLocality": "Thành phố Huế",
-          "addressRegion": "Thừa Thiên Huế",
-          "postalCode": "530000",
-          "addressCountry": "VN"
-        },
-        "founder": {
-          "@type": "Person",
-          "name": "Lương Tiến Sỹ",
-          "jobTitle": "Founder & CEO",
-          "url": "https://www.facebook.com/tien.sy.5011/",
-          "description": "Người sáng lập Ruby Wings Travel với hành trình từ biến cố sức khỏe đến hồi sinh"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rubywings.vn/#organization",
+      "name": "Ruby Wings Travel",
+      "url": "https://rubywings.vn/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/logo.png"
       },
-      {
-        "@type": "Article",
-        "headline": "Câu Chuyện Khởi Nguồn Ruby Wings - Hành Trình Từ Biến Cố Đến Hồi Sinh",
-        "description": "Khám phá hành trình đặc biệt từ biến cố sức khỏe đến hồi sinh của người sáng lập Ruby Wings",
-        "image": "https://rubywings.vn/images/02-cau-chuyen-khoi-nguon.jpg",
-        "author": {
-          "@type": "Person",
-          "name": "Lương Tiến Sỹ",
-          "url": "https://www.facebook.com/tien.sy.5011/"
-        },
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        },
-        "datePublished": "2024-01-01",
-        "dateModified": "2024-01-01",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html"
-        },
-        "keywords": "Ruby Wings, câu chuyện khởi nguồn, hành trình hồi sinh, thiền chánh niệm, khí công, chữa lành"
+      "description": "Ruby Wings Travel là đơn vị tổ chức các hành trình du lịch trải nghiệm tại Việt Nam, kết hợp thiền chánh niệm, khí công và kết nối với thiên nhiên. Hoạt động của Ruby Wings tập trung vào việc xây dựng các chương trình có chiều sâu, gắn với văn hóa, giá trị tinh thần và sự phục hồi thân – tâm – trí.",
+      "telephone": "+84-33-251-0486",
+      "email": "rubywingslsa@gmail.com",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61563772112138",
+        "https://www.facebook.com/tien.sy.5011/",
+        "https://x.com/TienSy379",
+        "https://www.instagram.com/tiensyrubywings",
+        "https://www.tiktok.com/@syluong379",
+        "https://www.linkedin.com/in/ti%E1%BA%BFn-s%E1%BB%B9-l%C6%B0%C6%A1ng-9a0292387"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "148 Trương Gia Mô, Vĩ Dạ",
+        "addressLocality": "Thành phố Huế",
+        "addressRegion": "Thừa Thiên Huế",
+        "postalCode": "530000",
+        "addressCountry": "VN"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html#webpage",
-        "url": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html",
-        "name": "Câu Chuyện Khởi Nguồn Ruby Wings - Hành Trình Từ Biến Cố Đến Hồi Sinh",
-        "description": "Trang kể về câu chuyện khởi nguồn và hành trình hồi sinh của Ruby Wings Travel",
-        "primaryImageOfPage": "https://rubywings.vn/images/02-cau-chuyen-khoi-nguon.jpg",
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        },
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Trang chủ",
-              "item": "https://rubywings.vn/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Về Chúng Tôi",
-              "item": "https://rubywings.vn/ve-chung-toi.html"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Câu Chuyện Khởi Nguồn",
-              "item": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html"
-            }
-          ]
-        }
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://rubywings.vn/#website",
-        "url": "https://rubywings.vn/",
-        "name": "Ruby Wings Travel",
-        "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
-        "publisher": {
-          "@id": "https://rubywings.vn/#organization"
-        }
+      "founder": {
+        "@type": "Person",
+        "name": "Lương Tiến Sỹ",
+        "jobTitle": "Founder & CEO",
+        "url": "https://www.facebook.com/tien.sy.5011/",
+        "description": "Người sáng lập Ruby Wings Travel, định hướng xây dựng các hành trình du lịch trải nghiệm gắn với thiền chánh niệm, khí công và giá trị sống bền vững."
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html#aboutpage",
+      "url": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html",
+      "name": "Câu Chuyện Khởi Nguồn Ruby Wings",
+      "description": "Trang giới thiệu câu chuyện khởi nguồn của Ruby Wings Travel, phản ánh quá trình hình thành, triết lý hoạt động và định hướng phát triển của thương hiệu.",
+      "isPartOf": {
+        "@id": "https://rubywings.vn/#website"
+      },
+      "about": {
+        "@id": "https://rubywings.vn/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://rubywings.vn/images/02-cau-chuyen-khoi-nguon.jpg"
+      },
+      "breadcrumb": {
+        "@id": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trang chủ",
+          "item": "https://rubywings.vn/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Về chúng tôi",
+          "item": "https://rubywings.vn/ve-chung-toi.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Câu chuyện khởi nguồn",
+          "item": "https://rubywings.vn/02-cau-chuyen-khoi-nguon.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rubywings.vn/#website",
+      "url": "https://rubywings.vn/",
+      "name": "Ruby Wings Travel",
+      "description": "Du lịch trải nghiệm - Hành trình của chiều sâu",
+      "publisher": {
+        "@id": "https://rubywings.vn/#organization"
+      }
+    }
+  ]
+}
+</script>
+
 
   <style>
     :root {
