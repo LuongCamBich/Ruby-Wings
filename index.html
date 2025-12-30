@@ -1263,6 +1263,12 @@
             color: var(--color-secondary);
             font-size: 1.2rem;
         }
+        /* MOBILE – đổi sang TRẮNG */
+@media (max-width: 768px) {
+    .tour-price {
+        color: #abee6c !important;
+    }
+}
        
         .tour-card-link {
             display: block;
@@ -1788,6 +1794,17 @@
     position: relative;
     overflow: hidden;
 }
+/* === FAQ WIDTH OVERRIDE - KHÓA CỨNG === */
+.faq-section .faq-container {
+    max-width: 1200px !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
 
 .faq-section::before {
     content: '';
