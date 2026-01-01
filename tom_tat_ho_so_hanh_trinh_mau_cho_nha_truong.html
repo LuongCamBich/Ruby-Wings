@@ -1028,17 +1028,9 @@
                     <p><strong>Địa chỉ:</strong> 148 Trương Gia Mô, Vĩ Dạ, Huế</p>
                     <p><strong>Điện thoại (Zalo):</strong> 0332510486 </p>
                      <div style="margin-top: 30px;">
-                <div style="position:relative;display:inline-block;">
-  <!-- NÚT GỌI (KHÔNG CLICK) -->
-  <a href="javascript:void(0)" style="pointer-events:none;" class="btn call-button">
-    GỌI ĐỂ TƯ VẤN
-  </a>
-
-  <!-- OVERLAY BẮT CLICK -->
-  <div id="callOverlay"
-       style="position:absolute;inset:0;cursor:pointer;"></div>
-</div>
-
+                <a href="tel:0332510486" class="btn call-button">
+                    <i class="fas fa-phone-alt"></i> GỌI ĐỂ CHÚNG TÔI TƯ VẤN
+                </a>
             </div>
                     <p><strong>Email:</strong> rubywingslsa@gmail.com</p>
                     <p><strong>Website:</strong> https://www.rubywings.vn</p>
@@ -1199,16 +1191,9 @@
                              <a href="tel:0332510486" class="btn call-button">
                     <i class="fas fa-phone-alt"></i> GỌI ĐỂ CHÚNG TÔI TƯ VẤN
                 </a>
-                           <div style="position:relative;display:inline-block;">
-  <!-- HIỂN THỊ ẢNH ZALO (KHÔNG CLICK TRỰC TIẾP) -->
-  <a href="javascript:void(0)" class="zalo-contact" title="Zalo Nhắn tin Ruby Wings" style="pointer-events:none;">
-    <img src="images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon-small" width="20" height="20">
-  </a>
-
-  <!-- OVERLAY BẮT CLICK -->
-  <div id="zaloOverlay" style="position:absolute;inset:0;cursor:pointer;"></div>
-</div>
-
+                            <a href="https://zalo.me/84332510486" target="_blank" class="zalo-contact" title="Zalo Nhắn tin Ruby Wings">
+                                <img src="images/zalo.jpg" alt="Zalo Ruby Wings" class="zalo-icon-small" width="20" height="20">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2903,87 +2888,6 @@ btn.innerHTML=`
 document.body.appendChild(btn);
 
 })();
-</script>
-<div id="callPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999999;">
-  <div style="background:#fff;max-width:360px;margin:20vh auto;padding:16px;">
-    <p>Nhập số điện thoại để Ruby Wings gọi lại</p>
-    <input id="callPhone" type="tel" placeholder="Số điện thoại" style="width:100%;padding:10px;">
-    <div style="margin-top:12px;">
-      <button id="confirmCall">Xác nhận</button>
-      <button id="closePopup">Huỷ</button>
-    </div>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  var overlay = document.getElementById("callOverlay");
-  var popup = document.getElementById("callPopup");
-  var close = document.getElementById("closePopup");
-  var confirm = document.getElementById("confirmCall");
-
-  overlay.addEventListener("click", function () {
-    popup.style.display = "block";
-  });
-
-  close.addEventListener("click", function () {
-    popup.style.display = "none";
-  });
-
-  confirm.addEventListener("click", function () {
-    var phone = document.getElementById("callPhone").value.trim();
-    if (!phone) { alert("Vui lòng nhập số điện thoại"); return; }
-    window.location.href = "tel:0332510486";
-  });
-});
-</script>
-<div id="zaloPopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999999;">
-  <div style="background:#fff;max-width:360px;margin:20vh auto;padding:16px;">
-    <p>Xác nhận mở Zalo để được tư vấn</p>
-    <div style="margin-top:12px;">
-      <button id="confirmZalo">Mở Zalo</button>
-      <button id="closeZalo">Huỷ</button>
-    </div>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  var overlay = document.getElementById("zaloOverlay");
-  var popup = document.getElementById("zaloPopup");
-  var close = document.getElementById("closeZalo");
-  var confirm = document.getElementById("confirmZalo");
-
-  overlay.addEventListener("click", function () {
-    popup.style.display = "block";
-  });
-
-  close.addEventListener("click", function () {
-    popup.style.display = "none";
-  });
-
-  confirm.addEventListener("click", function () {
-    window.location.href = "https://zalo.me/84332510486";
-  });
-});
-</script>
-<script>
-function saveLeadToSheet(payload) {
-  fetch("/api/save-lead", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log("Lead saved:", data);
-  })
-  .catch(err => {
-    console.error("Save lead error:", err);
-  });
-}
 </script>
 
 </body>
