@@ -4681,7 +4681,6 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 
   let currentAction = "";
 
-  // ===== POPUP =====
   function showPopup(actionType) {
     currentAction = actionType;
 
@@ -4707,7 +4706,6 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     document.getElementById("rw-confirm").onclick = submitLead;
   }
 
-  // ===== SUBMIT (NO-CORS – CHUẨN GAS) =====
   function submitLead() {
     const phone = document.getElementById("rw-phone-input").value.trim();
     if (!/^[0-9]{9,12}$/.test(phone)) {
@@ -4722,7 +4720,7 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
       phone: phone
     };
 
-    // 🔴 GỬI NGẦM – KHÔNG ĐỌC RESPONSE
+    // 🔴 GỬI POST NGẦM – CHUẨN GAS
     fetch(GAS_URL, {
       method: "POST",
       mode: "no-cors",
@@ -4734,10 +4732,9 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     document.getElementById("rw-phone-popup").remove();
     alert("Đã ghi thông tin thành công");
 
-    // ⚠️ CHƯA mở Call / Zalo (BƯỚC 5 mới làm)
+    // ⚠️ BƯỚC 5 sẽ mở Call/Zalo sau
   }
 
-  // ===== BIND BUTTON =====
   const callBtn = document.querySelector(".rw-call-btn");
   const zaloBtn = document.querySelector(".rw-zalo-btn");
 
