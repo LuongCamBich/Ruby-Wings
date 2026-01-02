@@ -4674,147 +4674,79 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 
 </div>
 <script>
-  (function () {
-    // Lấy nút theo class prefix riêng, không đụng hệ thống
-    var callBtn = document.querySelector('.rw-call-btn');
-    var zaloBtn = document.querySelector('.rw-zalo-btn');
-
-    if (callBtn) {
-      callBtn.addEventListener('click', function () {
-        console.log('[RBW] Click CALL button');
-        alert('RBW: Click GỌI (STEP 2 OK)');
-      });
-    }
-
-    if (zaloBtn) {
-      zaloBtn.addEventListener('click', function () {
-        console.log('[RBW] Click ZALO button');
-        alert('RBW: Click ZALO (STEP 2 OK)');
-      });
-    }
-  })();
-</script>
-<script>
 (function () {
-  var actionType = "";
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzqNXXF8UYIr22ljTRhqVN_pBR__hmHtsQlEa4sppIu12LuWvykog9nRwFI_scj5wEa/exec";
+  const CALL_TEL = "tel:0332510486";
+  const ZALO_URL = "https://zalo.me/84332510486";
 
-  function openPopup(type) {
-    actionType = type;
-    if (document.getElementById('rw-phone-popup')) return;
+  let currentAction = "";
 
-    var overlay = document.createElement('div');
-    overlay.id = 'rw-phone-popup';
-    overlay.innerHTML = `
-      <div style="
-        position:fixed; inset:0; background:rgba(0,0,0,.45);
-        z-index:1200; display:flex; align-items:center; justify-content:center;">
-        <div style="
-          background:#fff; width:90%; max-width:360px; padding:16px;
-          border-radius:12px; font-family:Arial, sans-serif;">
-          <h3 style="margin:0 0 10px;">Nhập số điện thoại</h3>
-          <input id="rw-phone-input" type="tel" placeholder="Ví dụ: 0332510486"
-            style="width:100%; padding:10px; font-size:16px; margin-bottom:12px;">
-          <div style="display:flex; gap:10px;">
-            <button id="rw-cancel" style="flex:1; padding:10px;">Hủy</button>
-            <button id="rw-confirm" style="flex:1; padding:10px; background:#16a34a; color:#fff;">
-              Xác nhận
-            </button>
+  // ===== POPUP =====
+  function showPopup(actionType) {
+    currentAction = actionType;
+
+    if (document.getElementById("rw-phone-popup")) return;
+
+    const wrap = document.createElement("div");
+    wrap.id = "rw-phone-popup";
+    wrap.innerHTML = `
+      <div style="position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:flex;align-items:center;justify-content:center;">
+        <div style="background:#fff;width:90%;max-width:360px;padding:16px;border-radius:12px;font-family:Arial;">
+          <h3>Nhập số điện thoại</h3>
+          <input id="rw-phone-input" type="tel" placeholder="0332510486"
+            style="width:100%;padding:10px;font-size:16px;margin:12px 0;">
+          <div style="display:flex;gap:10px;">
+            <button id="rw-cancel" style="flex:1;padding:10px;">Hủy</button>
+            <button id="rw-confirm" style="flex:1;padding:10px;background:#16a34a;color:#fff;">Xác nhận</button>
           </div>
         </div>
       </div>`;
-    document.body.appendChild(overlay);
+    document.body.appendChild(wrap);
 
-    document.getElementById('rw-cancel').onclick = closePopup;
-    document.getElementById('rw-confirm').onclick = confirmPhone;
+    document.getElementById("rw-cancel").onclick = () => wrap.remove();
+    document.getElementById("rw-confirm").onclick = submitLead;
   }
 
-  function closePopup() {
-    var p = document.getElementById('rw-phone-popup');
-    if (p) p.remove();
-  }
-
-  function confirmPhone() {
-    var phone = document.getElementById('rw-phone-input').value.trim();
+  // ===== SUBMIT =====
+  function submitLead() {
+    const phone = document.getElementById("rw-phone-input").value.trim();
     if (!/^[0-9]{9,12}$/.test(phone)) {
-      alert('Vui lòng nhập số điện thoại hợp lệ');
-      return;
-    }
-    console.log('[RBW] Popup confirm:', actionType, phone);
-    alert('Đã nhập số: ' + phone + '\\nHành động: ' + actionType);
-    closePopup();
-  }
-
-  // Gắn lại handler cho BƯỚC 3
-  var callBtn = document.querySelector('.rw-call-btn');
-  var zaloBtn = document.querySelector('.rw-zalo-btn');
-
-  if (callBtn) {
-    callBtn.onclick = function () {
-      openPopup('Click Call');
-    };
-  }
-  if (zaloBtn) {
-    zaloBtn.onclick = function () {
-      openPopup('Click Zalo');
-    };
-  }
-})();
-</script>
-<script>
-(function () {
-  // === CONFIG ===
-  var RW_GAS_URL = "https://script.google.com/macros/s/AKfycbzqNXXF8UYIr22ljTRhqVN_pBR__hmHtsQlEa4sppIu12LuWvykog9nRwFI_scj5wEa/exec";
-
-  var lastActionType = "";
-
-  // Ghi đè hàm confirmPhone của BƯỚC 3
-  window.confirmPhone = function () {
-    var phoneInput = document.getElementById('rw-phone-input');
-    if (!phoneInput) return;
-
-    var phone = phoneInput.value.trim();
-    if (!/^[0-9]{9,12}$/.test(phone)) {
-      alert('Vui lòng nhập số điện thoại hợp lệ');
+      alert("Số điện thoại không hợp lệ");
       return;
     }
 
-    var payload = {
+    const payload = {
       source_channel: "Website",
-      action_type: lastActionType,
+      action_type: currentAction,
       page_url: window.location.href,
       phone: phone
     };
 
-    fetch(RW_GAS_URL, {
+    fetch(GAS_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     })
-    .then(function (res) { return res.json(); })
-    .then(function (json) {
-      if (json && json.status === "ok") {
-        console.log('[RBW] Lead saved OK:', payload);
-        alert('Đã ghi thông tin thành công (STEP 4 OK)');
-        // KHÔNG mở Call/Zalo ở bước này
-        var popup = document.getElementById('rw-phone-popup');
-        if (popup) popup.remove();
+    .then(r => r.json())
+    .then(res => {
+      if (res && res.status === "ok") {
+        document.getElementById("rw-phone-popup").remove();
+        alert("Đã ghi thông tin thành công");
+
+        // ⚠️ CHƯA mở Call / Zalo ở bước này
       } else {
-        alert('Ghi thông tin chưa thành công');
+        alert("Không ghi được thông tin");
       }
     })
-    .catch(function () {
-      alert('Không kết nối được máy chủ');
-    });
-  };
-
-  // Cập nhật actionType khi mở popup
-  var _openPopup = window.openPopup;
-  if (typeof _openPopup === 'function') {
-    window.openPopup = function (type) {
-      lastActionType = type;
-      _openPopup(type);
-    };
+    .catch(() => alert("Không kết nối được máy chủ"));
   }
+
+  // ===== BIND BUTTON =====
+  const callBtn = document.querySelector(".rw-call-btn");
+  const zaloBtn = document.querySelector(".rw-zalo-btn");
+
+  if (callBtn) callBtn.onclick = () => showPopup("Click Call");
+  if (zaloBtn) zaloBtn.onclick = () => showPopup("Click Zalo");
 })();
 </script>
 
