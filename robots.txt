@@ -1,5 +1,3 @@
- dùng mẫu bạn vừa viết để viết lại cho trang con (trang chương trình) sau:
-
 
 # ============================================================
 # RubyWings.vn | robots.txt (2025)
