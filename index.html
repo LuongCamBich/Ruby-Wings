@@ -4594,15 +4594,13 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 })();
 </script>
 
-
-
-<!-- === RBW FLOATING CALL + ZALO (ZALO TRÀN VIỀN FIX) === -->
+<!-- === RBW FLOATING CALL + ZALO (STEP 1 – UI FINAL FIX) === -->
 <style>
   .rw-float-wrap {
     position: fixed;
     right: 14px;
     bottom: 72px; /* CANH THẲNG HÀNG VỚI NÚT TƯ VẤN */
-    z-index: 9999; /* TĂNG Z-INDEX ĐỂ LUÔN TRÊN CÙNG */
+    z-index: 900;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -4616,13 +4614,6 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0,0,0,.22);
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .rw-float-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,.25);
   }
 
   /* CALL – XANH LÁ THUẦN */
@@ -4630,11 +4621,9 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     background: #16a34a;
   }
 
-  /* ZALO – TRÀN VIỀN ĐẸP */
+  /* ZALO – NỀN TRẮNG, LOGO NGUYÊN BẢN */
   .rw-zalo-btn {
-    background: #0068ff; /* NỀN XANH ZALO */
-    padding: 0;
-    overflow: hidden; /* QUAN TRỌNG: ĐỂ LOGO TRÀN VIỀN */
+    background: #ffffff;
   }
 
   .rw-call-btn svg {
@@ -4644,78 +4633,70 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     display: block;
   }
 
-  /* ZALO LOGO - TRÀN VIỀN ĐẸP */
   .rw-zalo-btn img {
-    width: 44px;   /* TĂNG KÍCH THƯỚC ĐỂ TRÀN VIỀN */
-    height: 44px;
+    width: 34px;   /* LOGO ZALO ĐỦ TO – KHÔNG BỊ NHỎ */
+    height: 34px;
     display: block;
-    object-fit: contain;
-    transform: scale(1.1); /* PHÓNG TO NHẸ ĐỂ TRÀN VIỀN */
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-  }
-
-  /* ĐẢM BẢO HIỂN THỊ TRÊN MỌI TRANG */
-  body > .rw-float-wrap {
-    display: flex !important;
   }
 
   @media (max-width: 768px) {
     .rw-float-wrap {
-      bottom: 72px;
+      bottom: 72px; /* GIỮ THẲNG HÀNG VỚI TƯ VẤN TRÊN MOBILE */
       right: 12px;
-    }
-    
-    .rw-float-btn {
-      width: 52px;
-      height: 52px;
-    }
-    
-    .rw-zalo-btn img {
-      width: 42px;
-      height: 42px;
     }
   }
 </style>
 
 <div class="rw-float-wrap">
 
-  <!-- CALL BUTTON -->
-  <a href="tel:0332510486" class="rw-float-btn rw-call-btn">
+  <!-- CALL -->
+  <div class="rw-float-btn rw-call-btn">
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z" fill="#ffffff"/>
+      <path
+        d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2
+        a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57
+        a1 1 0 011 1v3.5a1 1 0 01-1 1
+        C10.07 21.01 3 13.93 3 5
+        a1 1 0 011-1h3.5a1 1 0 011 1
+        c0 1.25.2 2.46.57 3.59
+        a1 1 0 01-.25 1.01l-2.2 2.19z"
+        fill="#ffffff"/>
     </svg>
-  </a>
+  </div>
 
-  <!-- ZALO BUTTON - TRÀN VIỀN -->
-  <a href="https://zalo.me/84332510486" target="_blank" class="rw-float-btn rw-zalo-btn">
-    <!-- ZALO LOGO TRẮNG TRÊN NỀN XANH - TRÀN VIỀN -->
-    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI0IDBDMTAuNzUgMCAwIDEwLjc1IDAgMjRDMCAzNy4yNSAxMC43NSA0OCAyNCA0OEMzNy4yNSA0OCA0OCAzNy4yNSA0OCAyNEM0OCAxMC43NSAzNy4yNSAwIDI0IDBaTTMxLjYyNSAxNi4zNzVDMzEuNjI1IDE1LjYyNSAzMSAxNSAzMC4yNSAxNUgxNy43NUMxNyAxNSAxNi4zNzUgMTUuNjI1IDE2LjM3NSAxNi4zNzVWMzEuNjI1QzE2LjM3NSAzMi4zNzUgMTcgMzMgMTcuNzUgMzNIMzAuMjVDMzEgMzMgMzEuNjI1IDMyLjM3NSAzMS42MjUgMzEuNjI1VjE2LjM3NVpNMjAgMTlIMjhWMjFIMjBWMTlaTTIwIDIzSDI4VjI1SDIwVjIzWk0yMCAyN0gyOFYyOUgyMFYyN1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" alt="Chat Zalo">
-  </a>
+  <!-- ZALO -->
+  <div class="rw-float-btn rw-zalo-btn">
+    <!-- LOGO ZALO CHUẨN – GIỮ NGUYÊN MÀU -->
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+      alt="Zalo"
+    />
+  </div>
 
 </div>
 
 <script>
 (function() {
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbzqNXXF8UYIr22ljTRhqVN_pBR__hmHtsQlEa4sppIu12LuWvykog9nRwFI_scj5wEa/exec";
-  
-  // Hàm hiển thị popup
-  function showPopup(action, originalHref) {
-    // Ngăn chặn hành động mặc định
-    event.preventDefault();
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzuiVoDtD_OetpxToyQBeFrtg8VS_2WT4DoqGBH8sPTjvUBhvcIe3AQMAN86jGIKvuy/exec";
+  const CALL_TEL = "tel:0332510486";
+  const ZALO_URL = "https://zalo.me/84332510486";
+
+  let currentAction = "";
+
+  function showPopup(action) {
+    currentAction = action;
     
-    // Tạo popup nếu chưa có
     if (document.getElementById('rw-phone-popup')) return;
     
     const popupHTML = `
-      <div id="rw-phone-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:10000;display:flex;align-items:center;justify-content:center;">
-        <div style="background:white;padding:25px;border-radius:12px;max-width:400px;width:90%;box-shadow:0 8px 30px rgba(0,0,0,0.3);">
-          <h3 style="margin:0 0 20px 0;color:#333;font-size:18px;font-weight:600;">Nhập số điện thoại để được tư vấn</h3>
+      <div id="rw-phone-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;padding:20px;border-radius:10px;max-width:400px;width:90%;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+          <h3 style="margin:0 0 15px 0;color:#333;">Nhập số điện thoại</h3>
           <input type="tel" id="rw-phone-input" placeholder="0901234567" 
-            style="width:100%;padding:14px;font-size:16px;margin-bottom:20px;border:2px solid #ddd;border-radius:8px;box-sizing:border-box;outline:none;transition:border 0.3s;" 
-            onfocus="this.style.borderColor='#0068ff'">
-          <div style="display:flex;gap:12px;">
-            <button id="rw-cancel-btn" style="flex:1;padding:14px;background:#f5f5f5;color:#666;border:none;border-radius:8px;cursor:pointer;font-weight:500;">Hủy</button>
-            <button id="rw-submit-btn" style="flex:1;padding:14px;background:#0068ff;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:500;">Xác nhận</button>
+            style="width:100%;padding:12px;font-size:16px;margin-bottom:15px;border:1px solid #ddd;border-radius:5px;box-sizing:border-box;">
+          <div style="display:flex;gap:10px;">
+            <button id="rw-cancel-btn" style="flex:1;padding:12px;background:#f0f0f0;border:none;border-radius:5px;cursor:pointer;">Hủy</button>
+            <button id="rw-submit-btn" style="flex:1;padding:12px;background:#4CAF50;color:white;border:none;border-radius:5px;cursor:pointer;">Xác nhận</button>
           </div>
         </div>
       </div>
@@ -4723,120 +4704,95 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     
     document.body.insertAdjacentHTML('beforeend', popupHTML);
     
-    // Xử lý sự kiện
     document.getElementById('rw-cancel-btn').onclick = function() {
       document.getElementById('rw-phone-popup').remove();
     };
     
-    document.getElementById('rw-submit-btn').onclick = function() {
-      submitLead(action, originalHref);
-    };
+    document.getElementById('rw-submit-btn').onclick = submitLead;
     
-    // Enter để submit
-    document.getElementById('rw-phone-input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        submitLead(action, originalHref);
-      }
-    });
-    
-    // Tự động focus
     setTimeout(() => {
       const input = document.getElementById('rw-phone-input');
       if (input) input.focus();
     }, 100);
   }
-  
-  // Hàm gửi dữ liệu
-  function submitLead(action, originalHref) {
+
+  function submitLead() {
     const phoneInput = document.getElementById('rw-phone-input');
     if (!phoneInput) return;
     
     const phone = phoneInput.value.trim();
     
-    // Validate số điện thoại
     if (!/^[0-9]{9,12}$/.test(phone)) {
       alert('Vui lòng nhập số điện thoại hợp lệ (9-12 chữ số)');
       return;
     }
     
-    // Tạo payload dữ liệu
     const payload = {
       source_channel: 'Website',
-      action_type: action,
+      action_type: currentAction,
       page_url: window.location.href,
       phone: phone,
-      note: 'Từ nút floating',
+      note: 'From website popup',
       timestamp: new Date().toISOString()
     };
     
-    // Gửi dữ liệu ngầm qua GET
+    console.log('Sending data:', payload);
+    
+    // 🔴 CHỈ DÙNG GET QUA IMAGE - KHÔNG FORM SUBMIT
     const params = new URLSearchParams(payload);
     const img = new Image();
     img.src = GAS_URL + '?' + params.toString();
     
+    // 🔴 KHÔNG CHUYỂN HƯỚNG ĐẾN GAS - CHỈ GỬI REQUEST NGẦM
     // Đóng popup
     document.getElementById('rw-phone-popup').remove();
     
     // Thông báo thành công
-    alert('Cảm ơn! Số điện thoại của bạn đã được ghi nhận.\nChúng tôi sẽ liên hệ lại sớm nhất!');
+    alert('Cảm ơn! Thông tin của bạn đã được ghi nhận.');
     
-    // Chuyển hướng theo hành động
-    setTimeout(() => {
-      if (action === 'Click Call') {
-        window.location.href = 'tel:0332510486';
-      } else if (action === 'Click Zalo' && originalHref) {
-        window.open(originalHref, '_blank');
-      }
-    }, 500);
+    // 🔴 CHUYỂN HƯỚNG NGAY LẬP TỨC
+    if (currentAction === 'Click Call') {
+      window.location.href = CALL_TEL;
+    } else if (currentAction === 'Click Zalo') {
+      window.open(ZALO_URL, '_blank');
+    }
   }
-  
-  // Gắn sự kiện khi trang load xong
+
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ RBW Floating Buttons loaded');
+    console.log('RBW Lead Collector loaded');
     
-    // Gắn sự kiện cho nút Call
     const callBtn = document.querySelector('.rw-call-btn');
     if (callBtn) {
       callBtn.addEventListener('click', function(e) {
-        showPopup('Click Call', this.href);
+        e.preventDefault();
+        console.log('Call button clicked');
+        showPopup('Click Call');
       });
     }
     
-    // Gắn sự kiện cho nút Zalo
     const zaloBtn = document.querySelector('.rw-zalo-btn');
     if (zaloBtn) {
       zaloBtn.addEventListener('click', function(e) {
-        showPopup('Click Zalo', this.href);
+        e.preventDefault();
+        console.log('Zalo button clicked');
+        showPopup('Click Zalo');
       });
     }
+    
+    // Test function
+    window.testLeadCollector = function(phone = '0901234567') {
+      console.log('Testing with phone:', phone);
+      showPopup('Test Action');
+      setTimeout(() => {
+        const input = document.getElementById('rw-phone-input');
+        if (input) {
+          input.value = phone;
+          submitLead();
+        }
+      }, 100);
+    };
   });
-  
-  // Đảm bảo script chạy ngay cả khi DOM đã load xong
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initButtons);
-  } else {
-    initButtons();
-  }
-  
-  function initButtons() {
-    // Re-check và gắn sự kiện nếu cần
-    const callBtn = document.querySelector('.rw-call-btn');
-    const zaloBtn = document.querySelector('.rw-zalo-btn');
-    
-    if (callBtn && !callBtn.hasAttribute('data-bound')) {
-      callBtn.setAttribute('data-bound', 'true');
-      callBtn.addEventListener('click', function(e) {
-        showPopup('Click Call', this.href);
-      });
-    }
-    
-    if (zaloBtn && !zaloBtn.hasAttribute('data-bound')) {
-      zaloBtn.setAttribute('data-bound', 'true');
-      zaloBtn.addEventListener('click', function(e) {
-        showPopup('Click Zalo', this.href);
-      });
-    }
-  }
+
 })();
 </script>
 </body>
