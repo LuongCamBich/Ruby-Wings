@@ -4675,17 +4675,16 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 </div>
 <script>
 (function () {
+  /* ===== KHÓA CỨNG URL – KHÔNG ĐỔI ===== */
   const GAS_URL = "https://script.google.com/macros/s/AKfycbzqNXXF8UYIr22ljTRhqVN_pBR__hmHtsQlEa4sppIu12LuWvykog9nRwFI_scj5wEa/exec";
-                   
   const CALL_TEL = "tel:0332510486";
   const ZALO_URL = "https://zalo.me/84332510486";
 
   let currentAction = "";
 
-  // ===== POPUP =====
+  /* ===== POPUP NHẬP SỐ ===== */
   function showPopup(actionType) {
     currentAction = actionType;
-
     if (document.getElementById("rw-phone-popup")) return;
 
     const wrap = document.createElement("div");
@@ -4708,7 +4707,7 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     document.getElementById("rw-confirm").onclick = submitLead;
   }
 
-  // ===== SUBMIT (FORM ENCODED – GAS ĐỌC e.parameter) =====
+  /* ===== GỬI LEAD (FORM-ENCODED – GAS NHẬN e.parameter) ===== */
   function submitLead() {
     const phone = document.getElementById("rw-phone-input").value.trim();
     if (!/^[0-9]{9,12}$/.test(phone)) {
@@ -4722,19 +4721,20 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     formData.append("page_url", window.location.href);
     formData.append("phone", phone);
 
+    /* 🔴 GỬI POST THẬT – KHÔNG no-cors, KHÔNG JSON */
     fetch(GAS_URL, {
       method: "POST",
       body: formData
     });
 
-    // 👉 COI NHƯ OK (GAS đã nhận được)
+    /* 👉 COI NHƯ THÀNH CÔNG */
     document.getElementById("rw-phone-popup").remove();
     alert("Đã ghi thông tin thành công");
 
-    // ⚠️ BƯỚC 5 mới mở Call / Zalo
+    /* ⚠️ BƯỚC 5 (mở Call/Zalo) sẽ làm sau */
   }
 
-  // ===== BIND BUTTON =====
+  /* ===== BIND NÚT FLOATING ===== */
   const callBtn = document.querySelector(".rw-call-btn");
   const zaloBtn = document.querySelector(".rw-zalo-btn");
 
