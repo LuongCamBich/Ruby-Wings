@@ -4673,64 +4673,104 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
   </div>
 
 </div>
+
 <script>
-(function () {
+(function() {
   const GAS_URL = "https://script.google.com/macros/s/AKfycbzqNXXF8UYIr22ljTRhqVN_pBR__hmHtsQlEa4sppIu12LuWvykog9nRwFI_scj5wEa/exec";
+  const CALL_TEL = "tel:0332510486";
+  const ZALO_URL = "https://zalo.me/84332510486";
 
   let currentAction = "";
 
-  function showPopup(actionType) {
-    currentAction = actionType;
-    if (document.getElementById("rw-phone-popup")) return;
-
-    const wrap = document.createElement("div");
-    wrap.id = "rw-phone-popup";
-    wrap.innerHTML = `
-      <div style="position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:flex;align-items:center;justify-content:center;">
-        <div style="background:#fff;width:90%;max-width:360px;padding:16px;border-radius:12px;font-family:Arial;">
-          <h3>Nhập số điện thoại</h3>
-          <input id="rw-phone-input" type="tel" placeholder="0332510486"
-            style="width:100%;padding:10px;font-size:16px;margin:12px 0;">
+  // Hiển thị popup nhập số điện thoại
+  function showPopup(action) {
+    currentAction = action;
+    
+    if (document.getElementById('rw-popup')) return;
+    
+    const popup = `
+      <div id="rw-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;padding:20px;border-radius:10px;max-width:400px;width:90%;">
+          <h3 style="margin-top:0;">Nhập số điện thoại</h3>
+          <input type="tel" id="rw-phone" placeholder="Nhập số điện thoại" 
+            style="width:100%;padding:10px;font-size:16px;margin-bottom:15px;box-sizing:border-box;">
           <div style="display:flex;gap:10px;">
-            <button id="rw-cancel" style="flex:1;padding:10px;">Hủy</button>
-            <button id="rw-confirm" style="flex:1;padding:10px;background:#16a34a;color:#fff;">Xác nhận</button>
+            <button id="rw-cancel" style="flex:1;padding:10px;background:#ccc;border:none;border-radius:5px;">Hủy</button>
+            <button id="rw-submit" style="flex:1;padding:10px;background:#4CAF50;color:white;border:none;border-radius:5px;">Xác nhận</button>
           </div>
         </div>
-      </div>`;
-    document.body.appendChild(wrap);
-
-    document.getElementById("rw-cancel").onclick = () => wrap.remove();
-    document.getElementById("rw-confirm").onclick = submitLead;
+      </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', popup);
+    
+    document.getElementById('rw-cancel').onclick = () => document.getElementById('rw-popup').remove();
+    document.getElementById('rw-submit').onclick = submitLead;
+    
+    // Focus vào ô nhập
+    setTimeout(() => document.getElementById('rw-phone').focus(), 100);
   }
 
+  // Gửi dữ liệu
   function submitLead() {
-    const phone = document.getElementById("rw-phone-input").value.trim();
+    const phone = document.getElementById('rw-phone').value.trim();
+    
     if (!/^[0-9]{9,12}$/.test(phone)) {
-      alert("Số điện thoại không hợp lệ");
+      alert('Vui lòng nhập số điện thoại hợp lệ (9-12 số)');
       return;
     }
-
-    const formData = new URLSearchParams();
-    formData.append("source_channel", "Website");
-    formData.append("action_type", currentAction);
-    formData.append("page_url", window.location.href);
-    formData.append("phone", phone);
-
-    // 🔴 POST THẬT – GAS ĐỌC ĐƯỢC
-    fetch(GAS_URL, {
-      method: "POST",
-      body: formData
-    });
-
-    document.getElementById("rw-phone-popup").remove();
-    alert("Đã ghi thông tin thành công");
+    
+    // Dữ liệu gửi đi
+    const data = {
+      source_channel: 'Website',
+      action_type: currentAction,
+      page_url: window.location.href,
+      phone: phone,
+      note: 'Điền thông tin từ popup'
+    };
+    
+    // Gửi bằng GET - đơn giản, không lỗi CORS
+    const params = new URLSearchParams(data);
+    const img = new Image();
+    img.src = GAS_URL + '?' + params.toString();
+    
+    // Đóng popup
+    document.getElementById('rw-popup').remove();
+    
+    // Thông báo
+    alert('Cảm ơn! Thông tin của bạn đã được ghi nhận.');
+    
+    // Chuyển hướng sau 1 giây
+    setTimeout(() => {
+      if (currentAction === 'Click Call') {
+        window.location.href = CALL_TEL;
+      } else if (currentAction === 'Click Zalo') {
+        window.open(ZALO_URL, '_blank');
+      }
+    }, 1000);
   }
 
-  document.querySelector(".rw-call-btn")?.addEventListener("click", () => showPopup("Click Call"));
-  document.querySelector(".rw-zalo-btn")?.addEventListener("click", () => showPopup("Click Zalo"));
+  // Gắn sự kiện khi trang load xong
+  document.addEventListener('DOMContentLoaded', function() {
+    // Nút Call
+    const callBtn = document.querySelector('.rw-call-btn');
+    if (callBtn) {
+      callBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showPopup('Click Call');
+      });
+    }
+    
+    // Nút Zalo
+    const zaloBtn = document.querySelector('.rw-zalo-btn');
+    if (zaloBtn) {
+      zaloBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showPopup('Click Zalo');
+      });
+    }
+  });
 })();
 </script>
-
-
 </body>
 </html>
