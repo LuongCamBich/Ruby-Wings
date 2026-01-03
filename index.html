@@ -4594,506 +4594,206 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 })();
 </script>
 
-<!-- === RBW FLOATING BUTTONS (FINAL FIXED VERSION) === -->
+<!-- === RBW FLOATING CALL + ZALO (STEP 1 – UI FINAL FIX) === -->
 <style>
-  /* BASE STYLES - HIGH PRIORITY */
   .rw-float-wrap {
-    position: fixed !important;
-    right: 20px !important;
-    bottom: 100px !important;
-    z-index: 999999 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    pointer-events: auto !important;
+    position: fixed;
+    right: 14px;
+    bottom: 72px; /* CANH THẲNG HÀNG VỚI NÚT TƯ VẤN */
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .rw-float-btn {
-    width: 60px !important;
-    height: 60px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25) !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    transition: transform 0.2s ease !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,.22);
   }
 
-  .rw-float-btn:hover {
-    transform: scale(1.05) !important;
-  }
-
-  /* CALL BUTTON - DARK GREEN */
+  /* CALL – XANH LÁ THUẦN */
   .rw-call-btn {
-    background: linear-gradient(145deg, #0d8a3d, #16a34a) !important;
+    background: #16a34a;
   }
 
-  /* ZALO BUTTON - BLUE GRADIENT */
+  /* ZALO – NỀN TRẮNG, LOGO NGUYÊN BẢN */
   .rw-zalo-btn {
-    background: linear-gradient(145deg, #0056cc, #0068ff) !important;
+    background: #ffffff;
   }
 
-  /* ICONS */
   .rw-call-btn svg {
-    width: 28px !important;
-    height: 28px !important;
-    fill: #ffffff !important;
+    width: 26px;
+    height: 26px;
+    fill: #ffffff;
+    display: block;
   }
 
-  .rw-zalo-btn svg {
-    width: 30px !important;
-    height: 30px !important;
-    fill: #ffffff !important;
+  .rw-zalo-btn img {
+    width: 34px;   /* LOGO ZALO ĐỦ TO – KHÔNG BỊ NHỎ */
+    height: 34px;
+    display: block;
   }
 
-  /* MOBILE OPTIMIZATION */
   @media (max-width: 768px) {
     .rw-float-wrap {
-      right: 15px !important;
-      bottom: 90px !important;
-      gap: 10px !important;
+      bottom: 72px; /* GIỮ THẲNG HÀNG VỚI TƯ VẤN TRÊN MOBILE */
+      right: 12px;
     }
-    
-    .rw-float-btn {
-      width: 56px !important;
-      height: 56px !important;
-    }
-    
-    /* Mobile - softer green gradient */
-    .rw-call-btn {
-      background: linear-gradient(145deg, #0f9d44, #1db954) !important;
-    }
-    
-    .rw-zalo-btn {
-      background: linear-gradient(145deg, #0066cc, #0080ff) !important;
-    }
-  }
-
-  /* SAFARI FIX */
-  @supports (-webkit-touch-callout: none) {
-    .rw-float-wrap {
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-    }
-  }
-
-  /* POPUP STYLES */
-  .rw-popup-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(0,0,0,0.7) !important;
-    z-index: 1000000 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    backdrop-filter: blur(4px) !important;
-  }
-
-  .rw-popup-content {
-    background: white !important;
-    padding: 25px !important;
-    border-radius: 16px !important;
-    max-width: 380px !important;
-    width: 90% !important;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
-    text-align: center !important;
-  }
-
-  .rw-popup-title {
-    margin: 0 0 20px 0 !important;
-    color: #1f2937 !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-  }
-
-  .rw-phone-input {
-    width: 100% !important;
-    padding: 14px !important;
-    font-size: 16px !important;
-    margin-bottom: 20px !important;
-    border: 2px solid #e5e7eb !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-  }
-
-  .rw-phone-input:focus {
-    border-color: #16a34a !important;
-    outline: none !important;
-  }
-
-  .rw-popup-buttons {
-    display: flex !important;
-    gap: 12px !important;
-  }
-
-  .rw-popup-btn {
-    flex: 1 !important;
-    padding: 14px !important;
-    border: none !important;
-    border-radius: 10px !important;
-    cursor: pointer !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
-    transition: opacity 0.2s !important;
-  }
-
-  .rw-popup-btn:hover {
-    opacity: 0.9 !important;
-  }
-
-  .rw-cancel-btn {
-    background: #f3f4f6 !important;
-    color: #6b7280 !important;
-  }
-
-  .rw-submit-btn {
-    background: linear-gradient(145deg, #0d8a3d, #16a34a) !important;
-    color: white !important;
   }
 </style>
 
-<!-- FLOATING BUTTONS -->
 <div class="rw-float-wrap">
-  <!-- CALL BUTTON -->
-  <button class="rw-float-btn rw-call-btn" title="Gọi điện tư vấn">
-    <svg viewBox="0 0 24 24">
-      <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
-    </svg>
-  </button>
 
-  <!-- ZALO BUTTON - SVG INLINE -->
-  <button class="rw-float-btn rw-zalo-btn" title="Chat Zalo">
-    <svg viewBox="0 0 48 48">
-      <path d="M24 0C10.75 0 0 10.75 0 24s10.75 24 24 24 24-10.75 24-24S37.25 0 24 0zm7.625 16.375c0-.725-.625-1.375-1.375-1.375H17.75c-.75 0-1.375.625-1.375 1.375v15.25c0 .75.625 1.375 1.375 1.375h12.5c.75 0 1.375-.625 1.375-1.375v-15.25zM20 19h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"/>
+  <!-- CALL -->
+  <div class="rw-float-btn rw-call-btn">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2
+        a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57
+        a1 1 0 011 1v3.5a1 1 0 01-1 1
+        C10.07 21.01 3 13.93 3 5
+        a1 1 0 011-1h3.5a1 1 0 011 1
+        c0 1.25.2 2.46.57 3.59
+        a1 1 0 01-.25 1.01l-2.2 2.19z"
+        fill="#ffffff"/>
     </svg>
-  </button>
+  </div>
+
+  <!-- ZALO -->
+  <div class="rw-float-btn rw-zalo-btn">
+    <!-- LOGO ZALO CHUẨN – GIỮ NGUYÊN MÀU -->
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+      alt="Zalo"
+    />
+  </div>
+
 </div>
 
 <script>
-// ========== CONFIGURATION ==========
-const RW_CONFIG = {
-  GAS_URL: "https://script.google.com/macros/s/AKfycbzuiVoDtD_OetpxToyQBeFrtg8VS_2WT4DoqGBH8sPTjvUBhvcIe3AQMAN86jGIKvuy/exec",
-  CALL_NUMBER: "0332510486",
-  ZALO_NUMBER: "84332510486",
-  DEBUG_MODE: false
-};
+(function() {
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbzuiVoDtD_OetpxToyQBeFrtg8VS_2WT4DoqGBH8sPTjvUBhvcIe3AQMAN86jGIKvuy/exec";
+  const CALL_TEL = "tel:0332510486";
+  const ZALO_URL = "https://zalo.me/84332510486";
 
-// ========== STATE MANAGEMENT ==========
-let RW_STATE = {
-  currentAction: "",
-  phoneNumber: "",
-  popupVisible: false,
-  buttonsInitialized: false
-};
+  let currentAction = "";
 
-// ========== CORE FUNCTIONS ==========
-
-/**
- * Ensure buttons are always visible on page changes
- */
-function rwEnsureButtonsVisible() {
-  let wrap = document.querySelector('.rw-float-wrap');
-  
-  // If wrap doesn't exist, recreate it
-  if (!wrap) {
-    console.log('🔧 RBW: Recreating floating buttons...');
-    // Find template in script tag
-    const templateScript = document.querySelector('script[type="text/template"][data-rw-template]');
-    if (templateScript) {
-      document.body.insertAdjacentHTML('beforeend', templateScript.innerHTML);
-      rwInitializeButtons();
-    }
-    return;
-  }
-  
-  // Force visibility
-  wrap.style.display = 'flex';
-  wrap.style.visibility = 'visible';
-  wrap.style.opacity = '1';
-  
-  // Initialize buttons if not done
-  if (!RW_STATE.buttonsInitialized) {
-    rwInitializeButtons();
-  }
-}
-
-/**
- * Initialize button event listeners
- */
-function rwInitializeButtons() {
-  const callBtn = document.querySelector('.rw-call-btn');
-  const zaloBtn = document.querySelector('.rw-zalo-btn');
-  
-  if (callBtn && !callBtn.hasAttribute('data-rw-bound')) {
-    callBtn.setAttribute('data-rw-bound', 'true');
-    callBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      RW_STATE.currentAction = 'Click Call';
-      rwShowPhonePopup();
-    });
-  }
-  
-  if (zaloBtn && !zaloBtn.hasAttribute('data-rw-bound')) {
-    zaloBtn.setAttribute('data-rw-bound', 'true');
-    zaloBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      RW_STATE.currentAction = 'Click Zalo';
-      rwShowPhonePopup();
-    });
-  }
-  
-  RW_STATE.buttonsInitialized = true;
-  if (RW_CONFIG.DEBUG_MODE) console.log('✅ RBW: Buttons initialized');
-}
-
-/**
- * Show phone input popup
- */
-function rwShowPhonePopup() {
-  if (RW_STATE.popupVisible) return;
-  RW_STATE.popupVisible = true;
-  
-  // Remove existing popup
-  const existingPopup = document.getElementById('rw-phone-popup');
-  if (existingPopup) existingPopup.remove();
-  
-  const popupHTML = `
-    <div id="rw-phone-popup" class="rw-popup-overlay">
-      <div class="rw-popup-content">
-        <h3 class="rw-popup-title">Nhập số điện thoại của bạn</h3>
-        <input type="tel" 
-               class="rw-phone-input" 
-               placeholder="0901234567" 
-               maxlength="12"
-               inputmode="numeric">
-        <div class="rw-popup-buttons">
-          <button class="rw-popup-btn rw-cancel-btn" type="button">Hủy</button>
-          <button class="rw-popup-btn rw-submit-btn" type="button">Xác nhận</button>
+  function showPopup(action) {
+    currentAction = action;
+    
+    if (document.getElementById('rw-phone-popup')) return;
+    
+    const popupHTML = `
+      <div id="rw-phone-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;padding:20px;border-radius:10px;max-width:400px;width:90%;box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+          <h3 style="margin:0 0 15px 0;color:#333;">Nhập số điện thoại</h3>
+          <input type="tel" id="rw-phone-input" placeholder="0901234567" 
+            style="width:100%;padding:12px;font-size:16px;margin-bottom:15px;border:1px solid #ddd;border-radius:5px;box-sizing:border-box;">
+          <div style="display:flex;gap:10px;">
+            <button id="rw-cancel-btn" style="flex:1;padding:12px;background:#f0f0f0;border:none;border-radius:5px;cursor:pointer;">Hủy</button>
+            <button id="rw-submit-btn" style="flex:1;padding:12px;background:#4CAF50;color:white;border:none;border-radius:5px;cursor:pointer;">Xác nhận</button>
+          </div>
         </div>
       </div>
-    </div>
-  `;
-  
-  document.body.insertAdjacentHTML('beforeend', popupHTML);
-  
-  // Add event listeners
-  const popup = document.getElementById('rw-phone-popup');
-  const input = popup.querySelector('.rw-phone-input');
-  const cancelBtn = popup.querySelector('.rw-cancel-btn');
-  const submitBtn = popup.querySelector('.rw-submit-btn');
-  
-  // Focus input
-  setTimeout(() => input.focus(), 100);
-  
-  // Cancel button
-  cancelBtn.addEventListener('click', () => {
-    popup.remove();
-    RW_STATE.popupVisible = false;
-  });
-  
-  // Submit button
-  submitBtn.addEventListener('click', () => rwProcessLead(input.value));
-  
-  // Enter key support
-  input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      rwProcessLead(input.value);
-    }
-  });
-  
-  // Close on overlay click
-  popup.addEventListener('click', (e) => {
-    if (e.target === popup) {
-      popup.remove();
-      RW_STATE.popupVisible = false;
-    }
-  });
-}
-
-/**
- * Process lead submission
- */
-function rwProcessLead(phone) {
-  if (!phone) return;
-  
-  // Clean phone number
-  phone = phone.trim().replace(/\D/g, '');
-  
-  // Validate
-  if (!/^[0-9]{9,12}$/.test(phone)) {
-    alert('Vui lòng nhập số điện thoại hợp lệ (9-12 chữ số)');
-    return;
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', popupHTML);
+    
+    document.getElementById('rw-cancel-btn').onclick = function() {
+      document.getElementById('rw-phone-popup').remove();
+    };
+    
+    document.getElementById('rw-submit-btn').onclick = submitLead;
+    
+    setTimeout(() => {
+      const input = document.getElementById('rw-phone-input');
+      if (input) input.focus();
+    }, 100);
   }
-  
-  RW_STATE.phoneNumber = phone;
-  
-  // Prepare data
-  const payload = {
-    source_channel: 'Website',
-    action_type: RW_STATE.currentAction,
-    page_url: window.location.href,
-    phone: phone,
-    note: 'Từ nút floating buttons',
-    timestamp: new Date().toISOString()
-  };
-  
-  if (RW_CONFIG.DEBUG_MODE) console.log('📤 Sending:', payload);
-  
-  // Send to Google Sheets (async)
-  rwSendToGoogleSheets(payload)
-    .then(() => {
-      // Success - remove popup
-      const popup = document.getElementById('rw-phone-popup');
-      if (popup) popup.remove();
-      RW_STATE.popupVisible = false;
-      
-      // Show success message
-      alert('Cảm ơn! Số điện thoại của bạn đã được ghi nhận.\nChúng tôi sẽ liên hệ lại sớm nhất!');
-      
-      // Redirect based on action
-      setTimeout(() => rwRedirectUser(), 500);
-    })
-    .catch(error => {
-      console.error('❌ Send failed:', error);
-      alert('Đã gửi thông tin thành công!');
-      rwRedirectUser();
-    });
-}
 
-/**
- * Send data to Google Sheets
- */
-function rwSendToGoogleSheets(payload) {
-  return new Promise((resolve, reject) => {
-    // Use GET request (more reliable for CORS)
+  function submitLead() {
+    const phoneInput = document.getElementById('rw-phone-input');
+    if (!phoneInput) return;
+    
+    const phone = phoneInput.value.trim();
+    
+    if (!/^[0-9]{9,12}$/.test(phone)) {
+      alert('Vui lòng nhập số điện thoại hợp lệ (9-12 chữ số)');
+      return;
+    }
+    
+    const payload = {
+      source_channel: 'Website',
+      action_type: currentAction,
+      page_url: window.location.href,
+      phone: phone,
+      note: 'From website popup',
+      timestamp: new Date().toISOString()
+    };
+    
+    console.log('Sending data:', payload);
+    
+    // 🔴 CHỈ DÙNG GET QUA IMAGE - KHÔNG FORM SUBMIT
     const params = new URLSearchParams(payload);
-    const url = RW_CONFIG.GAS_URL + '?' + params.toString();
-    
-    // Create tracking pixel
     const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve(); // Still resolve even if tracking fails
-    img.src = url;
+    img.src = GAS_URL + '?' + params.toString();
     
-    // Timeout fallback
-    setTimeout(() => resolve(), 1000);
-  });
-}
-
-/**
- * Redirect user after successful submission
- */
-function rwRedirectUser() {
-  if (RW_STATE.currentAction === 'Click Call') {
-    // Direct call - works on mobile, opens phone app on desktop
-    window.location.href = `tel:${RW_CONFIG.CALL_NUMBER}`;
-  } else if (RW_STATE.currentAction === 'Click Zalo') {
-    // Zalo - use direct link (not window.open to avoid popup blockers)
-    const zaloUrl = `https://zalo.me/${RW_CONFIG.ZALO_NUMBER}`;
+    // 🔴 KHÔNG CHUYỂN HƯỚNG ĐẾN GAS - CHỈ GỬI REQUEST NGẦM
+    // Đóng popup
+    document.getElementById('rw-phone-popup').remove();
     
-    // Try to open in new tab (user-initiated from our async flow)
-    const link = document.createElement('a');
-    link.href = zaloUrl;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Thông báo thành công
+    alert('Cảm ơn! Thông tin của bạn đã được ghi nhận.');
+    
+    // 🔴 CHUYỂN HƯỚNG NGAY LẬP TỨC
+    if (currentAction === 'Click Call') {
+      window.location.href = CALL_TEL;
+    } else if (currentAction === 'Click Zalo') {
+      window.open(ZALO_URL, '_blank');
+    }
   }
-}
 
-// ========== INITIALIZATION ==========
-
-/**
- * Main initialization
- */
-function rwInitialize() {
-  console.log('🚀 RBW Floating Buttons Initializing...');
-  
-  // 1. Ensure buttons are visible immediately
-  rwEnsureButtonsVisible();
-  
-  // 2. Set up mutation observer for SPA page changes
-  const observer = new MutationObserver((mutations) => {
-    // Check if body content changed significantly
-    for (let mutation of mutations) {
-      if (mutation.type === 'childList') {
-        // Check if our buttons are missing
-        const wrap = document.querySelector('.rw-float-wrap');
-        if (!wrap || window.getComputedStyle(wrap).display === 'none') {
-          rwEnsureButtonsVisible();
-          break;
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('RBW Lead Collector loaded');
+    
+    const callBtn = document.querySelector('.rw-call-btn');
+    if (callBtn) {
+      callBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Call button clicked');
+        showPopup('Click Call');
+      });
+    }
+    
+    const zaloBtn = document.querySelector('.rw-zalo-btn');
+    if (zaloBtn) {
+      zaloBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Zalo button clicked');
+        showPopup('Click Zalo');
+      });
+    }
+    
+    // Test function
+    window.testLeadCollector = function(phone = '0901234567') {
+      console.log('Testing with phone:', phone);
+      showPopup('Test Action');
+      setTimeout(() => {
+        const input = document.getElementById('rw-phone-input');
+        if (input) {
+          input.value = phone;
+          submitLead();
         }
-      }
-    }
+      }, 100);
+    };
   });
-  
-  // Start observing
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-  
-  // 3. Re-initialize on hash/path changes
-  let lastUrl = location.href;
-  const checkUrlChange = () => {
-    if (location.href !== lastUrl) {
-      lastUrl = location.href;
-      setTimeout(rwEnsureButtonsVisible, 300);
-    }
-  };
-  
-  window.addEventListener('hashchange', checkUrlChange);
-  window.addEventListener('popstate', checkUrlChange);
-  
-  // 4. Periodic check (every 3 seconds)
-  setInterval(rwEnsureButtonsVisible, 3000);
-  
-  // 5. Make function available globally for debugging
-  window.rwDebug = {
-    ensureVisible: rwEnsureButtonsVisible,
-    showPopup: () => rwShowPhonePopup(),
-    state: () => RW_STATE,
-    config: RW_CONFIG
-  };
-  
-  console.log('✅ RBW Floating Buttons Ready');
-}
 
-// ========== STARTUP ==========
-
-// Start when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', rwInitialize);
-} else {
-  rwInitialize();
-}
-
-// Backup startup after 1 second
-setTimeout(rwInitialize, 1000);
-</script>
-
-<!-- TEMPLATE FOR RECREATION -->
-<script type="text/template" data-rw-template>
-<div class="rw-float-wrap">
-  <button class="rw-float-btn rw-call-btn" title="Gọi điện tư vấn">
-    <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/></svg>
-  </button>
-  <button class="rw-float-btn rw-zalo-btn" title="Chat Zalo">
-    <svg viewBox="0 0 48 48"><path d="M24 0C10.75 0 0 10.75 0 24s10.75 24 24 24 24-10.75 24-24S37.25 0 24 0zm7.625 16.375c0-.725-.625-1.375-1.375-1.375H17.75c-.75 0-1.375.625-1.375 1.375v15.25c0 .75.625 1.375 1.375 1.375h12.5c.75 0 1.375-.625 1.375-1.375v-15.25zM20 19h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"/></svg>
-  </button>
-</div>
+})();
 </script>
 </body>
 </html>
