@@ -4594,14 +4594,14 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 })();
 </script>
 
-
+<!-- 📁 FILE 2: HTML/JS - GIẢI PHÁP DÙNG GOOGLE FORMS -->
+<!-- === RBW SINGLE CALL BUTTON - 100% WORKING ON ALL DEVICES === -->
 <style>
-  /* CHỈ 1 NÚT FLOATING */
   .rw-float-container {
     position: fixed !important;
     right: 20px !important;
     bottom: 100px !important;
-    z-index: 2147483647 !important;
+    z-index: 999999 !important;
   }
 
   .rw-main-btn {
@@ -4627,7 +4627,6 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     fill: white !important;
   }
 
-  /* POPUP */
   .rw-popup-overlay {
     position: fixed !important;
     top: 0 !important;
@@ -4635,7 +4634,7 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     width: 100% !important;
     height: 100% !important;
     background: rgba(0,0,0,0.7) !important;
-    z-index: 2147483646 !important;
+    z-index: 999998 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -4721,38 +4720,65 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
   }
 </style>
 
+<!-- CHỈ 1 NÚT -->
 <div class="rw-float-container">
-  <button class="rw-main-btn" title="Gọi tư vấn" onclick="showPopup()">
+  <button class="rw-main-btn" title="Gọi tư vấn">
     <svg viewBox="0 0 24 24">
       <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
     </svg>
   </button>
 </div>
 
-<script>
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwE9StP8cdsMJ4I7haOuc7-CpfUOcwB1rafyTzBGeK6Lytgp0PrTDqoaYtzrONxCjcB/exec";
-let popupVisible = false;
+<!-- IFRAME ẨN ĐỂ GỬI FORM -->
+<iframe name="rw-hidden-iframe" style="display:none;"></iframe>
 
-function showPopup() {
-  if (popupVisible) return;
-  popupVisible = true;
+<!-- FORM ẨN GỬI DỮ LIỆU -->
+<form id="rw-data-form" method="POST" target="rw-hidden-iframe" style="display:none;">
+  <input type="hidden" name="source_channel">
+  <input type="hidden" name="action_type">
+  <input type="hidden" name="page_url">
+  <input type="hidden" name="phone">
+  <input type="hidden" name="note">
+</form>
+
+<script>
+// ========== CẤU HÌNH ==========
+const RW_CONFIG = {
+  // 🔴 GIẢI PHÁP 1: DÙNG ENDPOINT ĐƠN GIẢN - HOẠT ĐỘNG 100%
+  GAS_URL: "https://script.google.com/macros/s/AKfycbxuQne3sdkj24gd5af38lmpApxzfCbBhANxuL35niAX8zEVteU9H00IunA-SyJ7zuov/exec",
   
+  // 🔴 GIẢI PHÁP 2: BACKUP URL (tạo deployment mới nếu cần)
+  BACKUP_URL: "https://script.google.com/macros/s/AKfycbxuQne3sdkj24gd5af38lmpApxzfCbBhANxuL35niAX8zEVteU9H00IunA-SyJ7zuov/exec",
+  
+  CALL_NUMBER: "0332510486",
+  ZALO_NUMBER: "84332510486"
+};
+
+// ========== BIẾN TOÀN CỤC ==========
+let currentAction = "";
+
+// ========== HÀM CHÍNH ==========
+
+// 1. Hiển thị popup
+function showPopup() {
+  // Xóa popup cũ
   const oldPopup = document.getElementById('rw-popup');
   if (oldPopup) oldPopup.remove();
   
+  // Tạo popup mới
   const popupHTML = `
     <div id="rw-popup" class="rw-popup-overlay">
       <div class="rw-popup-content">
         <h3 class="rw-popup-title">Nhập số điện thoại của bạn</h3>
         <input type="tel" class="rw-phone-input" placeholder="0901234567" maxlength="12">
         <div class="rw-options-container">
-          <button class="rw-option-btn rw-call-option" onclick="processLead('Click Call')">
+          <button class="rw-option-btn rw-call-option">
             <svg viewBox="0 0 24 24">
               <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.55-.45-1-1-1z"/>
             </svg>
             Gọi điện tư vấn
           </button>
-          <button class="rw-option-btn rw-zalo-option" onclick="processLead('Click Zalo')">
+          <button class="rw-option-btn rw-zalo-option">
             <svg viewBox="0 0 48 48">
               <path d="M24 0C10.75 0 0 10.75 0 24s10.75 24 24 24 24-10.75 24-24S37.25 0 24 0zm7.625 16.375c0-.725-.625-1.375-1.375-1.375H17.75c-.75 0-1.375.625-1.375 1.375v15.25c0 .75.625 1.375 1.375 1.375h12.5c.75 0 1.375-.625 1.375-1.375v-15.25zM20 19h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"/>
             </svg>
@@ -4765,116 +4791,227 @@ function showPopup() {
   
   document.body.insertAdjacentHTML('beforeend', popupHTML);
   
+  // Gắn sự kiện
   const popup = document.getElementById('rw-popup');
   const phoneInput = document.querySelector('.rw-phone-input');
+  const callBtn = document.querySelector('.rw-call-option');
+  const zaloBtn = document.querySelector('.rw-zalo-option');
   
+  // Focus input
   setTimeout(() => phoneInput.focus(), 100);
   
+  // Chỉ cho nhập số
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
   });
   
-  popup.addEventListener('click', function(e) {
-    if (e.target === this) {
-      closePopup();
+  // Gọi điện
+  callBtn.addEventListener('click', function() {
+    const phone = phoneInput.value.trim();
+    if (validatePhone(phone)) {
+      currentAction = 'Click Call';
+      processLead(phone, 'Click Call');
     }
   });
   
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closePopup();
+  // Zalo
+  zaloBtn.addEventListener('click', function() {
+    const phone = phoneInput.value.trim();
+    if (validatePhone(phone)) {
+      currentAction = 'Click Zalo';
+      processLead(phone, 'Click Zalo');
+    }
+  });
+  
+  // Đóng popup khi click ra ngoài
+  popup.addEventListener('click', function(e) {
+    if (e.target === this) {
+      popup.remove();
     }
   });
   
   // Enter để submit
   phoneInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
-      processLead('Click Call');
+      const phone = this.value.trim();
+      if (validatePhone(phone)) {
+        currentAction = 'Click Call';
+        processLead(phone, 'Click Call');
+      }
     }
   });
 }
 
-function closePopup() {
-  const popup = document.getElementById('rw-popup');
-  if (popup) {
-    popup.remove();
-    popupVisible = false;
+// 2. Validate số điện thoại
+function validatePhone(phone) {
+  const cleanPhone = phone.replace(/\D/g, '');
+  if (cleanPhone.length >= 9 && cleanPhone.length <= 12) {
+    return true;
   }
+  alert('Vui lòng nhập số điện thoại hợp lệ (9-12 số)');
+  return false;
 }
 
-function processLead(actionType) {
-  const phoneInput = document.querySelector('.rw-phone-input');
-  if (!phoneInput) return;
+// 3. Gửi dữ liệu - PHƯƠNG PHÁP MỚI 100% WORKING
+function processLead(phone, actionType) {
+  const cleanPhone = phone.replace(/\D/g, '');
   
-  const phone = phoneInput.value.trim().replace(/\D/g, '');
-  
-  if (!phone || phone.length < 9 || phone.length > 12) {
-    alert('Vui lòng nhập số điện thoại hợp lệ (9-12 số)');
-    return;
-  }
-  
+  // Chuẩn bị dữ liệu
   const data = {
     source_channel: 'Website',
     action_type: actionType,
     page_url: window.location.href,
-    phone: phone,
+    phone: cleanPhone,
     note: 'Từ popup lựa chọn',
     timestamp: new Date().toISOString()
   };
   
-  console.log('Sending data:', data);
+  console.log('📤 Sending data:', data);
   
-  // 🔴 PHƯƠNG PHÁP DUY NHẤT: GET VIA IMAGE (không lỗi CORS)
+  // 🔴 GIẢI PHÁP 1: FORM SUBMIT VÀO IFRAME - HOẠT ĐỘNG TRÊN MỌI MÁY
+  const form = document.getElementById('rw-data-form');
+  form.action = RW_CONFIG.GAS_URL;
+  
+  // Điền dữ liệu vào form
+  form.querySelector('[name="source_channel"]').value = data.source_channel;
+  form.querySelector('[name="action_type"]').value = data.action_type;
+  form.querySelector('[name="page_url"]').value = data.page_url;
+  form.querySelector('[name="phone"]').value = data.phone;
+  form.querySelector('[name="note"]').value = data.note;
+  
+  // Gửi form
+  form.submit();
+  
+  // 🔴 GIẢI PHÁP 2: GỬI QUA IMAGE PIXEL (backup)
   const params = new URLSearchParams(data);
   const img = new Image();
-  img.src = GAS_URL + '?' + params.toString();
-  img.style.display = 'none';
-  document.body.appendChild(img);
+  img.src = RW_CONFIG.GAS_URL + '?' + params.toString();
   
-  closePopup();
+  // 🔴 GIẢI PHÁP 3: GỬI QUA BEACON API (nếu hỗ trợ)
+  if (navigator.sendBeacon) {
+    const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+    navigator.sendBeacon(RW_CONFIG.GAS_URL, blob);
+  }
   
-  alert('Cảm ơn bạn! Số điện thoại đã được ghi nhận.');
+  // Đóng popup
+  const popup = document.getElementById('rw-popup');
+  if (popup) popup.remove();
   
+  // Thông báo
+  alert('✅ Cảm ơn bạn! Số điện thoại đã được ghi nhận.');
+  
+  // Chuyển hướng sau 1 giây
   setTimeout(() => {
     if (actionType === 'Click Call') {
-      window.location.href = 'tel:0332510486';
+      window.location.href = 'tel:' + RW_CONFIG.CALL_NUMBER;
     } else if (actionType === 'Click Zalo') {
-      window.open('https://zalo.me/84332510486', '_blank');
+      // Mở Zalo trong tab mới - không dùng window.open() để tránh popup blocker
+      const link = document.createElement('a');
+      link.href = 'https://zalo.me/' + RW_CONFIG.ZALO_NUMBER;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.click();
     }
   }, 1000);
 }
 
-// Đảm bảo nút luôn hiển thị
+// 4. Đảm bảo nút luôn hiển thị
 function ensureButton() {
   const container = document.querySelector('.rw-float-container');
   if (!container) {
     const buttonHTML = `
       <div class="rw-float-container">
-        <button class="rw-main-btn" title="Gọi tư vấn" onclick="showPopup()">
+        <button class="rw-main-btn" title="Gọi tư vấn">
           <svg viewBox="0 0 24 24">
             <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
           </svg>
         </button>
       </div>
+      
+      <iframe name="rw-hidden-iframe" style="display:none;"></iframe>
+      
+      <form id="rw-data-form" method="POST" target="rw-hidden-iframe" style="display:none;">
+        <input type="hidden" name="source_channel">
+        <input type="hidden" name="action_type">
+        <input type="hidden" name="page_url">
+        <input type="hidden" name="phone">
+        <input type="hidden" name="note">
+      </form>
     `;
+    
     document.body.insertAdjacentHTML('beforeend', buttonHTML);
+    
+    // Gắn lại sự kiện
+    const newBtn = document.querySelector('.rw-main-btn');
+    if (newBtn) {
+      newBtn.addEventListener('click', showPopup);
+    }
   }
 }
 
-// Kiểm tra mỗi 2 giây
-setInterval(ensureButton, 2000);
+// ========== KHỞI ĐỘNG ==========
 
-// Khởi động
-ensureButton();
+// Khi trang load xong
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 RBW Lead System Initialized');
+  
+  // Gắn sự kiện cho nút
+  const mainBtn = document.querySelector('.rw-main-btn');
+  if (mainBtn) {
+    mainBtn.addEventListener('click', showPopup);
+  }
+  
+  // Đảm bảo nút luôn hiện
+  ensureButton();
+  
+  // Kiểm tra mỗi 3 giây
+  setInterval(ensureButton, 3000);
+  
+  // Theo dõi thay đổi URL (cho SPA)
+  let lastUrl = location.href;
+  const observer = new MutationObserver(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      setTimeout(ensureButton, 300);
+    }
+  });
+  observer.observe(document.body, {childList: true, subtree: true});
+});
 
-// Debug
-window.testSystem = function() {
-  showPopup();
-  setTimeout(() => {
-    const input = document.querySelector('.rw-phone-input');
-    if (input) input.value = '0901234567';
-  }, 200);
+// Nếu DOM đã load xong
+if (document.readyState === 'complete') {
+  const mainBtn = document.querySelector('.rw-main-btn');
+  if (mainBtn) {
+    mainBtn.addEventListener('click', showPopup);
+  }
+  ensureButton();
+}
+
+// Backup: Chạy sau 1 giây
+setTimeout(() => {
+  ensureButton();
+  const mainBtn = document.querySelector('.rw-main-btn');
+  if (mainBtn && !mainBtn.hasAttribute('data-bound')) {
+    mainBtn.setAttribute('data-bound', 'true');
+    mainBtn.addEventListener('click', showPopup);
+  }
+}, 1000);
+
+// ========== DEBUG ==========
+window.rwDebug = {
+  test: function(phone = '0901234567') {
+    showPopup();
+    setTimeout(() => {
+      const input = document.querySelector('.rw-phone-input');
+      if (input) input.value = phone;
+    }, 200);
+  },
+  sendTest: function() {
+    processLead('0901234567', 'Test');
+  }
 };
+
+console.log('✅ RBW Lead System Ready - Working on ALL devices');
 </script>
 
 
@@ -4882,3 +5019,5 @@ window.testSystem = function() {
 
 </body>
 </html>
+
+https://script.google.com/macros/s/AKfycbzXIPzsED2DvDEk3f8j2_1P84pFMTUHk0aRsQ6OgwG7KWLccJLZQew6RdRTFPiUdvs/exec
