@@ -4594,106 +4594,78 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 })();
 </script>
 
-<!-- === RBW SINGLE CALL BUTTON WITH DUAL OPTIONS === -->
+
 <style>
-  /* BASE STYLES - HIGH PRIORITY */
+  /* CHỈ 1 NÚT FLOATING */
   .rw-float-container {
     position: fixed !important;
     right: 20px !important;
     bottom: 100px !important;
-    z-index: 2147483647 !important; /* MAX Z-INDEX */
-    pointer-events: auto !important;
+    z-index: 2147483647 !important;
   }
 
   .rw-main-btn {
     width: 64px !important;
     height: 64px !important;
     border-radius: 50% !important;
+    background: linear-gradient(135deg, #0d8a3d, #16a34a) !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    background: linear-gradient(135deg, #0d8a3d, #16a34a) !important;
-    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4) !important;
-    cursor: pointer !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    transition: all 0.3s ease !important;
   }
 
   .rw-main-btn:hover {
     transform: scale(1.1) !important;
-    box-shadow: 0 8px 25px rgba(22, 163, 74, 0.6) !important;
   }
 
   .rw-main-btn svg {
-    width: 30px !important;
-    height: 30px !important;
+    width: 28px !important;
+    height: 28px !important;
     fill: white !important;
   }
 
-  /* POPUP OVERLAY */
+  /* POPUP */
   .rw-popup-overlay {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    background: rgba(0, 0, 0, 0.7) !important;
+    background: rgba(0,0,0,0.7) !important;
     z-index: 2147483646 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    animation: fadeIn 0.3s ease !important;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   .rw-popup-content {
     background: white !important;
-    border-radius: 16px !important;
+    border-radius: 12px !important;
     width: 90% !important;
-    max-width: 380px !important;
-    overflow: hidden !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
-    animation: slideUp 0.4s ease !important;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  .rw-popup-header {
-    background: linear-gradient(135deg, #0d8a3d, #16a34a) !important;
-    color: white !important;
-    padding: 20px !important;
-    text-align: center !important;
+    max-width: 400px !important;
+    padding: 25px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
   }
 
   .rw-popup-title {
-    margin: 0 !important;
+    margin: 0 0 20px 0 !important;
     font-size: 18px !important;
-    font-weight: 600 !important;
-  }
-
-  .rw-popup-body {
-    padding: 25px !important;
+    color: #333 !important;
+    text-align: center !important;
   }
 
   .rw-phone-input {
     width: 100% !important;
-    padding: 16px !important;
+    padding: 14px !important;
     font-size: 16px !important;
-    border: 2px solid #e5e7eb !important;
-    border-radius: 10px !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
+    border: 2px solid #ddd !important;
+    border-radius: 8px !important;
     margin-bottom: 20px !important;
-    transition: border-color 0.3s !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
   }
 
   .rw-phone-input:focus {
@@ -4703,14 +4675,14 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 
   .rw-options-container {
     display: flex !important;
-    gap: 12px !important;
     flex-direction: column !important;
+    gap: 12px !important;
   }
 
   .rw-option-btn {
-    padding: 18px !important;
+    padding: 16px !important;
     border: none !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     font-size: 16px !important;
     font-weight: 500 !important;
     cursor: pointer !important;
@@ -4718,22 +4690,16 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     align-items: center !important;
     justify-content: center !important;
     gap: 10px !important;
-    transition: all 0.3s ease !important;
   }
 
   .rw-call-option {
-    background: linear-gradient(135deg, #0d8a3d, #16a34a) !important;
+    background: #16a34a !important;
     color: white !important;
   }
 
   .rw-zalo-option {
-    background: linear-gradient(135deg, #0068ff, #0080ff) !important;
+    background: #0068ff !important;
     color: white !important;
-  }
-
-  .rw-option-btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
   }
 
   .rw-option-btn svg {
@@ -4742,10 +4708,9 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     fill: currentColor !important;
   }
 
-  /* MOBILE OPTIMIZATION */
   @media (max-width: 768px) {
     .rw-float-container {
-      right: 16px !important;
+      right: 15px !important;
       bottom: 90px !important;
     }
     
@@ -4753,29 +4718,11 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
       width: 60px !important;
       height: 60px !important;
     }
-    
-    .rw-popup-content {
-      width: 95% !important;
-      max-width: 340px !important;
-    }
-    
-    .rw-option-btn {
-      padding: 16px !important;
-    }
-  }
-
-  /* SAFARI/IOS FIX */
-  @supports (-webkit-touch-callout: none) {
-    .rw-float-container {
-      -webkit-transform: translateZ(0) !important;
-      transform: translateZ(0) !important;
-    }
   }
 </style>
 
-<!-- MAIN FLOATING BUTTON -->
 <div class="rw-float-container">
-  <button class="rw-main-btn" title="Liên hệ tư vấn">
+  <button class="rw-main-btn" title="Gọi tư vấn" onclick="showPopup()">
     <svg viewBox="0 0 24 24">
       <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
     </svg>
@@ -4783,60 +4730,34 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 </div>
 
 <script>
-// ========== CONFIGURATION ==========
-const RW_CONFIG = {
-  GAS_URL: "https://script.google.com/macros/s/AKfycbzXIPzsED2DvDEk3f8j2_1P84pFMTUHk0aRsQ6OgwG7KWLccJLZQew6RdRTFPiUdvs/exec",
-  CALL_NUMBER: "0332510486",
-  ZALO_NUMBER: "84332510486",
-  DEBUG: false
-};
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwE9StP8cdsMJ4I7haOuc7-CpfUOcwB1rafyTzBGeK6Lytgp0PrTDqoaYtzrONxCjcB/exec";
+let popupVisible = false;
 
-// ========== STATE ==========
-let RW_STATE = {
-  phoneNumber: "",
-  popupVisible: false
-};
-
-// ========== CORE FUNCTIONS ==========
-
-/**
- * Show phone input popup
- */
-function rwShowPopup() {
-  if (RW_STATE.popupVisible) return;
-  RW_STATE.popupVisible = true;
+function showPopup() {
+  if (popupVisible) return;
+  popupVisible = true;
   
-  // Remove existing popup
-  const existing = document.getElementById('rw-popup');
-  if (existing) existing.remove();
+  const oldPopup = document.getElementById('rw-popup');
+  if (oldPopup) oldPopup.remove();
   
   const popupHTML = `
     <div id="rw-popup" class="rw-popup-overlay">
       <div class="rw-popup-content">
-        <div class="rw-popup-header">
-          <h3 class="rw-popup-title">Nhập số điện thoại của bạn</h3>
-        </div>
-        <div class="rw-popup-body">
-          <input type="tel" 
-                 class="rw-phone-input" 
-                 placeholder="0901234567"
-                 maxlength="12"
-                 inputmode="numeric"
-                 autocomplete="tel">
-          <div class="rw-options-container">
-            <button class="rw-option-btn rw-call-option" type="button">
-              <svg viewBox="0 0 24 24">
-                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.55-.45-1-1-1z"/>
-              </svg>
-              Gọi điện tư vấn
-            </button>
-            <button class="rw-option-btn rw-zalo-option" type="button">
-              <svg viewBox="0 0 48 48">
-                <path d="M24 0C10.75 0 0 10.75 0 24s10.75 24 24 24 24-10.75 24-24S37.25 0 24 0zm7.625 16.375c0-.725-.625-1.375-1.375-1.375H17.75c-.75 0-1.375.625-1.375 1.375v15.25c0 .75.625 1.375 1.375 1.375h12.5c.75 0 1.375-.625 1.375-1.375v-15.25zM20 19h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"/>
-              </svg>
-              Nhắn tin Zalo
-            </button>
-          </div>
+        <h3 class="rw-popup-title">Nhập số điện thoại của bạn</h3>
+        <input type="tel" class="rw-phone-input" placeholder="0901234567" maxlength="12">
+        <div class="rw-options-container">
+          <button class="rw-option-btn rw-call-option" onclick="processLead('Click Call')">
+            <svg viewBox="0 0 24 24">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.55-.45-1-1-1z"/>
+            </svg>
+            Gọi điện tư vấn
+          </button>
+          <button class="rw-option-btn rw-zalo-option" onclick="processLead('Click Zalo')">
+            <svg viewBox="0 0 48 48">
+              <path d="M24 0C10.75 0 0 10.75 0 24s10.75 24 24 24 24-10.75 24-24S37.25 0 24 0zm7.625 16.375c0-.725-.625-1.375-1.375-1.375H17.75c-.75 0-1.375.625-1.375 1.375v15.25c0 .75.625 1.375 1.375 1.375h12.5c.75 0 1.375-.625 1.375-1.375v-15.25zM20 19h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"/>
+            </svg>
+            Nhắn tin Zalo
+          </button>
         </div>
       </div>
     </div>
@@ -4844,89 +4765,55 @@ function rwShowPopup() {
   
   document.body.insertAdjacentHTML('beforeend', popupHTML);
   
-  // Get elements
   const popup = document.getElementById('rw-popup');
-  const phoneInput = popup.querySelector('.rw-phone-input');
-  const callOption = popup.querySelector('.rw-call-option');
-  const zaloOption = popup.querySelector('.rw-zalo-option');
+  const phoneInput = document.querySelector('.rw-phone-input');
   
-  // Focus input
   setTimeout(() => phoneInput.focus(), 100);
   
-  // Phone input validation
-  phoneInput.addEventListener('input', function(e) {
+  phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
   });
   
-  // Call option click
-  callOption.addEventListener('click', function() {
-    const phone = phoneInput.value.trim();
-    if (rwValidatePhone(phone)) {
-      rwProcessLead(phone, 'Click Call');
-    }
-  });
-  
-  // Zalo option click
-  zaloOption.addEventListener('click', function() {
-    const phone = phoneInput.value.trim();
-    if (rwValidatePhone(phone)) {
-      rwProcessLead(phone, 'Click Zalo');
-    }
-  });
-  
-  // Close popup on overlay click
   popup.addEventListener('click', function(e) {
     if (e.target === this) {
-      rwClosePopup();
+      closePopup();
     }
   });
   
-  // Close on Escape key
-  document.addEventListener('keydown', function handleEscape(e) {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-      rwClosePopup();
-      document.removeEventListener('keydown', handleEscape);
+      closePopup();
+    }
+  });
+  
+  // Enter để submit
+  phoneInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      processLead('Click Call');
     }
   });
 }
 
-/**
- * Close popup
- */
-function rwClosePopup() {
+function closePopup() {
   const popup = document.getElementById('rw-popup');
   if (popup) {
-    popup.style.animation = 'fadeOut 0.3s ease';
-    setTimeout(() => {
-      popup.remove();
-      RW_STATE.popupVisible = false;
-    }, 300);
+    popup.remove();
+    popupVisible = false;
   }
 }
 
-/**
- * Validate phone number
- */
-function rwValidatePhone(phone) {
-  phone = phone.replace(/\D/g, '');
+function processLead(actionType) {
+  const phoneInput = document.querySelector('.rw-phone-input');
+  if (!phoneInput) return;
+  
+  const phone = phoneInput.value.trim().replace(/\D/g, '');
   
   if (!phone || phone.length < 9 || phone.length > 12) {
-    alert('Vui lòng nhập số điện thoại hợp lệ (9-12 chữ số)');
-    return false;
+    alert('Vui lòng nhập số điện thoại hợp lệ (9-12 số)');
+    return;
   }
   
-  return true;
-}
-
-/**
- * Process lead submission
- */
-function rwProcessLead(phone, actionType) {
-  phone = phone.replace(/\D/g, '');
-  RW_STATE.phoneNumber = phone;
-  
-  // Prepare data
-  const payload = {
+  const data = {
     source_channel: 'Website',
     action_type: actionType,
     page_url: window.location.href,
@@ -4935,193 +4822,63 @@ function rwProcessLead(phone, actionType) {
     timestamp: new Date().toISOString()
   };
   
-  if (RW_CONFIG.DEBUG) console.log('📤 Sending payload:', payload);
+  console.log('Sending data:', data);
   
-  // 🔴 GỬI DATA BẰNG 2 PHƯƠNG PHÁP SONG SONG
-  rwSendData(payload)
-    .then(success => {
-      if (success || RW_CONFIG.DEBUG) {
-        console.log('✅ Data sent successfully');
-      }
-    })
-    .catch(error => {
-      console.warn('⚠️ Primary send failed, using fallback:', error);
-      // Fallback method
-      rwSendDataFallback(payload);
-    })
-    .finally(() => {
-      // ALWAYS redirect user regardless of data send success
-      rwRedirectUser(actionType);
-    });
-}
-
-/**
- * Send data using fetch API (primary method)
- */
-function rwSendData(payload) {
-  return new Promise((resolve, reject) => {
-    // Method 1: Fetch with CORS
-    fetch(RW_CONFIG.GAS_URL, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      if (response.ok || response.status === 0) {
-        resolve(true);
-      } else {
-        reject(new Error(`HTTP ${response.status}`));
-      }
-    })
-    .catch(error => {
-      // Method 2: Use GET as fallback
-      const params = new URLSearchParams(payload);
-      fetch(RW_CONFIG.GAS_URL + '?' + params.toString(), {
-        method: 'GET',
-        mode: 'no-cors'
-      })
-      .then(() => resolve(true))
-      .catch(err => reject(err));
-    });
-  });
-}
-
-/**
- * Fallback data sending method (works on all browsers)
- */
-function rwSendDataFallback(payload) {
-  // Method 3: Image pixel (always works, no CORS issues)
-  const params = new URLSearchParams(payload);
+  // 🔴 PHƯƠNG PHÁP DUY NHẤT: GET VIA IMAGE (không lỗi CORS)
+  const params = new URLSearchParams(data);
   const img = new Image();
-  img.src = RW_CONFIG.GAS_URL + '?' + params.toString();
+  img.src = GAS_URL + '?' + params.toString();
   img.style.display = 'none';
   document.body.appendChild(img);
   
-  // Method 4: Form submission (fallback of fallback)
-  setTimeout(() => {
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = RW_CONFIG.GAS_URL;
-    form.style.display = 'none';
-    
-    Object.keys(payload).forEach(key => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = payload[key];
-      form.appendChild(input);
-    });
-    
-    document.body.appendChild(form);
-    form.submit();
-  }, 100);
-}
-
-/**
- * Redirect user after processing
- */
-function rwRedirectUser(actionType) {
-  // Close popup first
-  rwClosePopup();
+  closePopup();
   
-  // Show success message
-  alert('Cảm ơn bạn! Thông tin đã được ghi nhận.\nChúng tôi sẽ liên hệ lại sớm nhất!');
+  alert('Cảm ơn bạn! Số điện thoại đã được ghi nhận.');
   
-  // Redirect based on action
   setTimeout(() => {
     if (actionType === 'Click Call') {
-      // Direct call - works on mobile, opens phone app on desktop
-      window.location.href = `tel:${RW_CONFIG.CALL_NUMBER}`;
+      window.location.href = 'tel:0332510486';
     } else if (actionType === 'Click Zalo') {
-      // Zalo - use direct link (no popup issues)
-      const zaloUrl = `https://zalo.me/${RW_CONFIG.ZALO_NUMBER}`;
-      
-      // Create and click a link instead of window.open
-      const link = document.createElement('a');
-      link.href = zaloUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      window.open('https://zalo.me/84332510486', '_blank');
     }
-  }, 800);
+  }, 1000);
 }
 
-/**
- * Initialize everything
- */
-function rwInitialize() {
-  console.log('🚀 RBW Call System Initializing...');
-  
-  // Get main button
-  const mainBtn = document.querySelector('.rw-main-btn');
-  
-  if (mainBtn && !mainBtn.hasAttribute('data-initialized')) {
-    mainBtn.setAttribute('data-initialized', 'true');
-    mainBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      rwShowPopup();
-    });
-  }
-  
-  // Ensure button is always visible
+// Đảm bảo nút luôn hiển thị
+function ensureButton() {
   const container = document.querySelector('.rw-float-container');
-  if (container) {
-    container.style.display = 'block';
-    container.style.visibility = 'visible';
-    container.style.opacity = '1';
+  if (!container) {
+    const buttonHTML = `
+      <div class="rw-float-container">
+        <button class="rw-main-btn" title="Gọi tư vấn" onclick="showPopup()">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.01 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.59a1 1 0 01-.25 1.01l-2.2 2.19z"/>
+          </svg>
+        </button>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', buttonHTML);
   }
-  
-  // Monitor for SPA page changes
-  let lastUrl = location.href;
-  const observer = new MutationObserver(() => {
-    if (location.href !== lastUrl) {
-      lastUrl = location.href;
-      setTimeout(rwInitialize, 300);
-    }
-  });
-  
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-  
-  // Periodic check every 5 seconds
-  setInterval(() => {
-    const btn = document.querySelector('.rw-main-btn');
-    if (btn && !btn.hasAttribute('data-initialized')) {
-      rwInitialize();
-    }
-  }, 5000);
-  
-  console.log('✅ RBW Call System Ready');
 }
 
-// ========== STARTUP ==========
+// Kiểm tra mỗi 2 giây
+setInterval(ensureButton, 2000);
 
-// Start when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', rwInitialize);
-} else {
-  rwInitialize();
-}
+// Khởi động
+ensureButton();
 
-// Backup initialization
-setTimeout(rwInitialize, 1000);
-
-// Global debug function
-window.rwDebug = {
-  showPopup: rwShowPopup,
-  test: () => rwProcessLead('0901234567', 'Test'),
-  config: RW_CONFIG
+// Debug
+window.testSystem = function() {
+  showPopup();
+  setTimeout(() => {
+    const input = document.querySelector('.rw-phone-input');
+    if (input) input.value = '0901234567';
+  }, 200);
 };
 </script>
+
+
+
+
 </body>
 </html>
-
