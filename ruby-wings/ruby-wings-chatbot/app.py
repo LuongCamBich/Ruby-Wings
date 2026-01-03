@@ -13,6 +13,15 @@ from typing import List, Tuple, Dict, Optional
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
+# ... các import hiện có ...
+
+
+
+# ---------- Google Sheets Lead Saving ----------
+
+from google.oauth2 import service_account
+
+
 
 # Try FAISS; fallback to numpy-only index if missing
 HAS_FAISS = False
@@ -716,13 +725,63 @@ try:
 except Exception:
     logger.exception("Initialization error")
 
+
+
+
+
+# ==================================================
+# LEAD SAVING ROUTE - ADDED 2024 (KHÔNG ẢNH HƯỞNG CHATBOT)
+# ==================================================
+# LEAD SAVING ROUTE - TEST MODE (KHÔNG GOOGLE SHEETS)
+# ==================================================
+from datetime import datetime
+
+@app.route('/api/save-lead', methods=['POST'])
+def save_lead():
+    """
+    Tạm thời chỉ log lead, không ghi Google Sheets
+    """
+    try:
+        # 1. Validate request
+        if not request.is_json:
+            return jsonify({'error': 'Content-Type must be application/json'}), 400
+        
+        data = request.get_json()
+        phone = data.get('phone', '').strip()
+        
+        # 2. Validate phone - lead hợp lệ phải có số điện thoại
+        if not phone:
+            return jsonify({'error': 'Phone number is required'}), 400
+        
+        # 3. Log thay vì ghi Google Sheets
+        print(f"[LEAD LOG] Phone: {phone}, Page: {data.get('page_url', 'N/A')}, Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Lead logged (test mode)',
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }), 200
+        
+    except Exception as e:
+        # Log lỗi chung và trả về error an toàn
+        print(f"[LEAD SAVE ERROR] {type(e).__name__}: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+
+# ==================================================
+# Flask App Run (KHÔNG SỬA)
+# ==================================================
+    # ... code hiện tại ...
 # When run directly, run flask dev server (note: for production use Gunicorn)
 if __name__ == "__main__":
     # ensure mapping saved for reproducibility
     if MAPPING and not os.path.exists(FAISS_MAPPING_PATH):
         save_mapping_to_disk()
+
+        
     # block startup building index to ensure readiness
     built = build_index(force_rebuild=False)
     if not built:
         logger.warning("Index not ready at startup; endpoint will attempt on-demand build.")
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
