@@ -3,28 +3,102 @@ services:
     name: ruby-wings-chatbot
     env: python
     plan: free
+
     buildCommand: "pip install --no-cache-dir -r requirements.txt"
-    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 300"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 300"
+
     envVars:
+      # ===== Core =====
+      - key: OPENAI_API_KEY
+        sync: false  # Set in Render Dashboard
+
       - key: OPENAI_BASE_URL
         value: "https://api.openai.com/v1"
-      - key: FAISS_ENABLED
-        value: "true"
+
       - key: FLASK_ENV
         value: "production"
+
+      # ===== FAISS / Chatbot =====
+      - key: FAISS_ENABLED
+        value: "true"
+
       - key: RBW_ALLOW_REINDEX
-        # Keep reindex protected by header by default (set to "1" to allow via env)
         value: "0"
+
       - key: KNOWLEDGE_PATH
         value: "knowledge.json"
+
       - key: FALLBACK_VECTORS_PATH
         value: "vectors.npz"
+
       - key: FAISS_MAPPING_PATH
         value: "faiss_mapping.json"
+
       - key: FAISS_INDEX_PATH
         value: "faiss_index.bin"
+
       - key: TOUR_ENTITIES_PATH
         value: "tour_entities.json"
-    healthCheckPath: "/health"
+
+      # ===== Embedding Models =====
+      - key: EMBEDDING_MODEL
+        value: "text-embedding-3-small"
+
+      - key: CHAT_MODEL
+        value: "gpt-4o-mini"
+
+      - key: TOP_K
+        value: "5"
+
+      # ===== Google Sheets Integration =====
+      - key: ENABLE_GOOGLE_SHEETS
+        value: "true"
+
+      - key: GOOGLE_SERVICE_ACCOUNT_JSON
+        sync: false  # Set in Render Dashboard with the full JSON
+
+      - key: GOOGLE_SHEET_ID
+        value: "1SdVbwkuxb8l1meEW--ddyfh4WmUvSXXMOPQ5bCyPkdk"
+
+      - key: GOOGLE_SHEET_NAME
+        value: "RBW_Lead_Raw_Inbox"
+
+      # ===== Fallback Storage =====
+      - key: ENABLE_FALLBACK_STORAGE
+        value: "true"
+
+      - key: FALLBACK_STORAGE_PATH
+        value: "leads_fallback.json"
+
+      # ===== Performance =====
+      - key: WORKERS
+        value: "1"
+
+      - key: TIMEOUT
+        value: "300"
+
+      - key: DEBUG
+        value: "false"
+
+    healthCheckPath: "/api/health"
+    healthCheckTimeout: 30
+
+    autoDeploy: true
+    branch: main
+
     disk:
-      sizeGb: 1
+      name: chatbot-storage
+      mountPath: /data
+      sizeGB: 1
+
+    # Add build cache for faster deployments
+    buildFilter:
+      paths:
+        - "*.py"
+        - "requirements.txt"
+        - "knowledge.json"
+        - "*.json"
+      ignoredPaths:
+        - "__pycache__/"
+        - "*.pyc"
+        - ".git/"
