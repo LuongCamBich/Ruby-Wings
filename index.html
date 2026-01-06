@@ -4594,7 +4594,9 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
 })();
 
 </script>
-<!-- NÚT GỌI ĐIỆN RUBY WINGS - Đặt trước thẻ đóng </body> -->
+
+
+<!-- NÚT GỌI ĐIỆN RUBY WINGS - Đã tích hợp công nghệ tracking -->
 <div id="ruby-call-widget" style="position: fixed; z-index: 10001;">
     <button id="ruby-call-button" style="background: linear-gradient(135deg, #1a5f23 0%, #0d3b1a 100%); color: white; border: 2px solid white; border-radius: 50%; cursor: pointer; box-shadow: 0 6px 25px rgba(0, 100, 0, 0.6); display: flex; align-items: center; justify-content: center; transition: all 0.3s; outline: none;">
         📞
@@ -4799,14 +4801,106 @@ const BACKEND_URL = "https://ruby-wings-chatbot.onrender.com";
     }
 }
 </style>
-
 <script>
 // Biến toàn cục để track trạng thái
 let rubyCallWidgetInitialized = false;
-let rubyCallWidgetVisible = true;
+
+// === META CAPI FUNCTIONS ===
+function getFBP() {
+    const match = document.cookie.match(/_fbp=([^;]+)/);
+    return match ? match[1] : null;
+}
+
+function getFBC() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fbclid = urlParams.get('fbclid');
+    if (fbclid) {
+        return `fb.1.${Date.now()}.${fbclid}`;
+    }
+    const match = document.cookie.match(/_fbc=([^;]+)/);
+    return match ? match[1] : null;
+}
+
+function generateEventID() {
+    return `call_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+let rubyCAPIMetaData = { fbp: null, fbc: null, event_id: null };
+
+function initRubyCAPIMetaData() {
+    rubyCAPIMetaData = {
+        fbp: getFBP(),
+        fbc: getFBC(),
+        event_id: generateEventID()
+    };
+}
 
 // Số điện thoại công ty cố định
 const COMPANY_PHONE = '0332510486';
+
+// Hàm tracking tích hợp công nghệ cao - ĐÃ TỐI ƯU
+function trackCallEvent(phoneNumber, callType) {
+    try {
+        const cleanPhone = phoneNumber.replace(/\D/g, '');
+        
+        // Chỉ tracking nếu số điện thoại hợp lệ
+        if (cleanPhone.length < 10 || cleanPhone.length > 11) return;
+        
+        const maskedPhone = cleanPhone.substring(0, 3) + '****' + cleanPhone.substring(7);
+        
+        // KHỞI TẠO META DATA CHO CAPI
+        initRubyCAPIMetaData();
+        
+        // 1. META PIXEL (Client-side)
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'Contact', {
+                content_name: 'Call Button Click',
+                content_category: callType === 'zalo' ? 'Zalo Call' : 'Phone Call',
+                content_ids: ['RW_CALL_BUTTON'],
+                value: 150000,
+                currency: 'VND',
+                phone: maskedPhone
+            });
+        }
+        
+        // 2. GOOGLE ANALYTICS 4 (GA4) - generate_lead ONLY
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'generate_lead', {
+                'method': callType,
+                'phone_length': cleanPhone.length,
+                'call_action': 'button_click',
+                'event_category': 'call_conversion',
+                'event_label': 'ruby_wings_call_button',
+                'value': 150000
+            });
+        }
+        
+        // 3. SERVER-SIDE META CAPI
+        const eventData = {
+            phone: cleanPhone,
+            call_type: callType,
+            page_url: window.location.href,
+            user_agent: navigator.userAgent,
+            timestamp: new Date().toISOString(),
+            fbp: rubyCAPIMetaData.fbp,
+            fbc: rubyCAPIMetaData.fbc,
+            event_id: rubyCAPIMetaData.event_id,
+            pixel_id: '862531473384426',
+            action_source: 'website',
+            event_name: 'CallButtonClick'
+        };
+        
+        fetch('https://ruby-wings-chatbot.onrender.com/api/track-call', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(eventData)
+        }).catch(() => {});
+        
+    } catch (error) {
+        // Fail silently
+        console.error('Ruby Call Tracking Error:', error);
+    }
+}
 
 // Hàm khởi tạo widget gọi điện
 function initRubyCallWidget() {
@@ -4826,29 +4920,22 @@ function initRubyCallWidget() {
     function applyWidgetPosition() {
         const widget = document.getElementById('ruby-call-widget');
         if (window.innerWidth >= 769) {
-            // Desktop positioning
             widget.style.bottom = '105px';
             widget.style.left = '24px';
         } else {
-            // Mobile positioning
             widget.style.bottom = '102px';
             widget.style.left = '14px';
         }
     }
     
-    // Apply initial position
     applyWidgetPosition();
-    
-    // Thêm hiệu ứng pulse cho nút
     callButton.classList.add('ruby-pulse');
     
-    // Mở modal khi click nút gọi điện
+    // Mở modal
     callButton.addEventListener('click', () => {
         callModal.style.display = 'flex';
         phoneInput.focus();
         phoneInput.select();
-        
-        // Tạm dừng hiệu ứng pulse khi mở modal
         callButton.classList.remove('ruby-pulse');
     });
     
@@ -4857,11 +4944,7 @@ function initRubyCallWidget() {
         callModal.style.display = 'none';
         messageElement.textContent = '';
         phoneInput.value = '';
-        
-        // Khôi phục hiệu ứng pulse
-        setTimeout(() => {
-            callButton.classList.add('ruby-pulse');
-        }, 500);
+        setTimeout(() => callButton.classList.add('ruby-pulse'), 500);
     });
     
     // Click bên ngoài để đóng modal
@@ -4870,11 +4953,7 @@ function initRubyCallWidget() {
             callModal.style.display = 'none';
             messageElement.textContent = '';
             phoneInput.value = '';
-            
-            // Khôi phục hiệu ứng pulse
-            setTimeout(() => {
-                callButton.classList.add('ruby-pulse');
-            }, 500);
+            setTimeout(() => callButton.classList.add('ruby-pulse'), 500);
         }
     });
     
@@ -4884,22 +4963,17 @@ function initRubyCallWidget() {
             callModal.style.display = 'none';
             messageElement.textContent = '';
             phoneInput.value = '';
-            
-            setTimeout(() => {
-                callButton.classList.add('ruby-pulse');
-            }, 500);
+            setTimeout(() => callButton.classList.add('ruby-pulse'), 500);
         }
     });
     
     // Hàm lưu lead vào hệ thống
     async function saveRubyLead(phoneNumber, callType) {
-        // Validate số điện thoại
         const cleanPhone = phoneNumber.replace(/\D/g, '');
         if (cleanPhone.length < 10 || cleanPhone.length > 11) {
             throw new Error('Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số');
         }
         
-        // Chuẩn bị dữ liệu lead
         const leadData = {
             phone: cleanPhone,
             source_channel: "Website",
@@ -4912,23 +4986,18 @@ function initRubyCallWidget() {
                   "Khách yêu cầu gọi lại trực tiếp"
         };
         
-        // Gửi đến backend API
         const response = await fetch('https://ruby-wings-chatbot.onrender.com/api/save-lead', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(leadData)
         });
         
-        if (!response.ok) {
-            throw new Error('Lỗi kết nối server. Vui lòng thử lại');
-        }
+        if (!response.ok) throw new Error('Lỗi kết nối server. Vui lòng thử lại');
         
         return await response.json();
     }
     
-    // Hàm xử lý gọi điện
+    // Hàm xử lý gọi điện - ĐÃ TÍCH HỢP TRACKING
     async function handleCall(callType = 'regular') {
         const phoneNumber = phoneInput.value.trim();
         
@@ -4938,6 +5007,17 @@ function initRubyCallWidget() {
             phoneInput.focus();
             return;
         }
+        
+        const cleanPhone = phoneNumber.replace(/\D/g, '');
+        if (cleanPhone.length < 10 || cleanPhone.length > 11) {
+            messageElement.textContent = '⚠️ Số điện thoại phải có 10-11 chữ số';
+            messageElement.style.color = '#ffcc00';
+            phoneInput.focus();
+            return;
+        }
+        
+        // ===== TRACKING =====
+        trackCallEvent(phoneNumber, callType);
         
         // Hiển thị trạng thái đang xử lý
         const originalRegularText = callRegularButton.innerHTML;
@@ -4957,46 +5037,32 @@ function initRubyCallWidget() {
         messageElement.style.color = '#ffcc00';
         
         try {
-            // 1. Lưu lead vào hệ thống
             const result = await saveRubyLead(phoneNumber, callType);
-            
-            // 2. Hiển thị thông báo thành công
             messageElement.innerHTML = '✅ <strong>THÀNH CÔNG!</strong> Đã lưu thông tin';
             messageElement.style.color = '#2ecc71';
             
-            // 3. Chuyển hướng đến cuộc gọi/Zalo sau 1 giây (GỌI CHO CÔNG TY)
             setTimeout(() => {
                 if (callType === 'zalo') {
-                    // Mở Zalo với số công ty
                     window.open(`https://zalo.me/${COMPANY_PHONE}`, '_blank', 'noopener,noreferrer');
                 } else {
-                    // Gọi điện đến số công ty
                     window.location.href = `tel:${COMPANY_PHONE}`;
                 }
                 
-                // Đóng modal sau 1.5 giây
                 setTimeout(() => {
                     callModal.style.display = 'none';
                     phoneInput.value = '';
                     messageElement.textContent = '';
-                    
-                    // Khôi phục hiệu ứng pulse
-                    setTimeout(() => {
-                        callButton.classList.add('ruby-pulse');
-                    }, 500);
+                    setTimeout(() => callButton.classList.add('ruby-pulse'), 500);
                 }, 1500);
             }, 1000);
             
         } catch (error) {
-            // Xử lý lỗi
             console.error('Ruby Call Widget Error:', error);
             messageElement.innerHTML = `❌ <strong>${error.message}</strong>`;
             messageElement.style.color = '#ff6b6b';
             
-            // Vẫn cho phép gọi nếu API fail (fallback) - GỌI CHO CÔNG TY
             setTimeout(() => {
                 const userConfirmed = confirm('Hệ thống đang bận. Bạn vẫn muốn tiếp tục gọi không?');
-                
                 if (userConfirmed) {
                     if (callType === 'zalo') {
                         window.open(`https://zalo.me/${COMPANY_PHONE}`, '_blank', 'noopener,noreferrer');
@@ -5009,7 +5075,6 @@ function initRubyCallWidget() {
                 }
             }, 2000);
         } finally {
-            // Khôi phục trạng thái nút
             if (callType === 'regular') {
                 setTimeout(() => {
                     callRegularButton.innerHTML = originalRegularText;
@@ -5026,23 +5091,16 @@ function initRubyCallWidget() {
         }
     }
     
-    // Gắn sự kiện cho nút gọi thường
+    // Gắn sự kiện
     callRegularButton.addEventListener('click', () => handleCall('regular'));
-    
-    // Gắn sự kiện cho nút gọi Zalo
     callZaloButton.addEventListener('click', () => handleCall('zalo'));
     
-    // Cho phép nhấn Enter để gọi thường
     phoneInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleCall('regular');
-        }
+        if (e.key === 'Enter') handleCall('regular');
     });
     
-    // Auto-format số điện thoại
     phoneInput.addEventListener('input', (e) => {
         let value = e.target.value.replace(/\D/g, '');
-        
         if (value.length > 0) {
             if (value.length <= 4) {
                 value = value;
@@ -5052,73 +5110,45 @@ function initRubyCallWidget() {
                 value = `${value.slice(0, 4)} ${value.slice(4, 7)} ${value.slice(7, 11)}`;
             }
         }
-        
         e.target.value = value;
     });
     
-    // Điều chỉnh vị trí nếu có chatbot
     function adjustPositionForChatbot() {
         const chatWidget = document.querySelector('#chatWidget, .chat-widget, [id*="chat"], [class*="chat"], .tawk-button, .zalo-chat-widget');
         if (chatWidget) {
             const chatRect = chatWidget.getBoundingClientRect();
             const callWidget = document.getElementById('ruby-call-widget');
-            
-            // Đặt nút gọi điện cao hơn nút chatbot 80px
             callWidget.style.bottom = `${chatRect.height + 80}px`;
         }
     }
     
-    // Re-apply position on resize
     window.addEventListener('resize', () => {
         applyWidgetPosition();
         adjustPositionForChatbot();
     });
     
-    // Kiểm tra và điều chỉnh mỗi 1 giây (phòng trường hợp chatbot load sau)
-    const positionCheckInterval = setInterval(() => {
-        adjustPositionForChatbot();
-    }, 1000);
+    setInterval(adjustPositionForChatbot, 1000);
+    setTimeout(adjustPositionForChatbot, 1000);
     
-    // Initial adjustments
-    setTimeout(() => {
-        adjustPositionForChatbot();
-    }, 1000);
-    
-    console.log('✅ Ruby Call Widget đã sẵn sàng - Phiên bản hoàn thiện');
+    console.log('✅ Ruby Call Widget đã sẵn sàng - Phiên bản tối ưu Meta CAPI');
 }
 
-// Khởi tạo khi DOM ready
+// Khởi tạo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRubyCallWidget);
 } else {
     initRubyCallWidget();
 }
 
-// Đảm bảo widget vẫn hoạt động khi chuyển trang trong SPA
-document.addEventListener('click', (e) => {
-    if (e.target.matches('a[href*="#"]') || e.target.closest('a[href*="#"]')) {
-        // Giữ widget hiển thị khi chuyển anchor link
-        setTimeout(() => {
-            if (window.rubyCallWidgetInitialized) {
-                const widget = document.getElementById('ruby-call-widget');
-                widget.style.display = 'block';
-            }
-        }, 100);
-    }
-});
-
 // Chống ẩn widget khi scroll
 let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const st = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Luôn hiển thị widget, không ẩn khi scroll
     const widget = document.getElementById('ruby-call-widget');
     if (widget) {
         widget.style.display = 'block';
         widget.style.opacity = '1';
     }
-    
     lastScrollTop = st <= 0 ? 0 : st;
 }, false);
 </script>
