@@ -18,6 +18,7 @@ import logging
 import re
 import unicodedata
 import traceback
+import hashlib
 from functools import lru_cache
 from typing import List, Tuple, Dict, Optional, Any
 from datetime import datetime
@@ -35,6 +36,7 @@ from gspread.exceptions import APIError, SpreadsheetNotFound, WorksheetNotFound
 from meta_capi import send_meta_pageview
 
 from meta_capi import send_meta_lead
+
 
 # Try FAISS
 HAS_FAISS = False
@@ -111,6 +113,114 @@ _gsheet_client_lock = threading.Lock()
 
 # Fallback storage for leads
 _fallback_storage_lock = threading.Lock()
+# =========== CONTEXT MANAGEMENT ===========
+SESSION_CONTEXT = {}
+CONTEXT_TIMEOUT = 1800  # 30 phút
+
+def cleanup_old_contexts():
+    """Dọn dẹp context cũ"""
+    now = datetime.utcnow()
+    to_delete = []
+    for session_id, context in SESSION_CONTEXT.items():
+        if (now - context.get("timestamp", now)).total_seconds() > CONTEXT_TIMEOUT:
+            to_delete.append(session_id)
+    for session_id in to_delete:
+        del SESSION_CONTEXT[session_id]
+
+def get_session_context(session_id):
+    """Lấy context cho session"""
+    cleanup_old_contexts()
+    if session_id not in SESSION_CONTEXT:
+        SESSION_CONTEXT[session_id] = {
+            "last_tour_indices": [],
+            "conversation_history": [],
+            "last_tour_name": None,
+            "timestamp": datetime.utcnow()
+        }
+    return SESSION_CONTEXT[session_id]
+
+def update_tour_context(session_id, tour_indices, tour_name=None):
+    """Cập nhật context tour"""
+    context = get_session_context(session_id)
+    if tour_indices:
+        context["last_tour_indices"] = tour_indices
+    if tour_name:
+        context["last_tour_name"] = tour_name
+    context["timestamp"] = datetime.utcnow()
+    return context
+
+def extract_session_id(request_data, remote_addr):
+
+    """Trích xuất session_id từ request"""
+     # Ưu tiên session_id từ frontend
+    session_id = request_data.get("session_id")
+    
+    if not session_id:
+        # Tạo session_id ổn định từ IP + timestamp (giữ trong 30 phút)
+        import hashlib
+        from datetime import datetime
+        
+        ip = remote_addr or "0.0.0.0"
+        current_hour = datetime.utcnow().strftime("%Y%m%d%H")
+        
+        # Tạo session_id ổn định trong 1 giờ
+        unique_str = f"{ip}_{current_hour}"
+        session_id = hashlib.md5(unique_str.encode()).hexdigest()[:12]
+    
+    return f"session_{session_id}"
+
+def get_complete_tour_info(tour_indices):
+    """Lấy thông tin đầy đủ của tour từ các indices"""
+    result = {}
+    
+    for idx in tour_indices:
+        tour_info = {}
+        
+        # Lấy tên tour
+        for m in MAPPING:
+            if f"[{idx}]" in m.get("path", "") and ".tour_name" in m.get("path", ""):
+                tour_info["name"] = m.get("text", "")
+                break
+        
+        # Lấy các field khác
+        for field in TOUR_FIELDS:
+            if field == "tour_name":
+                continue
+                
+            passages = get_passages_by_field(field, limit=5, tour_indices=[idx])
+            if passages:
+                field_texts = [m.get("text", "") for _, m in passages]
+                tour_info[field] = "\n".join(field_texts)
+        
+        result[idx] = tour_info
+    
+    return result
+def get_suggested_questions(tour_indices, current_field):
+    """Gợi ý câu hỏi tiếp theo"""
+    suggestions = []
+    
+    if not tour_indices:
+        suggestions.extend([
+            "Bạn muốn hỏi về tour nào?",
+            "Có tour nào về Huế không?",
+            "Tour nào phù hợp cho gia đình?"
+        ])
+    else:
+        common_fields = ["price", "includes", "accommodation", "meals", "duration"]
+        current = current_field or ""
+        
+        for field in common_fields:
+            if field != current:
+                field_names = {
+                    "price": "giá cả",
+                    "includes": "lịch trình",
+                    "accommodation": "chỗ ở", 
+                    "meals": "ăn uống",
+                    "duration": "thời gian"
+                }
+                suggestions.append(f"Tour có {field_names.get(field, field)} như thế nào?")
+    
+    return suggestions[:3]  # Chỉ 3 gợi ý
 
 # =========== KEYWORD MAPPING ===========
 KEYWORD_FIELD_MAP: Dict[str, Dict] = {
@@ -140,6 +250,13 @@ KEYWORD_FIELD_MAP: Dict[str, Dict] = {
     "who_can_join": {"keywords": ["phù hợp đối tượng", "ai tham gia", "who should join"], "field": "who_can_join"},
     "hotline": {"keywords": ["hotline", "số điện thoại", "liên hệ", "contact number"], "field": "hotline"},
 }
+# =========== TOUR FIELDS FOR COMPLETE INFO ===========
+TOUR_FIELDS = [
+    "tour_name", "summary", "location", "duration", "price",
+    "includes", "notes", "style", "transport", "accommodation",
+    "meals", "event_support", "cancellation_policy", 
+    "booking_method", "who_can_join", "hotline"
+]
 
 # =========== UTILITY FUNCTIONS ===========
 def normalize_text_simple(s: str) -> str:
@@ -598,15 +715,18 @@ def query_index(query: str, top_k: int = TOP_K) -> List[Tuple[float, dict]]:
 # =========== PROMPT COMPOSITION ===========
 def compose_system_prompt(top_passages: List[Tuple[float, dict]]) -> str:
     header = (
-        "Bạn là trợ lý AI của Ruby Wings - chuyên tư vấn du lịch trải nghiệm.\n"
-        "TRẢ LỜI THEO CÁC NGUYÊN TẮC:\n"
-        "1. ƯU TIÊN CAO: Thông tin từ dữ liệu được cung cấp\n"
-        "2. Nếu thiếu thông tin CHI TIẾT, hãy trả lời dựa trên THÔNG TIN CHUNG có sẵn\n"
-        "3. Đối với tour cụ thể: tìm thông tin đúng tour trước, sau đó mới dùng thông tin chung, nếu không có thông tin thì trả lời hiện nay Ruby Wings đang nâng cấp, cập nhật\n"
-        "4. Luôn giữ thái độ nhiệt tình, hữu ích\n\n"
-        "Bạn là trợ lý AI của Ruby Wings — chuyên tư vấn nghành du lịch trải nghiệm, retreat, "
-        "thiền, khí công, hành trình chữa lành - Hành trình tham quan linh hoạt theo nhhu cầu. Trả lời ngắn gọn, chính xác, tử tế.\n\n"
-    )
+    "Bạn là trợ lý AI của Ruby Wings - chuyên tư vấn du lịch trải nghiệm.\n"
+    "TRẢ LỜI THEO CÁC NGUYÊN TẮC:\n"
+    "1. ƯU TIÊN CAO NHẤT: Luôn sử dụng thông tin từ dữ liệu nội bộ được cung cấp thông qua hệ thống.\n"
+    "2. Nếu thiếu thông tin CHI TIẾT, hãy tổng hợp và trả lời dựa trên THÔNG TIN CHUNG có sẵn trong dữ liệu nội bộ.\n"
+    "3. Đối với tour cụ thể: nếu tìm thấy bất kỳ dữ liệu nội bộ liên quan nào (dù là tóm tắt, giá, lịch trình, ghi chú), PHẢI tổng hợp và trình bày rõ ràng; chỉ trả lời đang nâng cấp hoặc chưa có thông tin khi hoàn toàn không tìm thấy dữ liệu phù hợp.\n"
+    "4. TUYỆT ĐỐI KHÔNG nói rằng bạn không đọc được file, không truy cập dữ liệu, hoặc từ chối trả lời khi đã có dữ liệu liên quan.\n"
+    "5. Luôn giữ thái độ nhiệt tình, hữu ích, trả lời trực tiếp vào nội dung người dùng hỏi.\n\n"
+    "Bạn là trợ lý AI của Ruby Wings — chuyên tư vấn ngành du lịch trải nghiệm, retreat, "
+    "thiền, khí công, hành trình chữa lành và các hành trình tham quan linh hoạt theo nhu cầu. "
+    "Trả lời ngắn gọn, chính xác, rõ ràng, tử tế và bám sát dữ liệu Ruby Wings.\n\n"
+)
+
     if not top_passages:
         return header + "Không tìm thấy dữ liệu nội bộ phù hợp."
     
@@ -697,6 +817,9 @@ def reindex():
     ok = build_index(force_rebuild=True)
     return jsonify({"ok": ok, "count": len(FLAT_TEXTS)})
 
+
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
     """
@@ -711,6 +834,14 @@ def chat():
     if not user_message:
         return jsonify({"reply": "Bạn chưa nhập câu hỏi."})
 
+    # =========== CONTEXT AWARE PROCESSING ===========
+    # Get session context
+    session_id = extract_session_id(data, request.remote_addr)
+    context = get_session_context(session_id)
+    last_tour_indices = context.get("last_tour_indices", [])
+    last_tour_name = context.get("last_tour_name")
+    
+    # Detect requested field
     text_l = user_message.lower()
     requested_field: Optional[str] = None
     for k, v in KEYWORD_FIELD_MAP.items():
@@ -721,10 +852,107 @@ def chat():
         if requested_field:
             break
 
+        # Tour detection with context awareness - IMPROVED VERSION
     tour_indices = find_tour_indices_from_message(user_message)
-    top_results: List[Tuple[float, dict]] = []
+    
+        # Tour detection with context awareness - IMPROVED VERSION
+    tour_indices = find_tour_indices_from_message(user_message)
+    
+    # Nếu không tìm thấy tour, KIỂM TRA KỸ các reference
+    if not tour_indices:
+        # Danh sách từ tham chiếu MỞ RỘNG
+        ref_keywords = [
+            "tour này", "tour đó", "tour đang nói", 
+            "cái tour", "này", "đó", "nó",
+            "tour bach ma", "bạch mã", "bach ma"
+        ]
+        
+        has_reference = any(keyword in text_l for keyword in ref_keywords)
+        
+        if has_reference and last_tour_indices:
+            tour_indices = last_tour_indices
+            logger.info(f"✅ Using CONTEXT tour indices: {tour_indices} for reference: '{user_message}'")
+        elif has_reference and not last_tour_indices:
+            # Người dùng nói "tour này" nhưng chưa có context
+            # Thử tìm tour gần nhất trong lịch sử
+            if context.get("conversation_history"):
+                # Tìm tour được mention gần nhất trong history
+                for msg in reversed(context["conversation_history"][-5:]):
+                    if msg.get("type") == "tour_mentioned":
+                        tour_indices = msg.get("tour_indices", [])
+                        if tour_indices:
+                            break
+    
+    # Update context if we have tour indices
+    if tour_indices:
+        # Find tour name for these indices
+        tour_name = None
+        for idx in tour_indices:
+            for m in MAPPING:
+                if f"[{idx}]" in m.get("path", "") and ".tour_name" in m.get("path", ""):
+                    tour_name = m.get("text", "")
+                    break
+            if tour_name:
+                break
+        update_tour_context(session_id, tour_indices, tour_name)
 
-    if requested_field == "tour_name":
+            # Update conversation history
+    context["conversation_history"].append({
+        "timestamp": datetime.utcnow().isoformat(),
+        "user_message": user_message,
+        "tour_indices": tour_indices,
+        "requested_field": requested_field,
+        "type": "tour_mentioned" if tour_indices else "general"
+    })
+    
+    # Giữ history tối đa 10 messages
+    if len(context["conversation_history"]) > 10:
+        context["conversation_history"] = context["conversation_history"][-10:]
+            # =========== DEBUG LOGGING FOR TOUR CONTEXT ===========
+    logger.info(f"🎯 TOUR DETECTION DEBUG:")
+    logger.info(f"  User message: '{user_message}'")
+    logger.info(f"  Found indices: {tour_indices}")
+    logger.info(f"  Last tour indices from context: {last_tour_indices}")
+    logger.info(f"  Session ID: {session_id}")
+    logger.info(f"  Requested field: {requested_field}")
+    logger.info(f"  Is list request: {is_list_request}")
+    
+    # Log tour names if indices exist
+    if tour_indices:
+        for idx in tour_indices:
+            tour_name = None
+            for m in MAPPING:
+                if f"[{idx}]" in m.get("path", "") and ".tour_name" in m.get("path", ""):
+                    tour_name = m.get("text", "")
+                    logger.info(f"  Tour index {idx}: '{tour_name}'")
+                    break
+    
+    # Special handling for tour listing requests
+    top_results: List[Tuple[float, dict]] = []
+    
+    # Handle "liệt kê tour" requests
+    list_patterns = [
+        r"liệt kê.*tour",
+        r"có những tour nào",
+        r"danh sách tour", 
+        r"tour.*nổi bật",
+        r"show tour",
+        r"tour available"
+    ]
+    
+    is_list_request = any(re.search(pattern, text_l) for pattern in list_patterns)
+    
+    if is_list_request:
+        # Determine how many tours to list
+        limit = 3  # Default
+        num_match = re.search(r"(\d+)\s*tour", user_message)
+        if num_match:
+            limit = int(num_match.group(1))
+        elif "tất cả" in text_l or "all" in text_l:
+            limit = 50  # Large number for "all"
+        
+        top_results = get_passages_by_field("tour_name", tour_indices=None, limit=limit)
+    elif requested_field == "tour_name":
         top_results = get_passages_by_field("tour_name", tour_indices=None, limit=1000)
     elif requested_field and tour_indices:
         top_results = get_passages_by_field(requested_field, limit=TOP_K, tour_indices=tour_indices)
@@ -738,11 +966,75 @@ def chat():
         top_k = int(data.get("top_k", TOP_K))
         top_results = query_index(user_message, top_k)
 
+
+
+
     system_prompt = compose_system_prompt(top_results)
     messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}]
 
     reply = ""
-    if client is not None:
+    
+    # =========== SPECIAL HANDLING FOR LIST REQUESTS ===========
+    if is_list_request and top_results:
+        # Format beautiful tour list response
+        names = []
+        for _, m in top_results:
+            tour_name = m.get("text", "").strip()
+            if tour_name and tour_name not in names:
+                names.append(tour_name)
+        
+        if names:
+            # Determine limit from message or use all found
+            limit = len(names)
+            num_match = re.search(r"(\d+)\s*tour", user_message)
+            if num_match:
+                limit = min(int(num_match.group(1)), len(names))
+            
+            reply = f"✨ **Ruby Wings hiện có {len(names)} tour trải nghiệm đặc sắc:** ✨\n\n"
+            
+            for i, name in enumerate(names[:limit], 1):
+                # Find tour index for this name
+                tour_idx = None
+                for idx, m2 in enumerate(MAPPING):
+                    if m2.get("text", "").strip() == name and ".tour_name" in m2.get("path", ""):
+                        # Extract index from path like "tours[3].tour_name"
+                        match = re.search(r'\[(\d+)\]', m2.get("path", ""))
+                        if match:
+                            tour_idx = int(match.group(1))
+                        break
+                
+                # Get summary for this tour
+                summary = ""
+                duration = ""
+                if tour_idx is not None:
+                    for m2 in MAPPING:
+                        if f"[{tour_idx}]" in m2.get("path", ""):
+                            if ".summary" in m2.get("path", ""):
+                                summary = m2.get("text", "").strip()
+                            elif ".duration" in m2.get("path", ""):
+                                duration = m2.get("text", "").strip()
+                
+                reply += f"**{i}. {name}**"
+                if duration:
+                    reply += f" ({duration})"
+                reply += "\n"
+                
+                if summary:
+                    reply += f"   📝 *{summary[:120]}"
+                    if len(summary) > 120:
+                        reply += "...*"
+                    else:
+                        reply += "*"
+                
+                reply += "\n"
+            
+            reply += "\n💡 **Gợi ý:** Bạn có thể hỏi chi tiết về bất kỳ tour nào bằng cách nhập tên tour hoặc hỏi về: giá cả, lịch trình, chỗ ở, ẩm thực..."
+        
+        else:
+            reply = "Hiện chưa có thông tin tour trong hệ thống. Vui lòng liên hệ hotline 0935 304 338 để được tư vấn trực tiếp."
+    
+    # =========== OPENAI CHAT ===========
+    elif client is not None and not is_list_request:
         try:
             resp = client.chat.completions.create(
                 model=CHAT_MODEL,
@@ -755,14 +1047,60 @@ def chat():
                 reply = resp.choices[0].message.content or ""
         except Exception as e:
             logger.error(f"OpenAI chat failed: {e}")
-
+    
+    # =========== FALLBACK RESPONSE GENERATION ===========
     if not reply:
         if top_results:
-            if requested_field == "tour_name":
+            if is_list_request:
+                # Should have been handled above, but as backup
                 names = [m.get("text", "") for _, m in top_results]
                 seen = set()
                 names_u = [x for x in names if x and not (x in seen or seen.add(x))]
                 reply = "Các tour hiện có:\n" + "\n".join(f"- {n}" for n in names_u)
+            
+            elif requested_field == "tour_name":
+                names = [m.get("text", "") for _, m in top_results]
+                seen = set()
+                names_u = [x for x in names if x and not (x in seen or seen.add(x))]
+                reply = "Các tour hiện có:\n" + "\n".join(f"- {n}" for n in names_u)
+            
+            elif requested_field == "accommodation" and tour_indices:
+                # Special formatting for accommodation
+                parts = []
+                for ti in tour_indices:
+                    # Get tour name
+                    tour_name = None
+                    for m in MAPPING:
+                        p = m.get("path", "")
+                        if f"[{ti}]" in p and ".tour_name" in p:
+                            tour_name = m.get("text", "")
+                            break
+                    
+                    # Get accommodation text for this tour
+                    acc_texts = []
+                    for score, m in top_results:
+                        if f"[{ti}]" in m.get("path", ""):
+                            acc_texts.append(m.get("text", ""))
+                    
+                    # Also check directly from mapping
+                    if not acc_texts:
+                        for m2 in MAPPING:
+                            if f"[{ti}]" in m2.get("path", "") and ".accommodation" in m2.get("path", ""):
+                                acc_texts.append(m2.get("text", ""))
+                    
+                    if acc_texts:
+                        label = f'🏨 **Tour "{tour_name}"**' if tour_name else f"Tour"
+                        parts.append(f"{label}:\n" + "\n".join(f"   • {txt}" for txt in acc_texts))
+                
+                if parts:
+                    reply = "**Thông tin chỗ ở:**\n\n" + "\n\n".join(parts)
+                    
+                    # Add helpful note for 1-day tours
+                    if any("1 ngày" in p.lower() for p in parts):
+                        reply += "\n\n💡 *Lưu ý: Tour 1 ngày thường không bao gồm chỗ ở qua đêm. Nếu bạn cần lưu trú, vui lòng liên hệ để được tư vấn thêm.*"
+                else:
+                    reply = "Thông tin chỗ ở đang được cập nhật. Vui lòng liên hệ hotline 0935 304 338 để biết thêm chi tiết về chỗ nghỉ."
+            
             elif requested_field and tour_indices:
                 parts = []
                 for ti in tour_indices:
@@ -772,24 +1110,94 @@ def chat():
                         if p.endswith(f"tours[{ti}].tour_name"):
                             tour_name = m.get("text", "")
                             break
+                    
                     field_passages = [m.get("text", "") for score, m in top_results if f"[{ti}]" in m.get("path", "")]
                     if not field_passages:
                         field_passages = [m.get("text", "") for _, m in get_passages_by_field(requested_field, limit=TOP_K, tour_indices=[ti])]
+                    
                     if field_passages:
                         label = f'Tour "{tour_name}"' if tour_name else f"Tour #{ti}"
-                        parts.append(label + ":\n" + "\n".join(f"- {t}" for t in field_passages))
+                        
+                        # Special formatting for different fields
+                        if requested_field == "includes":
+                            parts.append(f"**{label} - Lịch trình chi tiết:**\n" + "\n".join(f"   • {t}" for t in field_passages))
+                        elif requested_field == "price":
+                            parts.append(f"**{label} - Giá tour:**\n" + "\n".join(f"   💰 {t}" for t in field_passages))
+                        elif requested_field == "duration":
+                            parts.append(f"**{label} - Thời gian:**\n" + "\n".join(f"   ⏱️ {t}" for t in field_passages))
+                        else:
+                            parts.append(f"**{label}:**\n" + "\n".join(f"   • {t}" for t in field_passages))
+                
                 if parts:
                     reply = "\n\n".join(parts)
                 else:
-                    snippets = "\n\n".join([f"- {m.get('text')}" for _, m in top_results[:5]])
-                    reply = f"Tôi tìm thấy:\n\n{snippets}"
+                    snippets = "\n\n".join([f"• {m.get('text')}" for _, m in top_results[:5]])
+                    reply = f"**Thông tin liên quan:**\n\n{snippets}"
+            
             else:
-                snippets = "\n\n".join([f"- {m.get('text')}" for _, m in top_results[:5]])
-                reply = f"Tôi tìm thấy thông tin nội bộ liên quan:\n\n{snippets}"
+                snippets = "\n\n".join([f"• {m.get('text')}" for _, m in top_results[:5]])
+                reply = f"**Thông tin nội bộ liên quan:**\n\n{snippets}"
+        
         else:
-            reply = "Xin lỗi — hiện không có dữ liệu nội bộ liên quan."
+            reply = "Xin lỗi — hiện không có dữ liệu nội bộ liên quan. Vui lòng liên hệ hotline 0935 304 338 để được tư vấn trực tiếp."
+    # =========== VALIDATE DURATION TO AVOID INCORRECT INFO ===========
+    # Check if reply contains unrealistic duration (like "5 ngày 4 đêm")
+    if reply and ("ngày" in reply or "đêm" in reply):
+        import re
+        
+        # Tìm tất cả các pattern duration trong reply
+        duration_patterns = [
+            r'(\d+)\s*ngày\s*(\d+)\s*đêm',
+            r'(\d+)\s*ngày',
+            r'(\d+)\s*đêm'
+        ]
+        
+        for pattern in duration_patterns:
+            matches = list(re.finditer(pattern, reply))
+            for match in matches:
+                try:
+                    if match.lastindex == 2:  # "X ngày Y đêm"
+                        days = int(match.group(1))
+                        nights = int(match.group(2))
+                        
+                        # Kiểm tra tính hợp lý: tour du lịch thường days = nights hoặc days = nights + 1
+                        # Và không quá 7 ngày cho tour thông thường
+                        if days > 7 or nights > 7 or abs(days - nights) > 1:
+                            logger.warning(f"⚠️ Unrealistic duration detected: {days} ngày {nights} đêm")
+                            # Thay thế chỉ phần duration không hợp lý
+                            old_duration = match.group(0)
+                            new_duration = "thời gian phù hợp"
+                            reply = reply.replace(old_duration, new_duration)
+                            
+                    elif match.lastindex == 1:  # "X ngày" hoặc "Y đêm"
+                        num = int(match.group(1))
+                        if num > 7:  # Quá dài cho tour thông thường
+                            logger.warning(f"⚠️ Unrealistic duration detected: {num}")
+                            old_duration = match.group(0)
+                            new_duration = "thời gian phù hợp"
+                            reply = reply.replace(old_duration, new_duration)
+                            
+                except (ValueError, IndexError):
+                    continue
+    
+    # Nếu sau validation mà reply bị thay đổi nhiều, kiểm tra lại
+    if "thời gian phù hợp" in reply and "tour" in user_message.lower():
+        # Đảm bảo reply vẫn có ý nghĩa
+        if "Thông tin thời gian tour" not in reply:
+            reply = "Thông tin thời gian tour đang được cập nhật. Vui lòng liên hệ hotline 0935 304 338 để biết lịch trình cụ thể."
+        return jsonify({
+        "reply": reply, 
+        "sources": [m for _, m in top_results],
+        "context": {
+            "tour_indices": tour_indices,
+            "session_id": session_id,
+            "last_tour_name": context.get("last_tour_name"),
+            "suggested_next": get_suggested_questions(tour_indices, requested_field)
+        }
+    })
 
-    return jsonify({"reply": reply, "sources": [m for _, m in top_results]})
+
+
 
 # =========== LEAD SAVING ROUTE ===========
 @app.route('/api/save-lead', methods=['POST'])
@@ -989,48 +1397,111 @@ def save_lead_to_sheet():
             "details": "Please check server logs for details"
         }), 500
     
-# =========== TRACK CALL BUTTON CLICKS ===========
-@app.route('/api/track-call', methods=['POST'])
+
+    
+    # =========== TRACK CALL BUTTON CLICKS - ENHANCED FOR META CAPI ===========
+# =========== TRACK CALL BUTTON CLICKS - ENHANCED FOR META CAPI ===========
+@app.route('/api/track-call', methods=['POST', 'OPTIONS'])
 def track_call_event():
     """
-    Log call button clicks for analytics
-    (Không ảnh hưởng business logic chính)
+    Enhanced endpoint for tracking call button clicks with proper Meta CAPI integration
+    Tương thích với tracking script hiện tại từ frontend
     """
     try:
+        # Handle preflight OPTIONS request
+        if request.method == 'OPTIONS':
+            response = jsonify({'status': 'ok'})
+            response.headers.add('Access-Control-Allow-Origin', 'https://www.rubywings.vn')
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            response.headers.add('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            response.headers.add('Access-Control-Allow-Credentials', 'true')
+            return response
+        
+        # Process POST request
         data = request.get_json() or {}
         logger.info(f"Call button clicked: {data.get('phone', 'unknown')} - {data.get('call_type')}")
         
-        # Gọi Meta CAPI (server-side) với đầy đủ tham số mới
+        # Gọi Meta CAPI với đầy đủ tham số mới (FIXED VERSION)
         try:
             from meta_capi import send_meta_call_button
+            
+            # Lấy user_agent từ frontend hoặc request
+            user_agent = data.get('user_agent')
+            if not user_agent:
+                user_agent = request.headers.get('User-Agent')
+            
+            # Gọi hàm đã fix
             send_meta_call_button(
-                request,
-                phone=data.get('phone'),
-                call_type=data.get('call_type', 'phone'),
+                request=request,
                 page_url=data.get('page_url'),
-                # === TRUYỀN THÊM META CAPI DATA ===
+                user_agent=user_agent,
+                phone=data.get('phone'),
+                call_type=data.get('call_type', 'regular'),
                 fbp=data.get('fbp'),
                 fbc=data.get('fbc'),
                 event_id=data.get('event_id'),
                 pixel_id=data.get('pixel_id'),
-                event_name=data.get('event_name', 'CallButtonClick')
+                event_name=data.get('event_name', 'CallButtonClick'),
+                value=data.get('value', 150000)
             )
         except Exception as e:
             logger.warning(f"Meta CAPI call tracking failed: {e}")
         
-        # Có thể lưu vào file log riêng (giữ nguyên)
-        log_entry = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "event": "call_button_click",
-            "data": data
-        }
+        # Log vào file riêng (giữ nguyên chức năng cũ)
+        try:
+            log_entry = {
+                "timestamp": datetime.utcnow().isoformat(),
+                "event": "call_button_click",
+                "data": {
+                    "phone": data.get('phone'),
+                    "call_type": data.get('call_type'),
+                    "page_url": data.get('page_url')
+                }
+            }
+            
+            # Lưu vào file log
+            logs_dir = "logs"
+            if not os.path.exists(logs_dir):
+                os.makedirs(logs_dir)
+            
+            log_file = os.path.join(logs_dir, f"call_clicks_{datetime.utcnow().strftime('%Y-%m-%d')}.json")
+            
+            logs = []
+            if os.path.exists(log_file):
+                try:
+                    with open(log_file, 'r', encoding='utf-8') as f:
+                        logs = json.load(f)
+                except:
+                    logs = []
+            
+            logs.append(log_entry)
+            
+            with open(log_file, 'w', encoding='utf-8') as f:
+                json.dump(logs, f, ensure_ascii=False, indent=2)
+                
+        except Exception as e:
+            logger.warning(f"Failed to save call log: {e}")
         
-        return jsonify({"success": True, "meta_sent": True})
+        # Thêm CORS headers cho POST response
+        response = jsonify({
+            "success": True, 
+            "message": "Call event tracked successfully",
+            "meta_capi_sent": True
+        })
+        response.headers.add('Access-Control-Allow-Origin', 'https://www.rubywings.vn')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        return response
     
     except Exception as e:
         logger.error(f"Track call error: {e}")
-        return jsonify({"success": False}), 500
-
+        response = jsonify({
+            "success": False,
+            "error": str(e)
+        })
+        response.status_code = 500
+        response.headers.add('Access-Control-Allow-Origin', 'https://www.rubywings.vn')
+        response.headers.add('Access-Control-Allow-Credentials', 'true')
+        return response
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
@@ -1071,7 +1542,8 @@ def health_check():
                 "fallback_storage": fallback_status,
                 "openai": "available" if client else "unavailable",
                 "faiss": "available" if HAS_FAISS else "unavailable",
-                "index": "loaded" if INDEX else "not_loaded"
+                "index": "loaded" if (INDEX is not None or os.path.exists(FAISS_INDEX_PATH)) else "not_loaded"
+
             },
             "counts": {
                 "knowledge_passages": len(FLAT_TEXTS),
