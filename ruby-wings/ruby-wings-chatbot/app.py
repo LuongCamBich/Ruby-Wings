@@ -1335,7 +1335,8 @@ def build_index(force_rebuild: bool = False) -> bool:
             loaded = False
             
             for index_file in index_files_to_try:
-                if use_faiss and os.path.exists(index_file) and os.path.exists(FAISS_MAPPING_PATH):
+                if FAISS_ENABLED and use_faiss and os.path.exists(index_file) and os.path.exists(FAISS_MAPPING_PATH):
+
                     try:
                         idx = faiss.read_index(index_file)
                         if load_mapping_from_disk(FAISS_MAPPING_PATH):
