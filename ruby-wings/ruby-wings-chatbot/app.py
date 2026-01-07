@@ -6,7 +6,8 @@
 FLAT_TEXTS = []
 INDEX = None
 HAS_FAISS = False
-FAISS_ENABLED = False
+FAISS_ENABLED = True
+
 
 def _index_dim(idx):
     return None
