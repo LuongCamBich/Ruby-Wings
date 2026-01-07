@@ -1831,7 +1831,11 @@ def chat():
     })
     if len(context.conversation_stack) > 10:
         context.conversation_stack = context.conversation_stack[-10:]
-    
+        return jsonify({
+        "reply": "Hệ thống đã nhận câu hỏi nhưng chưa có nhánh xử lý phù hợp.",
+        "debug": "chat() fallback return"
+    }), 200
+
 
 
     
