@@ -1,259 +1,292 @@
 #!/usr/bin/env python3
-# build_index.py — build embeddings/faiss index + mapping + tour_entities.json (compatible with app.py & entities.py)
-# Usage:
-#   pip install -r requirements.txt
-#   export OPENAI_API_KEY="sk-..."
-#   python build_index.py
+"""
+build_index.py - Tạo đầy đủ các file index cho Ruby Wings Chatbot
+Phiên bản đơn giản, dễ hiểu, tương thích với app.py
+"""
 
 import os
-import sys
 import json
-import time
-import datetime
-from typing import Any, List, Optional
 import numpy as np
+import re
+from typing import List, Dict, Any
+from datetime import datetime
+import unicodedata
+import hashlib
 
-# try imports with helpful fallbacks
-try:
-    import faiss  # type: ignore
-    HAS_FAISS = True
-except Exception:
-    faiss = None
-    HAS_FAISS = False
-
-# New OpenAI SDK
-try:
-    from openai import OpenAI
-except Exception:
-    OpenAI = None
-
-# import shared flatten
-try:
-    from common_utils import flatten_json
-except Exception:
-    def flatten_json(path: str) -> List[dict]:
-        # fallback simple flattener (used only if common_utils missing)
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"{path} not found")
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        mapping = []
-        def scan(obj, prefix="root"):
-            if isinstance(obj, dict):
-                for k,v in obj.items():
-                    scan(v, f"{prefix}.{k}")
-            elif isinstance(obj, list):
-                for i,v in enumerate(obj):
-                    scan(v, f"{prefix}[{i}]")
-            elif isinstance(obj, str):
-                t = obj.strip()
-                if t:
-                    mapping.append({"path": prefix, "text": t})
-            else:
-                try:
-                    s = str(obj).strip()
-                    if s:
-                        mapping.append({"path": prefix, "text": s})
-                except Exception:
-                    pass
-        scan(data, "root")
-        return mapping
-
-# Try to import entities.build_entity_index to persist tour_entities.json
-try:
-    from entities import build_entity_index, ENTITY_PATH_DEFAULT  # type: ignore
-except Exception:
-    build_entity_index = None
-    ENTITY_PATH_DEFAULT = os.environ.get("TOUR_ENTITIES_PATH", "tour_entities.json")
-
-# ---------- Config ----------
-OPENAI_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
-
-KNOW_PATH = os.environ.get("KNOWLEDGE_PATH", "knowledge.json")
+# =========== CONFIGURATION ===========
+# Đọc từ biến môi trường, nếu không có dùng giá trị mặc định
+KNOWLEDGE_PATH = os.environ.get("KNOWLEDGE_PATH", "knowledge.json")
 FAISS_INDEX_PATH = os.environ.get("FAISS_INDEX_PATH", "faiss_index.bin")
 FAISS_MAPPING_PATH = os.environ.get("FAISS_MAPPING_PATH", "faiss_mapping.json")
+FAISS_META_PATH = os.environ.get("FAISS_META_PATH", "faiss_index_meta.json")
 FALLBACK_VECTORS_PATH = os.environ.get("FALLBACK_VECTORS_PATH", "vectors.npz")
-META_PATH = os.environ.get("FAISS_META_PATH", "faiss_index_meta.json")
-TOUR_ENTITIES_PATH = os.environ.get("TOUR_ENTITIES_PATH", ENTITY_PATH_DEFAULT)
+OLD_FAISS_PATH = "index.faiss"  # Giữ cố định cho backward compatibility
 
+# OpenAI config - đọc từ biến môi trường
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
+USE_OPENAI = bool(OPENAI_API_KEY)
+
+# Model config - đọc từ biến môi trường
 EMBEDDING_MODEL = os.environ.get("EMBEDDING_MODEL", "text-embedding-3-small")
-BATCH_SIZE = int(os.environ.get("BUILD_BATCH_SIZE", "8"))
-RETRY_LIMIT = int(os.environ.get("RETRY_LIMIT", "5"))
-RETRY_BASE = float(os.environ.get("RETRY_BASE_DELAY", "1.0"))
+CHAT_MODEL = os.environ.get("CHAT_MODEL", "gpt-4o-mini")
 
-TMP_EMB_FILE = "emb_tmp.bin"
+# Kiểm tra các biến môi trường quan trọng
+print("🔍 KIỂM TRA BIẾN MÔI TRƯỜNG:")
+print(f"   KNOWLEDGE_PATH: {KNOWLEDGE_PATH}")
+print(f"   FAISS_INDEX_PATH: {FAISS_INDEX_PATH}")
+print(f"   FAISS_MAPPING_PATH: {FAISS_MAPPING_PATH}")
+print(f"   FALLBACK_VECTORS_PATH: {FALLBACK_VECTORS_PATH}")
+print(f"   EMBEDDING_MODEL: {EMBEDDING_MODEL}")
+print(f"   CHAT_MODEL: {CHAT_MODEL}")
+print(f"   OPENAI_API_KEY có tồn tại: {bool(OPENAI_API_KEY)}")
+print(f"   GOOGLE_SERVICE_ACCOUNT_JSON có tồn tại: {bool(os.environ.get('GOOGLE_SERVICE_ACCOUNT_JSON'))}")
 
-# ---------- Utilities ----------
-def synthetic_embedding(text: str, dim: int = 1536) -> List[float]:
-    h = abs(hash(text)) % (10 ** 12)
-    return [(float((h >> (i % 32)) & 0xFF) + (i % 7)) / 255.0 for i in range(dim)]
 
-def call_embeddings_with_retry(inputs: List[str], model: str) -> List[List[float]]:
-    if not OPENAI_KEY or OpenAI is None:
-        dim = 1536 if "3-small" in model else 3072
-        return [synthetic_embedding(t, dim) for t in inputs]
-
-    client = OpenAI(api_key=OPENAI_KEY)
-    attempt = 0
-    while attempt <= RETRY_LIMIT:
-        try:
-            resp = client.embeddings.create(model=model, input=inputs)
-            if getattr(resp, "data", None):
-                out = [r.embedding for r in resp.data]
-                print(f"✅ Generated {len(out)} embeddings (model={model})", flush=True)
-                return out
-            else:
-                raise ValueError("Empty response from OpenAI embeddings API")
-        except Exception as e:
-            attempt += 1
-            if attempt > RETRY_LIMIT:
-                print(f"❌ Embedding API failed after {RETRY_LIMIT} attempts: {e}", file=sys.stderr)
-                dim = 1536 if "3-small" in model else 3072
-                return [synthetic_embedding(t, dim) for t in inputs]
-            delay = RETRY_BASE * (2 ** (attempt - 1))
-            print(f"⚠️ Embedding API error (attempt {attempt}/{RETRY_LIMIT}): {e}. Retrying in {delay:.1f}s...", file=sys.stderr)
-            time.sleep(delay)
-    dim = 1536 if "3-small" in model else 3072
-    return [synthetic_embedding(t, dim) for t in inputs]
-
-# ---------- Main build flow ----------
-def build_index():
-    print("Flattening knowledge.json via common_utils...")
-    mapping = flatten_json(KNOW_PATH)
-    texts = [m.get("text", "") for m in mapping]
-    n = len(texts)
-    print(f"Found {n} passages.")
-    if n == 0:
-        print("No passages to index -> exit", file=sys.stderr)
-        sys.exit(1)
-
-    # remove tmp if exists
-    if os.path.exists(TMP_EMB_FILE):
-        try:
-            os.remove(TMP_EMB_FILE)
-        except Exception:
-            pass
-
-    dim: Optional[int] = None
-    total_rows = 0
-    batches = (n + BATCH_SIZE - 1) // BATCH_SIZE
-
-    for start in range(0, n, BATCH_SIZE):
-        batch = texts[start:start+BATCH_SIZE]
-        inputs = [t if (t and str(t).strip()) else " " for t in batch]
-        print(f"Embedding batch {start//BATCH_SIZE + 1}/{batches} ...", flush=True)
-        vecs = call_embeddings_with_retry(inputs, EMBEDDING_MODEL)
-
-        # ensure no None entries
-        for j, v in enumerate(vecs):
-            if v is None:
-                vecs[j] = synthetic_embedding(inputs[j], 1536 if "3-small" in EMBEDDING_MODEL else 3072)
-
-        if dim is None and vecs:
-            dim = len(vecs[0])
-
-        arr = np.array(vecs, dtype="float32")
-        norms = np.linalg.norm(arr, axis=1, keepdims=True)
-        norms[norms == 0] = 1.0
-        arr = arr / (norms + 1e-12)
-
-        with open(TMP_EMB_FILE, "ab") as f:
-            f.write(arr.tobytes())
-
-        total_rows += arr.shape[0]
-
-    if total_rows == 0 or dim is None:
-        print("No embeddings created -> exit", file=sys.stderr)
-        sys.exit(1)
-
-    print("Loading embeddings via memmap...")
+# =========== FLATTEN KNOWLEDGE ===========
+def load_and_flatten_knowledge(knowledge_path: str) -> tuple:
+    """
+    Đọc knowledge.json và flatten thành danh sách văn bản
+    Trả về: (FLAT_TEXTS, MAPPING)
+    """
+    print(f"📖 Đang đọc {knowledge_path}...")
+    
     try:
-        emb = np.memmap(TMP_EMB_FILE, dtype="float32", mode="r", shape=(total_rows, dim))
-    except Exception:
-        # fallback: load entire array into memory
-        raw = np.fromfile(TMP_EMB_FILE, dtype="float32")
-        emb = raw.reshape((total_rows, dim))
-
-    # Build FAISS index if available
-    print("Building index...")
-    if HAS_FAISS:
-        try:
-            index = faiss.IndexFlatIP(dim)
-            index.add(np.asarray(emb))
-            try:
-                faiss.write_index(index, FAISS_INDEX_PATH)
-                print(f"Saved FAISS index to {FAISS_INDEX_PATH}")
-            except Exception:
-                print("Warning: failed to persist FAISS index (continuing).", file=sys.stderr)
-        except Exception as e:
-            print("FAISS index build failed:", e, file=sys.stderr)
-            HAS_FAISS_local = False
+        with open(knowledge_path, "r", encoding="utf-8") as f:
+            KNOW = json.load(f)
+        print(f"✅ Đọc thành công: {len(KNOW)} keys trong knowledge")
+    except Exception as e:
+        print(f"❌ Lỗi đọc {knowledge_path}: {e}")
+        return [], []
+    
+    FLAT_TEXTS = []
+    MAPPING = []
+    
+    def scan(obj, prefix="root"):
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                scan(v, f"{prefix}.{k}")
+        elif isinstance(obj, list):
+            for i, v in enumerate(obj):
+                scan(v, f"{prefix}[{i}]")
+        elif isinstance(obj, str):
+            t = obj.strip()
+            if t:
+                FLAT_TEXTS.append(t)
+                MAPPING.append({"path": prefix, "text": t})
         else:
-            HAS_FAISS_local = True
+            try:
+                s = str(obj).strip()
+                if s:
+                    FLAT_TEXTS.append(s)
+                    MAPPING.append({"path": prefix, "text": s})
+            except Exception:
+                pass
+    
+    scan(KNOW)
+    print(f"✅ Flatten thành công: {len(FLAT_TEXTS)} passages")
+    return FLAT_TEXTS, MAPPING
+
+# =========== EMBEDDINGS ===========
+def deterministic_embedding(text: str, dim: int = 1536) -> List[float]:
+    """
+    Tạo embedding deterministic (ổn định) cho text
+    Dùng khi không có OpenAI API
+    """
+    if not text:
+        return [0.0] * dim
+    
+    # Lấy 2000 ký tự đầu
+    short = text if len(text) <= 2000 else text[:2000]
+    
+    # Tạo hash ổn định
+    h = abs(hash(short)) % (10 ** 12)
+    
+    # Tạo vector dựa trên hash
+    vec = []
+    for i in range(dim):
+        # Dùng hash và index để tạo giá trị pseudo-random
+        val = ((h >> (i % 32)) & 0xFF) / 255.0
+        # Thêm một chút variation dựa trên ký tự
+        if i < len(short):
+            val = (val + ord(short[i % len(short)]) / 255.0) / 2.0
+        vec.append(val)
+    
+    # Normalize
+    norm = sum(v*v for v in vec) ** 0.5
+    if norm > 0:
+        vec = [v/norm for v in vec]
+    
+    return vec
+
+def embed_with_openai(text: str, client, model: str = "text-embedding-3-small") -> List[float]:
+    """
+    Tạo embedding bằng OpenAI API
+    """
+    if not text:
+        return []
+    
+    short = text if len(text) <= 2000 else text[:2000]
+    
+    try:
+        resp = client.embeddings.create(
+            model=model,
+            input=short
+        )
+        if resp.data and len(resp.data) > 0:
+            return resp.data[0].embedding
+    except Exception as e:
+        print(f"⚠️ OpenAI embedding lỗi: {e}")
+    
+    return []
+
+# =========== BUILD INDEXES ===========
+def build_faiss_index(flat_texts: List[str], mapping: List[Dict]) -> bool:
+    """
+    Xây dựng FAISS index và lưu các file liên quan
+    """
+    print("\n🔧 Đang xây dựng FAISS index...")
+    
+    # Kiểm tra FAISS
+    try:
+        import faiss
+        print("✅ FAISS library có sẵn")
+    except ImportError:
+        print("❌ FAISS không cài đặt. Chạy: pip install faiss-cpu")
+        return False
+    
+    # Kiểm tra OpenAI
+    client = None
+    if USE_OPENAI:
+        try:
+            from openai import OpenAI
+            client = OpenAI(api_key=OPENAI_API_KEY)
+            print("✅ OpenAI client khởi tạo thành công")
+        except Exception as e:
+            print(f"⚠️ OpenAI client lỗi: {e}")
+            client = None
     else:
-        HAS_FAISS_local = False
-
-    # Always save fallback vectors (npz) for numpy fallback
-    try:
-        np.savez_compressed(FALLBACK_VECTORS_PATH, mat=np.asarray(emb))
-        print(f"Saved fallback vectors to {FALLBACK_VECTORS_PATH}")
-    except Exception as e:
-        print("Warning: failed to save fallback vectors:", e, file=sys.stderr)
-
-    # Save mapping (list of {"path","text"}) expected by app.py
-    print(f"Saving mapping to {FAISS_MAPPING_PATH} ...")
-    try:
-        with open(FAISS_MAPPING_PATH, "w", encoding="utf-8") as f:
-            json.dump(mapping, f, ensure_ascii=False, indent=2)
-    except Exception as e:
-        print("Failed to save mapping:", e, file=sys.stderr)
-
-    # Build tour_entities.json using entities.build_entity_index if available
-    try:
-        if build_entity_index is not None:
-            print(f"Building entity index -> {TOUR_ENTITIES_PATH} ...")
-            idx_map = build_entity_index(mapping, out_path=TOUR_ENTITIES_PATH)
-            try:
-                count_keys = len(idx_map) if isinstance(idx_map, dict) else 0
-            except Exception:
-                count_keys = 0
-            print(f"Saved entity index keys: {count_keys}")
+        print("ℹ️  Sử dụng deterministic embedding (không có OpenAI API)")
+    
+    # Tạo embeddings
+    print(f"📊 Tạo embeddings cho {len(flat_texts)} passages...")
+    
+    vectors = []
+    for i, text in enumerate(flat_texts):
+        if i % 50 == 0:
+            print(f"  Đang xử lý {i}/{len(flat_texts)}...")
+        
+        if client:
+            emb = embed_with_openai(text, client, EMBEDDING_MODEL)
         else:
-            print("entities.build_entity_index not available; skipping entity index build.")
-    except Exception as e:
-        print("Failed to build entity index:", e, file=sys.stderr)
-
-    # write meta
-    meta = {
-        "created_at": datetime.datetime.utcnow().isoformat() + "Z",
-        "num_passages": int(total_rows),
+            emb = deterministic_embedding(text, 1536)
+        
+        if emb:
+            vectors.append(np.array(emb, dtype="float32"))
+        else:
+            # Fallback deterministic
+            vectors.append(np.array(deterministic_embedding(text, 1536), dtype="float32"))
+    
+    if not vectors:
+        print("❌ Không tạo được vectors nào")
+        return False
+    
+    # Tạo matrix
+    mat = np.vstack(vectors).astype("float32")
+    print(f"✅ Tạo matrix: {mat.shape[0]} vectors, {mat.shape[1]} dimensions")
+    
+    # Normalize cho cosine similarity
+    row_norms = np.linalg.norm(mat, axis=1, keepdims=True)
+    mat = mat / (row_norms + 1e-12)
+    
+    # Tạo FAISS index
+    dim = mat.shape[1]
+    index = faiss.IndexFlatIP(dim)  # Inner Product = cosine similarity
+    index.add(mat)
+    
+    # =========== LƯU CÁC FILE ===========
+    
+    # 1. Lưu FAISS index chính
+    print(f"\n💾 Đang lưu FAISS index vào {FAISS_INDEX_PATH}...")
+    faiss.write_index(index, FAISS_INDEX_PATH)
+    print(f"✅ Đã lưu: {FAISS_INDEX_PATH}")
+    
+    # 2. Lưu mapping
+    print(f"💾 Đang lưu mapping vào {FAISS_MAPPING_PATH}...")
+    with open(FAISS_MAPPING_PATH, "w", encoding="utf-8") as f:
+        json.dump(mapping, f, ensure_ascii=False, indent=2)
+    print(f"✅ Đã lưu: {FAISS_MAPPING_PATH}")
+    
+    # 3. Lưu metadata
+    print(f"💾 Đang lưu metadata vào {FAISS_META_PATH}...")
+    meta_data = {
         "embedding_model": EMBEDDING_MODEL,
         "dimension": int(dim),
-        "faiss_available": bool(HAS_FAISS_local),
-        "notes": "Built with batch memmap flow; tour_entities.json produced if entities module present"
+        "total_vectors": len(flat_texts),
+        "created_at": datetime.now().isoformat(),
+        "index_type": "IndexFlatIP",
+        "normalized": True,
+        "similarity_metric": "cosine",
+        "has_openai": USE_OPENAI,
+        "version": "2.1.1"
     }
-    try:
-        with open(META_PATH, "w", encoding="utf-8") as f:
-            json.dump(meta, f, ensure_ascii=False, indent=2)
-    except Exception:
-        pass
+    with open(FAISS_META_PATH, "w", encoding="utf-8") as f:
+        json.dump(meta_data, f, indent=2)
+    print(f"✅ Đã lưu: {FAISS_META_PATH}")
+    
+    # 4. Lưu file FAISS cũ (backward compatibility)
+    print(f"💾 Đang lưu backup index vào {OLD_FAISS_PATH}...")
+    faiss.write_index(index, OLD_FAISS_PATH)
+    print(f"✅ Đã lưu: {OLD_FAISS_PATH}")
+    
+    # 5. Lưu numpy vectors (fallback)
+    print(f"💾 Đang lưu numpy vectors vào {FALLBACK_VECTORS_PATH}...")
+    np.savez_compressed(FALLBACK_VECTORS_PATH, mat=mat)
+    print(f"✅ Đã lưu: {FALLBACK_VECTORS_PATH}")
+    
+    # Thông tin tổng kết
+    print("\n" + "="*60)
+    print("🎉 HOÀN THÀNH XÂY DỰNG INDEX!")
+    print("="*60)
+    print(f"📊 Tổng số passages: {len(flat_texts)}")
+    print(f"📐 Dimension: {dim}")
+    print(f"🔢 Index size: {index.ntotal} vectors")
+    print(f"🔧 Embedding method: {'OpenAI' if USE_OPENAI else 'Deterministic'}")
+    print(f"💾 Các file đã tạo:")
+    print(f"  1. {FAISS_INDEX_PATH} (FAISS index chính)")
+    print(f"  2. {FAISS_MAPPING_PATH} (mapping văn bản)")
+    print(f"  3. {FAISS_META_PATH} (metadata)")
+    print(f"  4. {OLD_FAISS_PATH} (FAISS index cũ - compatibility)")
+    print(f"  5. {FALLBACK_VECTORS_PATH} (numpy fallback)")
+    print("="*60)
+    
+    return True
 
-    # cleanup temp
-    try:
-        os.remove(TMP_EMB_FILE)
-    except Exception:
-        pass
-
-    print("DONE. Index ready.")
-    print(f"- faiss: {FAISS_INDEX_PATH if HAS_FAISS_local else '(not produced)'}")
-    print(f"- mapping: {FAISS_MAPPING_PATH}")
-    print(f"- vectors (npz): {FALLBACK_VECTORS_PATH}")
-    print(f"- entities: {TOUR_ENTITIES_PATH} (if produced)")
-    print(f"- meta: {META_PATH}")
+# =========== MAIN ===========
+def main():
+    print("="*60)
+    print("🚀 RUBY WINGS - BUILD INDEX UTILITY")
+    print("="*60)
+    
+    # Kiểm tra knowledge.json
+    if not os.path.exists(KNOWLEDGE_PATH):
+        print(f"❌ Không tìm thấy {KNOWLEDGE_PATH}")
+        print(f"   Vui lòng đảm bảo file knowledge.json tồn tại trong thư mục này")
+        return
+    
+    # 1. Đọc và flatten knowledge
+    flat_texts, mapping = load_and_flatten_knowledge(KNOWLEDGE_PATH)
+    if not flat_texts:
+        print("❌ Không có dữ liệu để xây dựng index")
+        return
+    
+    # 2. Xây dựng FAISS index
+    success = build_faiss_index(flat_texts, mapping)
+    
+    if success:
+        print("\n✨ TẤT CẢ HOÀN THÀNH! Bạn có thể chạy app.py bình thường.")
+        print("👉 Chạy: python app.py")
+    else:
+        print("\n❌ Có lỗi xảy ra khi xây dựng index")
 
 if __name__ == "__main__":
-    try:
-        build_index()
-    except Exception as e:
-        print("ERROR building index:", e, file=sys.stderr)
-        raise
+    main()

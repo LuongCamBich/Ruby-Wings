@@ -1,54 +1,26 @@
+# render.yaml (BOOT / DEBUG)
+# MỤC TIÊU: khóa Python runtime, loại bỏ mọi nhiễu
+# CHỈ dùng để xác nhận môi trường chạy ổn định
+
 services:
   - type: web
     name: ruby-wings-chatbot
     env: python
-    plan: free
-
-    buildCommand: "pip install -r requirements.txt"
-
-    startCommand: "gunicorn app:app --workers 1 --timeout 300 --bind=0.0.0.0:$PORT"
-
-    envVars:
-      - key: OPENAI_API_KEY
-        sync: false
-
-      - key: FLASK_ENV
-        value: "production"
-
-      - key: PORT
-        value: "10000"
-
-      # ===== FAISS (ĐÃ TẮT) =====
-      - key: FAISS_ENABLED
-        value: "false"
-
-      - key: RBW_ALLOW_REINDEX
-        value: "0"
-
-      # ===== MODELS =====
-      - key: EMBEDDING_MODEL
-        value: "text-embedding-3-small"
-
-      - key: CHAT_MODEL
-        value: "gpt-4o-mini"
-
-      # ===== GOOGLE SHEETS =====
-      - key: ENABLE_GOOGLE_SHEETS
-        value: "true"
-
-      - key: GOOGLE_SERVICE_ACCOUNT_JSON
-        sync: false
-
-      - key: GOOGLE_SHEET_ID
-        value: "1SdVbwkuxb8l1meEW--ddyfh4WmUvSXXMOPQ5bCyPkdk"
-
-      - key: GOOGLE_SHEET_NAME
-        value: "RBW_Lead_Raw_Inbox"
-
-      # ===== SYSTEM =====
-      - key: DEBUG
-        value: "false"
-
-    healthCheckPath: "/api/health"
-    autoDeploy: true
+    runtime: python
+    pythonVersion: 3.11.9
+    plan: starter
     branch: main
+    autoDeploy: true
+
+    buildCommand: |
+      pip install --upgrade pip setuptools wheel
+      pip install -r requirements.txt
+
+    startCommand: >
+      gunicorn app:app
+      --workers 1
+      --threads 2
+      --bind 0.0.0.0:10000
+      --timeout 300
+
+    healthCheckPath: /api/health
